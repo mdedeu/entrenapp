@@ -39,18 +39,22 @@
 
     <v-main>
       <HelloWorld/>
+      <carrousel/>
     </v-main>
   </v-app>
 </template>
 
+
 <script>
 import HelloWorld from './components/HelloWorld';
+import carrousel from './components/carrousel'
 
 export default {
   name: 'App',
 
   components: {
     HelloWorld,
+    carrousel,
   },
 
   data: () => ({
