@@ -39,7 +39,7 @@
 
     <v-main>
       <HelloWorld/>
-      <carrousel/>
+      <CarrouselParaCiclos/>
     </v-main>
   </v-app>
 </template>
@@ -47,14 +47,14 @@
 
 <script>
 import HelloWorld from './components/HelloWorld';
-import carrousel from './components/carrousel'
+import CarrouselParaCiclos from './components/CarrouselParaCiclos'
 
 export default {
   name: 'App',
 
   components: {
     HelloWorld,
-    carrousel,
+    CarrouselParaCiclos,
   },
 
   data: () => ({
