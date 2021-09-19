@@ -3,20 +3,31 @@
       outlined
       app
       color = "primary"
-    class="">
-    <v-img :src="require('../assets/logo.png')"
-           alt="Vuetify Logo"
-           class="shrink mr-2"
-           contain
-           transition="scale-transition"
-           width="40">
-    </v-img>
-    <div class="d-inline-flex ml-16 col-4">
-      <h4 class="white--text  mr-6">Creá tu rutina</h4>
-      <h4 class="white--text mr-6">Rutinas</h4>
-      <h4 class="white--text mr-6">Ejercicios</h4>
-      <h4 class="white--text mr-6">Mi perfil</h4>
-    </div>
+   >
+    <v-row>
+      <v-col cols="3">
+        <v-img :src="require('../assets/logo.png')"
+                     alt="Vuetify Logo"
+                     class="shrink mr-2 col-6"
+                     contain
+                     transition="scale-transition"
+                     width="60">
+        </v-img>
+      </v-col>
+     <v-col cols="3" >
+       <div class="d-inline-flex justify-space-around text-center align-content-center mt-3">
+         <v-btn class="white--text  mr-16 ml-16" plain>Creá tu rutina</v-btn>
+         <v-btn class="white--text mr-16 ml-16" plain>Rutinas</v-btn>
+         <v-btn class="white--text mr-16 ml-16" plain>Ejercicios</v-btn>
+         <v-btn class="white--text mr-16 ml-16" plain>Mi perfil</v-btn>
+         <v-btn class="white--text mr-16 ml-16"  plain>
+           Salir
+           <v-icon color="white">mdi-arrow-right-thin-circle-outline</v-icon>
+         </v-btn>
+       </div>
+     </v-col>
+    </v-row>
+
 
   </v-app-bar>
 </template>
