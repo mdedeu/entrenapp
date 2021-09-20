@@ -7,34 +7,47 @@
           tile
       >
         <v-container>
-            <v-row style="height: 100px">
+            <v-row style="height: 100px" justify="center">
               <p class="text-h3 text-center black--text pt-5 pl-16"> Calentamiento: 3 Vueltas</p>
             </v-row>
-            <v-row style="height: 100px">
-              <template>
-                <div class="text-center">
-                  <v-btn width="900px"
-                      rounded
-                      color="white"
-                      class="black--text"
-                         height="80%"
-                  >
-                    Salto con soga
-                  </v-btn>
-                </div>
-              </template>
-            </v-row>
-            <v-row style="height: 100px">
+             <v-row style="height: 100px" justify="center">
             <template>
-              <div class="text-center">
+              <div>
                 <v-btn width="900px"
                        rounded
                        color="white"
-                       class="black--text"
+                       class="black--text justify-center text-h5"
                        height="80%"
 
                 >
-                  Descanso
+                  Salto con soga <v-icon
+                    x-large
+                    color="black"
+                    class="pl-10 pr-5"
+                >
+                  mdi-timer
+                </v-icon> 30''
+                </v-btn>
+              </div>
+            </template>
+          </v-row>
+            <v-row style="height: 100px" justify="center">
+            <template>
+              <div>
+                <v-btn width="900px"
+                       rounded
+                       color="white"
+                       class="black--text justify-center text-h5"
+                       height="80%"
+
+                >
+                 Descanso <v-icon
+                    large
+                    color="black"
+                    class="pl-10 pr-5"
+                >
+                  mdi-timer
+                </v-icon> 30''
                 </v-btn>
               </div>
             </template>
