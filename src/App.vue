@@ -2,21 +2,21 @@
   <v-app>
     <HeaderApp></HeaderApp>
     <v-main>
-      <HelloWorld/>
+      <Home></Home>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 import HeaderApp from "./components/HeaderApp";
+import Home from "./components/Home";
 
 export default {
   name: 'App',
 
   components: {
     HeaderApp,
-    HelloWorld,
+    Home,
   },
 
   data: () => ({
