@@ -8,7 +8,7 @@
       >
         <v-container>
             <v-row style="height: 100px">
-              <p class="text-h3 text-center black--text pt-5 pl-16"> Calentamiento 3 Vueltas</p>
+              <p class="text-h3 text-center black--text pt-5 pl-16"> Calentamiento: 3 Vueltas</p>
             </v-row>
             <v-row style="height: 100px">
               <template>
