@@ -3,8 +3,8 @@
     <v-row >
       <v-col class="align-self-center ml-16" cols="4">
         <div class="mr-auto">
-          <h1 class="mb-7" >Entrená como nunca antes</h1>
-          <p> ¿No sabes con qué rutina ejercitarte?Quédate tranquilo: <b>Entrenapp</b> te recomienda rutinas
+          <h1 class="mb-7 accent--text" >Entrená como nunca antes</h1>
+          <p class="white--text"> ¿No sabes con qué rutina ejercitarte?Quédate tranquilo: <b>Entrenapp</b> te recomienda rutinas
             personalizadas con gran variedad de ejericios. ¡Empieza ya!</p>
         </div>
 
@@ -15,7 +15,7 @@
         <v-img :src="require('../assets/Pilates-amico.svg')"/>
       </v-col>
     </v-row>
-    <h2 class="mb-10">Creá rutinas , compartilas y ejecutalas</h2>
+    <h2 class="mb-10 accent--text">Creá rutinas , compartilas y ejecutalas</h2>
     <v-carousel>
       <v-carousel-item>
         <v-img  contain :src="require('../assets/ej.jpg') "></v-img>

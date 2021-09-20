@@ -1,21 +1,21 @@
 <template>
   <v-app>
-    <HeaderApp></HeaderApp>
-    <v-main>
+    <HeaderHome></HeaderHome>
+    <v-main class="primary">
       <Home></Home>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HeaderApp from "./components/HeaderApp";
+import HeaderHome from "./components/HeaderHome";
 import Home from "./components/Home";
 
 export default {
   name: 'App',
 
   components: {
-    HeaderApp,
+    HeaderHome,
     Home,
   },
 
