@@ -1,7 +1,7 @@
 <template>
 <v-container class="primary">
     <v-row >
-      <v-col class="align-self-center ml-16" cols="4">
+      <v-col class="align-self-center" cols="4">
         <div class="mr-auto">
           <h1 class="mb-7 accent--text" >Entrená como nunca antes</h1>
           <p class="white--text"> ¿No sabes con qué rutina ejercitarte?Quédate tranquilo: <b>Entrenapp</b> te recomienda rutinas
