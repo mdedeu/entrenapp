@@ -18,14 +18,16 @@
     <h2 class="mb-10 accent--text">Creá rutinas , compartilas y ejecutalas</h2>
     <v-carousel>
       <v-carousel-item>
-        <v-img  contain :src="require('../assets/ej.jpg') "></v-img>
+        <v-img  contain :src="require('../assets/ej2.jpg') "></v-img>
       </v-carousel-item>
       <v-carousel-item>
         <v-img  contain :src="require('../assets/ej.jpg') "></v-img>
       </v-carousel-item>
       <v-carousel-item>
-        <v-img  contain :src="require('../assets/ej.jpg') "></v-img>
+        <v-img  contain :src="require('../assets/ej3.jpg') "></v-img>
       </v-carousel-item>
+
+
 
     </v-carousel>
 </v-container>
