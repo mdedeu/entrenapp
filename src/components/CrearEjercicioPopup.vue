@@ -107,14 +107,13 @@
     </v-row>
 
       <v-row>
-        <v-col>
+        <v-col height="100%">
           <v-checkbox
               v-model="ex4"
               label="Equipamiento extra"
-              color="primary"
-              value="primary"
+              color="black"
+              value="black"
               hide-details
-              class="text-h3"
           ></v-checkbox>
         </v-col>
       </v-row>
