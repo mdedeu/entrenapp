@@ -39,18 +39,24 @@
 
     <v-main>
       <HelloWorld/>
+      <RoutineDescription/>
+      <RutinasCreador/>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld';
+import RoutineDescription from './components/RoutineDescription'
+import RutinasCreador from './components/RutinasCreador'
 
 export default {
   name: 'App',
 
   components: {
     HelloWorld,
+    RoutineDescription,
+    RutinasCreador
   },
 
   data: () => ({
