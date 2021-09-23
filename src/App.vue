@@ -39,24 +39,21 @@
 
     <v-main>
       <HelloWorld/>
-      <RoutineDescription/>
-      <RutinasCreador/>
+      <CrearEjercicioPopup/>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld';
-import RoutineDescription from './components/RoutineDescription'
-import RutinasCreador from './components/RutinasCreador'
+import CrearEjercicioPopup from './components/CrearEjercicioPopup'
 
 export default {
   name: 'App',
 
   components: {
     HelloWorld,
-    RoutineDescription,
-    RutinasCreador
+    CrearEjercicioPopup
   },
 
   data: () => ({
