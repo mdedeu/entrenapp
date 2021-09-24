@@ -10,7 +10,7 @@
 
     <v-container>
       <v-row>
-        <v-col cols="11"></v-col>
+        <v-col cols="11"></v-col> <! otra forma!>
         <v-col cols="1">
           <v-icon
               x-large

@@ -39,21 +39,20 @@
 
     <v-main>
       <HelloWorld/>
-      <CrearEjercicioPopup/>
+      <FiltroRutinas/>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld';
-import CrearEjercicioPopup from './components/CrearEjercicioPopup'
-
+import FiltroRutinas from './components/FiltroRutinas'
 export default {
   name: 'App',
 
   components: {
     HelloWorld,
-    CrearEjercicioPopup
+    FiltroRutinas
   },
 
   data: () => ({
