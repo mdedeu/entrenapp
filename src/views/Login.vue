@@ -11,9 +11,10 @@
       </v-row>
       <v-row>
         <v-col></v-col>
-        <v-col>  <v-text-field   label="Usuario"
+        <v-col>  <v-text-field   label="Email"
                                  required
                                  solo
+                                 prepend-inner-icon="mdi-email-outline"
         ></v-text-field> </v-col>
         <v-col></v-col>
       </v-row>
@@ -22,6 +23,8 @@
         <v-col>  <v-text-field label="Contraseña"
                                required
                                solo
+                               prepend-inner-icon="mdi-lock-outline"
+                               append-icon="mdi-eye-off-outline"
         ></v-text-field> </v-col>
         <v-col></v-col>
       </v-row>
@@ -29,10 +32,15 @@
         <v-col>
         </v-col>
         <v-col class="text-center">
-          <v-btn class="mt-3">Ingresá</v-btn>
+          <v-btn class="accent text--primary"  width="250" height="50" rounded>Ingresá</v-btn>
         </v-col>
         <v-col></v-col>
       </v-row>
+    <v-row>
+      <v-col></v-col>
+      <v-col class="text-center mt-n3"><u><a class="grey--text">Olvidaste tu contraseña?</a></u></v-col>
+      <v-col></v-col>
+    </v-row>
   </v-container>
 </template>
 
