@@ -15,6 +15,7 @@
                                  required
                                  solo
                                  prepend-inner-icon="mdi-email-outline"
+                                 v-model="email"
         ></v-text-field> </v-col>
         <v-col></v-col>
       </v-row>
@@ -24,7 +25,11 @@
                                required
                                solo
                                prepend-inner-icon="mdi-lock-outline"
-                               append-icon="mdi-eye-off-outline"
+                               v-model="password"
+                               :append-icon="show ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+                               :type="show ? 'text' : 'password'"
+                               @click:append="changeShow"
+
         ></v-text-field> </v-col>
         <v-col></v-col>
       </v-row>
@@ -32,7 +37,7 @@
         <v-col>
         </v-col>
         <v-col class="text-center">
-          <v-btn class="accent text--primary"  width="250" height="50" rounded>Ingresá</v-btn>
+          <v-btn class="accent text--primary"  width="250" height="50" rounded @click="login">Ingresá</v-btn>
         </v-col>
         <v-col></v-col>
       </v-row>
@@ -45,8 +50,25 @@
 </template>
 
 <script>
+import store from "../store";
 export default {
-  name: "Login.vue"
+  name: "Login.vue",
+  data() {
+    return{
+      email : null,
+      password : null,
+      show: false
+    }
+  },
+  methods :{
+    login(){
+      store.email = this.email;
+      this.$router.push("/app");
+    },
+    changeShow(){
+      this.show = !this.show ;
+    }
+  }
 }
 </script>
 
