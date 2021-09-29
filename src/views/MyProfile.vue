@@ -1,8 +1,15 @@
 <template>
-  <div>
-    <HeaderApp></HeaderApp>
-    <ProfileCard></ProfileCard>
-  </div>
+  <v-container fluid class="primary fill-height">
+    <v-row>
+      <v-col cols = 12><HeaderApp></HeaderApp></v-col>
+    </v-row>
+
+    <v-row>
+      <v-col>
+        <ProfileCard></ProfileCard>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -13,8 +20,8 @@ import ProfileCard from "../components/ProfileCard";
 export default {
   name: "MyProfile.vue",
   components: {
-    HeaderApp,
-    ProfileCard
+   HeaderApp,
+   ProfileCard
   }
 }
 </script>

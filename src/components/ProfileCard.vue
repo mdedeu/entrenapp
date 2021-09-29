@@ -1,58 +1,32 @@
 <template>
-  <v-container align="center" color="primary" justify="center" fill-height>
-    <v-row class="bg-img" justify="space-around">
-      <v-col cols="12" class="mt-8">
-        <v-card width="400">
-          <v-img
-              height="200px"
-              src="https://cdn.pixabay.com/photo/2021/07/09/06/52/lavender-6398415_960_720.jpg"
-          >
-            <v-app-bar
-                class="mt-8"
-                flat
-                color="rgba(0, 0, 0, 0)"
-            >
-              <v-avatar size="100">
-                <img
-                    alt="user"
-                    src="https://cdn.pixabay.com/photo/2019/12/16/21/39/tree-4700352_960_720.jpg"
-                >
-              </v-avatar>
+  <v-container>
+        <v-card>
+          <v-img height="25vh" :src="require('../assets/psg_header.jpg')">
+            <v-container>
+              <v-row align="center">
+                <v-col>
+                  <v-app-bar class="mt-12" flat color="rgba(0, 0, 0, 0)">
+                    <v-avatar size="150">
+                      <img alt="user" :src="require('../assets/messi.jpg')">
+                    </v-avatar>
+                    <v-spacer></v-spacer>
+                  </v-app-bar>
+                </v-col>
+                <v-col>
 
-              <v-spacer></v-spacer>
-
-              <v-menu offset-y left>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                      v-bind="attrs"
-                      v-on="on"
-                      color="white"
-                      icon
-                  >
-                    <v-icon>mdi-dots-vertical</v-icon>
-                  </v-btn>
-                </template>
-                <v-list>
-                  <v-list-item href="https://edu.fedorae.com">
-                    <v-list-item-title>Edit</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-
-            </v-app-bar>
-
-            <v-card-title class="white--text mt-8">
-              <p class="ml-3">
-                Jane Doe
-              </p>
-            </v-card-title>
+                </v-col>
+              </v-row>
+            </v-container>
           </v-img>
+
 
           <v-card-text>
 
-            <div class="font-weight-bold ml-8 mb-2">
-              Details
-            </div>
+            <v-card-title  class="white--text">
+              <h1 class="black--text">Leo Messi</h1>
+            </v-card-title>
+
+            <div class="font-weight-bold ml-4 mb-2"> Detalles </div>
 
             <v-list two-line>
               <v-list-item href="https://edu.fedorae.com">
@@ -64,7 +38,7 @@
 
                 <v-list-item-content>
                   <v-list-item-title>1 444 555 8888</v-list-item-title>
-                  <v-list-item-subtitle>Mobile</v-list-item-subtitle>
+                  <v-list-item-subtitle>Teléfono</v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-icon>
@@ -82,8 +56,8 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>jane@edu.fedorae.com</v-list-item-title>
-                  <v-list-item-subtitle>Work</v-list-item-subtitle>
+                  <v-list-item-title>messi@psg.com</v-list-item-title>
+                  <v-list-item-subtitle>Trabajo</v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-icon>
@@ -101,15 +75,32 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Fedorae Education</v-list-item-title>
+                  <v-list-item-title>Paris Saint germain</v-list-item-title>
                   <v-list-item-subtitle>Online</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
           </v-card-text>
+
+            <v-container>
+              <v-row>
+                <v-col>
+                  <v-card-actions>
+                    <v-button class="grey--text  mr-16 ml-16">Cambiar contraseña</v-button>
+                  </v-card-actions>
+                </v-col>
+                <v-col>
+                  <v-card-actions>
+                    <v-button class="grey--text  mr-16 ml-16">Cambiar foto de perfil</v-button>
+                  </v-card-actions>                </v-col>
+                <v-col>
+                  <v-card-actions>
+                    <v-button class="grey--text  mr-16 ml-16">Cambiar foto de portada</v-button>
+                  </v-card-actions>                </v-col>
+              </v-row>
+            </v-container>
+
         </v-card>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 
