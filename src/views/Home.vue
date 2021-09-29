@@ -31,10 +31,8 @@
           </v-carousel-item>
         </v-carousel>
       </v-row>
-
     </div>
   </div>
-
 </template>
 
 <script>
