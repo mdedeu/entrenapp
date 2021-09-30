@@ -38,21 +38,23 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <BuscadorRutinas/>
+      <SeleccCateg/>
+      <CrearEjercicioPopup/>
+      <RutinasCreador/>
+      <RoutinDescription/>
       <FiltroRutinas/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-import FiltroRutinas from './components/FiltroRutinas'
+
+
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
-    FiltroRutinas
   },
 
   data: () => ({

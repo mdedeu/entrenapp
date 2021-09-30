@@ -9,26 +9,8 @@
   >
   <v-container>
 
-    <v-col class="col-2">
-      <template>
-        <div class="text-center">
-          <v-btn
-              rounded
-              color="transparent"
-              width="100%"
-              class="white--text"
-          >
-            <v-icon
-                large
-                color="white"
-            >
-              mdi-arrow-left
-            </v-icon>
-            Atrás
-          </v-btn>
-        </div>
-      </template>
-    </v-col>
+    <Back/>
+
     <v-row>
 
       <v-col class="yellow--text text-h3">
@@ -97,8 +79,12 @@
 
 <script>
 
+import Back from './Back'
 export default {
   name: 'RutinasCreador',
+  components: {
+    Back
+  }
 }
 
 </script>

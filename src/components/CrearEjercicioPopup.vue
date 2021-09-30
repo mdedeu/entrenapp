@@ -9,21 +9,10 @@
   >
 
     <v-container>
-      <v-row>
-        <v-col cols="11"></v-col> <! otra forma!>
-        <v-col cols="1">
-          <v-icon
-              x-large
-              color="black"
-          >
-            mdi-alpha-x
-          </v-icon>
 
-        </v-col>
-      </v-row>
-
+      <Close/>
       <v-row>
-        <v-col class="text-h3">Informacion del ejercicio</v-col>
+        <v-col class="text-h3">Información del ejercicio</v-col>
       </v-row>
 
       <v-row>
@@ -140,9 +129,12 @@
 
 
 <script>
-
+import Close from './Close'
 export default {
   name: 'RoutineDescription',
+  components:{
+    Close
+  }
 }
 
 </script>
