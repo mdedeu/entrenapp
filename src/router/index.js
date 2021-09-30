@@ -10,13 +10,11 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    meta: { requiresAuth: false},
     component: Home
    },
   {
     path: '/login',
     name: 'Login',
-    meta: { requiresAuth: false},
     component: Login
   },
   {
@@ -33,17 +31,14 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to,from,next) =>{
-  if(to.meta.requiresAuth){
-    if(!store.user){
-      next({name: 'Login'});
-    }
-    else{
+    if (to.matched.some(route => route.meta.requiresAuth)) {
+      if (!store.user) {
+        next({ name: "Login", query: { redirect: to.fullPath } });
+      } else {
+        next();
+      }
+    } else {
       next();
     }
-    //login
-  }
-  else{
-    next()
-  }
 });
 export default router
