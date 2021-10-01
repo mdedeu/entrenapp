@@ -1,27 +1,25 @@
 <template>
   <v-container fluid class="primary fill-height">
     <v-row>
-      <v-col cols=12><HeaderApp></HeaderApp></v-col>
+      <v-col cols = 12><HeaderApp></HeaderApp></v-col>
     </v-row>
-
     <v-row>
-      <v-col>
-        <ProfileCard></ProfileCard>
-      </v-col>
+      <v-col cols="2-11"><ExerciseFilterScroll></ExerciseFilterScroll></v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
 import HeaderApp from "../components/HeaderApp";
-import ProfileCard from "../components/ProfileCard";
+import ExerciseFilterScroll from "../components/ExerciseFilterScroll";
+
 
 
 export default {
-  name: "MyProfile.vue",
+  name: "ExerciseChooser.vue",
   components: {
    HeaderApp,
-   ProfileCard
+    ExerciseFilterScroll,
   }
 }
 </script>
