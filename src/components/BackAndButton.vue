@@ -18,7 +18,7 @@
           >
             mdi-bookmark-outline
           </v-icon>
-          Añadir a favoritas
+          <slot></slot>
         </v-btn>
 
       </template>

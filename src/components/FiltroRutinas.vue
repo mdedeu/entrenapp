@@ -1,11 +1,6 @@
 <template>
 
-  <v-sheet
-      color="blue"
-      elevation="1"
-      height="50%"
-      width="100%"
-  >
+
     <v-container fluid>
       <v-row class="yellow--text" justify="space-around" >
           <v-col cols="6" >
@@ -81,6 +76,7 @@
                     color="yellow"
                     value="yellow"
                     hide-details
+                    class="yellow--text"
                 ></v-checkbox>
             </v-row>
 
@@ -159,9 +155,6 @@
 
       </v-row>
     </v-container>
-  </v-sheet>
-
-
 </template>
 
 

@@ -2,7 +2,7 @@
     <v-sheet
         color="blue"
         elevation="1"
-        height="50%"
+        height="100%"
         width="100%"
         class="yellow--text"
     >

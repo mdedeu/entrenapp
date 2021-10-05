@@ -2,7 +2,7 @@
   <v-carousel v-model="model">
     <v-carousel-item>
       <v-sheet
-          color="yellow"
+          color="accent"
           height="350px"
           tile
 
@@ -10,7 +10,7 @@
         <v-container fluid>
                 <v-row>
                   <v-col style="height: 50px" >
-                    <p class="text-center text-h3"> Rutinas recomendadas</p>
+                    <p class="text-center text-h3"> <slot></slot></p>
                   </v-col>
                 </v-row>
                 <v-row style="height: 300px">
