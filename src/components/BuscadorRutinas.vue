@@ -1,16 +1,13 @@
 <template>
-    <v-sheet
-        color="blue"
-        elevation="1"
-        height="100%"
-        width="100%"
-        class="yellow--text"
-    >
-    <v-container>
-        <Back/>
+    <v-container style="height: 90vh">
+      <v-row>
+        <v-col>
+          <Back/>
+        </v-col>
+      </v-row>
         <v-row>
             <v-col align="center">
-                <p class="text-h3">Tus rutinas</p>
+                <p class="text-h3 accent--text">Tus rutinas</p>
             </v-col>
         </v-row>
         <v-row justify="center">
@@ -27,14 +24,17 @@
 
             </v-col>
         </v-row>
-
-
-
+        <v-row v-for="routine in routines" :key="routine.id">
+          <v-col cols="12" align="center">
+            <v-btn
+                rounded
+                width="50%"
+            >
+              {{ routine.name }}
+            </v-btn>
+          </v-col>
+        </v-row>
     </v-container>
-
-
-    </v-sheet>
-
 </template>
 
 <script>
@@ -43,6 +43,11 @@
     name: "BuscadorRutinas",
     components:{
         Back
+    },
+    data(){
+      return {
+        routines : [ {id:0,name:"Pecho",level:"1"} , {id:1,name:"Espalda",level:"1"} , {id:2, name:"Abdominales",level:"1"}, {id:3, name:"Brazos",level:"1"} ],
+        }
     }
 }
 </script>

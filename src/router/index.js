@@ -9,6 +9,7 @@ import Login from "../views/Login";
 import store from "../store/index"
 import Register from "../views/Register";
 import RoutineCreator from "../views/RoutineCreator"
+import TusRutinas from "../views/TusRutinas"
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,11 @@ const routes = [
     path: '/RoutineCreator',
     name: 'RoutineCreator',
     component: RoutineCreator
+  },
+  {
+    path: '/TusRutinas',
+    name: 'TusRutinas',
+    component: TusRutinas
   },
 
   {

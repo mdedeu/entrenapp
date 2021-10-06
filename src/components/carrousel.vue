@@ -1,14 +1,12 @@
 <template>
     <v-container fluid class="accent fill-height">
-      <v-row>
-        <v-col>
-          <p class="text-center text-h3"> <slot></slot></p>
+      <v-row justify="center">
+        <v-col cols="3">
+          <router-link  to="/TusRutinas" class="text-h4"><slot></slot></router-link>
         </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col>
-          <v-carousel v-model="model">
+        </v-row  >
+        <v-row>
+          <v-carousel v-model="model" style="height: 30vh">
             <v-carousel-item  >
               <template>
                 <v-row>
@@ -35,10 +33,9 @@
                   </v-col>
                 </v-row>
               </template>
-              </v-carousel-item>
-        </v-carousel>
-       </v-col>
-      </v-row>
+            </v-carousel-item>
+          </v-carousel>
+        </v-row>
     </v-container>
 </template>
 
