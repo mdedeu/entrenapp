@@ -7,6 +7,7 @@ import RoutineDescription from '../views/RoutineDescriptionPage.vue'
 import RoutineLanding from '../views/RoutineLanding.vue'
 import Login from "../views/Login";
 import store from "../store/index"
+import RoutineCreator from "../views/RoutineCreator"
 
 Vue.use(VueRouter)
 
@@ -42,6 +43,12 @@ const routes = [
     name: 'Login',
     component: Login
   },
+  {
+    path: '/RoutineCreator',
+    name: 'RoutineCreator',
+    component: RoutineCreator
+  },
+
   {
     path: '/app',
     name: 'App',
