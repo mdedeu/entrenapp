@@ -16,10 +16,10 @@
       </v-col>
      <v-col cols="3" >
        <div class="d-inline-flex justify-space-around text-center align-content-center mt-3">
-         <v-btn class="white--text  mr-16 ml-16" plain>Creá tu rutina</v-btn>
-         <v-btn class="white--text mr-16 ml-16" plain>Rutinas</v-btn>
+         <v-btn class="white--text  mr-16 ml-16" plain  @click="CreateRoutine()" >Creá tu rutina</v-btn>
+         <v-btn class="white--text mr-16 ml-16" plain @click="RoutineLanding()">Rutinas</v-btn>
          <v-btn class="white--text mr-16 ml-16" plain>Ejercicios</v-btn>
-         <v-btn class="white--text mr-16 ml-16" plain>Mi perfil</v-btn>
+         <v-btn class="white--text mr-16 ml-16" plain @click="MyProfile()">Mi perfil</v-btn>
          <v-btn class="white--text mr-16 ml-16"  plain>
            Salir
            <v-icon color="white">mdi-arrow-right-thin-circle-outline</v-icon>
@@ -34,7 +34,18 @@
 
 <script>
 export default {
-  name: "HeaderApp"
+  name: "HeaderApp",
+  methods:{
+    CreateRoutine() {
+      this.$router.push({name:"RoutineCreator"});
+    },
+    RoutineLanding(){
+      this.$router.push({name:"RoutineLanding"});
+    },
+    MyProfile(){
+      this.$router.push({name:"My Profile"});
+    }
+  }
 }
 </script>
 
