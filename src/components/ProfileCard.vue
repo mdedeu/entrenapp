@@ -1,13 +1,13 @@
 <template>
   <v-container>
         <v-card>
-          <v-img height="25vh" :src="require('../assets/psg_header.jpg')">
+          <v-img height="25vh" :src="profile.back_im">
             <v-container>
               <v-row align="center">
                 <v-col>
                   <v-app-bar class="mt-12" flat color="rgba(0, 0, 0, 0)">
                     <v-avatar size="150">
-                      <img alt="user" :src="require('../assets/messi.jpg')">
+                      <img alt="user" :src="profile.prof_im">
                     </v-avatar>
                     <v-spacer></v-spacer>
                   </v-app-bar>
@@ -23,7 +23,7 @@
           <v-card-text>
 
             <v-card-title  class="white--text">
-              <h1 class="black--text">Leo Messi</h1>
+              <h1 class="black--text">{{ profile.name }}</h1>
             </v-card-title>
 
             <div class="font-weight-bold ml-4 mb-2"> Detalles </div>
@@ -37,7 +37,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>1 444 555 8888</v-list-item-title>
+                  <v-list-item-title>{{ profile.number }}</v-list-item-title>
                   <v-list-item-subtitle>Teléfono</v-list-item-subtitle>
                 </v-list-item-content>
 
@@ -56,7 +56,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>messi@psg.com</v-list-item-title>
+                  <v-list-item-title>{{ profile.email }}</v-list-item-title>
                   <v-list-item-subtitle>Trabajo</v-list-item-subtitle>
                 </v-list-item-content>
 
@@ -75,7 +75,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Paris Saint germain</v-list-item-title>
+                  <v-list-item-title>{{ profile.location }}</v-list-item-title>
                   <v-list-item-subtitle>Online</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -106,7 +106,12 @@
 
 <script>
 export default {
-  name: "ProfileCard.vue"
+  name: "ProfileCard.vue",
+  data(){
+    return {
+      profile:{prof_im:require('../assets/messi.jpg'), back_im:require('../assets/psg_header.jpg'), name:"Leo Messi", number:"1 444 555 8888", email:"messi@psg.com", location:"Paris Saint-Germain"}
+    }
+  }
 }
 </script>
 
