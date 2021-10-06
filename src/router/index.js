@@ -7,6 +7,7 @@ import RoutineDescription from '../views/RoutineDescriptionPage.vue'
 import RoutineLanding from '../views/RoutineLanding.vue'
 import Login from "../views/Login";
 import store from "../store/index"
+import Register from "../views/Register";
 import RoutineCreator from "../views/RoutineCreator"
 
 Vue.use(VueRouter)
@@ -26,6 +27,11 @@ const routes = [
     path: '/Routines',
     name: 'Routines',
     component: RoutineSearcher
+  },
+  {
+    path: '/Register',
+    name: 'Register',
+    component: Register
   },
   {
     path: '/RoutineDescription',
