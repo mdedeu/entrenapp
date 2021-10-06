@@ -5,9 +5,16 @@
         </v-row>
         <v-row class="pt-16">
             <carrousel>Rutinas recomendadas</carrousel>
+        </v-row>
+
+        <v-row class="pt-16">
             <carrousel>Tus rutinas</carrousel>
+        </v-row>
+
+        <v-row class="pt-16">
             <carrousel>Rutinas favoritas</carrousel>
         </v-row>
+
     </v-container>
 
 

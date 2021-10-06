@@ -9,6 +9,7 @@
             color="transparent"
             width="100%"
             class="white--text"
+            @click="goBack"
         >
           <v-icon
               large
@@ -29,6 +30,11 @@
 
 export default {
   name : 'Back',
-}
+  methods:{
+    goBack(){
+      return this.$router.go(-1);
+    }
+  }
+};
 
 </script>

@@ -32,12 +32,14 @@ const routes = [
   {
     path: '/RoutineLanding',
     name: 'RoutineLanding',
-    component: RoutineLanding
+    component: RoutineLanding,
+    props:true,
   }
 
 ]
 
 const router = new VueRouter({
+  mode : "history",
   base: process.env.BASE_URL,
   routes
 })
