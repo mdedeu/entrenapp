@@ -5,6 +5,8 @@ import MyProfile from '../views/MyProfile.vue'
 import RoutineSearcher from '../views/RoutineSearcher.vue'
 import RoutineDescription from '../views/RoutineDescriptionPage.vue'
 import RoutineLanding from '../views/RoutineLanding.vue'
+import Login from "../views/Login";
+import store from "../store/index"
 
 Vue.use(VueRouter)
 
@@ -34,8 +36,18 @@ const routes = [
     name: 'RoutineLanding',
     component: RoutineLanding,
     props:true,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/app',
+    name: 'App',
+    meta: { requiresAuth: true},
+    component: Home
   }
-
 ]
 
 const router = new VueRouter({
@@ -44,4 +56,15 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to,from,next) =>{
+    if (to.matched.some(route => route.meta.requiresAuth)) {
+      if (!store.user) {
+        next({ name: "Login", query: { redirect: to.fullPath } });
+      } else {
+        next();
+      }
+    } else {
+      next();
+    }
+});
 export default router

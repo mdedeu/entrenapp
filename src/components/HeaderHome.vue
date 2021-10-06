@@ -12,7 +12,11 @@
     <v-toolbar-title class="font-weight-bold">ENTRENAPP</v-toolbar-title>
     <v-spacer>
     </v-spacer>
-    <v-btn outlined rounded class="mr-3 font-weight-bold">Inicia Sesión</v-btn>
+    <router-link :to = "{name: 'Login'}" class="text-decoration-none">
+    <v-btn outlined rounded class="mr-3 font-weight-bold">
+      Inicia Sesión
+    </v-btn>
+    </router-link>
     <v-btn outlined rounded class="primary accent--text font-weight-bold">Registrate</v-btn>
   </v-app-bar>
 
