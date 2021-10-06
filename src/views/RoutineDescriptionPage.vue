@@ -1,6 +1,6 @@
 <template>
     <v-container fluid class="primary fill-height">
-        <v-row>
+        <v-row style="height: 50px">
             <v-col cols = "12"><HeaderApp/></v-col>
         </v-row>
 
