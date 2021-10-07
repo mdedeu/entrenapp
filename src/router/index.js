@@ -10,6 +10,7 @@ import store from "../store/index"
 import Register from "../views/Register";
 import RoutineCreator from "../views/RoutineCreator"
 import TusRutinas from "../views/TusRutinas"
+import RutinasRecomendadas from "../views/RutinasRecomendadas"
 
 Vue.use(VueRouter)
 
@@ -60,7 +61,11 @@ const routes = [
     name: 'TusRutinas',
     component: TusRutinas
   },
-
+  {
+    path: '/RutinasRecomendadas',
+    name: 'RutinasRecomendadas',
+    component: RutinasRecomendadas
+  },
   {
     path: '/app',
     name: 'App',

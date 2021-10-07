@@ -2,81 +2,40 @@
 
 
     <v-container fluid>
-      <v-row class="yellow--text" justify="space-around" >
+      <v-row class="accent--text" justify="space-around" >
           <v-col cols="6" >
               <v-row class="text-h4 pl-16" justify="space-around">Nivel de dificultad:</v-row>
-              <v-row class="pt-6" justify="space-around">
+              <v-row class="pt-6" justify="space-around" v-for="difficult in difficulty" :key="difficult.level">
                 <template>
                   <v-btn
                     rounded
                     color="white"
                     width="60%"
-                  >Principiante
+                  >{{ difficult.level }}
                   </v-btn>
               </template>
               </v-row>
-            <v-row class="pt-6" justify="space-around">
-              <template>
-                <v-btn
-                    rounded
-                    color="white"
-                    width="60%"
-                >Intermedio
-                </v-btn>
-              </template>
-            </v-row>
-
-            <v-row class="pt-6" justify="space-around">
-              <template>
-                <v-btn
-                    rounded
-                    color="white"
-                    width="60%"
-                >Avanzado
-                </v-btn>
-              </template>
-            </v-row>
 
               <v-row class="text-h4 pt-6" justify="space-around">Duración:</v-row>
-              <v-row class="pt-6" justify="space-around">
+              <v-row class="pt-6" justify="space-around" v-for="durationE in duration" :key="durationE.range">
                 <template>
                   <v-btn
                       rounded
                       color="white"
                       width="60%"
-                  >15-30
-                  </v-btn>
-                </template>
-              </v-row>
-              <v-row class="pt-6" justify="space-around">
-                <template>
-                  <v-btn
-                      rounded
-                      color="white"
-                      width="60%"
-                  >30-45
+                  >{{ durationE.range }}
                   </v-btn>
                 </template>
               </v-row>
 
-              <v-row class="pt-6" justify="space-around">
-                <template>
-                  <v-btn
-                      rounded
-                      color="white"
-                      width="60%"
-                  >45-60
-                  </v-btn>
-                </template>
-              </v-row>
             <v-row justify="space-around" class="pt-6">
                 <v-checkbox
                     v-model="ex4"
                     label="Equipación extra"
-                    color="yellow"
-                    value="yellow"
+                    color="accent"
+                    value="accent"
                     hide-details
-                    class="yellow--text"
+                    class="accent--text"
                 ></v-checkbox>
             </v-row>
 
@@ -89,9 +48,7 @@
                 ></v-text-field>
               </v-col>
             </v-row>
-
-
-            </v-col>
+          </v-col>
 
 
         <v-divider
@@ -99,60 +56,18 @@
         ></v-divider>
 
         <v-col cols="6">
-          <v-row class="pt-6 pl-6" justify="space-around">
+          <v-row class="pt-6 pl-6" justify="space-around" v-for="routine in routines" :key="routine.name">
             <template>
               <v-btn
                   rounded
                   color="white"
                   width="60%"
-              >Pecho
+                  @click="RoutineDescription()"
+              >{{ routine.name }}
               </v-btn>
             </template>
           </v-row>
-          <v-row class="pt-6 pl-6" justify="space-around">
-            <template>
-              <v-btn
-                  rounded
-                  color="white"
-                  width="60%"
-              >Piernas
-              </v-btn>
-            </template>
-          </v-row>
-          <v-row class="pt-6 pl-6" justify="space-around">
-            <template>
-              <v-btn
-                  rounded
-                  color="white"
-                  width="60%"
-              >Brazos
-              </v-btn>
-            </template>
-          </v-row>
-          <v-row class="pt-6 pl-6" justify="space-around">
-            <template>
-              <v-btn
-                  rounded
-                  color="white"
-                  width="60%"
-              >Hombros
-              </v-btn>
-            </template>
-          </v-row>
-          <v-row class="pt-6 pl-6" justify="space-around" >
-          <template>
-            <v-btn
-                rounded
-                color="white"
-                width="60%"
-            >Espalda
-            </v-btn>
-          </template>
-        </v-row>
-
-
-        </v-col>
-
+         </v-col>
       </v-row>
     </v-container>
 </template>
@@ -163,6 +78,19 @@
 
 export default {
   name: 'FiltroRutinas',
+  data(){
+    return {
+      routines:[{name:"Pecho"},{name:"Piernas"},{name:"Brazo"},{name:"Hombros"},{name:"Espalda"}],
+      difficulty: [{level:"Principiante"},{level:"Intermedio"},{level:"Avanzado"}],
+      duration: [{range:"15-30"},{range:"30-45"},{range:"45-60"}]
+    }
+  },
+  methods:{
+    RoutineDescription(){
+     this.$router.push({name:"RoutineDescription"})
+    }
+  }
+
 }
 
 </script>
