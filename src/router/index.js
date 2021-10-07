@@ -14,6 +14,7 @@ import RutinasRecomendadas from "../views/RutinasRecomendadas"
 import EjercicioDescripcion from "../views/EjercicioDescripcionPage"
 import CrearEjercicio from "../views/CrearEjercicioPage"
 import SeleccCateg from "../views/SeleccCategPage"
+import NotFound from "../views/NotFound";
 Vue.use(VueRouter)
 
 const routes = [
@@ -88,6 +89,11 @@ const routes = [
     name: 'App',
     meta: { requiresAuth: true},
     component: Home
+  },
+  {
+    path: '*',
+    name: "NotFound",
+    component: NotFound
   }
 ]
 
