@@ -3,44 +3,19 @@
             <Close/>
             <v-row >
                 <v-col align="center">
-                    <p class="text-h3 text-center accent--text">Ejercicios recomendados</p>
+                    <p class="text-h3 text-center accent--text">Seleccionar la categoria</p>
                 </v-col>
             </v-row>
-            <v-row style="height: 10%">
+            <v-row style="height: 10%" v-for="category in categories" :key="category.cat">
                 <v-col cols="12" align="center">
                     <v-btn
                         width="50%"
                         height="90%"
                         rounded
                         class="text-h4"
+                        @click="PopupSeleccionarEjercicio"
                     >
-                        Ejercicios recomendados
-                    </v-btn>
-                </v-col>
-            </v-row>
-            <v-row style="height: 10%">
-                <v-col cols="12" align="center">
-                    <v-btn
-                    rounded
-                    width="50%"
-                    height="90%"
-                    class="text-h4"
-
-                    >
-                        Tus ejercicios
-                    </v-btn>
-                </v-col>
-            </v-row>
-            <v-row style="height: 10%">
-                <v-col cols="12"  align="center">
-                    <v-btn
-                        rounded
-                        width="50%"
-                        height="90%"
-                        class="text-h4"
-
-                    >
-                        Ejercicios favoritos
+                      {{ category.cat }}
                     </v-btn>
                 </v-col>
             </v-row>
@@ -53,6 +28,16 @@
     name: "SeleccCateg",
     components:{
         Close
-}
+    },
+      data(){
+        return {
+          categories:[{cat:"Ejercicios recomendados"},{cat:"Tus ejercicios"},{cat:"Ejercicios favoritos"}],
+        }
+      },
+      methods:{
+        PopupSeleccionarEjercicio(){
+          this.$router.push({name:"SeleccionarEjercicioPopup"})
+        }
+      }
 }
 </script>

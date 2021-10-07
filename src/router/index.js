@@ -15,6 +15,7 @@ import EjercicioDescripcion from "../views/EjercicioDescripcionPage"
 import CrearEjercicio from "../views/CrearEjercicioPage"
 import SeleccCateg from "../views/SeleccCategPage"
 import NotFound from "../views/NotFound";
+import SeleccionarEjercicioPopup from '../views/SeleccionarEjercicio'
 Vue.use(VueRouter)
 
 const routes = [
@@ -89,6 +90,11 @@ const routes = [
     name: 'App',
     meta: { requiresAuth: true},
     component: Home
+  },
+  {
+    path: '/SeleccionarEjercicio',
+    name: 'SeleccionarEjercicioPopup',
+    component: SeleccionarEjercicioPopup
   },
   {
     path: '*',
