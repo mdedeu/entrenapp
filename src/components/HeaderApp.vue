@@ -18,7 +18,7 @@
        <div class="d-inline-flex justify-space-around text-center align-content-center mt-3">
          <v-btn class="white--text  mr-16 ml-16" plain  @click="CreateRoutine()" >Creá tu rutina</v-btn>
          <v-btn class="white--text mr-16 ml-16" plain @click="RoutineLanding()">Rutinas</v-btn>
-         <v-btn class="white--text mr-16 ml-16" plain>Ejercicios</v-btn>
+         <v-btn class="white--text mr-16 ml-16" plain @click="EjerciciosLanding">Ejercicios</v-btn>
          <v-btn class="white--text mr-16 ml-16" plain @click="MyProfile()">Mi perfil</v-btn>
          <v-btn class="white--text mr-16 ml-16"  @click="Home" plain>
            Salir
@@ -47,6 +47,9 @@ export default {
     },
     Home(){
       this.$router.push({name:"Home"})
+    },
+    EjerciciosLanding(){
+      this.$router.push({name:"EjerciciosLanding"});
     }
   }
 }

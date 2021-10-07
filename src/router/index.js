@@ -16,6 +16,9 @@ import CrearEjercicio from "../views/CrearEjercicioPage"
 import SeleccCateg from "../views/SeleccCategPage"
 import NotFound from "../views/NotFound";
 import SeleccionarEjercicioPopup from '../views/SeleccionarEjercicio'
+import TusEjercicios from "../views/TusEjercicios"
+import EjerciciosLanding from  "../views/EjerciciosLanding"
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,6 +31,16 @@ const routes = [
     path: '/myprofile',
     name: 'My Profile',
     component: MyProfile
+  },
+  {
+    path: '/EjerciciosLanding',
+    name: 'EjerciciosLanding',
+    component: EjerciciosLanding
+  },
+  {
+    path: '/TusEjercicios',
+    name: 'Tus Ejercicios',
+    component: TusEjercicios
   },
   {
     path: '/Routines',
