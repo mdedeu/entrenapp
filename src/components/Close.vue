@@ -4,10 +4,11 @@
         <v-col cols="12" align="right">
             <v-btn
                 color="transparent"
+                @click="goBack"
             >
                 <v-icon
                     x-large
-                    color="black"
+                    color="white"
                 >
                     mdi-alpha-x
                 </v-icon>
@@ -19,7 +20,12 @@
 
 <script>
     export default {
-    name: 'Close',
+    name: 'Close' ,
+    methods:{
+      goBack(){
+        return this.$router.go(-1);
+      }
+    }
     }
 </script>
 

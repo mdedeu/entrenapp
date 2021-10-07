@@ -1,18 +1,11 @@
 <template>
+   <v-container fluid class="accent fill-height">
 
-  <v-sheet
-      color="yellow"
-      elevation="1"
-      height="50%"
-      width="100%"
-      class ="black--text"
-  >
-
-    <v-container>
-
-      <Close/>
-      <v-row>
-        <v-col class="text-h3">Información del ejercicio</v-col>
+      <v-row justify="space-between">
+        <v-col cols="6" class="text-h3">Información del ejercicio</v-col>
+        <v-col cols="3">
+          <Close/>
+        </v-col>
       </v-row>
 
       <v-row>
@@ -26,7 +19,7 @@
       </v-row>
 
       <v-row>
-        <v-col class="text-h3">Grupo muscular</v-col>
+        <v-col class="text-h3">Grupo múscular</v-col>
       </v-row>
 
       <v-row>
@@ -123,8 +116,6 @@
 
 
     </v-container>
-
-</v-sheet>
 </template>
 
 
@@ -134,7 +125,13 @@ export default {
   name: 'RoutineDescription',
   components:{
     Close
+  },
+  data(){
+    return {
+      muscle:[{name:"Piernas"},{name:"Espalda"},{name:"Pecho"},{name:"Abdominales"},{name:"Brazos"},{name:"Hombros"}]
+    }
   }
+
 }
 
 </script>

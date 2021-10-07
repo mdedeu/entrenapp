@@ -11,7 +11,9 @@ import Register from "../views/Register";
 import RoutineCreator from "../views/RoutineCreator"
 import TusRutinas from "../views/TusRutinas"
 import RutinasRecomendadas from "../views/RutinasRecomendadas"
-
+import EjercicioDescripcion from "../views/EjercicioDescripcionPage"
+import CrearEjercicio from "../views/CrearEjercicioPage"
+import SeleccCateg from "../views/SeleccCategPage"
 Vue.use(VueRouter)
 
 const routes = [
@@ -41,6 +43,16 @@ const routes = [
     component: RoutineDescription
   },
   {
+    path: '/CrearEjercicio',
+    name: 'CrearEjercicio',
+    component: CrearEjercicio
+  },
+  {
+    path: '/EjercicioDescripcion',
+    name: 'EjercicioDescripcion',
+    component: EjercicioDescripcion
+  },
+  {
     path: '/RoutineLanding',
     name: 'RoutineLanding',
     component: RoutineLanding,
@@ -65,6 +77,11 @@ const routes = [
     path: '/RutinasRecomendadas',
     name: 'RutinasRecomendadas',
     component: RutinasRecomendadas
+  },
+  {
+    path: '/SeleccCateg',
+    name: 'SeleccCateg',
+    component: SeleccCateg
   },
   {
     path: '/app',
