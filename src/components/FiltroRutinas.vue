@@ -1,6 +1,5 @@
 <template>
 
-
     <v-container fluid>
       <v-row class="accent--text" justify="space-around" >
           <v-col cols="6" >
@@ -57,15 +56,7 @@
 
         <v-col cols="6">
           <v-row class="pt-6 pl-6" justify="space-around" v-for="routine in routines" :key="routine.name">
-            <template>
-              <v-btn
-                  rounded
-                  color="white"
-                  width="60%"
-                  @click="RoutineDescription()"
-              >{{ routine.name }}
-              </v-btn>
-            </template>
+           <DescriptiveRoutine :name = "routine.name" ></DescriptiveRoutine>
           </v-row>
          </v-col>
       </v-row>
@@ -76,18 +67,15 @@
 <script>
 
 
+import DescriptiveRoutine from "./DescriptiveRoutine";
 export default {
   name: 'FiltroRutinas',
+  components: {DescriptiveRoutine},
   data(){
     return {
       routines:[{name:"Pecho"},{name:"Piernas"},{name:"Brazo"},{name:"Hombros"},{name:"Espalda"}],
       difficulty: [{level:"Principiante"},{level:"Intermedio"},{level:"Avanzado"}],
       duration: [{range:"15-30"},{range:"30-45"},{range:"45-60"}]
-    }
-  },
-  methods:{
-    RoutineDescription(){
-     this.$router.push({name:"RoutineDescription"})
     }
   }
 

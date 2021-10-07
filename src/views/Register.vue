@@ -3,9 +3,10 @@
     <v-row class="mt-16">
       <v-col/>
       <v-col>
-        <!-- Aca iria el router al home-->
+        <router-link :to="{name: 'Home'}">
           <v-img src = "../assets/logo.png" class="mr-auto ml-auto" alt="logo" width="25%"/>
-      </v-col>
+        </router-link>
+          </v-col>
       <v-col/>
     </v-row>
     <v-row>
@@ -67,7 +68,8 @@
     </v-row>
     <v-row>
       <v-col/>
-      <v-col class="text-center mt-n3"><u><a class="grey--text">Ya tenes una cuenta?</a></u></v-col>
+      <v-col class="text-center mt-n3"><u><router-link :to="{name: 'Login'}">
+        <a class="grey--text"> Ya tenes una cuenta?</a></router-link></u></v-col>
       <v-col/>
     </v-row>
     <v-row style="height: 150px"></v-row>
