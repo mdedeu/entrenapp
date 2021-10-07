@@ -22,7 +22,9 @@
                    rounded
                    color="white"
                    class="primary--text justify-center text-h5"
-                   height="100%">
+                   height="100%"
+                    @click="EjercicioDescripcion"
+            >
               {{ exercise.name }}
               <v-icon
                   x-large
@@ -42,7 +44,9 @@
                    rounded
                    color="white"
                    class="primary--text justify-center text-h5"
-                   height="100%">
+                   height="100%"
+                    @click="SeleccCateg"
+            >
               <v-icon
                   x-large
                   color="primary"
@@ -66,7 +70,9 @@
                    rounded
                    color="white"
                    class="primary--text justify-center text-h5"
-                   height="100%">
+                   height="100%"
+                  @click="tusRutinas"
+            >
               <v-icon
                   x-large
                   color="primary"
@@ -105,5 +111,16 @@ export default {
       {
         routines: [{step:'Calentamiento',repetitions:3,exercise:[{name:'Salto con soga',time:30},{name:'Salto',time:35}]},{step:'Ejercitacion',repetitions:3,exercise:[{name:'Flexiones de brazo',time:60},{name:'Abdominales',time:60}]}]
       }),
+  methods:{
+    SeleccCateg(){
+      this.$router.push({name:"SeleccCateg"})
+    },
+    EjercicioDescripcion(){
+      this.$router.push({name:"EjercicioDescripcion"})
+    },
+    tusRutinas(){
+      this.$router.push({name:"Tus rutinas"});
+    }
+  }
 }
 </script>

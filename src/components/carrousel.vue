@@ -14,22 +14,14 @@
                     <v-card
                         className="mx-auto"
                         max-width="344"
+                        @click="RoutineDescription"
                     >
                       <v-card-text>
                         <div>{{routine.name}}</div>
                         <p class="text-h4 text--primary">{{routine.name}}</p>
                         <div class="text--primary">Nivel de dificultad : {{routine.level}}<br></div>
                       </v-card-text>
-                      <v-card-actions>
-                        <v-btn
-                            text
-                            color="teal accent-4"
-                        >Leer más
-                        </v-btn>
-                      </v-card-actions>
                     </v-card>
-
-
                   </v-col>
                 </v-row>
               </template>
@@ -51,6 +43,11 @@
       Section: {
         type: Object,
         required : true
+      }
+    },
+    methods:{
+      RoutineDescription(){
+        this.$router.push({name:"RoutineDescription"})
       }
     }
 

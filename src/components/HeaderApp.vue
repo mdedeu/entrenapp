@@ -20,7 +20,7 @@
          <v-btn class="white--text mr-16 ml-16" plain @click="RoutineLanding()">Rutinas</v-btn>
          <v-btn class="white--text mr-16 ml-16" plain>Ejercicios</v-btn>
          <v-btn class="white--text mr-16 ml-16" plain @click="MyProfile()">Mi perfil</v-btn>
-         <v-btn class="white--text mr-16 ml-16"  plain>
+         <v-btn class="white--text mr-16 ml-16"  @click="Home" plain>
            Salir
            <v-icon color="white">mdi-arrow-right-thin-circle-outline</v-icon>
          </v-btn>
@@ -44,6 +44,9 @@ export default {
     },
     MyProfile(){
       this.$router.push({name:"My Profile"});
+    },
+    Home(){
+      this.$router.push({name:"Home"})
     }
   }
 }

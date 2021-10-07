@@ -29,6 +29,7 @@
             <v-btn
                 rounded
                 width="50%"
+                @click="RoutineDescription"
             >
               {{ routine.name }}
             </v-btn>
@@ -48,7 +49,12 @@
       return {
         routines : [ {id:0,name:"Pecho",level:"1"} , {id:1,name:"Espalda",level:"1"} , {id:2, name:"Abdominales",level:"1"}, {id:3, name:"Brazos",level:"1"} ],
         }
-    }
+    },
+      methods:{
+      RoutineDescription(){
+        this.$router.push({name:"RoutineDescription"});
+      }
+      }
 }
 </script>
 

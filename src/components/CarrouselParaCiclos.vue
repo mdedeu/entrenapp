@@ -11,7 +11,9 @@
                    rounded
                    color="white"
                    class="primary--text justify-center text-h5"
-                   height="100%">
+                    @click="EjercicioDescripcion"
+                   height="100%"
+            >
               {{ exercise.name }}
               <v-icon
                   x-large
@@ -35,5 +37,10 @@ export default {
       {
         routines: [{step:'Calentamiento',repetitions:3,exercise:[{name:'Salto con soga',time:30},{name:'Salto',time:35}]},{step:'Ejercitacion',repetitions:3,exercise:[{name:'Flexiones de brazo',time:60},{name:'Abdominales',time:60}]}]
       }),
+  methods:{
+    EjercicioDescripcion(){
+      this.$router.push({name:"EjercicioDescripcion"})
+    }
+  }
 }
 </script>
