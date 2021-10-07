@@ -99,12 +99,6 @@ const routes = [
     component: SeleccCateg
   },
   {
-    path: '/app',
-    name: 'App',
-    meta: { requiresAuth: true},
-    component: Home
-  },
-  {
     path: '/SeleccionarEjercicio',
     name: 'SeleccionarEjercicioPopup',
     component: SeleccionarEjercicioPopup
