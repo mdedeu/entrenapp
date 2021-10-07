@@ -1,5 +1,5 @@
 <template>
-   <v-container fluid class="accent fill-height">
+   <v-container fluid class="accent fill-height primary--text">
 
       <v-row justify="space-between">
         <v-col cols="6" class="text-h3">Información del ejercicio</v-col>
@@ -93,8 +93,8 @@
           <v-checkbox
               v-model="ex4"
               label="Equipamiento extra"
-              color="black"
-              value="black"
+              color="primary"
+              value="primary"
               hide-details
           ></v-checkbox>
         </v-col>
