@@ -13,18 +13,27 @@
     <v-spacer>
     </v-spacer>
     <router-link :to = "{name: 'Login'}" class="text-decoration-none">
-    <v-btn outlined rounded class="mr-3 font-weight-bold">
+    <v-btn outlined rounded class="mr-3 font-weight-bold" @click="Login">
       Inicia Sesión
     </v-btn>
     </router-link>
-    <v-btn outlined rounded class="primary accent--text font-weight-bold">Registrate</v-btn>
+    <v-btn outlined rounded class="primary accent--text font-weight-bold" @click="Register">Registrate</v-btn>
   </v-app-bar>
 
 </template>
 
 <script>
 export default {
-  name: "HeaderHome"
+  name: "HeaderHome",
+  methods:{
+    Login(){
+      this.$router.push({name:"Login"})
+    },
+    Register(){
+      this.$router.push({name:"Register"})
+    }
+
+  }
 }
 </script>
 

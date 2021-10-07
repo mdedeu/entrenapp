@@ -71,7 +71,7 @@ const routes = [
   },
   {
     path: '/TusRutinas',
-    name: 'TusRutinas',
+    name: 'Tus rutinas',
     component: TusRutinas
   },
   {

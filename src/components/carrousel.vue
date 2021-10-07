@@ -2,7 +2,7 @@
     <v-container fluid class="accent fill-height">
       <v-row justify="center">
         <v-col cols="3">
-          <router-link  to="/TusRutinas" class="text-h4"><slot></slot></router-link>
+          <router-link  :to="{name:`${Section.nameComponent}`}" class="text-h4">{{ Section.title }}</router-link>
         </v-col>
         </v-row  >
         <v-row>
@@ -46,7 +46,13 @@
       return {
         routines : [ {id:0,name:"Pecho",level:"1"} , {id:1,name:"Pecho",level:"1"} , {id:2, name:"Pecho",level:"1"}, {id:3, name:"Pecho",level:"1"} ],
       }
-  }
+  },
+    props:{
+      Section: {
+        type: Object,
+        required : true
+      }
+    }
 
   }
 </script>

@@ -4,15 +4,15 @@
             <v-col cols = "12"><HeaderApp/></v-col>
         </v-row>
         <v-row class="pt-16">
-            <carrousel>Rutinas recomendadas</carrousel>
+            <carrousel :Section="{title:'Rutinas recomendadas',nameComponent:'RutinasRecomendadas'}"></carrousel>
+        </v-row>
+
+        <v-row class="pt-16" >
+            <carrousel :Section="{title:'Tus rutinas',nameComponent:'Tus rutinas'}"></carrousel>
         </v-row>
 
         <v-row class="pt-16">
-            <carrousel>Tus rutinas</carrousel>
-        </v-row>
-
-        <v-row class="pt-16">
-            <carrousel>Rutinas favoritas</carrousel>
+            <carrousel :Section="{title:'Rutinas recomendadas',nameComponent:'RutinasRecomendadas'}" ></carrousel>
         </v-row>
 
     </v-container>

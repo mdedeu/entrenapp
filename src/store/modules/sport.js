@@ -1,4 +1,4 @@
-import {SportApi} from "../../../api/sport";
+import {SportApi} from "../../../API/sport";
 
 export default {
     namespaced: true,

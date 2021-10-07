@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import security from '@/store/module/security';
-import sport from '@/store/module/sport';
+import security from '@/store/modules/security';
+import sport from '@/store/modules/sport';
 
 Vue.use(Vuex)
 
