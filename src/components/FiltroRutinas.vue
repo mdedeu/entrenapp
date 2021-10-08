@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row class="accent--text" justify="space-around" >
           <v-col cols="6" >
-              <v-row class="pl-16" justify="space-around">Nivel de dificultad:</v-row>
+              <v-row justify="space-around">Nivel de dificultad:</v-row>
               <v-row class="pt-6" justify="space-around" v-for="difficult in difficulty" :key="difficult.level">
                 <template>
                   <v-btn
@@ -57,7 +57,7 @@
         ></v-divider>
 
         <v-col cols="6">
-          <v-card-text justify="space-around" class="waiting-api" v-if="!routines" > Filtra tus rutinas!</v-card-text>
+          <v-card-text justify="space-around" class="waiting-api" v-if="!routines" > Filtra tus {{objects}}!</v-card-text>
           <v-row class="pt-6 pl-6" justify="space-around" v-for="routine in routines" :key="routine.name">
            <DescriptiveRoutine :name = "routine.name" difficulty = "Intermedia" category = "Pecho" :sample-exercises="['Flexiones Abiertas', 'Press Plano']" ></DescriptiveRoutine>
           </v-row>
@@ -74,12 +74,13 @@ import DescriptiveRoutine from "./DescriptiveRoutine";
 export default {
   name: 'FiltroRutinas',
   components: {DescriptiveRoutine},
+  props: ['objects'],
   data(){
     return {
-       //routines:[{name:"Pecho"},{name:"Piernas"},{name:"Brazo"},{name:"Hombros"},{name:"Espalda"}],
+      // routines: [{name:"Pecho"},{name:"Piernas"},{name:"Brazo"},{name:"Hombros"},{name:"Espalda"}],
+      routines: false,
       difficulty: [{level:"Principiante"},{level:"Intermedio"},{level:"Avanzado"}],
       duration: [{range:"15-30"},{range:"30-45"},{range:"45-60"}],
-      results:false,
       sports: ['Futbol','Hockey','Tenis','Otro']
     }
   }

@@ -18,6 +18,7 @@ import NotFound from "../views/NotFound";
 import SeleccionarEjercicioPopup from '../views/SeleccionarEjercicio'
 import TusEjercicios from "../views/TusEjercicios"
 import EjerciciosLanding from  "../views/EjerciciosLanding"
+import RutinasFavoritas from "../views/RutinasFavoritas";
 
 Vue.use(VueRouter)
 
@@ -104,6 +105,11 @@ const routes = [
     component: SeleccionarEjercicioPopup
   },
   {
+    path: '/RutinasFavoritas',
+    name: 'RutinasFavoritas',
+    component: RutinasFavoritas
+  },
+  {
     path: '*',
     name: "NotFound",
     component: NotFound
@@ -113,7 +119,10 @@ const routes = [
 const router = new VueRouter({
   mode : "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior () {
+      return { x: 0, y: 0 }
+  }
 })
 //
 // router.beforeEach((to,from,next) =>{

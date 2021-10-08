@@ -9,7 +9,7 @@
           </v-col>
           <v-col cols="3">
             <v-text-field
-                label="Número de vueltas"
+                label="¿Cuántas vueltas de estos ejecricios?"
                 solo
                 background-color="white"
             ></v-text-field>
@@ -21,7 +21,7 @@
             <v-btn width="100%"
                    rounded
                    color="white"
-                   class="primary--text justify-center text-h5"
+                   class="primary--text justify-center text-h5 mt-n5"
                    height="100%"
                     @click="EjercicioDescripcion"
             >
@@ -43,7 +43,7 @@
             <v-btn width="100%"
                    rounded
                    color="white"
-                   class="primary--text justify-center text-h5"
+                   class="primary--text justify-center text-h5 mt-n10"
                    height="100%"
                     @click="SeleccCateg"
             >
@@ -109,7 +109,7 @@ export default {
   name: "CarrouselParaCreacion",
   data: () => (
       {
-        routines: [{step:'Calentamiento',repetitions:3,exercise:[{name:'Salto con soga',time:30},{name:'Salto',time:35}]},{step:'Ejercitacion',repetitions:3,exercise:[{name:'Flexiones de brazo',time:60},{name:'Abdominales',time:60}]}]
+        routines: [{step:'Calentamiento',repetitions:3,exercise:[{name:'Salto',time:35},{name: 'Roberto', time: 30}]},{step:'Ejercitacion',repetitions:3,exercise:[{name:'Flexiones de brazo',time:60},{name:'Abdominales',time:60}]}]
       }),
   methods:{
     SeleccCateg(){

@@ -5,18 +5,16 @@
   </v-row>
 
   <v-row class="pt-16">
-    <CarrouselParaEjercicios :Section="{title:'Tus ejercicios',nameComponent:'Tus Ejercicios'}"></CarrouselParaEjercicios>
+    <carrousel :Section="{title:'Tus ejercicios',nameComponent:'Tus Ejercicios'}"></carrousel>
   </v-row>
 
   <v-row class="pt-16" >
-    <CarrouselParaEjercicios :Section="{title:'Tus rutinas',nameComponent:'Tus rutinas'}"></CarrouselParaEjercicios>
+    <carrousel :Section="{title:'Tus rutinas',nameComponent:'Tus rutinas'}"></carrousel>
   </v-row>
 
   <v-row class="pt-16">
-    <CarrouselParaEjercicios :Section="{title:'Rutinas recomendadas',nameComponent:'RutinasRecomendadas'}" ></CarrouselParaEjercicios>
+    <carrousel :Section="{title:'Rutinas recomendadas',nameComponent:'RutinasRecomendadas'}" ></carrousel>
   </v-row>
-
-
 </v-container>
 
 
@@ -24,14 +22,14 @@
 
 <script>
 import HeaderApp from '../components/HeaderApp'
-import CarrouselParaEjercicios from '../components/CarrouselParaEjercicios'
+import Carrousel from "../components/carrousel";
 
 
 export default {
   name: "EjerciciosLanding",
   components:{
-    HeaderApp,
-    CarrouselParaEjercicios
+    Carrousel,
+    HeaderApp
   }
 }
 </script>
