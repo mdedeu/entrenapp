@@ -9,11 +9,11 @@
   </v-row>
 
   <v-row class="pt-16" >
-    <carrousel :Section="{title:'Tus rutinas',nameComponent:'Tus rutinas'}"></carrousel>
+    <carrousel :Section="{title:'Ejercicios Favoritos',nameComponent:'EjerciciosRecomendados'}"></carrousel>
   </v-row>
 
   <v-row class="pt-16">
-    <carrousel :Section="{title:'Rutinas recomendadas',nameComponent:'RutinasRecomendadas'}" ></carrousel>
+    <carrousel :Section="{title:'Ejercicios Recomendados',nameComponent:'EjerciciosRecomendados'}" ></carrousel>
   </v-row>
 </v-container>
 

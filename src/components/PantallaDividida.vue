@@ -8,7 +8,7 @@
     </v-row>
     <v-row justify="center">
       <v-col cols="3">
-        <h2 class="accent--text text-h3 mt-10">{{titulo}}</h2>
+        <h2 class="accent--text text-h3">{{titulo}}</h2>
       </v-col>
     </v-row>
     <v-row>

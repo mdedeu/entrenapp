@@ -19,6 +19,7 @@ import SeleccionarEjercicioPopup from '../views/SeleccionarEjercicio'
 import TusEjercicios from "../views/TusEjercicios"
 import EjerciciosLanding from  "../views/EjerciciosLanding"
 import RutinasFavoritas from "../views/RutinasFavoritas";
+import EjerciciosRecomendados from "../views/EjerciciosRecomendados";
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,11 @@ const routes = [
     path: '/myprofile',
     name: 'My Profile',
     component: MyProfile
+  },
+  {
+    path: '/EjerciciosRecomendados',
+    name: 'EjerciciosRecomendados',
+    component: EjerciciosRecomendados
   },
   {
     path: '/EjerciciosLanding',

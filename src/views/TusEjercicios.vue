@@ -6,8 +6,18 @@
     </v-row>
     <v-row justify="center">
       <v-col cols="3">
-        <p class="text-h3 accent--text">Tus ejercicios</p>
+        <h1 class="accent--text text-h3">Tus ejercicios</h1>
       </v-col>
+    </v-row>
+    <v-row justify="center">
+        <v-col cols="3">
+          <v-btn
+              rounded
+              color="green"
+              class="text--primary"
+              width="60%"
+          >Crear ejercicio</v-btn>
+        </v-col>
     </v-row>
     <v-row style="height: 90vh">
       <v-col>
