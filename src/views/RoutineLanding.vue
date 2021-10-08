@@ -49,10 +49,10 @@
       }),
 
       mine(){
-        return this.Allroutines.filter((item => item.username===(this.user.username)))
+        return this.Allroutines.filter((item => item.user.username===(this.user.username)))
       },
       other(){
-        return this.Allroutines.filter((item => item.username != (this.user.username)))
+        return this.Allroutines.filter((item => item.user.username != (this.user.username)))
       }
 
     } ,
