@@ -6,12 +6,12 @@
     </v-row>
     <v-row justify="center">
       <v-col cols="3">
-        <p class="text-h3 accent--text">Ejercicios Recomendados</p>
+        <p class="text-h3 accent--text">Ejercicios Favoritos</p>
       </v-col>
     </v-row>
     <v-row style="height: 90vh">
       <v-col>
-       <TusejerciciosComponent></TusejerciciosComponent>
+        <TusejerciciosComponent></TusejerciciosComponent>
       </v-col>
     </v-row>
 
@@ -20,11 +20,12 @@
 
 <script>
 import HeaderApp from "../components/HeaderApp";
-import TusejerciciosComponent from "../components/TusejerciciosComponent";
 import Back from "../components/Back";
+import TusejerciciosComponent from "../components/TusejerciciosComponent";
+
 export default {
-  name: "EjerciciosRecomendados",
-  components: {HeaderApp, TusejerciciosComponent, Back}
+  name: "EjerciciosFavoritos",
+  components: {Back, HeaderApp, TusejerciciosComponent}
 }
 </script>
 

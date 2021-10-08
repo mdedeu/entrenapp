@@ -39,6 +39,7 @@ export default {
     HeaderApp,
     Back,
     TusEj
-  }
+  },
+  props : ['title']
 }
 </script>

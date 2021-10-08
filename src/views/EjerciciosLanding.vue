@@ -9,7 +9,7 @@
   </v-row>
 
   <v-row class="pt-16" >
-    <carrousel :Section="{title:'Ejercicios Favoritos',nameComponent:'EjerciciosRecomendados'}"></carrousel>
+    <carrousel :Section="{title:'Ejercicios Favoritos',nameComponent:'EjerciciosFavoritos'}"></carrousel>
   </v-row>
 
   <v-row class="pt-16">
