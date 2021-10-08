@@ -4,7 +4,7 @@
       <v-row class="accent--text" justify="space-around" >
           <v-col cols="6" >
             <v-row justify="center">
-              <h2 class="font-weight-medium">Filtra por nivel de dificultad, deporte o más</h2>
+              <h2 class="font-weight-medium">Filtra por nivel de dificultad, duración y más</h2>
             </v-row>
               <v-row justify="space-around">Nivel de dificultad:</v-row>
               <v-row class="pt-6" justify="space-around" v-for="difficult in difficulty" :key="difficult.level">
@@ -29,14 +29,15 @@
                   </v-btn>
                 </template>
               </v-row>
-
-            <v-row justify="space-around" class="pt-6 text--white">
+            <v-row justify="space-around" class="mt-6 mb-n5">
+              ¿Vas a necesitar alguna máquina o equipación extra?
+            </v-row>
+            <v-row justify="space-around" class="pt-6">
                 <v-checkbox
-                    v-model="ex4"
                     label="Equipación extra"
                     color="accent"
-                    value="accent"
                     hide-details
+                    dark
                 ></v-checkbox>
             </v-row>
 
@@ -60,7 +61,7 @@
         ></v-divider>
 
         <v-col cols="6" >
-          <h2 class="mb-3">Resultados</h2>
+          <h2 class="mb-3">Todos los resultados</h2>
           <v-container class="routine" >
             <v-row class="pt-6 pl-6" justify="space-around" v-for="routine in routines" :key="routine.name">
               <DescriptiveRoutine :name = "routine.name" difficulty = "Intermedia" category = "Pecho" :sample-exercises="['Flexiones Abiertas', 'Press Plano']" ></DescriptiveRoutine>
