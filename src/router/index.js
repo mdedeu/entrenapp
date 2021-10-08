@@ -6,7 +6,7 @@ import RoutineSearcher from '../views/RoutineSearcher.vue'
 import RoutineDescription from '../views/RoutineDescriptionPage.vue'
 import RoutineLanding from '../views/RoutineLanding.vue'
 import Login from "../views/Login";
-import store from "../store/index"
+// import store from "../store/index"
 import Register from "../views/Register";
 import RoutineCreator from "../views/RoutineCreator"
 import TusRutinas from "../views/TusRutinas"
@@ -115,16 +115,16 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
-router.beforeEach((to,from,next) =>{
-    if (to.matched.some(route => route.meta.requiresAuth)) {
-      if (!store.user) {
-        next({ name: "Login", query: { redirect: to.fullPath } });
-      } else {
-        next();
-      }
-    } else {
-      next();
-    }
-});
+//
+// router.beforeEach((to,from,next) =>{
+//     if (to.matched.some(route => route.meta.requiresAuth)) {
+//       if (!store.user) {
+//         next({ name: "Login", query: { redirect: to.fullPath } });
+//       } else {
+//         next();
+//       }
+//     } else {
+//       next();
+//     }
+// });
 export default router

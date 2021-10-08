@@ -63,7 +63,7 @@ export default {
   methods :{
     login() {
       store.email = this.email;
-      this.$router.push("/app");
+      this.$router.push("/RoutineLanding");
     },
     changeShow(){
       this.show = !this.show ;
