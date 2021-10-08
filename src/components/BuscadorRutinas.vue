@@ -1,5 +1,7 @@
 <template>
-    <v-container style="height: 90vh">
+  <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
+
+  <v-container style="height: 90vh" v-else>
       <v-row>
         <v-col>
           <Back/>
@@ -20,19 +22,14 @@
                     background-color="white"
                     width="50%"
                     append-icon="mdi-card-search"
+                    v-model="name"
                 ></v-text-field>
 
             </v-col>
         </v-row>
         <v-row v-for="routine in routines" :key="routine.id">
           <v-col cols="12" align="center">
-            <v-btn
-                rounded
-                width="50%"
-                @click="RoutineDescription"
-            >
-              {{ routine.name }}
-            </v-btn>
+            <DescriptiveRoutine :routineDes="routine"></DescriptiveRoutine>
           </v-col>
         </v-row>
     </v-container>
@@ -40,20 +37,44 @@
 
 <script>
     import Back from './Back'
+    import {mapGetters} from 'vuex'
+    import DescriptiveRoutine from './DescriptiveRoutine'
+
     export default {
     name: "BuscadorRutinas",
     components:{
-        Back
+        Back,
+        DescriptiveRoutine
     },
     data(){
       return {
-        routines : [ {id:0,name:"Pecho",level:"1"} , {id:1,name:"Espalda",level:"1"} , {id:2, name:"Abdominales",level:"1"}, {id:3, name:"Brazos",level:"1"} ],
+        loading : false,
+        name:null
         }
     },
       methods:{
       RoutineDescription(){
         this.$router.push({name:"RoutineDescription"});
       }
+      },
+
+      computed: {
+        ...mapGetters('routine', {
+          Allroutines: 'getMine',
+        }),
+        routines(){
+          if(!this.name){
+            return this.Allroutines
+          }
+          return this.Allroutines.filter((item)=>item.name===this.name)
+        }
+
+      },
+
+      async created() {
+        this.loading = true;
+        await this.$store.dispatch("routine/getAll")
+        this.loading = false;
       }
 }
 </script>

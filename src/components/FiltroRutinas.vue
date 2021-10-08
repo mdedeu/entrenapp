@@ -120,8 +120,6 @@ export default {
   max-height: 45em;
   overflow: auto;
 }
-<<<<<<< HEAD
+
 </style>
-=======
-</style>
->>>>>>> master
+

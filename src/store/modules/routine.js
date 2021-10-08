@@ -16,7 +16,8 @@ export default{
         },
         getOther(state){
             return state.items
-        }
+        },
+
     },
     mutations:{
 

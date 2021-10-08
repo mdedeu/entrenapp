@@ -14,8 +14,8 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    security,
-    sport,
-    routine
+    security:security,
+    sport:sport,
+    routine:routine
   }
 })
