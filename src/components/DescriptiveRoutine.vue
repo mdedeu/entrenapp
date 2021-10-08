@@ -8,12 +8,12 @@
     <v-list-item three-line>
       <v-list-item-content>
         <div class="text-overline mb-4">
-          {{category}}
+            <p>category</p>
         </div>
         <v-list-item-title class="text-h5 mb-1">
-          {{name}}
+          {{routineDes.name}}
         </v-list-item-title>
-        <v-list-item-subtitle>Esta rutina tiene dificultad {{difficulty}}. Incluye ejercicios como {{sampleExercises[0]}} y {{sampleExercises[1]}} </v-list-item-subtitle>
+        <v-list-item-subtitle>Esta rutina tiene dificultad {{routineDes.difficulty}}. Incluye ejercicios como ... </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 
@@ -25,7 +25,7 @@
           @click="RoutineDescription"
           class="accent"
       >
-        Ir a la Rutina
+        Ir a la rutina
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -34,12 +34,17 @@
 <script>
 export default {
   name: "DescriptiveRoutine",
-  props: ['name','category','difficulty','sampleExercises'],
+  props: {
+    routineDes: {
+      type:Object,
+      required : true
+    }
+  },
   methods:{
   RoutineDescription(){
-    this.$router.push({name:"RoutineDescription"})
+    this.$router.push({name:"RoutineDescription",params:{ routine:this.routineDes } })
   }
-}
+},
 }
 </script>
 

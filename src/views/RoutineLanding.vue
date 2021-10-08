@@ -12,7 +12,7 @@
         </v-row>
 
         <v-row class="pt-16">
-            <carrousel :Section="{title:'Rutinas recomendadas',nameComponent:'RutinasRecomendadas'}" ></carrousel>
+            <carrousel :Section="{title:'Rutinas favoritas',nameComponent:'RutinasFavoritas'}" ></carrousel>
         </v-row>
 
     </v-container>

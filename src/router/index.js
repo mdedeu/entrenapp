@@ -18,6 +18,10 @@ import NotFound from "../views/NotFound";
 import SeleccionarEjercicioPopup from '../views/SeleccionarEjercicio'
 import TusEjercicios from "../views/TusEjercicios"
 import EjerciciosLanding from  "../views/EjerciciosLanding"
+import RutinasFavoritas from "../views/RutinasFavoritas";
+import EjerciciosRecomendados from "../views/EjerciciosRecomendados";
+import EjerciciosFavoritos from "../views/EjerciciosFavoritos";
+
 
 Vue.use(VueRouter)
 
@@ -31,6 +35,16 @@ const routes = [
     path: '/myprofile',
     name: 'My Profile',
     component: MyProfile
+  },
+  {
+    path: '/EjerciciosRecomendados',
+    name: 'EjerciciosRecomendados',
+    component: EjerciciosRecomendados
+  },
+  {
+    path: '/EjerciciosFavoritos',
+    name: 'EjerciciosFavoritos',
+    component: EjerciciosFavoritos
   },
   {
     path: '/EjerciciosLanding',
@@ -55,7 +69,8 @@ const routes = [
   {
     path: '/RoutineDescription',
     name: 'RoutineDescription',
-    component: RoutineDescription
+    component: RoutineDescription,
+    props: true
   },
   {
     path: '/CrearEjercicio',
@@ -104,6 +119,11 @@ const routes = [
     component: SeleccionarEjercicioPopup
   },
   {
+    path: '/RutinasFavoritas',
+    name: 'RutinasFavoritas',
+    component: RutinasFavoritas
+  },
+  {
     path: '*',
     name: "NotFound",
     component: NotFound
@@ -113,7 +133,10 @@ const routes = [
 const router = new VueRouter({
   mode : "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior () {
+      return { x: 0, y: 0 }
+  }
 })
 //
 // router.beforeEach((to,from,next) =>{

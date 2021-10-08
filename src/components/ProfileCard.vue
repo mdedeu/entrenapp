@@ -126,7 +126,6 @@ export default {
     this.loading = true;
     await this.$store.dispatch("security/getCurrentUser")
     this.loading = false;
-    console.log(this.user)
   }
 }
 </script>
