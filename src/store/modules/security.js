@@ -12,6 +12,10 @@ export default {
     getters: {
         isLoggedIn(state) {
             return state.token != null
+        },
+        getUser(state){
+            if(state.token)
+                return state.user
         }
     },
     mutations: {

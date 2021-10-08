@@ -45,7 +45,8 @@ export default {
     MyProfile(){
       this.$router.push({name:"My Profile"});
     },
-    Home(){
+    async Home(){
+      await this.$store.dispatch("security/logout");
       this.$router.push({name:"Home"})
     },
     EjerciciosLanding(){
