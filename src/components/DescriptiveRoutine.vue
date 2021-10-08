@@ -1,7 +1,7 @@
 <template>
   <v-card
       class="mx-auto"
-      max-width="500"
+      max-width="600"
       outlined
       onclick="RoutineDescription"
   >
@@ -13,22 +13,17 @@
         <v-list-item-title class="text-h5 mb-1">
           {{name}}
         </v-list-item-title>
-        <v-list-item-subtitle>Esta rutina tiene dificultad {{difficulty}}divisely hello coldly fonwderfully</v-list-item-subtitle>
+        <v-list-item-subtitle>Esta rutina tiene dificultad {{difficulty}}. Incluye ejercicios como {{sampleExercises[0]}} y {{sampleExercises[1]}} </v-list-item-subtitle>
       </v-list-item-content>
-
-      <v-list-item-avatar
-          tile
-          size="80"
-          color="grey"
-      ></v-list-item-avatar>
     </v-list-item>
 
-    <v-card-actions>
+    <v-card-actions class="justify-center">
       <v-btn
           outlined
           rounded
           text
           @click="RoutineDescription"
+          class="accent"
       >
         Ir a la Rutina
       </v-btn>
@@ -39,7 +34,7 @@
 <script>
 export default {
   name: "DescriptiveRoutine",
-  props: ['name','category','difficulty'],
+  props: ['name','category','difficulty','sampleExercises'],
   methods:{
   RoutineDescription(){
     this.$router.push({name:"RoutineDescription"})

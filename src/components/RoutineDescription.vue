@@ -1,12 +1,21 @@
 <template>
-  <v-container>
-    <BackAndButton><slot></slot></BackAndButton>
-    <v-row justify="left" class="pt-10">
-        <p class="text-h3 yellow--text">{{routine.tipo}}<br>
-          Nivel de dificultad :{{routine.dificultad}}<br>
+  <v-container class="mb-7">
+    <BackAndButton class="mt-6"><slot></slot></BackAndButton>
+    <div  class="pt-10 accent--text">
+      <v-row justify="center">
+        <h2>{{routine.tipo}}</h2>
+      </v-row>
+      <v-row justify="center">
+        <p>Nivel de dificultad :{{routine.dificultad}}</p>
+      </v-row>
+      <v-row justify="center">
+        <p>
           Duracion: {{routine.duracion}}
         </p>
-    </v-row>
+      </v-row>
+    </div>
+
+
   </v-container>
 
 </template>
@@ -25,3 +34,12 @@ export default {
   }
 }
 </script>
+<style scoped>
+h2{
+  font-size: 3em;
+}
+p{
+  font-size: 1em;
+}
+
+</style>
