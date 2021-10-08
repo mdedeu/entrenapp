@@ -69,7 +69,8 @@ const routes = [
   {
     path: '/RoutineDescription',
     name: 'RoutineDescription',
-    component: RoutineDescription
+    component: RoutineDescription,
+    props: true
   },
   {
     path: '/CrearEjercicio',
