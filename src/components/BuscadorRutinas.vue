@@ -19,30 +19,29 @@
                     rounded
                     background-color="white"
                     width="50%"
-                    append-icon="mdi-card-search"
+                    append-icon="mdi-magnify"
                 ></v-text-field>
 
             </v-col>
         </v-row>
+      <v-container class="routines">
         <v-row v-for="routine in routines" :key="routine.id">
           <v-col cols="12" align="center">
-            <v-btn
-                rounded
-                width="50%"
-                @click="RoutineDescription"
-            >
-              {{ routine.name }}
-            </v-btn>
+            <DescriptiveRoutine :name="routine.name" category="Pecho" difficulty="Intermedia" :sample-exercises="['Pecho Plano','Saltar de un balcon']">
+            </DescriptiveRoutine>
           </v-col>
         </v-row>
+      </v-container>
     </v-container>
 </template>
 
 <script>
     import Back from './Back'
+    import DescriptiveRoutine from "./DescriptiveRoutine";
     export default {
     name: "BuscadorRutinas",
     components:{
+      DescriptiveRoutine,
         Back
     },
     data(){
@@ -58,3 +57,9 @@
 }
 </script>
 
+<style scoped>
+.routines{
+  max-height: 600px;
+  overflow: auto;
+}
+</style>
