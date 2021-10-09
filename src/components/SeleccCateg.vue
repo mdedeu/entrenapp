@@ -1,9 +1,12 @@
 <template>
         <v-container fluid class="primary fill-height">
-            <v-row>
-                <v-col align="center">
+            <v-row justify="space-around">
+                <v-col>
                     <p class="text-center accent--text">Seleccionar la categoria</p>
                 </v-col>
+              <v-col>
+                <Close v-on:close-popup="closePopup()"></Close>
+              </v-col>
             </v-row>
             <v-row v-for="category in categories" :key="category.cat">
               <v-dialog
@@ -33,9 +36,10 @@
 <script>
     import PopupSeleccionarEjercicio from "./PopupSeleccionarEjercicio";
     import PopupDescanso from "./PopupDescanso";
+    import Close from "./Close";
     export default {
     name: "SeleccCateg",
-      components: {PopupDescanso, PopupSeleccionarEjercicio},
+      components: {Close, PopupDescanso, PopupSeleccionarEjercicio},
       data(){
         return {
           categories:[{cat:"Ejercicios recomendados",showing:false},{cat:"Tus ejercicios",showing:false},{cat:"Ejercicios favoritos",showing:false},{cat: 'Descanso',showing:false}],
@@ -48,6 +52,9 @@
         },
         openDialog(category){
           this.category_active = category.cat
+        },
+        closePopup(){
+          this.$emit('close-popup')
         }
       }
 }

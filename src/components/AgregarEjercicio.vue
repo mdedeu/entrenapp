@@ -44,6 +44,7 @@
 <v-container>
   <v-dialog
       width="500"
+      :value="popup"
   >
 
     <template v-slot:activator="{ on, attrs }" >
@@ -55,6 +56,7 @@
           height="100%"
           v-bind="attrs"
           v-on="on"
+          @click="popup=true"
       >
         <v-icon
             x-large
@@ -67,7 +69,7 @@
     </template>
     <v-card class="primary"
     rounded>
-      <SeleccCateg></SeleccCateg>
+      <SeleccCateg v-on:close-popup="popup=false"></SeleccCateg>
     </v-card>
 
   </v-dialog>
@@ -80,7 +82,12 @@
     import SeleccCateg from "./SeleccCateg";
     export default {
       name: "AgregarEjercicio",
-      components: {SeleccCateg}
+      components: {SeleccCateg},
+      data(){
+        return {
+          popup: false
+        }
+      }
     }
     </script>
 
