@@ -23,6 +23,8 @@
                   v-bind="attrs"
                   v-on="on"
                   @click="addTofavourite"
+                  :loading="loadingButton"
+                  :disabled="loadingButton"
 
               >
                 <v-icon left>
@@ -51,6 +53,8 @@
                     color="primary"
                     text
                     @click="dialog = false"
+                    :loading="loadingButton"
+                    :disabled="loadingButton"
                 >
                   OK
                 </v-btn>
@@ -135,25 +139,25 @@ export default {
     return {
       dialog:false,
       loading : true,
-      loadingPopup:false
+      loadingButton:false
     }
   },
   methods:{
     async addTofavourite(){
-      this.loadingPopup=true
+      this.loadingButton=true
       await this.create(this.routineID)
       await this.$store.dispatch("favouriteRoutine/getAll")
-      this.loadingPopup=false
+      this.loadingButton=false
     },
     ...mapActions( 'favouriteRoutine',['create'] ),
     ...mapActions( 'favouriteRoutine',['delete'] ),
 
 
     async removeFromFavourite(){
-      this.loadingPopup=true
+      this.loadingButton=true
       await this.delete(this.routineID)
       await this.$store.dispatch("favouriteRoutine/getAll")
-      this.loadingPopup=false
+      this.loadingButton=false
     }
 
   },
