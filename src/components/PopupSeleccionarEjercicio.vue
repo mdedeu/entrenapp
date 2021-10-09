@@ -9,8 +9,10 @@
           <template>
             <v-btn
                 rounded
-                color="white"
                 width="60%"
+                class="primary--text"
+                :id="muscle.name"
+                @click="addColor(muscle.name)"
             >{{ muscle.name }}
             </v-btn>
           </template>
@@ -19,6 +21,7 @@
         <v-row justify="space-around" class="pt-6" >
           <v-col cols="4">
             <v-select
+                v-model="selected_sport"
                 :items="sports"
                 label="Deporte"
                 solo
@@ -105,7 +108,10 @@ export default {
     return {
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
       exercises:[{name:"Flexiones de brazo", difficulty: 'Intermedio', category: 'Pecho'},{name:"Abdominales bolita", difficulty: 'Intermedio', category: 'Pecho'},{name:"Salto con soga", difficulty: 'Intermedio', category: 'Pecho'},{name:"Estirar piernas", difficulty: 'Intermedio', category: 'Pecho'},{name:"Espalda en colchoneta", difficulty: 'Intermedio', category: 'Pecho'}],
-      sports: ['Futbol','Hockey', 'Otros']}
+      sports: ['Futbol','Hockey', 'Otros'],
+      selected_muscle: null,
+      selected_sport: null
+    }
   },
   methods:{
     EjercicioDescripcion(){
@@ -113,6 +119,25 @@ export default {
     },
     closePopup() {
       this.$emit('close-popup')
+    },
+    addColor(id){
+      let element =document.getElementById(id)
+
+      if(!this.selected_muscle){
+        this.selected_muscle = id;
+        element.classList.add('accent')
+      }else{
+        if(this.selected_muscle === id){
+          element.classList.remove('accent')
+          this.selected_muscle = null;
+        }
+        else{
+          document.getElementById(this.selected_muscle).classList.remove('accent')
+          this.selected_muscle = id;
+          console.log(this.selected_muscle)
+          element.classList.add('accent')
+        }
+      }
     }
   }
 
