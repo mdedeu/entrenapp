@@ -13,6 +13,9 @@ export default {
         },
         getFavouritesId(state){
             return state.items
+        },
+        isFavourite(state){
+            return  state.items.map( (item) => { return item.id } )
         }
 
     },

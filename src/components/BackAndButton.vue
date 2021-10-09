@@ -8,7 +8,7 @@
     <Back></Back>
 
 
-    <v-col class="col-3" offset="6" >
+    <v-col v-if="favourite" class="col-3" offset="6" >
       <template>
         <div class="text-center">
           <v-dialog
@@ -28,14 +28,14 @@
                 <v-icon left>
                   mdi-bookmark-outline
                 </v-icon>
-                <slot></slot>
+                Añadir a favoritas
 
               </v-btn>
             </template>
 
             <v-card >
               <v-card-title class="text-h5 green lighten-2">
-               Éxito
+                Éxito
               </v-card-title>
 
               <v-card-text>
@@ -58,11 +58,66 @@
             </v-card>
           </v-dialog>
         </div>
-
-
-
       </template>
     </v-col>
+
+
+        <v-col v-else class="col-3" offset="6" >
+          <template>
+            <div class="text-center">
+              <v-dialog
+                  v-model="dialog"
+                  width="500"
+                  transition="dialog-bottom-transition"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                      color="lighten-2"
+                      dark
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="removeFromFavourite"
+
+                  >
+                    <v-icon left>
+                      mdi-bookmark-outline
+                    </v-icon>
+                    Eliminar de favoritas
+
+                  </v-btn>
+                </template>
+
+                <v-card >
+                  <v-card-title class="text-h5 green lighten-2">
+                    Éxito
+                  </v-card-title>
+
+                  <v-card-text>
+                    ¡Rutina eliminada de favoritos!
+                  </v-card-text>
+                  <v-icon color="green" size="60">mdi-check</v-icon>
+
+                  <v-divider></v-divider>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="primary"
+                        text
+                        @click="dialog = false"
+                    >
+                      OK
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </div>
+
+
+
+          </template>
+        </v-col>
+
 
   </v-row>
   </v-container>
@@ -79,15 +134,27 @@ export default {
   data(){
     return {
       dialog:false,
-      loading : true
+      loading : true,
+      loadingPopup:false
     }
   },
   methods:{
     async addTofavourite(){
-      console.log(this.routineID)
-      return await this.create(this.routineID)
+      this.loadingPopup=true
+      await this.create(this.routineID)
+      await this.$store.dispatch("favouriteRoutine/getAll")
+      this.loadingPopup=false
     },
-    ...mapActions( 'favouriteRoutine',['create'] )
+    ...mapActions( 'favouriteRoutine',['create'] ),
+    ...mapActions( 'favouriteRoutine',['delete'] ),
+
+
+    async removeFromFavourite(){
+      this.loadingPopup=true
+      await this.delete(this.routineID)
+      await this.$store.dispatch("favouriteRoutine/getAll")
+      this.loadingPopup=false
+    }
 
   },
   props:{
@@ -101,10 +168,20 @@ export default {
     ...mapGetters('security',{
       user:'getUser'
     }),
+
+    ...mapGetters('favouriteRoutine',{
+      isFavouriteFunction:'isFavourite'
+    }),
+
+    favourite(){
+      return  !this.isFavouriteFunction.includes(this.routineID)
+    }
+
   },
   async created() {
     this.loading = true;
     await this.$store.dispatch("security/getCurrentUser")
+    await this.$store.dispatch("favouriteRoutine/getAll")
     this.loading = false;
   }
 
