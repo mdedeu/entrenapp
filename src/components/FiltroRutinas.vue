@@ -83,7 +83,6 @@ import {mapGetters} from 'vuex'
 export default {
   name: 'FiltroRutinas',
   components: {DescriptiveRoutine},
-  props: ['objects'],
   data(){
     return {
 
@@ -95,14 +94,21 @@ export default {
     }
   },
   computed:{
-    ...mapGetters('routine',{
-      routines: 'getOther'
+
+    ...mapGetters('security',{
+      user: 'getUser',
     }),
 
+    ...mapGetters('routine',['getOther']),
+
+    routines(){
+      return this.getOther(this.user.username)
+    },
   },
   async created() {
     this.loading = true;
     await this.$store.dispatch("routine/getAll")
+    await this.$store.dispatch("security/getCurrentUser")
     this.loading = false;
   }
 

@@ -52,21 +52,22 @@
         name:null
         }
     },
-      methods:{
-      RoutineDescription(){
-        this.$router.push({name:"RoutineDescription"});
-      }
-      },
 
       computed: {
-        ...mapGetters('routine', {
-          Allroutines: 'getMine',
+        ...mapGetters('security',{
+          user: 'getUser',
         }),
+        ...mapGetters('routine',['getMine']),
+
+        allMine(){
+          return this.getMine(this.user.username)
+        },
+
         routines(){
           if(!this.name){
-            return this.Allroutines
+            return this.allMine
           }
-          return this.Allroutines.filter((item)=>item.name===this.name)
+          return this.allMine.filter( (item) => item.name===this.name)
         }
 
       },
@@ -74,6 +75,7 @@
       async created() {
         this.loading = true;
         await this.$store.dispatch("routine/getAll")
+        await this.$store.dispatch("security/getCurrentUser")
         this.loading = false;
       }
 }

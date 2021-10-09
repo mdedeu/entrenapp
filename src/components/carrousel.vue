@@ -30,7 +30,7 @@ import DescriptiveRoutine from './DescriptiveRoutine'
         required : true
       },
       routines:{
-        type:Object,
+        type:[],
         required:true
       }
     },

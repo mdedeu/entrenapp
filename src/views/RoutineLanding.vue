@@ -14,7 +14,7 @@
         </v-row>
 
         <v-row class="pt-16">
-            <carrousel :Section="{title:'Rutinas favoritas',nameComponent:'RutinasFavoritas'}" ></carrousel>
+            <carrousel :Section="{title:'Rutinas favoritas',nameComponent:'RutinasFavoritas'}" :routines="other"></carrousel>
         </v-row>
 
     </v-container>
@@ -41,18 +41,18 @@
       }
     },
     computed:{
-      ...mapGetters('routine',{
-        Allroutines: 'getOther'
-      }),
+
       ...mapGetters('security',{
-        user: 'getUser'
+        user: 'getUser',
       }),
+      ...mapGetters('routine',['getMine']),
+      ...mapGetters('routine',['getOther']),
 
       mine(){
-        return this.Allroutines.filter((item => item.user.username===(this.user.username)))
+        return this.getMine(this.user.username)
       },
       other(){
-        return this.Allroutines.filter((item => item.user.username != (this.user.username)))
+        return this.getOther(this.user.username)
       }
 
     } ,
