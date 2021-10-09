@@ -10,8 +10,10 @@
           <template>
             <v-btn
                 rounded
-                color="white"
+                class="primary--text"
                 width="60%"
+                :id="muscle.name"
+                @click="addColor(muscle.name)"
             >{{ muscle.name }}
             </v-btn>
           </template>
@@ -33,6 +35,7 @@
         <v-row justify="space-around" class="pt-6" >
           <v-col cols="4">
             <v-select
+                v-model="selected_sport"
                 :items="sports"
                 label="Deporte"
                 solo
@@ -77,11 +80,31 @@ export default {
     return {
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
       exercises:[{name:"Flexiones de brazo"},{name:"Abdominales bolita"},{name:"Salto con soga"},{name:"Estirar piernas"},{name:"Espalda en colchoneta"}],
-      sports: ['Fútbol', 'Hockey','Tenis','Paddle']
+      sports: ['Fútbol', 'Hockey','Tenis','Paddle'],
+      selected_sport: null,
+      selected_muscle: null
     }
   },
   methods:{
+    addColor(id){
+      let element =document.getElementById(id)
 
+      if(!this.selected_muscle){
+        this.selected_muscle = id;
+        element.classList.add('accent')
+      }else{
+        if(this.selected_muscle === id){
+          element.classList.remove('accent')
+          this.selected_muscle = null;
+        }
+        else{
+          document.getElementById(this.selected_muscle).classList.remove('accent')
+          this.selected_muscle = id;
+          console.log(this.selected_muscle)
+          element.classList.add('accent')
+        }
+      }
+    }
   }
 
 }
