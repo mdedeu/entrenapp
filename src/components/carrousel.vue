@@ -5,13 +5,11 @@
           <router-link  :to="{path:`${Section.path}`}" class="text-h4">{{ Section.title }}</router-link>
         </v-col>
         </v-row  >
-        <v-row class="mb-5 mt-4">
+        <v-row class="mb-5 mt-4" justify="space-around">
           <v-slide-group show-arrows >
             <v-slide-item
                 v-for="routine in routines"
-                :key="routine.id"
-                witdh="50vh" class="mx-12"
-            >
+                :key="routine.id">
               <DescriptiveRoutine :routineDes="routine" ></DescriptiveRoutine>
             </v-slide-item>
           </v-slide-group>

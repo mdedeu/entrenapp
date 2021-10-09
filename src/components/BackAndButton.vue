@@ -22,7 +22,7 @@
                   dark
                   v-bind="attrs"
                   v-on="on"
-                  @click="addTofavourite"
+                  @click="removeFromFavourite"
                   :loading="loadingButton"
                   :disabled="loadingButton"
 
@@ -30,18 +30,18 @@
                 <v-icon left>
                   mdi-bookmark-outline
                 </v-icon>
-                Añadir a favoritas
+                Eliminar de favoritas
 
               </v-btn>
             </template>
 
-            <v-card >
+            <v-card>
               <v-card-title class="text-h5 green lighten-2">
                 Éxito
               </v-card-title>
 
               <v-card-text>
-                {{object}}!
+                Rutina agregada a tus favoritas
               </v-card-text>
               <v-icon color="green" size="60">mdi-check</v-icon>
 
@@ -66,7 +66,7 @@
     </v-col>
 
 
-        <v-col v-else class="col-3" offset="6" >
+    <v-col v-else class="col-3" offset="6" >
           <template>
             <div class="text-center">
               <v-dialog
@@ -80,24 +80,24 @@
                       dark
                       v-bind="attrs"
                       v-on="on"
-                      @click="removeFromFavourite"
+                      @click="addTofavourite"
 
                   >
                     <v-icon left>
                       mdi-bookmark-outline
                     </v-icon>
-                    Eliminar de favoritas
+                    Agregar a favoritas
 
                   </v-btn>
                 </template>
 
-                <v-card >
+                <v-card>
                   <v-card-title class="text-h5 green lighten-2">
                     Éxito
                   </v-card-title>
 
                   <v-card-text>
-                    ¡Rutina eliminada de favoritos!
+                    ¡Rutina eliminada de favoritas!
                   </v-card-text>
                   <v-icon color="green" size="60">mdi-check</v-icon>
 
@@ -130,6 +130,7 @@
 <script>
 import Back from './Back'
 import {mapGetters,mapActions} from 'vuex'
+
 export default {
   name: 'BackAndButton',
   components:{
@@ -178,7 +179,7 @@ export default {
     }),
 
     favourite(){
-      return  !this.isFavouriteFunction.includes(this.routineID)
+      return  this.isFavouriteFunction.includes(this.routineID)
     }
 
   },

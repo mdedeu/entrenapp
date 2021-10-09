@@ -5,17 +5,20 @@
         <v-row>
             <v-col cols = "12"><HeaderApp/></v-col>
         </v-row>
-        <v-row class="pt-16">
-            <carrousel :Section="{title:'Rutinas recomendadas',path:'/Rutinas/recomendadas'}" :routines="other"></carrousel>
-        </v-row>
+
 
         <v-row class="pt-16" >
             <carrousel :Section="{title:'Tus rutinas',path:'/TusRutinas'}" :routines="mine"></carrousel>
         </v-row>
 
+
         <v-row class="pt-16">
             <carrousel :Section="{title:'Rutinas favoritas',path:'/Rutinas/favoritas'}" :routines="favourites"></carrousel>
         </v-row>
+
+     <v-row class="pt-16">
+      <carrousel :Section="{title:'Rutinas recomendadas',path:'/Rutinas/recomendadas'}" :routines="other"></carrousel>
+    </v-row>
 
     </v-container>
 
