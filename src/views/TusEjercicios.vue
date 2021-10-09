@@ -11,12 +11,7 @@
     </v-row>
     <v-row justify="center">
         <v-col cols="3">
-          <v-btn
-              rounded
-              color="green"
-              class="text--primary"
-              width="60%"
-          >Crear ejercicio</v-btn>
+          <CrearEjercicioButton></CrearEjercicioButton>
         </v-col>
     </v-row>
     <v-row style="height: 90vh">
@@ -32,10 +27,12 @@
 import HeaderApp from '../components/HeaderApp'
 import Back from '../components/Back'
 import TusEj from '../components/TusejerciciosComponent'
+import CrearEjercicioButton from "../components/CrearEjercicioButton";
 
 export default {
   name: "TusEjercicios",
   components:{
+    CrearEjercicioButton,
     HeaderApp,
     Back,
     TusEj

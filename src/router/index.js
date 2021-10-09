@@ -12,7 +12,6 @@ import RoutineCreator from "../views/RoutineCreator"
 import TusRutinas from "../views/TusRutinas"
 import RutinasRecomendadas from "../views/RutinasRecomendadas"
 import EjercicioDescripcion from "../views/EjercicioDescripcionPage"
-import CrearEjercicio from "../views/CrearEjercicioPage"
 import SeleccCateg from "../views/SeleccCategPage"
 import NotFound from "../views/NotFound";
 import SeleccionarEjercicioPopup from '../views/SeleccionarEjercicio'
@@ -70,11 +69,6 @@ const routes = [
     path: '/RoutineDescription',
     name: 'RoutineDescription',
     component: RoutineDescription
-  },
-  {
-    path: '/CrearEjercicio',
-    name: 'CrearEjercicio',
-    component: CrearEjercicio
   },
   {
     path: '/EjercicioDescripcion',

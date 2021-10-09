@@ -53,7 +53,7 @@
       ></v-divider>
 
       <v-col cols="6" >
-        <h2 class="mb-3">Todos los resultados</h2>
+        <h2 class="mb-3 font-weight-medium">Todos los resultados</h2>
         <v-container class="exercises">
           <v-row class="pt-6 pl-6" justify="space-around" v-for="exercise in exercises" :key="exercise.name">
             <DescriptiveExcercise :name = "exercise.name" difficulty = "Intermedia" category = "Pecho" ></DescriptiveExcercise>
