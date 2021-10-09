@@ -12,6 +12,10 @@ export default {
     getters: {
         isLoggedIn(state) {
             return state.token != null
+        },
+        getUser(state){
+            if(state.token)
+                return state.user
         }
     },
     mutations: {
@@ -41,10 +45,12 @@ export default {
             commit('setToken', null)
             Api.token = null
         },
-        async login({dispatch}, {credentials, rememberMe}) {
+
+        async login({dispatch},{credentials,rememberMe}){
             const result = await UserApi.login(credentials)
             dispatch('updateToken', { token: result.token, rememberMe })
         },
+
         async logout({dispatch}) {
             await UserApi.logout()
             dispatch('removeToken')

@@ -55,7 +55,7 @@
       <v-col cols="6" >
         <h2 class="mb-3">Todos los resultados</h2>
         <v-container class="exercises">
-          <v-row class="pt-6 pl-6" justify="space-around" v-for="exercise in exercises" :key="exercise.name">
+          <v-row class="pt-6 pl-6" justify="space-around" v-for="res in result" :key="res.name">
             <DescriptiveExcercise :name = "exercise.name" difficulty = "Intermedia" category = "Pecho" ></DescriptiveExcercise>
           </v-row>
         </v-container>
@@ -75,6 +75,8 @@ export default {
   components: {DescriptiveExcercise},
   data(){
     return {
+      result : null,
+      controller : null,
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
       exercises:[{name:"Flexiones de brazo"},{name:"Abdominales bolita"},{name:"Salto con soga"},{name:"Estirar piernas"},{name:"Espalda en colchoneta"}],
       sports: ['Fútbol', 'Hockey','Tenis','Paddle']
@@ -82,6 +84,10 @@ export default {
   },
   methods:{
 
+  },
+  async created() {
+    this.result = await this.$store.dispatch("exercise/getAll")
+    console.log(this.result)
   }
 
 }
