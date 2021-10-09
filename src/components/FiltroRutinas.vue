@@ -11,8 +11,10 @@
                 <template>
                   <v-btn
                     rounded
-                    color="white"
                     width="60%"
+                    class="primary--text"
+                    :id="difficult.level"
+                    @click="addColorDifficulty(difficult.level)"
                   >{{ difficult.level }}
                   </v-btn>
               </template>
@@ -23,8 +25,10 @@
                 <template>
                   <v-btn
                       rounded
-                      color="white"
                       width="60%"
+                      class="primary--text"
+                      :id="durationE.range"
+                      @click="addColorDuration(durationE.range)"
                   >{{ durationE.range }}
                   </v-btn>
                 </template>
@@ -44,6 +48,7 @@
             <v-row justify="space-around" class="pt-6" >
               <v-col cols="4">
                 <v-select
+                    v-model="selected_sport"
                     :items="sports"
                     label="Deporte Relacionado"
                     solo
@@ -88,7 +93,50 @@ export default {
       //routines: false,
       difficulty: [{level:"Principiante"},{level:"Intermedio"},{level:"Avanzado"}],
       duration: [{range:"15-30"},{range:"30-45"},{range:"45-60"}],
-      sports: ['Futbol','Hockey','Tenis','Otro']
+      sports: ['Futbol','Hockey','Tenis','Otro'],
+      selected_difficulty : null,
+      selected_duration : null,
+      selected_sport: null
+    }
+  },
+  methods : {
+    addColorDifficulty(id){
+        let element =document.getElementById(id)
+
+        if(!this.selected_difficulty){
+          this.selected_difficulty = id;
+          element.classList.add('accent')
+        }else{
+          if(this.selected_difficulty === id){
+            element.classList.remove('accent')
+            this.selected_difficulty = null;
+          }
+          else{
+            document.getElementById(this.selected_difficulty).classList.remove('accent')
+            this.selected_difficulty = id;
+            console.log(this.selected_difficulty)
+            element.classList.add('accent')
+          }
+        }
+    },
+    addColorDuration(id){
+      let element =document.getElementById(id)
+
+      if(!this.selected_duration){
+        this.selected_duration = id;
+        element.classList.add('accent')
+      }else{
+        if(this.selected_duration === id){
+          element.classList.remove('accent')
+          this.selected_duration = null;
+        }
+        else{
+          document.getElementById(this.selected_duration).classList.remove('accent')
+          this.selected_duration = id;
+          console.log(this.selected_duration)
+          element.classList.add('accent')
+        }
+      }
     }
   }
 
