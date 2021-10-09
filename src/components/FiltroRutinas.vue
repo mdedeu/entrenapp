@@ -114,7 +114,6 @@ export default {
           else{
             document.getElementById(this.selected_difficulty).classList.remove('accent')
             this.selected_difficulty = id;
-            console.log(this.selected_difficulty)
             element.classList.add('accent')
           }
         }
