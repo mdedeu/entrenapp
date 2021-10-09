@@ -1,6 +1,6 @@
 <template>
   <v-card
-      class="mx-auto"
+      class="mx-10"
       max-width="600"
       outlined
       onclick="RoutineDescription"

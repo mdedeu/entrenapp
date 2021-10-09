@@ -1,12 +1,18 @@
 <template>
-  <PantallaDividida titulo="Rutinas Favoritas" object="rutinas"></PantallaDividida>
+  <PantallaDividida :slug="this.slug"></PantallaDividida>
 </template>
 
 <script>
 import PantallaDividida from "../components/PantallaDividida";
 export default {
   name: "RutinasFavoritas",
-  components: {PantallaDividida}
+  components: {PantallaDividida},
+  props:{
+    slug:{
+      type:String,
+      required:true
+    }
+  }
 }
 </script>
 

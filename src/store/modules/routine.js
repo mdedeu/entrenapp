@@ -12,11 +12,16 @@ export default{
             }
         },
         getMine(state){
-            return state.items
+            return (username)=>{
+                return state.items.filter( (item) => item.user.username === (username))
+            }
         },
         getOther(state){
-            return state.items
-        }
+            return (username)=>{
+                return state.items.filter( (item) => item.user.username != (username))
+            }
+        },
+
     },
     mutations:{
 

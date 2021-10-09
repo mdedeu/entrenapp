@@ -5,7 +5,7 @@
         </v-row>
 
         <v-row>
-            <RoutineDescription :routine="routine">Añadir a favoritas</RoutineDescription>
+            <RoutineDescription :routine="routine"></RoutineDescription>
         </v-row>
 
         <CarrouselParaCiclos></CarrouselParaCiclos>

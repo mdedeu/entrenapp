@@ -23,7 +23,7 @@
     name: 'Close' ,
     methods:{
       goBack(){
-        return this.$router.go(-1);
+        this.$emit('close-popup')
       }
     }
     }

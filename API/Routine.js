@@ -31,7 +31,7 @@ class RoutineApi{
 
 
 class Routine{
-    constructor(id, name, detail,difficulty,isPublic,user) {
+    constructor(id, name, detail,difficulty,isPublic,user,metadata) {
         if (id) {
             this.id = id;
         }
@@ -39,9 +39,10 @@ class Routine{
         this.detail = detail;
         this.isPublic=isPublic;
         this.difficulty=difficulty;
-        this.user=user
+        this.user=user;
+        this.metadata=metadata;
 
     }
 
-
 }
+

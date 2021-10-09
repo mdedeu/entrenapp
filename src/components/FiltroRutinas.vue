@@ -12,8 +12,10 @@
                 <template>
                   <v-btn
                     rounded
-                    color="white"
                     width="60%"
+                    class="primary--text"
+                    :id="difficult.level"
+                    @click="addColorDifficulty(difficult.level)"
                   >{{ difficult.level }}
                   </v-btn>
               </template>
@@ -24,8 +26,10 @@
                 <template>
                   <v-btn
                       rounded
-                      color="white"
                       width="60%"
+                      class="primary--text"
+                      :id="durationE.range"
+                      @click="addColorDuration(durationE.range)"
                   >{{ durationE.range }}
                   </v-btn>
                 </template>
@@ -45,6 +49,7 @@
             <v-row justify="space-around" class="pt-6" >
               <v-col cols="4">
                 <v-select
+                    v-model="selected_sport"
                     :items="sports"
                     label="Deporte Relacionado"
                     solo
@@ -60,6 +65,7 @@
         <v-divider
             vertical class="accent"
         ></v-divider>
+
 
         <v-col cols="6">
           <v-card-text justify="space-around" class="waiting-api" v-if="!routines" > Filtra tus rutinas!</v-card-text>
@@ -82,25 +88,86 @@ import {mapGetters} from 'vuex'
 export default {
   name: 'FiltroRutinas',
   components: {DescriptiveRoutine},
-  props: ['objects'],
+  props:{
+    slug: {
+        type: String,
+        required: true
+    }
+  },
   data(){
     return {
+
       difficulty: [{level:"Principiante"},{level:"Intermedio"},{level:"Avanzado"}],
       duration: [{range:"15-30"},{range:"30-45"},{range:"45-60"}],
-      results:false,
+      loading: false,
       sports: ['Futbol','Hockey','Tenis','Otro'],
-      loading: false
+      selected_difficulty : null,
+      selected_duration : null,
+      selected_sport: null
+    }
+  },
+  methods : {
+    addColorDifficulty(id){
+        let element =document.getElementById(id)
+
+        if(!this.selected_difficulty){
+          this.selected_difficulty = id;
+          element.classList.add('accent')
+        }else{
+          if(this.selected_difficulty === id){
+            element.classList.remove('accent')
+            this.selected_difficulty = null;
+          }
+          else{
+            document.getElementById(this.selected_difficulty).classList.remove('accent')
+            this.selected_difficulty = id;
+            element.classList.add('accent')
+          }
+        }
+    },
+    addColorDuration(id){
+      let element =document.getElementById(id)
+
+      if(!this.selected_duration){
+        this.selected_duration = id;
+        element.classList.add('accent')
+      }else{
+        if(this.selected_duration === id){
+          element.classList.remove('accent')
+          this.selected_duration = null;
+        }
+        else{
+          document.getElementById(this.selected_duration).classList.remove('accent')
+          this.selected_duration = id;
+          console.log(this.selected_duration)
+          element.classList.add('accent')
+        }
+      }
     }
   },
   computed:{
-    ...mapGetters('routine',{
-      routines: 'getOther'
+
+    ...mapGetters('security',{
+      user: 'getUser',
     }),
 
+    ...mapGetters('routine',['getOther']),
+    ...mapGetters('favouriteRoutine',['getFavouritesId']),
+
+    routines(){
+      if(this.slug==='favoritas'){
+        return this.getFavouritesId
+      }
+      return this.getOther(this.user.username)
+    },
   },
   async created() {
     this.loading = true;
-    await this.$store.dispatch("routine/getAll")
+    await this.$store.dispatch("security/getCurrentUser")
+    if(this.slug != 'favoritas')
+      await this.$store.dispatch("routine/getAll")
+    else
+      await this.$store.dispatch("favouriteRoutine/getAll")
     this.loading = false;
   }
 
@@ -118,4 +185,6 @@ export default {
   max-height: 45em;
   overflow: auto;
 }
+
 </style>
+

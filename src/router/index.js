@@ -10,9 +10,8 @@ import Login from "../views/Login";
 import Register from "../views/Register";
 import RoutineCreator from "../views/RoutineCreator"
 import TusRutinas from "../views/TusRutinas"
-import RutinasRecomendadas from "../views/RutinasRecomendadas"
+//import RutinasRecomendadas from "../views/RutinasRecomendadas"
 import EjercicioDescripcion from "../views/EjercicioDescripcionPage"
-import CrearEjercicio from "../views/CrearEjercicioPage"
 import SeleccCateg from "../views/SeleccCategPage"
 import NotFound from "../views/NotFound";
 import SeleccionarEjercicioPopup from '../views/SeleccionarEjercicio'
@@ -73,11 +72,6 @@ const routes = [
     props: true
   },
   {
-    path: '/CrearEjercicio',
-    name: 'CrearEjercicio',
-    component: CrearEjercicio
-  },
-  {
     path: '/EjercicioDescripcion',
     name: 'EjercicioDescripcion',
     component: EjercicioDescripcion
@@ -103,11 +97,7 @@ const routes = [
     name: 'Tus rutinas',
     component: TusRutinas
   },
-  {
-    path: '/RutinasRecomendadas',
-    name: 'RutinasRecomendadas',
-    component: RutinasRecomendadas
-  },
+
   {
     path: '/SeleccCateg',
     name: 'SeleccCateg',
@@ -118,11 +108,22 @@ const routes = [
     name: 'SeleccionarEjercicioPopup',
     component: SeleccionarEjercicioPopup
   },
+  // {
+  //   path: '/RutinasFavoritas',
+  //   name: 'RutinasFavoritas',
+  //   component: RutinasFavoritas
+  // },
   {
-    path: '/RutinasFavoritas',
-    name: 'RutinasFavoritas',
-    component: RutinasFavoritas
+    path: '/Rutinas/:slug',
+    name: 'Rutinas',
+    component: RutinasFavoritas,
+    props: true
   },
+  // {
+  //   path: '/RutinasRecomendadas',
+  //   name: 'RutinasRecomendadas',
+  //   component: RutinasRecomendadas
+  // },
   {
     path: '*',
     name: "NotFound",

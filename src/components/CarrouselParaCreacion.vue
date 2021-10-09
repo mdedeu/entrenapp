@@ -17,7 +17,7 @@
         </v-row>
 
         <v-row justify="center"  style="height: 10vh" v-for="exercise in routine.exercise" :key="exercise.name">
-          <v-col cols="6" height="100%">
+          <v-col cols="6"  >
             <v-btn width="100%"
                    rounded
                    color="white"
@@ -38,23 +38,9 @@
           </v-col>
         </v-row>
 
-        <v-row justify="center"  style="height: 10vh">
+        <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <v-btn width="100%"
-                   rounded
-                   color="white"
-                   class="primary--text justify-center text-h5 mt-n10"
-                   height="100%"
-                    @click="SeleccCateg"
-            >
-              <v-icon
-                  x-large
-                  color="primary"
-                  class="pl-10 pr-5"
-              >
-                mdi-plus-box-outline
-              </v-icon>
-            </v-btn>
+            <AgregarEjercicio></AgregarEjercicio>
           </v-col>
         </v-row>
 
@@ -105,8 +91,11 @@
   </v-carousel>
 </template>
 <script>
+import AgregarEjercicio from "./AgregarEjercicio";
+
 export default {
   name: "CarrouselParaCreacion",
+  components : {AgregarEjercicio},
   data: () => (
       {
         routines: [{step:'Calentamiento',repetitions:3,exercise:[{name:'Salto',time:35},{name: 'Roberto', time: 30}]},{step:'Ejercitacion',repetitions:3,exercise:[{name:'Flexiones de brazo',time:60},{name:'Abdominales',time:60}]}]

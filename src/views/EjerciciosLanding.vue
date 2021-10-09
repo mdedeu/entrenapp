@@ -5,15 +5,15 @@
   </v-row>
 
   <v-row class="pt-16">
-    <carrousel :Section="{title:'Tus ejercicios',nameComponent:'Tus Ejercicios'}"></carrousel>
+    <carrousel :Section="{title:'Tus ejercicios',path:'/TusEjercicios'}"></carrousel>
   </v-row>
 
   <v-row class="pt-16" >
-    <carrousel :Section="{title:'Ejercicios Favoritos',nameComponent:'EjerciciosFavoritos'}"></carrousel>
+    <carrousel :Section="{title:'Ejercicios favoritos',path:'/EjerciciosFavoritos'}"></carrousel>
   </v-row>
 
   <v-row class="pt-16">
-    <carrousel :Section="{title:'Ejercicios Recomendados',nameComponent:'EjerciciosRecomendados'}" ></carrousel>
+    <carrousel :Section="{title:'Ejercicios recomendados',path:'/EjerciciosRecomendados'}" ></carrousel>
   </v-row>
 </v-container>
 
