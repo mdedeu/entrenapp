@@ -27,6 +27,7 @@
               <v-col cols="6">
                 <h4 class="primary--text" >Nombre</h4>
                 <v-text-field
+                    v-model="nombre"
                     label="Nombre"
                     solo
                     background-color="white"
@@ -38,71 +39,18 @@
                 <h4 class="primary--text mt-n6">Grupo múscular</h4>
               </v-col>
             </v-row>
-            <v-row justify="center">
+            <v-row justify="center" v-for="exercise in exercises" :key="exercise.name">
               <v-col cols="3">
                 <template>
                   <v-btn
                       rounded
-                      color="white"
                       width="100%"
-                  >Piernas
+                      :id="'crear-' + exercise.name"
+                      @click="addColor(exercise.name)"
+                  >{{exercise.name}}
                   </v-btn>
                 </template>
-              </v-col>
-              <v-col cols="3">
-                <template>
-                  <v-btn
-                      rounded
-                      color="white"
-                      width="100%"
-                  >Pecho
-                  </v-btn>
-                </template>
-              </v-col>
-            </v-row>
-            <v-row justify="center">
-              <v-col cols="3">
-                <template>
-                  <v-btn
-                      rounded
-                      color="white"
-                      width="100%"
-                  >Piernas
-                  </v-btn>
-                </template>
-              </v-col>
-              <v-col cols="3">
-                <template>
-                  <v-btn
-                      rounded
-                      color="white"
-                      width="100%"
-                  >Abdominales
-                  </v-btn>
-                </template>
-              </v-col>
-            </v-row>
-          <v-row justify="center">
-            <v-col cols="3">
-              <template>
-                <v-btn
-                    rounded
-                    color="white"
-                    width="100%"
-                >Brazos
-                </v-btn>
-              </template>
-            </v-col>
-            <v-col cols="3">
-              <template>
-                <v-btn
-                    rounded
-                    color="white"
-                    width="100%"
-                >Espalda
-                </v-btn>
-              </template>
-            </v-col>
+                </v-col>
           </v-row>
             <v-row justify="center">
               <h4 class="primary--text mt-6"> ¿Vas a necesitar algún elemento adicional? </h4>
@@ -123,6 +71,7 @@
             <v-row justify="center">
               <v-col cols="6">
                 <v-select
+                    v-model="selected_sport"
                     :items="sports"
                     label="Deporte"
                     solo
@@ -161,7 +110,30 @@ export default {
   data() {
     return {
       dialog:false,
-      sports: ['Fútbol', 'Voley', 'Tenis', 'Paddle']
+      sports: ['Fútbol', 'Voley', 'Tenis', 'Paddle'],
+      exercises: [{name: 'Abdominales' }, {name: 'Espalda'}, {name: 'Brazos'}, {name: 'Pecho'}],
+      selected_sport: null,
+    }
+  },
+  methods : {
+    addColor(name){
+      let element =document.getElementById('crear-'+name)
+
+      if(!this.selected_muscle){
+        this.selected_muscle = name;
+        element.classList.add('primary')
+      }else{
+        if(this.selected_muscle === name){
+          element.classList.remove('primary')
+          this.selected_muscle = null;
+        }
+        else{
+          document.getElementById('crear-'+ this.selected_muscle).classList.remove('primary')
+          this.selected_muscle = name;
+          console.log(this.selected_muscle)
+          element.classList.add('primary')
+        }
+      }
     }
   }
 }
