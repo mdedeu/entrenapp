@@ -1,5 +1,7 @@
 <template>
-  <v-container>
+  <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
+
+  <v-container v-else>
 
   <v-row justify="space-between">
 
@@ -20,6 +22,7 @@
                   dark
                   v-bind="attrs"
                   v-on="on"
+                  @click="addTofavourite"
 
               >
                 <v-icon left>
@@ -67,6 +70,7 @@
 
 <script>
 import Back from './Back'
+import {mapGetters,mapActions} from 'vuex'
 export default {
   name: 'BackAndButton',
   components:{
@@ -74,9 +78,36 @@ export default {
   },
   data(){
     return {
-      dialog:false
+      dialog:false,
+      loading : true
     }
+  },
+  methods:{
+    async addTofavourite(){
+      console.log(this.routineID)
+      return await this.create(this.routineID)
+    },
+    ...mapActions( 'favouriteRoutine',['create'] )
+
+  },
+  props:{
+    routineID:{
+      type:Number,
+      required:true
+    }
+  },
+
+  computed:{
+    ...mapGetters('security',{
+      user:'getUser'
+    }),
+  },
+  async created() {
+    this.loading = true;
+    await this.$store.dispatch("security/getCurrentUser")
+    this.loading = false;
   }
+
 }
 
 </script>

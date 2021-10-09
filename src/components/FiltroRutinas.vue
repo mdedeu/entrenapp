@@ -93,6 +93,13 @@ export default {
       loading: false
     }
   },
+  props:{
+    slug: {
+      type: String,
+      required: true
+    }
+  },
+
   computed:{
 
     ...mapGetters('security',{
@@ -100,15 +107,22 @@ export default {
     }),
 
     ...mapGetters('routine',['getOther']),
+    ...mapGetters('favouriteRoutine',['getFavouritesId']),
 
     routines(){
+      if(this.slug==='favoritas'){
+        return this.getFavouritesId
+      }
       return this.getOther(this.user.username)
     },
   },
   async created() {
     this.loading = true;
-    await this.$store.dispatch("routine/getAll")
     await this.$store.dispatch("security/getCurrentUser")
+    if(this.slug != 'favoritas')
+      await this.$store.dispatch("routine/getAll")
+    else
+      await this.$store.dispatch("favouriteRoutine/getAll")
     this.loading = false;
   }
 

@@ -2,7 +2,7 @@
     <v-container fluid class="accent fill-height">
       <v-row justify="center" class="mb-5 mt-4">
         <v-col cols="5">
-          <router-link  :to="{name:`${Section.nameComponent}`}" class="text-h4">{{ Section.title }}</router-link>
+          <router-link  :to="{path:`${Section.path}`}" class="text-h4">{{ Section.title }}</router-link>
         </v-col>
         </v-row  >
         <v-row class="mb-5 mt-4">
@@ -34,11 +34,7 @@ import DescriptiveRoutine from './DescriptiveRoutine'
         required:true
       }
     },
-    methods:{
-      RoutineDescription(){
-        this.$router.push({name:"RoutineDescription"})
-      }
-    }
+
 
   }
 </script>

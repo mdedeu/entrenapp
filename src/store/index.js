@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import security from '@/store/modules/security';
 import sport from '@/store/modules/sport';
 import routine from '@/store/modules/routine'
+import favouriteRoutine from '@/store/modules/favouriteRoutine'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
   modules: {
     security:security,
     sport:sport,
-    routine:routine
+    routine:routine,
+    favouriteRoutine:favouriteRoutine
   }
 })
