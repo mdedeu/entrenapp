@@ -1,42 +1,40 @@
 <template>
-        <v-container fluid class="primary fill-height" style="height: 100vh">
-            <Close/>
+        <v-container fluid class="primary fill-height">
             <v-row >
                 <v-col align="center">
-                    <p class="text-h3 text-center accent--text">Seleccionar la categoria</p>
+                    <p class="text-center accent--text">Seleccionar la categoria</p>
                 </v-col>
             </v-row>
-            <v-row style="height: 10%" v-for="category in categories" :key="category.cat">
+            <v-row v-for="category in categories" :key="category.cat">
+              <v-dialog>
+                <template v-slot:activator="{ on, attrs }" >
                 <v-col cols="12" align="center">
                     <v-btn
-                        width="50%"
-                        height="90%"
                         rounded
-                        class="text-h4"
-                        @click="PopupSeleccionarEjercicio"
+                        v-on="on"
+                        v-bind="attrs"
                     >
                       {{ category.cat }}
                     </v-btn>
                 </v-col>
+                </template>
+
+                <PopupSeleccionarEjercicio></PopupSeleccionarEjercicio>
+              </v-dialog>
+
+
             </v-row>
         </v-container>
 </template>
 
 <script>
-    import Close from './Close'
+    import PopupSeleccionarEjercicio from "./PopupSeleccionarEjercicio";
     export default {
     name: "SeleccCateg",
-    components:{
-        Close
-    },
+      components: { PopupSeleccionarEjercicio},
       data(){
         return {
-          categories:[{cat:"Ejercicios recomendados"},{cat:"Tus ejercicios"},{cat:"Ejercicios favoritos"}],
-        }
-      },
-      methods:{
-        PopupSeleccionarEjercicio(){
-          this.$router.push({name:"SeleccionarEjercicioPopup"})
+          categories:[{cat:"Ejercicios recomendados"},{cat:"Tus ejercicios"},{cat:"Ejercicios favoritos"}]
         }
       }
 }

@@ -4,7 +4,6 @@
         <v-col cols="12" align="right">
             <v-btn
                 color="transparent"
-                @click="goBack"
             >
                 <v-icon
                     x-large
