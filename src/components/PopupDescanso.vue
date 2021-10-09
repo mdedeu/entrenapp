@@ -15,7 +15,7 @@
     <v-row>
       <v-col>
         <v-btn
-        rounded color=" accent primary--text">Guardar
+        rounded color=" accent primary--text" @click="closePopup()">Guardar
         </v-btn>
       </v-col>
     </v-row>
@@ -24,7 +24,12 @@
 
 <script>
 export default {
-  name: "PopupDescanso"
+  name: "PopupDescanso",
+  methods: {
+    closePopup() {
+      this.$emit('close-popup');
+    }
+  }
 }
 </script>
 

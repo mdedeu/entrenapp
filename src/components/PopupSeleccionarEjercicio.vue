@@ -1,5 +1,6 @@
 <template>
   <v-container class="primary">
+    <v-row > <Close v-on:close-popup="closePopup()"></Close></v-row>
     <v-row class="accent--text mt-6" justify="space-around" >
       <v-col cols="6" >
         <v-row justify="center"><h4>Filtra</h4></v-row>
@@ -45,7 +46,7 @@
       <v-col cols="6" >
         <v-row justify="center" class="mb-4"><h4>Todos los resultados</h4></v-row>
         <v-container class="exercises">
-        <v-row class="pt-6 pl-6" justify="space-around" v-for="exercise in exercises" :key="exercise.name">
+        <v-row class="pt-6 pl-6 pr-6" justify="space-around" v-for="exercise in exercises" :key="exercise.name">
           <template>
 
             <v-card
@@ -96,8 +97,10 @@
 
 <script>
 
+import Close from "./Close";
 export default {
   name: 'PopupSeleccionarEjercicio',
+  components: {Close},
   data(){
     return {
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
@@ -107,6 +110,9 @@ export default {
   methods:{
     EjercicioDescripcion(){
       this.$router.push({name:"EjercicioDescripcion"})
+    },
+    closePopup() {
+      this.$emit('close-popup')
     }
   }
 

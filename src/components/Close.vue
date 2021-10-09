@@ -4,6 +4,7 @@
         <v-col cols="12" align="right">
             <v-btn
                 color="transparent"
+                @click="goBack"
             >
                 <v-icon
                     x-large
@@ -22,7 +23,7 @@
     name: 'Close' ,
     methods:{
       goBack(){
-        return this.$router.go(-1);
+        this.$emit('close-popup')
       }
     }
     }
