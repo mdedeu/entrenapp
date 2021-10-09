@@ -1,6 +1,12 @@
 <template>
   <v-container fluid  fill-height class="primary">
-      <v-row class="mt-16">
+      <v-row>
+        <v-col>
+          <p v-if="incorrect" class="text--h3">{{ this.error }}</p>
+        </v-col>
+      </v-row>
+
+    <v-row class="mt-16">
         <v-col/>
         <v-col>
           <router-link :to= "{name: 'Home'}">
@@ -15,8 +21,8 @@
                                  required
                                  solo
                                  prepend-inner-icon="mdi-email-outline"
-                                 v-model="email"
                                  outlined
+                                 v-model="email"
         ></v-text-field> </v-col>
         <v-col/>
       </v-row>
@@ -50,20 +56,31 @@
 </template>
 
 <script>
-import store from "../store/index";
+import {Credentials} from "../../API/user";
+
 export default {
+
   name: "Login.vue",
   data() {
     return{
       email : null,
       password : null,
-      show: false
+      show: false,
+      incorrect:false,
+      error:null
     }
   },
   methods :{
-    login() {
-      store.email = this.email;
-      this.$router.push("/RoutineLanding");
+    async login(){
+     try{
+       const credentials = new Credentials(this.email, this.password)
+       await this.$store.dispatch("security/login",{credentials, rememberMe: true });
+       this.$router.push({name:"RoutineLanding"})
+     }
+      catch(e){
+        this.error=e.details
+        this.incorrect=true
+     }
     },
     changeShow(){
       this.show = !this.show ;

@@ -5,7 +5,7 @@
         </v-row>
 
         <v-row>
-            <RoutineDescription>Añadir a favoritas</RoutineDescription>
+            <RoutineDescription :routine="routine"></RoutineDescription>
         </v-row>
 
         <CarrouselParaCiclos></CarrouselParaCiclos>
@@ -24,6 +24,13 @@
         HeaderApp,
         RoutineDescription,
         CarrouselParaCiclos
-    }
+    },
+      props:{
+        routine: {
+          type: Object,/**name,dificultad,duracion*/
+          required: true
+        }
+      },
+
 }
 </script>

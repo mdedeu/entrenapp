@@ -1,6 +1,7 @@
 <template>
+  <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
 
-    <v-container fluid>
+  <v-container v-else fluid>
       <v-row class="accent--text" justify="space-around" >
           <v-col cols="6" >
             <v-row justify="center">
@@ -65,13 +66,12 @@
             vertical class="accent"
         ></v-divider>
 
-        <v-col cols="6" >
-          <h2 class="mb-3">Todos los resultados</h2>
-          <v-container class="routine" >
-            <v-row class="pt-6 pl-6" justify="space-around" v-for="routine in routines" :key="routine.name">
-              <DescriptiveRoutine :name = "routine.name" difficulty = "Intermedia" category = "Pecho" :sample-exercises="['Flexiones Abiertas', 'Press Plano']" ></DescriptiveRoutine>
-            </v-row>
-          </v-container>
+
+        <v-col cols="6">
+          <v-card-text justify="space-around" class="waiting-api" v-if="!routines" > Filtra tus rutinas!</v-card-text>
+          <v-row class="pt-6 pl-6" justify="space-around" v-for="routine in routines" :key="routine.name">
+           <DescriptiveRoutine :routineDes="routine" ></DescriptiveRoutine>
+          </v-row>
 
          </v-col>
       </v-row>
@@ -83,16 +83,23 @@
 
 
 import DescriptiveRoutine from "./DescriptiveRoutine";
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'FiltroRutinas',
   components: {DescriptiveRoutine},
-  props: ['objects'],
+  props:{
+    slug: {
+        type: String,
+        required: true
+    }
+  },
   data(){
     return {
-       routines: [{name:"Pecho"},{name:"Piernas"},{name:"Brazo"},{name:"Hombros"},{name:"Espalda"}],
-      //routines: false,
+
       difficulty: [{level:"Principiante"},{level:"Intermedio"},{level:"Avanzado"}],
       duration: [{range:"15-30"},{range:"30-45"},{range:"45-60"}],
+      loading: false,
       sports: ['Futbol','Hockey','Tenis','Otro'],
       selected_difficulty : null,
       selected_duration : null,
@@ -137,7 +144,33 @@ export default {
         }
       }
     }
+  },
+  computed:{
+
+    ...mapGetters('security',{
+      user: 'getUser',
+    }),
+
+    ...mapGetters('routine',['getOther']),
+    ...mapGetters('favouriteRoutine',['getFavouritesId']),
+
+    routines(){
+      if(this.slug==='favoritas'){
+        return this.getFavouritesId
+      }
+      return this.getOther(this.user.username)
+    },
+  },
+  async created() {
+    this.loading = true;
+    await this.$store.dispatch("security/getCurrentUser")
+    if(this.slug != 'favoritas')
+      await this.$store.dispatch("routine/getAll")
+    else
+      await this.$store.dispatch("favouriteRoutine/getAll")
+    this.loading = false;
   }
+
 
 }
 
@@ -152,4 +185,6 @@ export default {
   max-height: 45em;
   overflow: auto;
 }
+
 </style>
+

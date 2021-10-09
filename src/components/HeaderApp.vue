@@ -17,11 +17,11 @@
       </v-col>
      <v-col cols="3" >
        <div class="d-inline-flex justify-space-around text-center align-content-center mt-3">
-         <v-btn class="white--text  mr-16 ml-16" plain  @click="CreateRoutine()" >Creá tu rutina</v-btn>
-         <v-btn class="white--text mr-16 ml-16" plain @click="RoutineLanding()">Rutinas</v-btn>
+         <v-btn class="white--text  mr-16 ml-16" plain  @click="CreateRoutine" >Creá tu rutina</v-btn>
+         <v-btn class="white--text mr-16 ml-16" plain @click="RoutineLanding">Rutinas</v-btn>
          <v-btn class="white--text mr-16 ml-16" plain @click="EjerciciosLanding">Ejercicios</v-btn>
-         <v-btn class="white--text mr-16 ml-16" plain @click="MyProfile()">Mi perfil</v-btn>
-         <v-btn class="white--text ml-16"  @click="Home" plain>
+         <v-btn class="white--text mr-16 ml-16" plain @click="MyProfile">Mi perfil</v-btn>
+         <v-btn class="white--text ml-16"  @click="Salir" plain>
            Salir
          </v-btn>
        </div>
@@ -45,8 +45,8 @@ export default {
     MyProfile(){
       this.$router.push({name:"My Profile"});
     },
-    Home(){
-
+    async Salir(){
+      await this.$store.dispatch("security/logout");
       this.$router.push({name:"Home"})
     },
     EjerciciosLanding(){
@@ -55,7 +55,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

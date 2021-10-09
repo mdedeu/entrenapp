@@ -1,16 +1,16 @@
 <template>
   <v-container class="mb-7">
-    <BackAndButton class="mt-6" object="Rutina agregada a favoritos"><slot></slot></BackAndButton>
+    <BackAndButton :routineID="this.routine.id" class="mt-6"></BackAndButton>
     <div  class="pt-10 accent--text">
       <v-row justify="center">
-        <h2>{{routine.tipo}}</h2>
+        <h2>{{routine.name}}</h2>
       </v-row>
       <v-row justify="center">
-        <p>Nivel de dificultad :{{routine.dificultad}}</p>
+        <p>Nivel de dificultad: {{routine.difficulty}}</p>
       </v-row>
       <v-row justify="center">
         <p>
-          Duracion: {{routine.duracion}}
+          Duración: {{routine.name}}
         </p>
       </v-row>
     </div>
@@ -29,9 +29,12 @@ export default {
   components: {
     BackAndButton
   },
-  data(){
-    return {routine: {tipo:"Pecho", dificultad: "Intermedio", duracion:"45'"}}
-  }
+  props:{
+    routine: {
+      type: Object,/**name,dificultad,duracion*/
+      required: true
+    }
+  },
 }
 </script>
 <style scoped>

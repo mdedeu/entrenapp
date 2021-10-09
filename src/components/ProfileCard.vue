@@ -1,5 +1,7 @@
 <template>
-  <v-container>
+  <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
+
+  <v-container v-else>
         <v-card>
           <v-img height="25vh" :src="profile.back_im">
             <v-container>
@@ -23,7 +25,7 @@
           <v-card-text>
 
             <v-card-title  class="white--text">
-              <h1 class="black--text">{{ profile.name }}</h1>
+              <h1 class="black--text">{{ user.username }}</h1>
             </v-card-title>
 
             <div class="font-weight-bold ml-4 mb-2"> Detalles </div>
@@ -37,7 +39,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{ profile.number }}</v-list-item-title>
+                  <v-list-item-title>{{ user.phone }}</v-list-item-title>
                   <v-list-item-subtitle>Teléfono</v-list-item-subtitle>
                 </v-list-item-content>
 
@@ -56,7 +58,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{ profile.email }}</v-list-item-title>
+                  <v-list-item-title>{{ user.email }}</v-list-item-title>
                   <v-list-item-subtitle>Trabajo</v-list-item-subtitle>
                 </v-list-item-content>
 
@@ -105,12 +107,25 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: "ProfileCard.vue",
   data(){
     return {
-      profile:{prof_im:require('../assets/messi.jpg'), back_im:require('../assets/psg_header.jpg'), name:"Leo Messi", number:"1 444 555 8888", email:"messi@psg.com", location:"Paris Saint-Germain"}
+      loading:false,
+      profile:{prof_im:require('../assets/messi.jpg'), back_im:require('../assets/psg_header.jpg'), location:"Paris Saint-Germain"},
     }
+  },
+  computed:{
+    ...mapGetters('security',{
+      user: 'getUser'
+    })
+  },
+  async created() {
+    this.loading = true;
+    await this.$store.dispatch("security/getCurrentUser")
+    this.loading = false;
   }
 }
 </script>
