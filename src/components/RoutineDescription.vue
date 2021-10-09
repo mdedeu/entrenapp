@@ -1,6 +1,6 @@
 <template>
   <v-container class="mb-7">
-    <BackAndButton class="mt-6"><slot></slot></BackAndButton>
+    <BackAndButton class="mt-6" object="Rutina agregada a favoritos"><slot></slot></BackAndButton>
     <div  class="pt-10 accent--text">
       <v-row justify="center">
         <h2>{{routine.tipo}}</h2>

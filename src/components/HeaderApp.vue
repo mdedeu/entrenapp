@@ -46,6 +46,7 @@ export default {
       this.$router.push({name:"My Profile"});
     },
     Home(){
+
       this.$router.push({name:"Home"})
     },
     EjerciciosLanding(){

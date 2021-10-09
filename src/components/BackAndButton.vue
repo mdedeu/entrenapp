@@ -36,7 +36,7 @@
               </v-card-title>
 
               <v-card-text>
-                Rutina agregada a favoritos!
+                {{object}}!
               </v-card-text>
               <v-icon color="green" size="60">mdi-check</v-icon>
 
@@ -72,6 +72,7 @@ export default {
   components:{
     Back
   },
+  props: ['object'],
   data(){
     return {
       dialog:false

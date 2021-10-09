@@ -1,5 +1,8 @@
 <template>
   <v-container fluid class="primary fill-height" style="height: 100vh">
+    <v-row>
+      <BackAndButton object="Ejericio agregado a favoritos">Agregar a favoritos</BackAndButton>
+    </v-row>
     <v-row justify="center">
       <v-col cols="3" >
         <p class="text-h4 accent--text">{{ejercicio.name}}</p>
@@ -22,8 +25,10 @@
 </template>
 
 <script>
+import BackAndButton from "./BackAndButton";
 export default {
   name: "EjercicioDescripcion",
+  components: {BackAndButton},
   data(){
     return {
       ejercicio:{name:"Flexiones de brazo",muscles:"Pecho"}
