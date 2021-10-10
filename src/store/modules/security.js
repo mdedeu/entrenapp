@@ -67,6 +67,11 @@ export default {
         },
         async verify(context,data){
             return await UserApi.verify(data)
+        },
+        async updateUser({commit},data){
+            await UserApi.updateUser(data)
+            const result = await UserApi.get()
+            commit('setUser', result)
         }
 
         },

@@ -26,6 +26,9 @@ class UserApi {
     static async verify(data,controller){
         return await Api.post(`${UserApi.getUrl()}/verify_email`,false,data,controller)
     }
+    static async updateUser(data,controller){
+        return await Api.put(`${UserApi.getUrl()}/current`,true,data,controller)
+    }
 
 
 
