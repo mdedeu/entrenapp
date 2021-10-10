@@ -21,6 +21,7 @@ import RutinasFavoritas from "../views/RutinasFavoritas";
 import EjerciciosRecomendados from "../views/EjerciciosRecomendados";
 import EjerciciosFavoritos from "../views/EjerciciosFavoritos";
 import codeChecking from "../views/CodeChecking"
+import Verification from "../views/Verification"
 
 
 Vue.use(VueRouter)
@@ -55,6 +56,11 @@ const routes = [
     path: '/TusEjercicios',
     name: 'Tus Ejercicios',
     component: TusEjercicios
+  },
+  {
+    path: '/Verification',
+    name: 'Verification',
+    component: Verification
   },
   {
     path: '/Routines',
