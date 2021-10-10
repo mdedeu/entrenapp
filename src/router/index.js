@@ -20,6 +20,7 @@ import EjerciciosLanding from  "../views/EjerciciosLanding"
 import RutinasFavoritas from "../views/RutinasFavoritas";
 import EjerciciosRecomendados from "../views/EjerciciosRecomendados";
 import EjerciciosFavoritos from "../views/EjerciciosFavoritos";
+import codeChecking from "../views/CodeChecking"
 
 
 Vue.use(VueRouter)
@@ -65,6 +66,14 @@ const routes = [
     name: 'Register',
     component: Register
   },
+  {
+    path: '/codeChecking',
+    name: 'codeChecking',
+    component: codeChecking,
+    props: true
+  },
+
+
   {
     path: '/RoutineDescription',
     name: 'RoutineDescription',
