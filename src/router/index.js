@@ -22,7 +22,8 @@ import EjerciciosRecomendados from "../views/EjerciciosRecomendados";
 import EjerciciosFavoritos from "../views/EjerciciosFavoritos";
 import codeChecking from "../views/CodeChecking"
 import Verification from "../views/Verification"
-
+import RoutineCreadorInfo from "../views/RoutineCreatorInfo"
+import RoutineCreatorExercise from "../views/RoutineCreatorExercise"
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,19 @@ const routes = [
     name: 'Home',
     component: Home
    },
+  {
+    path: '/RoutineCreadorInfo',
+    name: 'RoutineCreadorInfo',
+    component: RoutineCreadorInfo,
+    props: true
+  },
+  {
+    path: '/RoutineCreatorExercise',
+    name: 'RoutineCreatorExercise',
+    component: RoutineCreatorExercise,
+    props: true
+  },
+
   {
     path: '/myprofile',
     name: 'My Profile',

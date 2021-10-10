@@ -27,6 +27,7 @@
               color="accent"
               label="Equipación Extra"
               hide-details
+              v-model="equipacion"
               dark
           >
           </v-checkbox>
@@ -82,7 +83,8 @@ export default {
       exercises:[{name:"Flexiones de brazo"},{name:"Abdominales bolita"},{name:"Salto con soga"},{name:"Estirar piernas"},{name:"Espalda en colchoneta"}],
       sports: ['Fútbol', 'Hockey','Tenis','Paddle'],
       selected_sport: null,
-      selected_muscle: null
+      selected_muscle: null,
+      equipacion:false
     }
   },
   methods:{

@@ -4,6 +4,7 @@ import security from '@/store/modules/security';
 import sport from '@/store/modules/sport';
 import routine from '@/store/modules/routine'
 import favouriteRoutine from '@/store/modules/favouriteRoutine'
+import routineCycle from '@/store/modules/routineCycle'
 
 Vue.use(Vuex)
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     security:security,
     sport:sport,
     routine:routine,
-    favouriteRoutine:favouriteRoutine
+    favouriteRoutine:favouriteRoutine,
+    routineCycle : routineCycle
   }
 })

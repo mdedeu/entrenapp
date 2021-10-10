@@ -1,25 +1,17 @@
 <template>
+
   <v-container fluid class="primary fill-height">
+    <v-row v-if="error"><v-col>
+      <p class="text-h3 red--text" >Todos los campos son obligatorios</p>
+    </v-col></v-row>
+
     <v-row>
       <v-col class="mt-10">
         <h1>Creá tu rutina</h1>
       </v-col>
     </v-row>
 
-    <v-row justify="center">
-      <h3 class="accent--text">Selecciona el grupo Muscular</h3>
-    </v-row>
-    <v-row justify="center">
-      <v-col cols="4">
-        <v-select
-            v-model="muscle_selected"
-            :items="muscles"
-            label="Grupo Muscular"
-            solo
-            full-width
-        ></v-select>
-      </v-col>
-    </v-row>
+
     <v-row justify="center">
       <h3 class="accent--text"> Dale un nombre creativo a tu rutina</h3>
     </v-row>
@@ -33,6 +25,24 @@
         ></v-text-field>
       </v-col>
     </v-row>
+
+
+    <v-row justify="center" v-if="publicRoutine">
+      <h3 class="accent--text"> Agregá una descripcion de la rutina</h3>
+    </v-row>
+    <v-row justify="center" v-if="publicRoutine">
+      <v-col cols="4">
+        <v-text-field
+            v-model="descripcion"
+            label="Descripcion"
+            solo
+            background-color="white"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+
+
+
     <v-row>
       <v-col col="6">
         <h3 class="accent--text">Selecciona el nivel de dificultad:</h3>
@@ -46,8 +56,8 @@
                 color="white"
                 width="80%"
                 class="black--text"
-                id="Principiante"
-                @click="addOutline('Principiante')"
+                id="rookie"
+                @click="addOutline('rookie')"
             >Principiante
             </v-btn>
           </v-col>
@@ -57,8 +67,8 @@
             color="white"
             width="80%"
             class="black--text"
-            id="Intermedio"
-            @click="addOutline('Intermedio')"
+            id="intermediate"
+            @click="addOutline('intermediate')"
         >Intermedio
         </v-btn>
       </v-col>
@@ -68,8 +78,8 @@
             color="white"
             width="80%"
             class="black--text"
-            id="Avanzado"
-            @click="addOutline('Avanzado')"
+            id="expert"
+            @click="addOutline('expert')"
         >Avanzado
         </v-btn>
       </v-col>
@@ -90,6 +100,11 @@
             ></v-select>
       </v-col>
     </v-row>
+    <v-row class="primary ">
+      <v-col>
+        <v-btn rounded class="accent text--primary mt-10 mb-16" @click="SendInfo">Siguiente</v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -99,12 +114,13 @@ export default {
   name: 'RutinasCreador',
   data() {
     return {
-      sports: ['Futbol', 'Tenis', 'Hockey', 'Otro'],
-      muscles: ['Pecho', 'Piernas','Brazos','Hombros','Otro'],
+      sports: ['Futbol', 'Tenis', 'Hockey', 'Ninguno'],
       difficulty: null,
       nombre: null,
-      muscle_selected : null,
-      sport_selected : null
+      sport_selected : null,
+      error:false,
+      publicRoutine:true,
+      descripcion:""
     }
   },
   methods : {
@@ -124,6 +140,17 @@ export default {
           this.difficulty = id;
           element.classList.add('accent')
         }
+      }
+    },
+    SendInfo(){
+      if(this.publicRoutine && this.descripcion==null){
+        return this.error=true
+      }
+
+      if(this.nombre != null  && this.sport_selected!=null && this.difficulty !=null)
+        this.$emit('Info-received',{name:this.nombre,detail:this.descripcion,isPublic:true,difficulty:this.difficulty,metadata:{sport:this.sport_selected}})
+      else {
+        this.error=true
       }
     }
   }
