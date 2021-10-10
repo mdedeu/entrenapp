@@ -95,13 +95,50 @@
           >
             Cancelar
           </v-btn>
+
+
+
+          <v-dialog
+              v-model="dialog_message"
+              width="500"
+              transition="dialog-bottom-transition"
+          >
+            <template v-slot:activator="{ on, attrs }">
           <v-btn
+              v-bind="attrs"
+              v-on="on"
               color="primary darken-1"
               text
               @click="guardarHandler"
           >
             Guardar
           </v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="text-h5 green lighten-2">
+                Éxito
+              </v-card-title>
+              <v-card-text>
+                ¡Ejercicio eliminado de favoritos!
+              </v-card-text>
+              <v-icon color="green" size="60">mdi-check</v-icon>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                    color="primary"
+                    text
+                    @click="dialog_message = false"
+                >
+                  OK
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
+
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -118,6 +155,7 @@ export default {
       rules: {
         length:[ val => (val || '').length > 0 || 'Este campo es obligatorio' ]
       },
+      dialog_message:false,
       dialog:false,
       sports: ['Fútbol', 'Voley', 'Tenis', 'Paddle'],
       exercises: [{name: 'Abdominales' }, {name: 'Espalda'}, {name: 'Brazos'}, {name: 'Pecho'}],
@@ -174,6 +212,7 @@ export default {
           favorito:false
         }}
       await this.$createExercise(exercise)
+      this.$forceUpdate()
       this.closeHandler()
     },
     closeHandler(){

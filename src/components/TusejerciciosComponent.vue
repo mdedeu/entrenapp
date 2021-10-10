@@ -109,20 +109,11 @@ export default {
     ...mapGetters('exercise', ['getFavourites'])
 
   },
+  async updated(){
+    await this.loadExercises()
+  },
   async created() {
-    this.loading = true;
-    await this.$store.dispatch("security/getCurrentUser")
-    await this.$store.dispatch("exercise/getAll")
-    this.loading = false;
-    if(this.slug !== 'favoritas') {
-      this.exercises = this.getMine
-    }
-    else{
-      this.exercises = this.getFavourites
-    }
-    this.filtered = this.exercises
-
-
+    await this.loadExercises()
   },
   methods:{
     addColor(id){
@@ -151,6 +142,19 @@ export default {
           this.filtered = this.filtered.filter( (item) => this.getMuscle(this.selected_muscle).includes(item) )
       if(this.selected_sport)
         this.filtered = this.filtered.filter( (item) => this.getDeporte(this.selected_sport).includes(item) )
+    },
+    async loadExercises(){
+      this.loading = true;
+      await this.$store.dispatch("security/getCurrentUser")
+      await this.$store.dispatch("exercise/getAll")
+      this.loading = false;
+      if(this.slug !== 'favoritas') {
+        this.exercises = this.getMine
+      }
+      else{
+        this.exercises = this.getFavourites
+      }
+      this.filtered = this.exercises
     }
   }
 
