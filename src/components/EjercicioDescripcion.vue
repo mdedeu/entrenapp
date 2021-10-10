@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="primary fill-height" style="height: 100vh">
     <v-row>
-      <ExerciseBackAndButton :exercise="this.exercise" :exerciseId="this.exercise.id" class="mt-6"></ExerciseBackAndButton>
+        <ExerciseBackAndButton :guardar-ejercicio="guardarEjercicio" :exercise="this.exercise" :exerciseId="this.exercise.id" class="mt-6"></ExerciseBackAndButton>
     </v-row>
     <v-row justify="center">
       <v-col cols="3" >

@@ -121,6 +121,10 @@
 
 
       <v-col>
+        <ModificarEjercicio v-on:guardar-ejercicio="guardarAuxiliar" :slug="exercise"></ModificarEjercicio>
+      </v-col>
+
+      <v-col>
         <template>
           <div class="text-center">
             <v-dialog
@@ -186,10 +190,12 @@
 <script>
 import Back from './Back'
 import {mapGetters,mapActions} from 'vuex'
+import ModificarEjercicio from "./ModificarEjercicioButton";
 
 export default {
   name: 'ExerciseBackAndButton',
   components:{
+    ModificarEjercicio,
     Back
   },
   data(){
@@ -220,6 +226,9 @@ export default {
       this.dialog_delete = false
       await this.$deleteExercise(this.exercise)
       return this.$router.go(-1);
+    },
+    guardarAuxiliar(){
+      this.$emit('guardar-ejercicio')
     }
   },
   props:{
