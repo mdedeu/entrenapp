@@ -72,6 +72,9 @@ export default {
             await UserApi.updateUser(data)
             const result = await UserApi.get()
             commit('setUser', result)
+        },
+        async removeUser(data){
+            await UserApi.removeUser(data)
         }
 
         },

@@ -65,7 +65,7 @@
               Cancelar
             </v-btn>
             <v-btn color="error"
-                   @click="borrar=false">
+                   @click="deleteUser()">
               Borrar
             </v-btn>
           </v-card-actions>
@@ -134,7 +134,14 @@ export default {
   methods: {
    async updatePhoto(){
         await this.$store.dispatch('security/updateUser',{ avatarUrl : this.url})
+        this.url = ''
         this.editar= false
+    },
+    async deleteUser(){
+     await this.$store.dispatch('security/removeUser')
+     this.borrar= false
+     await this.$router.push({name: 'Home'})
+
     }
   },
   async beforeCreate() {
