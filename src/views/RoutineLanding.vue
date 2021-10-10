@@ -53,10 +53,10 @@
       ...mapGetters('favouriteRoutine',['getFavouritesId']),
 
       mine(){
-        return this.getMine(this.user.username)
+        return this.getMine(this.user.id)
       },
       other(){
-        return this.getOther(this.user.username)
+        return this.getOther(this.user.id)
       },
       favourites(){
         return this.getFavouritesId

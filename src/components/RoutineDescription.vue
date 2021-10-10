@@ -1,6 +1,6 @@
 <template>
   <v-container class="mb-7">
-    <BackAndButton :routineID="this.routine" :routine="this.routine" class="mt-6"></BackAndButton>
+    <BackAndButton :routineID="this.routine.id" :routine="this.routine" class="mt-6"></BackAndButton>
     <div  class="pt-10 accent--text">
       <v-row justify="center">
         <h2>{{routine.name}}</h2>

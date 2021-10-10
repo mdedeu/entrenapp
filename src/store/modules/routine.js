@@ -12,13 +12,13 @@ export default{
             }
         },
         getMine(state){
-            return (username)=>{
-                return state.items.filter( (item) => item.user.username === (username))
+            return (id)=>{
+                return state.items.filter( (item) => item.user.id === (id))
             }
         },
         getOther(state){
-            return (username)=>{
-                return state.items.filter( (item) => item.user.username != (username))
+            return (id)=>{
+                return state.items.filter( (item) => item.user.id != (id))
             }
         },
 

@@ -2,7 +2,6 @@
   <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
 
   <v-container v-else-if="!mine">
-
   <v-row justify="space-between">
 
     <Back></Back>
@@ -123,30 +122,26 @@
         </v-col>
 
 
+
   </v-row>
   </v-container>
 
   <v-container v-else>
-    <v-row justify="space-between">
-    <Back></Back>
+    <v-row>
+      <Back></Back>
       <v-col></v-col>
-    <v-col>
-      <v-btn
-          color="lighten-2"
-          dark
-          @click="removeRoutine"
-
-      >
-        <v-icon left>
-          mdi-bookmark-outline
-        </v-icon>
-        Eliminar rutina
-
-      </v-btn>
-
-    </v-col>
+      <v-col>
+        <v-btn
+            color="lighten-2"
+            dark
+            @click="removeRoutine"
+        >
+          Eliminar rutina
+        </v-btn>
+      </v-col>
     </v-row>
   </v-container>
+
 
 </template>
 
