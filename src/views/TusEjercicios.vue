@@ -16,7 +16,7 @@
     </v-row>
     <v-row style="height: 90vh">
       <v-col>
-        <TusEj></TusEj>
+        <TusEj :slug="'no_favoritas'"></TusEj>
       </v-col>
     </v-row>
 

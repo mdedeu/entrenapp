@@ -1,11 +1,11 @@
 <template>
   <v-container fluid class="primary fill-height" style="height: 100vh">
     <v-row>
-      <BackAndButton object="Ejericio agregado a favoritos">Agregar a favoritos</BackAndButton>
+      <ExerciseBackAndButton :exerciseId="this.exercise.id" class="mt-6"></ExerciseBackAndButton>
     </v-row>
     <v-row justify="center">
       <v-col cols="3" >
-        <p class="text-h4 accent--text">{{ejercicio.name}}</p>
+        <p class="text-h4 accent--text">{{exercise.name}}</p>
       </v-col>
     </v-row>
 
@@ -17,7 +17,7 @@
 
     <v-row justify="center">
       <v-col cols="6">
-        <p class="text-h5 accent--text">Músculos que trabaja: {{ejercicio.muscles}}</p>
+        <p class="text-h5 accent--text">Músculos que trabaja: {{exercise.name}}</p>
       </v-col>
     </v-row>
   </v-container>
@@ -25,15 +25,16 @@
 </template>
 
 <script>
-import BackAndButton from "./BackAndButton";
+import ExerciseBackAndButton from "./ExerciseBackAndButton";
 export default {
   name: "EjercicioDescripcion",
-  components: {BackAndButton},
-  data(){
-    return {
-      ejercicio:{name:"Flexiones de brazo",muscles:"Pecho"}
-    }
-  }
+  components: {ExerciseBackAndButton},
+  props:{
+    exercise: {
+      type: Object, //Nombre, musculo (o descanso), requirere herramientas, deportes
+      required: true
+    },
+  },
 }
 </script>
 
