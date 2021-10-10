@@ -45,7 +45,7 @@ export default {
     }),
     ...mapGetters('exercise',['getMine']),
     ...mapGetters('exercise',['getOther']),
-    ...mapGetters('favouriteExercise',['getFavouritesId']),
+    ...mapGetters('exercise',['getFavourites']),
 
     mine(){
       return this.getMine
@@ -54,7 +54,7 @@ export default {
       return this.getOther
     },
     favourites(){
-      return this.getFavouritesId
+      return this.getFavourites
     }
 
   } ,
@@ -63,7 +63,7 @@ export default {
     this.loading = true;
     await this.$store.dispatch("exercise/getAll")
     await this.$store.dispatch("security/getCurrentUser")
-    await this.$store.dispatch("favouriteExercise/getAll")
+    //await this.$store.dispatch("favouriteExercise/getAll")
     this.loading = false;
   }
 }

@@ -7,8 +7,8 @@ export default{
     },
     getters:{
         findIndex(state) {
-            return () => {
-                return state.items
+            return (exercise) => {
+                return state.items.findIndex(item => item.id === exercise.id)
             }
         },
         getMine(state){
@@ -29,6 +29,14 @@ export default{
             return (sport)=>{
                 return state.items.filter((item)=>item.metadata.deportes.includes(sport))
 
+            }
+        },
+        getFavourites(state){
+            return state.items.filter((item) => item.metadata.favorito)
+        },
+        isFavourite(){
+            return (exercise) => {
+                return exercise.metadata.favorito
             }
         }
     },
@@ -79,7 +87,7 @@ export default{
             const result = await ExerciseApi.getAll(controller)
             commit('replaceAll', result.content)
             return result.content
-        }
+        },
     },
 
 

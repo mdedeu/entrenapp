@@ -106,20 +106,20 @@ export default {
     ...mapGetters('exercise',['getMuscle']),
     ...mapGetters('exercise',['getEquipacion']),
     ...mapGetters('exercise',['getDeporte']),
+    ...mapGetters('exercise', ['getFavourites'])
 
   },
   async created() {
     this.loading = true;
     await this.$store.dispatch("security/getCurrentUser")
-    if(this.slug !== 'favoritas')
-      await this.$store.dispatch("exercise/getAll")
-    else
-      await this.$store.dispatch("favouriteExercise/getAll")
+    await this.$store.dispatch("exercise/getAll")
     this.loading = false;
-    if(this.slug==='favoritas'){
-      this.exercises = this.getFavouritesId
+    if(this.slug !== 'favoritas') {
+      this.exercises = this.getMine
     }
-    else this.exercises = this.getMine
+    else{
+      this.exercises = this.getFavourites
+    }
     this.filtered = this.exercises
 
 

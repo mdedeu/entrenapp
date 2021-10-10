@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="primary fill-height" style="height: 100vh">
     <v-row>
-      <ExerciseBackAndButton :exerciseId="this.exercise.id" class="mt-6"></ExerciseBackAndButton>
+      <ExerciseBackAndButton :exercise="this.exercise" :exerciseId="this.exercise.id" class="mt-6"></ExerciseBackAndButton>
     </v-row>
     <v-row justify="center">
       <v-col cols="3" >
@@ -17,7 +17,7 @@
 
     <v-row justify="center">
       <v-col cols="6">
-        <p class="text-h5 accent--text">Músculos que trabaja: {{exercise.name}}</p>
+        <p class="text-h5 accent--text">Este ejercicios trabaja: {{exercise.metadata.musculos}}</p>
       </v-col>
     </v-row>
   </v-container>

@@ -144,29 +144,30 @@ export default {
     }
   },
   methods:{
+    ...mapActions('exercise', {
+      $modifyExercise: 'modify'
+    }),
     async addTofavourite(){
-      this.loadingButton=true
-      await this.create(this.exerciseId)
-      await this.$store.dispatch("favouriteExercise/getAll")
-      this.loadingButton=false
+      const result = this.exercise
+      result.metadata.favorito=true
+      this.$modifyExercise(result)
     },
-    ...mapActions( 'favouriteExercise',['create'] ),
-    ...mapActions( 'favouriteExercise',['delete'] ),
-
 
     async removeFromFavourite(){
-      this.loadingButton=true
-      await this.delete(this.exerciseId)
-      await this.$store.dispatch("favouriteExercise/getAll")
-      this.loadingButton=false
+      const result = this.exercise
+      result.metadata.favorito=false
+      this.$modifyExercise(result)
     }
-
   },
   props:{
+    exercise:{
+      type:Object,
+      required:true
+    },
     exerciseId:{
       type:Number,
       required:true
-    }
+    },
   },
 
   computed:{
@@ -174,22 +175,17 @@ export default {
       user:'getUser'
     }),
 
-    ...mapGetters('favouriteExercise',{
-      isFavouriteFunction:'isFavourite'
-    }),
-
     favourite(){
-      return  this.isFavouriteFunction.includes(this.exerciseId)
+      return  this.exercise.metadata.favorito
     }
 
   },
   async created() {
     this.loading = true;
     await this.$store.dispatch("security/getCurrentUser")
-    await this.$store.dispatch("favouriteExercise/getAll")
+    await this.$store.dispatch("exercise/getFavourites")
     this.loading = false;
   }
-
 }
 
 </script>
