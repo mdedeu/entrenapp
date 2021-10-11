@@ -13,7 +13,7 @@
 
         <v-row justify="space-around">
           <v-col cols="3">
-            <p class="text-h3  primary--text"> {{ calentamiento.name }}:</p>
+            <h1 class=" text-h4 primary--text"> {{ calentamiento.name }}:</h1>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -21,11 +21,12 @@
                 v-model="calentamiento.repetitions"
                 solo
                 background-color="white"
+                :rules="rulesNumber"
             ></v-text-field>
           </v-col>
         </v-row>
 
-        <v-row justify="center"  style="height: 10vh" v-for="calExec in calentamiento.metadata.ejercicios" :key="calExec.name">
+        <v-row justify="center" v-for="calExec in calentamiento.metadata.ejercicios" :key="calExec.name">
           <v-col cols="6"  >
             <v-btn width="100%"
                    rounded
@@ -115,15 +116,15 @@
 
     <v-carousel-item v-if="update">
       <v-container fluid class="accent fill-height">
-
-        <v-btn width="50%"
-               rounded
-               color="white"
-               class="primary--text justify-center mt-n5"
-               @click="addExerciseCycle"
-        >Agregar ciclo de ejercitacion
-        </v-btn>
-
+        <v-row justify="center">
+          <v-btn width="50%"
+                 rounded
+                 color="white"
+                 class="primary--text justify-center mt-n5"
+                 @click="addExerciseCycle"
+          >Agregar ciclo de ejercitacion
+          </v-btn>
+        </v-row>
       </v-container>
     </v-carousel-item>
 
@@ -133,7 +134,7 @@
 
         <v-row justify="space-around">
           <v-col cols="3">
-            <p class="text-h3  primary--text"> {{ enfriamiento.name }}:</p>
+            <h1 class="text-h4  primary--text"> {{ enfriamiento.name }}:</h1>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -200,9 +201,8 @@ export default {
         enfriamiento:{name:'Enfriamiento',detail:'Enfriamiento',type:'cooldown',order:null,repetitions:null,metadata:{ejercicios:[]} },
         cicleNumber:2,
         update:true,
-        error:false
-
-
+        error:false,
+        rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 ']
       }),
   methods:{
     addExercise(event){
