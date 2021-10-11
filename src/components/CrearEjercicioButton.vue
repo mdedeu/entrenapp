@@ -212,7 +212,7 @@ export default {
           favorito:false
         }}
       await this.$createExercise(exercise)
-      this.$forceUpdate()
+      this.$emit('load-exercise')
       this.closeHandler()
     },
     closeHandler(){

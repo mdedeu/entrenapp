@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="primary fill-height" style="height: 100vh">
     <v-row>
-        <ExerciseBackAndButton :guardar-ejercicio="guardarEjercicio" :exercise="this.exercise" :exerciseId="this.exercise.id" class="mt-6"></ExerciseBackAndButton>
+        <ExerciseBackAndButton v-on:guardar-ejercicio="guardarEjercicio" :exercise="this.exercise" :exerciseId="this.exercise.id" class="mt-6"></ExerciseBackAndButton>
     </v-row>
     <v-row justify="center">
       <v-col cols="3" >
@@ -35,6 +35,12 @@ export default {
       required: true
     },
   },
+  methods:{
+    async guardarEjercicio(){
+      await this.$store.dispatch('exercise/getAll')
+      this.exercise = await this.$store.dispatch('exercise/get', this.exercise)
+    }
+  }
 }
 </script>
 

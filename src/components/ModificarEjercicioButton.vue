@@ -23,7 +23,7 @@
         </template>
         <v-card class="accent">
           <v-card-title>
-            <span class="text-h4">Creá tu ejercicio</span>
+            <span class="text-h4">Editá el ejercicio</span>
           </v-card-title>
           <v-card-text>
             <v-row justify="center">
@@ -122,7 +122,7 @@
                   Éxito
                 </v-card-title>
                 <v-card-text>
-                  ¡Ejercicio eliminado de favoritos!
+                  ¡Ejercicio editado correctamente!
                 </v-card-text>
                 <v-icon color="green" size="60">mdi-check</v-icon>
 
@@ -213,6 +213,7 @@ export default {
           favorito: false
         }}
       await this.$store.dispatch('exercise/modify', exercise)
+      await this.$store.dispatch('exercise/getAll')
       await this.$store.dispatch('exercise/get', exercise)
       this.$emit('guardar-ejercicio')
       this.closeHandler()
@@ -230,9 +231,6 @@ export default {
         document.getElementById('crear-'+exercise.name).classList.remove("primary")
       })
     },
-    async updateExercise(){
-
-    }
   },
 }
 </script>

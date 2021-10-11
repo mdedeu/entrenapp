@@ -109,9 +109,6 @@ export default {
     ...mapGetters('exercise', ['getFavourites'])
 
   },
-  async updated(){
-    await this.loadExercises()
-  },
   async created() {
     await this.loadExercises()
   },
@@ -145,7 +142,6 @@ export default {
     },
     async loadExercises(){
       this.loading = true;
-      await this.$store.dispatch("security/getCurrentUser")
       await this.$store.dispatch("exercise/getAll")
       this.loading = false;
       if(this.slug !== 'favoritas') {
