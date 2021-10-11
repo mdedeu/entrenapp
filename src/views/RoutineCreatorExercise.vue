@@ -63,13 +63,18 @@ export default {
        let info = {id:this.routineID, routineCycle:cycles[i]}
        await this.$store.dispatch('routineCycle/create', info)
      }
-    this.$router.push({name:"Tus rutinas"})
+     console.log(this.routine)
+    this.$router.push({name:"RoutineDescription",params:{routine:this.routine}})
    }
   },
   props:{
     routineID:{
       type:Number,
       required : true
+    },
+    routine:{
+      type:Object,
+      required:true
     }
   }
 }

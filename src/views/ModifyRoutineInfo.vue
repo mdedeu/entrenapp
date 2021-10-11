@@ -52,6 +52,7 @@ export default {
   },
   methods:{
     async modificateRoutine(routine){
+      await this.$store.dispatch('routine/getAll')
       this.routine.name=routine.name
       this.routine.detail=routine.detail
       this.routine.isPublic=routine.isPublic
@@ -71,7 +72,6 @@ export default {
       required:true,
     }
   },
-
 }
 </script>
 

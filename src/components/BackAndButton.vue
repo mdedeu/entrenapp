@@ -182,13 +182,13 @@ export default {
 
     async removeRoutine(){
        await this.$store.dispatch('routine/delete',this.routine)
-       this.$router.go(-1)
+       this.$router.push({name:'RoutineLanding'})
     },
 
     async editRoutine(){
-      await this.$store.dispatch('routineCycle/getAll',{id:this.routineID})
-      let routineCycle = this.getRoutineCycle;
-      this.$router.push({name:"modifyRoutineInfo",params:{routine:this.routine,routineCycle:routineCycle}})
+      await this.$store.dispatch('routineCycle/getAll',this.routine)
+      let routineCycleL = this.getRoutineCycle;
+      this.$router.push({name:"modifyRoutineInfo",params:{routine:this.routine,routineCycle:routineCycleL}})
     },
 
 

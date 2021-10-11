@@ -53,10 +53,9 @@ export default {
   },
   methods:{
     async createRoutine(routine){
-      console.log(routine)
       let createdroutine =await this.$store.dispatch("routine/create",routine);
       console.log(createdroutine)
-      this.$router.push({name:"RoutineCreatorExercise",params:{routineID:createdroutine.id}})
+      this.$router.push({name:"RoutineCreatorExercise",params:{routineID:createdroutine.id,routine:createdroutine}})
     }
   }
 }

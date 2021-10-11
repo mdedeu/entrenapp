@@ -8,7 +8,7 @@
             <RoutineDescription :routine="routine"></RoutineDescription>
         </v-row>
 
-        <CarrouselParaCiclos></CarrouselParaCiclos>
+        <CarrouselParaCiclos :routine="routine"></CarrouselParaCiclos>
 
     </v-container>
 </template>
@@ -27,7 +27,7 @@
     },
       props:{
         routine: {
-          type: Object,/**name,dificultad,duracion*/
+          type: Object,
           required: true
         }
       },

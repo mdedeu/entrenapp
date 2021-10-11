@@ -59,6 +59,8 @@ export default {
 
    async saveCycles(cycles) {
       await this.$store.dispatch('routineCycle/getAll',this.routine)
+      await this.$store.dispatch('routine/getAll')
+
       let Apicycle =  this.getRoutineCycle
 
      let i;
@@ -71,7 +73,7 @@ export default {
        else
          await this.$store.dispatch('routineCycle/create', info)
      }
-    this.$router.push({name:"RoutineLanding"})
+    this.$router.push({name:"RoutineDescription",params:{routine:this.routine}})
    }
   },
   props:{
@@ -83,7 +85,10 @@ export default {
       type:Object,
       required:true
     }
-  }
+  },
+
+
+
 }
 </script>
 
