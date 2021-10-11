@@ -75,15 +75,18 @@ export default {
   },
   methods:{
     async createRoutine(routine){
+
+      let createdroutine = await this.$store.dispatch("routine/create",routine);
       let currentRoutine = {
         user: this.getUser,
-        name: routine.name,
-        id: routine.id,
-        detail: routine.detail,
-        difficulty: routine.difficulty,
-        isPublic: routine.isPublic,
-        metadata : routine.metadata
+        name: createdroutine.name,
+        id: createdroutine.id,
+        detail: createdroutine.detail,
+        difficulty: createdroutine.difficulty,
+        isPublic: createdroutine.isPublic,
+        metadata : createdroutine.metadata
       }
+      this.currentRoutine = currentRoutine
       try{
         this.createdRoutine_component = await this.$store.dispatch("routine/create",currentRoutine);
       }catch (e) {
@@ -92,14 +95,15 @@ export default {
       this.exito=true
     },
     redirect(){
-      this.$router.push({name:"RoutineCreatorExercise",params:{routineID:this.createdRoutine_component.id,routine:this.createdRoutine_component}})
+      this.$router.push({name:"RoutineCreatorExercise",params:{routineID:this.createdRoutine_component.id,routine:this.currentRoutine}})
     }
   },
   data() {
     return {
       step: 1,
       exito: false,
-      createdRoutine_component: null
+      createdRoutine_component: null,
+      currentRoutine: null
     }
   },
   async created() {
@@ -109,7 +113,7 @@ export default {
     ...mapGetters(
         'security',
         ['getUser']
-    )
+    ),
   }
 }
 </script>

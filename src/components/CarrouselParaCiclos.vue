@@ -80,7 +80,7 @@
 
 
 
-    <v-carousel-item>
+    <v-carousel-item v-if="update">
       <v-container fluid class="accent fill-height">
 
         <v-row justify="space-around">
@@ -133,7 +133,8 @@ export default {
         calentamiento: {detail:null,id:null,metadata: {ejercicios:null},name:null,order:null,repetitions:null,type:null},
         ejercitacion:[],
         enfriamiento:{detail:null,id:null,metadata:{ejercicios:null},name:null,order:null,repetitions:null,type:null},
-        loading:false
+        loading:false,
+        update:false
         }),
   methods:{
     EjercicioDescripcion(){
@@ -156,7 +157,8 @@ export default {
     await this.$store.dispatch('routineCycle/getAll',this.routine)
     this.loading=false
     let routinesCycle = this.getRoutineCycle
-    this.calentamiento=routinesCycle[0]
+    console.log(routinesCycle)
+    this.calentamiento = routinesCycle[0]
     let i
     for( i = 1 ; i <  routinesCycle.length;i++ ){
       if( routinesCycle[i].name==='Enfriamiento' ){
@@ -165,6 +167,7 @@ export default {
       else
         this.ejercitacion.push(routinesCycle[i])
     }
+    setTimeout(()=>this.update=true,500)
   }
 }
 </script>
