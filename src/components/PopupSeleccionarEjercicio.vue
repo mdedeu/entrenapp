@@ -84,53 +84,52 @@
                     rounded
                     text
                     class="primary white--text"
-                    @click="agregar=true">
+                    @click="agregarPopup(exercise)">
                   Agregar este ejercicio
-                  <v-dialog width="600px"  :value="agregar" :retain-focus="false">
-                    <v-container fluid  class="fill-height">
-                      <v-card  width="100%" class="primary mx-16" rounded>
-                        <h1 class="font-weight-medium">Elegi la duración</h1>
-                        <v-row>
-                          <v-col>
-                            <h4 class=" font-weight-medium accent--text">Ingresá el número de repeticiones si corresponde</h4>
-                          </v-col>
-                        </v-row>
-                        <v-row>
-                          <v-col>
-                            <v-text-field v-model="exercise_reps" solo label="Repeticiones" class=" mx-3 mt-6" :rules="rulesNumber"></v-text-field>
-                          </v-col>
-                        </v-row>
-                        <v-row>
-                          <v-col>
-                            <h4 class=" font-weight-medium accent--text" :rules="rulesNumber">Ingresá el tiempo del ejercicio en segundos si corresponde</h4>
-                          </v-col>
-                        </v-row>
-                        <v-row>
-                          <v-col>
-                            <v-text-field v-model="exercise_time" solo label="Tiempo" class=" mx-3 mt-6"></v-text-field>
-                          </v-col>
-                        </v-row>
-                        <v-row>
-                          <v-col>
-                            <v-btn class="accent primary--text mb-4"
-                                   @click="addExercise(
-                                       {exercise: exercise,
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+            <v-dialog width="600px"  :value="agregar" :retain-focus="false">
+              <v-container fluid  class="fill-height">
+                <v-card  width="100%" class="primary mx-16" rounded>
+                  <h1 class="font-weight-medium">Elegi la duración</h1>
+                  <v-row>
+                    <v-col>
+                      <h4 class=" font-weight-medium accent--text">Ingresá el número de repeticiones si corresponde</h4>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-text-field v-model="exercise_reps" solo label="Repeticiones" class=" mx-3 mt-6" :rules="rulesNumber"></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <h4 class=" font-weight-medium accent--text" :rules="rulesNumber">Ingresá el tiempo del ejercicio en segundos si corresponde</h4>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-text-field v-model="exercise_time" solo label="Tiempo" class=" mx-3 mt-6"></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-btn class="accent primary--text mb-4"
+                             @click="addExercise(
+                                       {
+                                       exercise: currentExerciseToAdd,
                              time: exercise_time,
                              reps: exercise_reps,
                              stage: stage
                       })">
-                              Guardar
-                            </v-btn>
-                          </v-col>
-                        </v-row>
-                      </v-card>
-                    </v-container>
-
-
-                  </v-dialog>
-                </v-btn>
-              </v-card-actions>
-            </v-card>
+                        Guardar
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-container>
+            </v-dialog>
           </template>
         </v-row>
         </v-container>
@@ -157,6 +156,7 @@ export default {
       agregar : false,
       exercise_time: 0,
       exercise_reps: 0,
+      currentExerciseToAdd : {},
       rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 ']
     }
   },
@@ -167,9 +167,12 @@ export default {
     closePopup() {
       this.$emit('close-popup')
     },
+    agregarPopup(exercise){
+      this.agregar = true
+      this.currentExerciseToAdd = exercise;
+    },
     addExercise(event){
       if(!isNaN(this.exercise_reps) && !isNaN(this.exercise_time)){
-        console.log("PopupSeleccionarEjercicio")
         this.$emit('add-exercise',event)
         this.agregar = false
       }

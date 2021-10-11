@@ -119,8 +119,7 @@
         <v-btn width="50%"
                rounded
                color="white"
-               class="primary--text justify-center text-h3 mt-n5"
-               height="20%"
+               class="primary--text justify-center mt-n5"
                @click="addExerciseCycle"
         >Agregar ciclo de ejercitacion
         </v-btn>
