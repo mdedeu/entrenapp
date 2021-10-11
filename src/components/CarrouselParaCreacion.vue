@@ -203,8 +203,8 @@ export default {
 
       }),
   methods:{
-    addExercise(exercise){
-      console.log(exercise)
+    addExercise(event){
+      console.log(event) //Aca nos llega { exercise: ObjectEjercicio, time: tiempo del ej, reps: reps}
     },
     SeleccCateg(){
       this.$router.push({name:"SeleccCateg"})

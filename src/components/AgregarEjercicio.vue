@@ -47,10 +47,8 @@
         }
       },
       methods :{
-        addExercise(exercise){
-          this.$emit('add-exercise',exercise)
-          console.log('AgregarEjercicio')
-
+        addExercise(event){
+          this.$emit('add-exercise',event)
         }
       }
     }

@@ -56,9 +56,8 @@
         closePopup(){
           this.$emit('close-popup')
         },
-        addExercise(exercise) {
-          this.$emit('add-exercise',exercise)
-          console.log('SeleccCateg')
+        addExercise(event) {
+          this.$emit('add-exercise',event)
         }
       }
 }

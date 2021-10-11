@@ -84,8 +84,35 @@
                     rounded
                     text
                     class="primary white--text"
-                    @click="addExercise(exercise)">
+                    @click="agregar=true">
                   Agregar este ejercicio
+                  <v-dialog width="500px"  :value="agregar">
+                    <v-card class="primary">
+                      <h1 class="font-weight-medium">Elegi la duración</h1>
+                      <v-row>
+                        <h4 class=" font-weight-medium">Ingresá el número de repeticiones si corresponde</h4>
+                      </v-row>
+                      <v-row>
+                        <v-text-field v-model="exercise_reps" solo label="Repeticiones" class="mx-6 mt-6"></v-text-field>
+                      </v-row>
+                      <v-row>
+                        <h4 class=" font-weight-medium">Ingresá el tiempo del ejercicio si corresponde</h4>
+                      </v-row>
+                      <v-row>
+                        <v-text-field v-model="exercise_time" solo label="Tiempo" class="mx-6 mt-6"></v-text-field>
+                      </v-row>
+                      <v-row>
+                        <v-btn class="accent primary--text mb-4"
+                               @click="addExercise({exercise: exercise,
+                             time: exercise_time,
+                             reps: exercise_reps
+                      })">
+                          Guardar
+                        </v-btn>
+                      </v-row>
+                    </v-card>
+
+                  </v-dialog>
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -110,7 +137,10 @@ export default {
       exercises:[{name:"Flexiones de brazo", difficulty: 'Intermedio', category: 'Pecho'},{name:"Abdominales bolita", difficulty: 'Intermedio', category: 'Pecho'},{name:"Salto con soga", difficulty: 'Intermedio', category: 'Pecho'},{name:"Estirar piernas", difficulty: 'Intermedio', category: 'Pecho'},{name:"Espalda en colchoneta", difficulty: 'Intermedio', category: 'Pecho'}],
       sports: ['Futbol','Hockey', 'Otros'],
       selected_muscle: null,
-      selected_sport: null
+      selected_sport: null,
+      agregar : false,
+      exercise_time: 0,
+      exercise_reps: 0
     }
   },
   methods:{
@@ -120,9 +150,9 @@ export default {
     closePopup() {
       this.$emit('close-popup')
     },
-    addExercise(exercise){
-      this.$emit('add-exercise',exercise)
-      console.log('PopupSeleccionarEjercicio')
+    addExercise(event){
+      this.$emit('add-exercise',event)
+      this.agregar = false
     },
     addColor(id){
       let element =document.getElementById(id)
