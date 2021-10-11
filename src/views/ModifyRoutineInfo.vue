@@ -3,13 +3,14 @@
     <v-row style="height: 10vh">
       <HeaderApp/>
     </v-row>
+
     <v-row style="height: 10vh">
       <v-col>
         <template>
           <v-stepper alt-labels>
             <v-stepper-header>
               <v-stepper-step
-                  complete
+                  :rules="[() => false]"
                   step="1"
               >
                 Informacion de la rutina
@@ -19,7 +20,6 @@
 
 
               <v-stepper-step
-                  :rules="[() => false]"
                   step="2"
               >
                 Agregar ejercicios
@@ -31,10 +31,9 @@
       </v-col>
     </v-row>
 
-    <v-row>
-      <CarrouselParaCreacion @Info-Exercise="saveCycles"></CarrouselParaCreacion>
+    <v-row style="height: 80vh">
+      <RutinasModificador :routine="this.routine" :routineCycle="this.routineCycle" @Info-received="modificateRoutine" class="pt-16"/>
     </v-row>
-
 
 
   </v-container>
@@ -43,43 +42,36 @@
 
 <script>
 import HeaderApp from "../components/HeaderApp";
-import CarrouselParaCreacion from '../components/CarrouselParaCreacion'
-
+import RutinasModificador from '../components/RutinasModificador'
 
 export default {
-  name: "RoutineCreator",
-  components:{
+  name: "RoutineCreatorInfo",
+  components: {
     HeaderApp,
-    CarrouselParaCreacion
+    RutinasModificador,
   },
   methods:{
-   async saveCycles(cycles) {
-
-
-     let i;
-     for ( i=0 ; i < cycles.length ; i++) {
-       cycles[i].order = Number(cycles[i].order)
-       cycles[i].repetitions = Number(cycles[i].repetitions)
-       let info = {id:this.routineID, routineCycle:cycles[i]}
-       await this.$store.dispatch('routineCycle/create', info)
-     }
-     console.log(this.routine)
-    this.$router.push({name:"RoutineDescription",params:{routine:this.routine}})
-   }
+    async modificateRoutine(routine){
+      await this.$store.dispatch('routine/getAll')
+      this.routine.name=routine.name
+      this.routine.detail=routine.detail
+      this.routine.isPublic=routine.isPublic
+      this.routine.difficulty = routine.difficulty
+      this.routine.metadata=routine.metadata
+      await this.$store.dispatch("routine/modify",this.routine);
+      this.$router.push({name:"ModifyRoutineExercise",params:{routine:this.routine,routinesCycle:this.routineCycle}})
+    }
   },
   props:{
-    routineID:{
-      type:Number,
-      required : true
-    },
     routine:{
       type:Object,
       required:true
+    },
+    routineCycle:{
+      type:[],
+      required:true,
     }
-  }
+  },
 }
 </script>
 
-<style scoped>
-
-</style>

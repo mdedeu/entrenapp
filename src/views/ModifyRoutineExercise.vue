@@ -32,7 +32,7 @@
     </v-row>
 
     <v-row>
-      <CarrouselParaCreacion @Info-Exercise="saveCycles"></CarrouselParaCreacion>
+      <CarrouselParaModificacion :routinesCycle="this.routinesCycle" @Info-Exercise="saveCycles"></CarrouselParaModificacion>
     </v-row>
 
 
@@ -43,40 +43,52 @@
 
 <script>
 import HeaderApp from "../components/HeaderApp";
-import CarrouselParaCreacion from '../components/CarrouselParaCreacion'
-
+import CarrouselParaModificacion from '../components/CarrouselParaModificacion'
+import {mapGetters} from 'vuex'
 
 export default {
   name: "RoutineCreator",
   components:{
     HeaderApp,
-    CarrouselParaCreacion
+    CarrouselParaModificacion
+  },
+  computed:{
+    ...mapGetters('routineCycle',['getRoutineCycle']),
   },
   methods:{
-   async saveCycles(cycles) {
 
+   async saveCycles(cycles) {
+      await this.$store.dispatch('routineCycle/getAll',this.routine)
+      await this.$store.dispatch('routine/getAll')
+
+      let Apicycle =  this.getRoutineCycle
 
      let i;
      for ( i=0 ; i < cycles.length ; i++) {
        cycles[i].order = Number(cycles[i].order)
        cycles[i].repetitions = Number(cycles[i].repetitions)
-       let info = {id:this.routineID, routineCycle:cycles[i]}
-       await this.$store.dispatch('routineCycle/create', info)
+       let info = {id:this.routine.id, routineCycle:cycles[i]}
+       if(Apicycle.filter((item)=>item.order===info.routineCycle.order).length > 0)
+         await this.$store.dispatch('routineCycle/modify', info)
+       else
+         await this.$store.dispatch('routineCycle/create', info)
      }
-     console.log(this.routine)
     this.$router.push({name:"RoutineDescription",params:{routine:this.routine}})
    }
   },
   props:{
-    routineID:{
-      type:Number,
+    routinesCycle:{
+      type:[],
       required : true
     },
     routine:{
       type:Object,
       required:true
     }
-  }
+  },
+
+
+
 }
 </script>
 

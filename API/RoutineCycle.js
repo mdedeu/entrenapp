@@ -13,15 +13,15 @@ class RoutineCycleApi{
     }
 
     static async modify(info, controller) {
-        return await Api.put(RoutineCycleApi.getUrl(info.id,info.routineCycle.order), true, info.routineCycle, controller)
+        return await Api.put(RoutineCycleApi.getUrl(info.id,info.routineCycle.id), true, info.routineCycle, controller)
     }
 
     static async delete(info, controller) {
-        return await Api.delete(RoutineCycleApi.getUrl(info.id,info.routineCycle.order), true, controller)
+        return await Api.delete(RoutineCycleApi.getUrl(info.id,info.routineCycle.id), true, controller)
     }
 
     static async get(info, controller) {
-        return await Api.get(RoutineCycleApi.getUrl(info.id,info.routineCycle.order),true,  controller)
+        return await Api.get(RoutineCycleApi.getUrl(info.id,info.routineCycle.id),true,  controller)
     }
 
     static async getAll(info,controller) {
