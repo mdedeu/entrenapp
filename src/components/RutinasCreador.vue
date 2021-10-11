@@ -6,7 +6,7 @@
     </v-col></v-row>
 
     <v-row>
-      <v-col class="mt-10">
+      <v-col>
         <h1>Creá tu rutina</h1>
       </v-col>
     </v-row>
@@ -32,12 +32,12 @@
     </v-row>
     <v-row justify="center" v-if="publicRoutine">
       <v-col cols="4">
-        <v-text-field
+        <v-textarea
             v-model="descripcion"
             label="Descripcion"
             solo
             background-color="white"
-        ></v-text-field>
+        ></v-textarea>
       </v-col>
     </v-row>
 
