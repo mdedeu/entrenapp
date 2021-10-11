@@ -86,31 +86,44 @@
                     class="primary white--text"
                     @click="agregar=true">
                   Agregar este ejercicio
-                  <v-dialog width="500px"  :value="agregar">
-                    <v-card class="primary">
-                      <h1 class="font-weight-medium">Elegi la duración</h1>
-                      <v-row>
-                        <h4 class=" font-weight-medium">Ingresá el número de repeticiones si corresponde</h4>
-                      </v-row>
-                      <v-row>
-                        <v-text-field v-model="exercise_reps" solo label="Repeticiones" class="mx-6 mt-6"></v-text-field>
-                      </v-row>
-                      <v-row>
-                        <h4 class=" font-weight-medium">Ingresá el tiempo del ejercicio si corresponde</h4>
-                      </v-row>
-                      <v-row>
-                        <v-text-field v-model="exercise_time" solo label="Tiempo" class="mx-6 mt-6"></v-text-field>
-                      </v-row>
-                      <v-row>
-                        <v-btn class="accent primary--text mb-4"
-                               @click="addExercise({exercise: exercise,
+                  <v-dialog width="600px"  :value="agregar">
+                    <v-container fluid  class="fill-height">
+                      <v-card  width="100%" class="primary mx-16" rounded>
+                        <h1 class="font-weight-medium">Elegi la duración</h1>
+                        <v-row>
+                          <v-col>
+                            <h4 class=" font-weight-medium accent--text">Ingresá el número de repeticiones si corresponde</h4>
+                          </v-col>
+                        </v-row>
+                        <v-row>
+                          <v-col>
+                            <v-text-field v-model="exercise_reps" solo label="Repeticiones" class=" mx-3 mt-6"></v-text-field>
+                          </v-col>
+                        </v-row>
+                        <v-row>
+                          <v-col>
+                            <h4 class=" font-weight-medium accent--text ">Ingresá el tiempo del ejercicio si corresponde</h4>
+                          </v-col>
+                        </v-row>
+                        <v-row>
+                          <v-col>
+                            <v-text-field v-model="exercise_time" solo label="Tiempo" class=" mx-3 mt-6"></v-text-field>
+                          </v-col>
+                        </v-row>
+                        <v-row>
+                          <v-col>
+                            <v-btn class="accent primary--text mb-4"
+                                   @click="addExercise({exercise: exercise,
                              time: exercise_time,
                              reps: exercise_reps
                       })">
-                          Guardar
-                        </v-btn>
-                      </v-row>
-                    </v-card>
+                              Guardar
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-card>
+                    </v-container>
+
 
                   </v-dialog>
                 </v-btn>
