@@ -97,12 +97,12 @@
                         </v-row>
                         <v-row>
                           <v-col>
-                            <v-text-field v-model="exercise_reps" solo label="Repeticiones" class=" mx-3 mt-6"></v-text-field>
+                            <v-text-field v-model="exercise_reps" solo label="Repeticiones" class=" mx-3 mt-6" :rules="rulesNumber"></v-text-field>
                           </v-col>
                         </v-row>
                         <v-row>
                           <v-col>
-                            <h4 class=" font-weight-medium accent--text ">Ingresá el tiempo del ejercicio si corresponde</h4>
+                            <h4 class=" font-weight-medium accent--text" :rules="rulesNumber">Ingresá el tiempo del ejercicio en segundos si corresponde</h4>
                           </v-col>
                         </v-row>
                         <v-row>
@@ -153,7 +153,8 @@ export default {
       selected_sport: null,
       agregar : false,
       exercise_time: 0,
-      exercise_reps: 0
+      exercise_reps: 0,
+      rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 ']
     }
   },
   methods:{
@@ -164,8 +165,10 @@ export default {
       this.$emit('close-popup')
     },
     addExercise(event){
-      this.$emit('add-exercise',event)
-      this.agregar = false
+      if(!isNaN(this.exercise_reps) && !isNaN(this.exercise_time)){
+        this.$emit('add-exercise',event)
+        this.agregar = false
+      }
     },
     addColor(id){
       let element =document.getElementById(id)
