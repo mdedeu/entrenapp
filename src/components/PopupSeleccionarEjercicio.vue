@@ -118,7 +118,7 @@
                                        {exercise: exercise,
                              time: exercise_time,
                              reps: exercise_reps,
-                             stage: this.stage
+                             stage: stage
                       })">
                               Guardar
                             </v-btn>
