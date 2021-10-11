@@ -12,10 +12,6 @@
   <v-row class="pt-16" >
     <ExerciseCarrousel :Section="{title:'Ejercicios favoritos',path:'/EjerciciosFavoritos'}" :exercises="favourites"></ExerciseCarrousel>
   </v-row>
-
-  <v-row class="pt-16">
-    <ExerciseCarrousel :Section="{title:'Ejercicios recomendados',path:'/EjerciciosRecomendados'}" :exercises="other" ></ExerciseCarrousel>
-  </v-row>
 </v-container>
 
 
@@ -62,8 +58,6 @@ export default {
   async created() {
     this.loading = true;
     await this.$store.dispatch("exercise/getAll")
-    await this.$store.dispatch("security/getCurrentUser")
-    //await this.$store.dispatch("favouriteExercise/getAll")
     this.loading = false;
   }
 }

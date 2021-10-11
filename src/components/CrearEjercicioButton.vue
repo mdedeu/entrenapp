@@ -96,41 +96,35 @@
             Cancelar
           </v-btn>
 
-
-
-          <v-dialog
-              v-model="dialog_message"
-              width="500"
-              transition="dialog-bottom-transition"
-          >
-            <template v-slot:activator="{ on, attrs }">
           <v-btn
-              v-bind="attrs"
-              v-on="on"
               color="primary darken-1"
               text
               @click="guardarHandler"
           >
             Guardar
           </v-btn>
-            </template>
+
+          <v-dialog
+              :value="popup"
+              width="500"
+              transition="dialog-bottom-transition"
+          >
             <v-card>
               <v-card-title class="text-h5 green lighten-2">
                 Éxito
               </v-card-title>
               <v-card-text>
-                ¡Ejercicio eliminado de favoritos!
+                ¡Ejercicio editado correctamente!
               </v-card-text>
               <v-icon color="green" size="60">mdi-check</v-icon>
 
               <v-divider></v-divider>
-
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
                     color="primary"
                     text
-                    @click="dialog_message = false"
+                    @click="closeHandler"
                 >
                   OK
                 </v-btn>
@@ -138,7 +132,35 @@
             </v-card>
           </v-dialog>
 
+          <v-dialog
+              :value="error_popup"
+              width="500"
+              transition="dialog-bottom-transition"
+          >
+            <v-card>
+              <v-card-title class="text-h5 red lighten-2">
+                Error
+              </v-card-title>
+              <v-card-text>
+                Falta informacion sobre el {{this.error}}
+              </v-card-text>
+              <v-icon color="red" size="60">mdi-close</v-icon>
 
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                    color="primary"
+                    text
+                    @click="errorHandler"
+                >
+                  OK
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
+          
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -155,7 +177,9 @@ export default {
       rules: {
         length:[ val => (val || '').length > 0 || 'Este campo es obligatorio' ]
       },
-      dialog_message:false,
+      error_popup:false,
+      error:null,
+      popup:false,
       dialog:false,
       sports: ['Fútbol', 'Voley', 'Tenis', 'Paddle'],
       exercises: [{name: 'Abdominales' }, {name: 'Espalda'}, {name: 'Brazos'}, {name: 'Pecho'}],
@@ -188,21 +212,26 @@ export default {
         }
       }
     },
+    errorHandler(){
+      this.error_popup=false
+    },
     muscleHandler(exercise_name){
       this.addColor(exercise_name)
-      this.selected_muscle=exercise_name
     },
     async guardarHandler(){
       if(this.nombre==="" || this.nombre===null) {
-        console.log("nom");
+        this.error_popup=true;
+        this.error="nombre"
         return
       }
       if(this.selected_muscle===null){
-        console.log("musc");
+        this.error_popup=true;
+        this.error="musculo"
         return
       }
       if(this.selected_sport===null) {
-        console.log("sport");
+        this.error_popup=true;
+        this.error="deporte"
         return
       }
       const exercise = {name:this.nombre, detail:"", type:"exercise", metadata:{
@@ -213,9 +242,10 @@ export default {
         }}
       await this.$createExercise(exercise)
       this.$emit('load-exercise')
-      this.closeHandler()
+      this.popup=true
     },
     closeHandler(){
+      this.popup=false
       this.dialog = false
       this.nombre=null
       this.selected_muscle=null

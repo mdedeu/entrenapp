@@ -17,7 +17,7 @@
 
     <v-row justify="center">
       <v-col cols="6">
-        <p class="text-h5 accent--text">Este ejercicios trabaja: {{exercise.metadata.musculos[0]}}</p>
+        <p class="text-h5 accent--text">Este ejercicio trabaja: {{exercise.metadata.musculos[0]}}</p>
       </v-col>
     </v-row>
   </v-container>

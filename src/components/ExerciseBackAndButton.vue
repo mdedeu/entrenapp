@@ -214,17 +214,20 @@ export default {
     async addTofavourite(){
       const result = this.exercise
       result.metadata.favorito=true
-      await this.$modifyExercise(result)
+      await this.$store.dispatch('exercise/getAll')
+      await this.$store.dispatch('exercise/modify', result)
     },
 
     async removeFromFavourite(){
       const result = this.exercise
       result.metadata.favorito=false
-      await this.$modifyExercise(result)
+      await this.$store.dispatch('exercise/getAll')
+      await this.$store.dispatch('exercise/modify', result)
     },
     async deleteHandler(){
       this.dialog_delete = false
-      await this.$deleteExercise(this.exercise)
+      await this.$store.dispatch('exercise/getAll')
+      await this.$store.dispatch('exercise/delete', this.exercise)
       return this.$router.go(-1);
     },
     guardarAuxiliar(){
@@ -254,8 +257,7 @@ export default {
   },
   async created() {
     this.loading = true;
-    await this.$store.dispatch("security/getCurrentUser")
-    await this.$store.dispatch("exercise/getFavourites")
+    await this.$store.dispatch("exercise/getAll")
     this.loading = false;
   }
 }
