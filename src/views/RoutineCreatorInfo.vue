@@ -35,6 +35,26 @@
     <v-row style="height: 80vh">
       <RutinasCreador @Info-received="createRoutine" class="pt-16"/>
     </v-row>
+    <v-dialog :value="exito" width="600px" height="600px">
+      <v-card class="fill-height">
+        <v-card-title class="green lighten-1">
+          Exito
+        </v-card-title>
+        <v-card-text>
+          Rutina creada con éxito. Proseguí para detallar las ciclos de la misma
+        </v-card-text>
+        <v-card-actions>
+          <v-row>
+            <v-col>
+              <v-btn @click="redirect">
+                Continuar
+              </v-btn>
+            </v-col>
+          </v-row>
+
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
 
   </v-container>
@@ -64,13 +84,22 @@ export default {
         isPublic: routine.isPublic,
         metadata : routine.metadata
       }
-      let createdroutine = await this.$store.dispatch("routine/create",currentRoutine);
-      this.$router.push({name:"RoutineCreatorExercise",params:{routineID:createdroutine.id,routine:createdroutine}})
+      try{
+        this.createdRoutine_component = await this.$store.dispatch("routine/create",currentRoutine);
+      }catch (e) {
+        console.log(e)
+      }
+      this.exito=true
+    },
+    redirect(){
+      this.$router.push({name:"RoutineCreatorExercise",params:{routineID:this.createdRoutine_component.id,routine:this.createdRoutine_component}})
     }
   },
   data() {
     return {
-      step: 1
+      step: 1,
+      exito: false,
+      createdRoutine_component: null
     }
   },
   async created() {

@@ -1,9 +1,6 @@
 <template>
 
   <v-container fluid class="primary fill-height">
-    <v-row v-if="error"><v-col>
-      <p class="text-h3 red--text" >Todos los campos son obligatorios</p>
-    </v-col></v-row>
 
     <v-row>
       <v-col>
@@ -102,9 +99,20 @@
     </v-row>
     <v-row class="primary ">
       <v-col>
+        <v-alert v-if="error"
+            color="red"
+            type="error"
+            transition="scale-transition"
+            dismissible
+            outlined
+            @click="error=false"
+            id="error"
+        >{{ this.message }}</v-alert>
         <v-btn rounded class="accent text--primary mt-10 mb-16" @click="SendInfo">Siguiente</v-btn>
       </v-col>
     </v-row>
+
+
   </v-container>
 </template>
 
@@ -120,7 +128,8 @@ export default {
       sport_selected : null,
       error:false,
       publicRoutine:true,
-      descripcion:""
+      descripcion:"",
+      message: "Ocurrio un error inesperado"
     }
   },
   methods : {
@@ -144,12 +153,14 @@ export default {
     },
     SendInfo(){
       if(this.publicRoutine && this.descripcion==null){
+        this.message = 'La rutina debe tener el campo descripcion'
         return this.error=true
       }
 
       if(this.nombre != null  && this.sport_selected!=null && this.difficulty !=null)
         this.$emit('Info-received',{name:this.nombre,detail:this.descripcion,isPublic:true,difficulty:this.difficulty,metadata:{sport:this.sport_selected}})
       else {
+        this.message = 'La rutina tiene que tener nombre, deporte asociado y dificultad'
         this.error=true
       }
     }
