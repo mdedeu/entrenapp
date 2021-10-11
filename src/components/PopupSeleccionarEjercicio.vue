@@ -56,7 +56,6 @@
                 class="mx-auto"
                 max-width="500"
                 outlined
-                onclick="RoutineDescription"
             >
               <v-list-item three-line>
                 <v-list-item-content>
@@ -75,7 +74,7 @@
                     outlined
                     rounded
                     text
-                    @click="EjercicioDescripcion()"
+                    @click="EjercicioDescripcion"
                     class="accent"
                 >
                   Ir al Ejercicio
@@ -84,7 +83,8 @@
                     outlined
                     rounded
                     text
-                    class="primary white--text">
+                    class="primary white--text"
+                    @click="addExercise(exercise)">
                   Agregar este ejercicio
                 </v-btn>
               </v-card-actions>
@@ -119,6 +119,10 @@ export default {
     },
     closePopup() {
       this.$emit('close-popup')
+    },
+    addExercise(exercise){
+      this.$emit('add-exercise',exercise)
+      console.log('PopupSeleccionarEjercicio')
     },
     addColor(id){
       let element =document.getElementById(id)

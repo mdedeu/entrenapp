@@ -11,7 +11,7 @@
                    rounded
                    color="white"
                    class="primary--text justify-center text-h5"
-                    @click="EjercicioDescripcion"
+                    @click="EjercicioDescripcion()"
                    height="100%"
             >
               {{ exercise.name }}

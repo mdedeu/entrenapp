@@ -3,7 +3,7 @@
         class="mx-auto"
         max-width="500"
         outlined
-        onclick="RoutineDescription"
+        onclick="EjercicioDescripcion()"
     >
       <v-list-item three-line>
         <v-list-item-content>

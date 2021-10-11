@@ -32,7 +32,7 @@
                    color="white"
                    class="primary--text justify-center text-h5 mt-n5"
                    height="100%"
-                   @click="EjercicioDescripcion"
+                   @click="EjercicioDescripcion()"
             >
               {{ calExec.name }}
               <v-icon
@@ -49,7 +49,7 @@
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio></AgregarEjercicio>
+            <AgregarEjercicio v-on:add-exercise="addExercise"></AgregarEjercicio>
           </v-col>
         </v-row>
       </v-container>
@@ -103,7 +103,7 @@
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio></AgregarEjercicio>
+            <AgregarEjercicio v-on:add-exercise="addExercise"></AgregarEjercicio>
           </v-col>
         </v-row>
       </v-container>
@@ -168,7 +168,7 @@
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio></AgregarEjercicio>
+            <AgregarEjercicio v-on:add-exercise="addExercise" ></AgregarEjercicio>
           </v-col>
         </v-row>
 
@@ -203,6 +203,9 @@ export default {
 
       }),
   methods:{
+    addExercise(exercise){
+      console.log(exercise)
+    },
     SeleccCateg(){
       this.$router.push({name:"SeleccCateg"})
     },

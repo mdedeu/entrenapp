@@ -98,7 +98,7 @@ export default {
   data(){
     return {
       loading:false,
-      profile:{prof_im:require('../assets/sinFoto.jpeg'), back_im:require('../assets/psg_header.jpg')},
+      //profile:{prof_im:require('../assets/sinFoto.jpeg'), back_im:require('../assets/psg_header.jpg')},
     }
   },
   computed:{

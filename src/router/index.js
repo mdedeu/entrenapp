@@ -14,7 +14,6 @@ import TusRutinas from "../views/TusRutinas"
 import EjercicioDescripcion from "../views/EjercicioDescripcionPage"
 import SeleccCateg from "../views/SeleccCategPage"
 import NotFound from "../views/NotFound";
-import SeleccionarEjercicioPopup from '../views/SeleccionarEjercicio'
 import TusEjercicios from "../views/TusEjercicios"
 import EjerciciosLanding from  "../views/EjerciciosLanding"
 import RutinasFavoritas from "../views/RutinasFavoritas";
@@ -131,11 +130,6 @@ const routes = [
     path: '/SeleccCateg',
     name: 'SeleccCateg',
     component: SeleccCateg
-  },
-  {
-    path: '/SeleccionarEjercicio',
-    name: 'SeleccionarEjercicioPopup',
-    component: SeleccionarEjercicioPopup
   },
   // {
   //   path: '/RutinasFavoritas',

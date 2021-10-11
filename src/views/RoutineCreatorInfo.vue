@@ -7,10 +7,10 @@
     <v-row style="height: 10vh">
       <v-col>
         <template>
-          <v-stepper alt-labels>
+          <v-stepper v-model="step">
             <v-stepper-header>
               <v-stepper-step
-                  :rules="[() => false]"
+                  :complete="step > 1"
                   step="1"
               >
                 Informacion de la rutina
@@ -53,10 +53,13 @@ export default {
   },
   methods:{
     async createRoutine(routine){
-      console.log(routine)
       let createdroutine =await this.$store.dispatch("routine/create",routine);
-      console.log(createdroutine)
       this.$router.push({name:"RoutineCreatorExercise",params:{routineID:createdroutine.id}})
+    }
+  },
+  data() {
+    return {
+      step: 1
     }
   }
 }
