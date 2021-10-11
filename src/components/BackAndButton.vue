@@ -139,6 +139,15 @@
           Eliminar rutina
         </v-btn>
       </v-col>
+      <v-col>
+        <v-btn
+            color="lighten-2"
+            dark
+            @click="editRoutine"
+        >
+          Editar rutina
+        </v-btn>
+      </v-col>
     </v-row>
   </v-container>
 
@@ -176,6 +185,12 @@ export default {
        this.$router.go(-1)
     },
 
+    async editRoutine(){
+      await this.$store.dispatch('routineCycle/getAll',{id:this.routineID})
+      let routineCycle = this.getRoutineCycle;
+      this.$router.push({name:"modifyRoutineInfo",params:{routine:this.routine,routineCycle:routineCycle}})
+    },
+
 
     async removeFromFavourite(){
       this.loadingButton=true
@@ -195,7 +210,7 @@ export default {
 
   computed:{
     ...mapGetters('security',['getUser']),
-
+    ...mapGetters('routineCycle',['getRoutineCycle']),
     ...mapGetters('favouriteRoutine',{
       isFavouriteFunction:'isFavourite'
     }),

@@ -8,10 +8,10 @@ export default{
     getters:{
         findIndex(state) {
             return (routine) => {
-                return state.items.findIndex(item => item.id === routine.id)
+                return state.items.findIndex(item => item.order === routine.order)
             }
         },
-        getRoutine(state) {
+        getRoutineCycle(state) {
             return state.items
         },
 
@@ -32,17 +32,17 @@ export default{
         }
     },
     actions:{
-        async create({getters, commit}, info) {
+        async create({getters,commit}, info) {
             const result = await RoutineCycleApi.add(info)
             if (!getters.findIndex(result))
                 commit('push', result)
             return result
         },
-        async modify({getters, commit}, info) {
+        async modify({getters,commit}, info) {
             const result = await RoutineCycleApi.modify(info)
-            const index = getters.findIndex(result)
+            const index = getters.findIndex(info)
             if (index >= 0)
-                commit('replace', index, result)
+                commit('replace', index, info)
             return result
         },
         async delete({getters, commit}, info) {
@@ -60,7 +60,7 @@ export default{
             commit('push', result)
             return result
         },
-        async getAll({commit}, controller,info) {
+        async getAll({commit},info,controller) {
             const result = await RoutineCycleApi.getAll(info,controller)
             commit('replaceAll', result.content)
             return result.content

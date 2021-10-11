@@ -24,6 +24,9 @@ import codeChecking from "../views/CodeChecking"
 import Verification from "../views/Verification"
 import RoutineCreadorInfo from "../views/RoutineCreatorInfo"
 import RoutineCreatorExercise from "../views/RoutineCreatorExercise"
+import ModifyRoutineInfo from "../views/ModifyRoutineInfo"
+import ModifyRoutineExercise from "../views/ModifyRoutineExercise"
+
 
 Vue.use(VueRouter)
 
@@ -37,6 +40,18 @@ const routes = [
     path: '/RoutineCreadorInfo',
     name: 'RoutineCreadorInfo',
     component: RoutineCreadorInfo,
+    props: true
+  },
+  {
+    path: '/ModifyRoutineExercise',
+    name: 'ModifyRoutineExercise',
+    component: ModifyRoutineExercise,
+    props: true
+  },
+  {
+    path: '/ModifyRoutineInfo',
+    name: 'modifyRoutineInfo',
+    component: ModifyRoutineInfo,
     props: true
   },
   {
