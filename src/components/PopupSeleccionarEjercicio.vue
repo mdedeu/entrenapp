@@ -86,7 +86,7 @@
                     class="primary white--text"
                     @click="agregar=true">
                   Agregar este ejercicio
-                  <v-dialog width="600px"  :value="agregar">
+                  <v-dialog width="600px"  :value="agregar" :retain-focus="false">
                     <v-container fluid  class="fill-height">
                       <v-card  width="100%" class="primary mx-16" rounded>
                         <h1 class="font-weight-medium">Elegi la duración</h1>
@@ -169,6 +169,7 @@ export default {
     },
     addExercise(event){
       if(!isNaN(this.exercise_reps) && !isNaN(this.exercise_time)){
+        console.log("PopupSeleccionarEjercicio")
         this.$emit('add-exercise',event)
         this.agregar = false
       }

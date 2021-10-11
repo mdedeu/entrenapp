@@ -25,6 +25,7 @@
                 Agregar ejercicios
               </v-stepper-step>
 
+
             </v-stepper-header>
           </v-stepper>
         </template>
