@@ -54,17 +54,18 @@ export default {
   },
   methods:{
     async createRoutine(routine){
+
+      let createdroutine = await this.$store.dispatch("routine/create",routine);
       let currentRoutine = {
         user: this.getUser,
-        name: routine.name,
-        id: routine.id,
-        detail: routine.detail,
-        difficulty: routine.difficulty,
-        isPublic: routine.isPublic,
-        metadata : routine.metadata
+        name: createdroutine.name,
+        id: createdroutine.id,
+        detail: createdroutine.detail,
+        difficulty: createdroutine.difficulty,
+        isPublic: createdroutine.isPublic,
+        metadata : createdroutine.metadata
       }
-      let createdroutine = await this.$store.dispatch("routine/create",currentRoutine);
-      this.$router.push({name:"RoutineCreatorExercise",params:{routineID:createdroutine.id,routine:createdroutine}})
+      this.$router.push({name:"RoutineCreatorExercise",params:{routineID:createdroutine.id,routine:currentRoutine}})
     }
   },
   data() {
@@ -79,7 +80,7 @@ export default {
     ...mapGetters(
         'security',
         ['getUser']
-    )
+    ),
   }
 }
 </script>

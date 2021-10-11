@@ -86,7 +86,7 @@
                     class="primary white--text"
                     @click="agregar=true">
                   Agregar este ejercicio
-                  <v-dialog width="600px"  :value="agregar">
+                  <v-dialog width="600px"  :value="agregar" >
                     <v-container fluid  class="fill-height">
                       <v-card  width="100%" class="primary mx-16" rounded>
                         <h1 class="font-weight-medium">Elegi la duración</h1>
@@ -117,7 +117,7 @@
                                        {exercise: exercise,
                              time: exercise_time,
                              reps: exercise_reps,
-                             stage: stage
+                             stage: this.stage
                       })">
                               Guardar
                             </v-btn>

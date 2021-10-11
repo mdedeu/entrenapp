@@ -80,7 +80,7 @@
 
 
 
-    <v-carousel-item>
+    <v-carousel-item v-if="update">
       <v-container fluid class="accent fill-height">
 
         <v-row justify="space-around">
@@ -133,7 +133,8 @@ export default {
         calentamiento: {detail:null,id:null,metadata: {ejercicios:null},name:null,order:null,repetitions:null,type:null},
         ejercitacion:[],
         enfriamiento:{detail:null,id:null,metadata:{ejercicios:null},name:null,order:null,repetitions:null,type:null},
-        loading:false
+        loading:false,
+        update:false
         }),
   methods:{
     EjercicioDescripcion(){
@@ -165,6 +166,7 @@ export default {
       else
         this.ejercitacion.push(routinesCycle[i])
     }
+    setTimeout(()=>this.update=true,500)
   }
 }
 </script>
