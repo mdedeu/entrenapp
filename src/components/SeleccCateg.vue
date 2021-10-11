@@ -25,7 +25,7 @@
                 </v-col>
                 </template>
                 <PopupDescanso v-if="category.cat==='Descanso'"  v-on:close-popup="updateShowing()"></PopupDescanso>
-                <PopupSeleccionarEjercicio v-else v-on:close-popup="updateShowing()" v-on:add-exercise="addExercise"></PopupSeleccionarEjercicio>
+                <PopupSeleccionarEjercicio :stage="stage" v-else v-on:close-popup="updateShowing()" v-on:add-exercise="addExercise"></PopupSeleccionarEjercicio>
               </v-dialog>
 
 
@@ -40,6 +40,7 @@
     export default {
     name: "SeleccCateg",
       components: {Close, PopupDescanso, PopupSeleccionarEjercicio},
+      props: ['stage'],
       data(){
         return {
           categories:[{cat:"Ejercicios recomendados",showing:false},{cat:"Tus ejercicios",showing:false},{cat: 'Descanso',showing:false}],

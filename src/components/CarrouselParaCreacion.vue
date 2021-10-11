@@ -42,14 +42,15 @@
               >
                 mdi-timer
               </v-icon>
-              {{ calExec.time }}''
+              {{ calExec.time }}''||
+              {{calExec.reps}}
             </v-btn>
           </v-col>
         </v-row>
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio v-on:add-exercise="addExercise"></AgregarEjercicio>
+            <AgregarEjercicio stage="Calentamiento" v-on:add-exercise="addExercise"></AgregarEjercicio>
           </v-col>
         </v-row>
       </v-container>
@@ -96,14 +97,15 @@
               >
                 mdi-timer
               </v-icon>
-              {{ exerciseDescrip.time }}''
+              {{ exerciseDescrip.time }}'' ||
+              {{exerciseDescrip.reps}}
             </v-btn>
           </v-col>
         </v-row>
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio v-on:add-exercise="addExercise"></AgregarEjercicio>
+            <AgregarEjercicio :stage="exercise.name" v-on:add-exercise="addExercise"></AgregarEjercicio>
           </v-col>
         </v-row>
       </v-container>
@@ -161,14 +163,15 @@
               >
                 mdi-timer
               </v-icon>
-              {{ calExec.time }}''
+              {{ calExec.time }}'' ||
+              {{calExec.reps}}
             </v-btn>
           </v-col>
         </v-row>
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio v-on:add-exercise="addExercise" ></AgregarEjercicio>
+            <AgregarEjercicio stage="Enfriamiento" v-on:add-exercise="addExercise" ></AgregarEjercicio>
           </v-col>
         </v-row>
 
@@ -204,6 +207,31 @@ export default {
       }),
   methods:{
     addExercise(event){
+      if(event.stage==='Calentamiento'){
+        this.calentamiento.metadata.ejercicios.push({
+          time: event.time,
+          reps: event.reps,
+          name : event.exercise.name
+        })
+      }else if(event.stage === 'Enfriamiento'){
+        this.enfriamiento.metadata.ejercicios.push({
+          time: event.time,
+          reps: event.reps,
+          name : event.exercise.name
+        })
+      }else{
+        let i;
+        for(i=0;i<this.ejercitacion.length;i++){
+          if(this.ejercitacion[i].name === event.stage){
+            this.ejercitacion[i].metadata.ejercicios.push({
+              time: event.time,
+              reps: event.reps,
+              name : event.exercise.name
+            })
+            break;
+          }
+        }
+      }
       console.log(event) //Aca nos llega { exercise: ObjectEjercicio, time: tiempo del ej, reps: reps}
     },
     SeleccCateg(){

@@ -113,9 +113,11 @@
                         <v-row>
                           <v-col>
                             <v-btn class="accent primary--text mb-4"
-                                   @click="addExercise({exercise: exercise,
+                                   @click="addExercise(
+                                       {exercise: exercise,
                              time: exercise_time,
-                             reps: exercise_reps
+                             reps: exercise_reps,
+                             stage: stage
                       })">
                               Guardar
                             </v-btn>
@@ -144,6 +146,7 @@ import Close from "./Close";
 export default {
   name: 'PopupSeleccionarEjercicio',
   components: {Close},
+  props: ['stage'],
   data(){
     return {
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],

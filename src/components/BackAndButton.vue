@@ -216,6 +216,8 @@ export default {
     }),
 
     mine(){
+      console.log(this.routine)
+      console.log(this.getUser)
       return this.routine.user.id === this.getUser.id
     },
 

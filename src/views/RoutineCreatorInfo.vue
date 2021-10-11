@@ -44,6 +44,7 @@
 <script>
 import HeaderApp from "../components/HeaderApp";
 import RutinasCreador from '../components/RutinasCreador'
+import {mapGetters} from 'vuex';
 
 export default {
   name: "RoutineCreatorInfo",
@@ -53,7 +54,16 @@ export default {
   },
   methods:{
     async createRoutine(routine){
-      let createdroutine =await this.$store.dispatch("routine/create",routine);
+      let currentRoutine = {
+        user: this.getUser,
+        name: routine.name,
+        id: routine.id,
+        detail: routine.detail,
+        difficulty: routine.difficulty,
+        isPublic: routine.isPublic,
+        metadata : routine.metadata
+      }
+      let createdroutine = await this.$store.dispatch("routine/create",currentRoutine);
       this.$router.push({name:"RoutineCreatorExercise",params:{routineID:createdroutine.id,routine:createdroutine}})
     }
   },
@@ -61,6 +71,15 @@ export default {
     return {
       step: 1
     }
+  },
+  async created() {
+    await this.$store.dispatch('security/getCurrentUser')
+  },
+  computed : {
+    ...mapGetters(
+        'security',
+        ['getUser']
+    )
   }
 }
 </script>

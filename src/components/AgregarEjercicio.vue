@@ -27,7 +27,7 @@
     </template>
     <v-card class="primary"
     rounded>
-      <SeleccCateg v-on:close-popup="popup=false" v-on:add-exercise="addExercise"></SeleccCateg>
+      <SeleccCateg :stage="stage" v-on:close-popup="popup=false" v-on:add-exercise="addExercise"></SeleccCateg>
     </v-card>
 
   </v-dialog>
@@ -41,6 +41,7 @@
     export default {
       name: "AgregarEjercicio",
       components: {SeleccCateg},
+      props: ['stage'],
       data(){
         return {
           popup: false
