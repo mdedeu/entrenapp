@@ -178,11 +178,12 @@ const router = new VueRouter({
 router.beforeEach((to,from,next) =>{
   let noAuthRoutes = ['Home','Login','Register','Verificacion','codeChecking']
   if(!noAuthRoutes.includes(to.name)){
-    if(to.name)
-    if (mapGetters('security','isLoggedIn')) {
+    if (!mapGetters('security',['isLoggedIn'])) {
       next({name: 'Login'})
+      return;
     } else {
       next()
+      return;
     }
   }
   next()
