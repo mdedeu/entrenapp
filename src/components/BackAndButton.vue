@@ -135,6 +135,9 @@
             color="red light white--text"
             @click="eliminada=true"
         >
+          <v-icon left>
+            mdi-delete-outline
+          </v-icon>
           Eliminar rutina
         </v-btn>
       </v-col>
@@ -144,7 +147,11 @@
 
             @click="editRoutine"
         >
+          <v-icon left>
+            mdi-pencil-outline
+          </v-icon>
           Editar rutina
+
         </v-btn>
       </v-col>
     </v-row>
