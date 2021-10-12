@@ -27,7 +27,7 @@
     </template>
     <v-card class="primary"
     rounded>
-      <SeleccCateg :stage="stage" v-on:close-popup="popup=false" v-on:add-exercise="addExercise"></SeleccCateg>
+      <SeleccCateg :stage="stage" v-on:close-popup="popup=false" v-on:add-exercise="addExercise" v-on:add-descanso="addDescanso"></SeleccCateg>
     </v-card>
 
   </v-dialog>
@@ -50,6 +50,9 @@
       methods :{
         addExercise(event){
           this.$emit('add-exercise',event)
+        },
+        addDescanso(segundos){
+          this.$emit('add-descanso',segundos)
         }
       }
     }

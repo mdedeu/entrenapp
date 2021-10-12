@@ -24,7 +24,7 @@
                     </v-btn>
                 </v-col>
                 </template>
-                <PopupDescanso v-if="category.cat==='Descanso'"  v-on:close-popup="updateShowing()"></PopupDescanso>
+                <PopupDescanso :stage= "stage" v-if="category.cat==='Descanso'"  v-on:close-popup="updateShowing()" v-on:add-descanso="addDescanso"></PopupDescanso>
                 <PopupSeleccionarEjercicio :stage="stage" v-else v-on:close-popup="updateShowing()" v-on:add-exercise="addExercise"></PopupSeleccionarEjercicio>
               </v-dialog>
 
@@ -53,6 +53,9 @@
         },
         openDialog(category){
           this.category_active = category.cat
+        },
+        addDescanso(segundos){
+          this.$emit('add-descanso',segundos)
         },
         closePopup(){
           this.$emit('close-popup')

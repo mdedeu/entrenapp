@@ -49,7 +49,7 @@
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio :stage="Calentamiento" v-on:add-exercise="addExercise" ></AgregarEjercicio>
+            <AgregarEjercicio stage="Calentamiento" v-on:add-exercise="addExercise" ></AgregarEjercicio>
           </v-col>
         </v-row>
       </v-container>
@@ -122,8 +122,6 @@
         >Agregar ciclo de ejercitacion
         </v-btn>
       </v-row>
-
-
       </v-container>
     </v-carousel-item>
 
@@ -169,7 +167,7 @@
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio :stage="Enfriamiento" v-on:add-exercise="addExercise" ></AgregarEjercicio>
+            <AgregarEjercicio stage="Enfriamiento" v-on:add-exercise="addExercise" ></AgregarEjercicio>
           </v-col>
         </v-row>
 
