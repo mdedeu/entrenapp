@@ -27,6 +27,7 @@
               color="accent"
               label="Equipación Extra"
               hide-details
+              v-model="equipacion"
               dark
           >
           </v-checkbox>
@@ -44,7 +45,9 @@
           </v-col>
         </v-row>
         <v-row justify="center">
-          <v-btn rounded class="accent primary--text">
+          <v-btn rounded class="accent primary--text"
+          @click="reassign"
+          >
             Filtrar
           </v-btn>
         </v-row>
@@ -58,11 +61,10 @@
       <v-col cols="6" >
         <h2 class="mb-3 font-weight-medium">Todos los resultados</h2>
         <v-container class="exercises">
-          <v-row class="pt-6 pl-6" justify="space-around" v-for="exercise in exercises" :key="exercise.name">
-            <DescriptiveExcercise :name = "exercise.name" difficulty = "Intermedia" category = "Pecho" ></DescriptiveExcercise>
+          <v-row class="pt-6 pl-6" justify="space-around" v-for="exercise in filtered" :key="exercise.name">
+            <DescriptiveExcercise :exercise-des="exercise" ></DescriptiveExcercise>
           </v-row>
         </v-container>
-
       </v-col>
     </v-row>
   </v-container>
@@ -73,17 +75,42 @@
 
 
 import DescriptiveExcercise from "./DescriptiveExcercise";
+import {mapGetters} from "vuex";
 export default {
   name: 'PopupSeleccionarEjercicio',
   components: {DescriptiveExcercise},
   data(){
     return {
+      loading : false,
+      name : null,
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
-      exercises:[{name:"Flexiones de brazo"},{name:"Abdominales bolita"},{name:"Salto con soga"},{name:"Estirar piernas"},{name:"Espalda en colchoneta"}],
       sports: ['Fútbol', 'Hockey','Tenis','Paddle'],
       selected_sport: null,
-      selected_muscle: null
+      selected_muscle: null,
+      equipacion:false,
+      exercises:null,
+      filtered:null
     }
+  },
+  props:{
+    slug: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    ...mapGetters('security',{
+      user: 'getUser',
+    }),
+    ...mapGetters('exercise',['getMine']),
+    ...mapGetters('exercise',['getMuscle']),
+    ...mapGetters('exercise',['getEquipacion']),
+    ...mapGetters('exercise',['getDeporte']),
+    ...mapGetters('exercise', ['getFavourites'])
+
+  },
+  async created() {
+    await this.loadExercises()
   },
   methods:{
     addColor(id){
@@ -100,10 +127,30 @@ export default {
         else{
           document.getElementById(this.selected_muscle).classList.remove('accent')
           this.selected_muscle = id;
-          console.log(this.selected_muscle)
           element.classList.add('accent')
         }
       }
+    },
+    reassign(){
+        this.filtered = this.exercises
+        if(this.equipacion)
+          this.filtered = this.filtered.filter( (item)=> this.getEquipacion.includes(item) )
+        if(this.selected_muscle)
+          this.filtered = this.filtered.filter( (item) => this.getMuscle(this.selected_muscle).includes(item) )
+      if(this.selected_sport)
+        this.filtered = this.filtered.filter( (item) => this.getDeporte(this.selected_sport).includes(item) )
+    },
+    async loadExercises(){
+      this.loading = true;
+      await this.$store.dispatch("exercise/getAll")
+      this.loading = false;
+      if(this.slug !== 'favoritas') {
+        this.exercises = this.getMine
+      }
+      else{
+        this.exercises = this.getFavourites
+      }
+      this.filtered = this.exercises
     }
   }
 

@@ -57,7 +57,7 @@
         ...mapGetters('routine',['getMine']),
 
         allMine(){
-          return this.getMine(this.user.username)
+          return this.getMine(this.user.id)
         },
 
         routines(){

@@ -27,6 +27,7 @@ class RoutineApi{
     static async getAll(controller) {
         return await Api.get(RoutineApi.getUrl(), true, controller)
     }
+
 }
 
 

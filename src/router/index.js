@@ -14,7 +14,6 @@ import TusRutinas from "../views/TusRutinas"
 import EjercicioDescripcion from "../views/EjercicioDescripcionPage"
 import SeleccCateg from "../views/SeleccCategPage"
 import NotFound from "../views/NotFound";
-import SeleccionarEjercicioPopup from '../views/SeleccionarEjercicio'
 import TusEjercicios from "../views/TusEjercicios"
 import EjerciciosLanding from  "../views/EjerciciosLanding"
 import RutinasFavoritas from "../views/RutinasFavoritas";
@@ -22,6 +21,10 @@ import EjerciciosRecomendados from "../views/EjerciciosRecomendados";
 import EjerciciosFavoritos from "../views/EjerciciosFavoritos";
 import codeChecking from "../views/CodeChecking"
 import Verification from "../views/Verification"
+import RoutineCreadorInfo from "../views/RoutineCreatorInfo"
+import RoutineCreatorExercise from "../views/RoutineCreatorExercise"
+import ModifyRoutineInfo from "../views/ModifyRoutineInfo"
+import ModifyRoutineExercise from "../views/ModifyRoutineExercise"
 
 
 Vue.use(VueRouter)
@@ -33,6 +36,31 @@ const routes = [
     component: Home
    },
   {
+    path: '/RoutineCreadorInfo',
+    name: 'RoutineCreadorInfo',
+    component: RoutineCreadorInfo,
+    props: true
+  },
+  {
+    path: '/ModifyRoutineExercise',
+    name: 'ModifyRoutineExercise',
+    component: ModifyRoutineExercise,
+    props: true
+  },
+  {
+    path: '/ModifyRoutineInfo',
+    name: 'modifyRoutineInfo',
+    component: ModifyRoutineInfo,
+    props: true
+  },
+  {
+    path: '/RoutineCreatorExercise',
+    name: 'RoutineCreatorExercise',
+    component: RoutineCreatorExercise,
+    props: true
+  },
+
+  {
     path: '/myprofile',
     name: 'My Profile',
     component: MyProfile
@@ -40,22 +68,26 @@ const routes = [
   {
     path: '/EjerciciosRecomendados',
     name: 'EjerciciosRecomendados',
-    component: EjerciciosRecomendados
+    component: EjerciciosRecomendados,
+    props: true
   },
   {
     path: '/EjerciciosFavoritos',
     name: 'EjerciciosFavoritos',
-    component: EjerciciosFavoritos
+    component: EjerciciosFavoritos,
+    props: true
   },
   {
     path: '/EjerciciosLanding',
     name: 'EjerciciosLanding',
-    component: EjerciciosLanding
+    component: EjerciciosLanding,
+    props: true
   },
   {
     path: '/TusEjercicios',
     name: 'Tus Ejercicios',
-    component: TusEjercicios
+    component: TusEjercicios,
+    props: true
   },
   {
     path: '/Verification',
@@ -89,7 +121,8 @@ const routes = [
   {
     path: '/EjercicioDescripcion',
     name: 'EjercicioDescripcion',
-    component: EjercicioDescripcion
+    component: EjercicioDescripcion,
+    props:true
   },
   {
     path: '/RoutineLanding',
@@ -118,11 +151,6 @@ const routes = [
     name: 'SeleccCateg',
     component: SeleccCateg
   },
-  {
-    path: '/SeleccionarEjercicio',
-    name: 'SeleccionarEjercicioPopup',
-    component: SeleccionarEjercicioPopup
-  },
   // {
   //   path: '/RutinasFavoritas',
   //   name: 'RutinasFavoritas',
@@ -134,6 +162,7 @@ const routes = [
     component: RutinasFavoritas,
     props: true
   },
+
   // {
   //   path: '/RutinasRecomendadas',
   //   name: 'RutinasRecomendadas',

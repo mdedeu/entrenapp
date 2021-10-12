@@ -11,12 +11,12 @@
     </v-row>
     <v-row justify="center">
         <v-col cols="3">
-          <CrearEjercicioButton></CrearEjercicioButton>
+          <CrearEjercicioButton v-on:load-exercise="loadExercise"></CrearEjercicioButton>
         </v-col>
     </v-row>
     <v-row style="height: 90vh">
       <v-col>
-        <TusEj></TusEj>
+        <TusEj :slug="'no_favoritas'" ref="tusEj"></TusEj>
       </v-col>
     </v-row>
 
@@ -37,6 +37,11 @@ export default {
     Back,
     TusEj
   },
-  props : ['title']
+  props : ['title'],
+  methods:{
+    async loadExercise(){
+      this.$refs.tusEj.loadExercises()
+    }
+  }
 }
 </script>

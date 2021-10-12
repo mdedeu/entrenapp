@@ -1,8 +1,7 @@
 <template>
   <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
 
-  <v-container v-else>
-
+  <v-container v-else-if="!mine">
   <v-row justify="space-between">
 
     <Back></Back>
@@ -123,8 +122,35 @@
         </v-col>
 
 
+
   </v-row>
   </v-container>
+
+  <v-container v-else>
+    <v-row>
+      <Back></Back>
+      <v-col></v-col>
+      <v-col>
+        <v-btn
+            color="red light white--text"
+            @click="removeRoutine"
+        >
+          Eliminar rutina
+        </v-btn>
+      </v-col>
+      <v-col>
+        <v-btn
+            color="accent primary--text"
+
+            @click="editRoutine"
+        >
+          Editar rutina
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
+
+
 </template>
 
 <script>
@@ -153,6 +179,17 @@ export default {
     ...mapActions( 'favouriteRoutine',['create'] ),
     ...mapActions( 'favouriteRoutine',['delete'] ),
 
+    async removeRoutine(){
+       await this.$store.dispatch('routine/delete',this.routine)
+       this.$router.push({name:'RoutineLanding'})
+    },
+
+    async editRoutine(){
+      await this.$store.dispatch('routineCycle/getAll',this.routine)
+      let routineCycleL = this.getRoutineCycle;
+      this.$router.push({name:"modifyRoutineInfo",params:{routine:this.routine,routineCycle:routineCycleL}})
+    },
+
 
     async removeFromFavourite(){
       this.loadingButton=true
@@ -166,17 +203,22 @@ export default {
     routineID:{
       type:Number,
       required:true
-    }
+    },
+    routine:{type:Object , required:true}
   },
 
   computed:{
-    ...mapGetters('security',{
-      user:'getUser'
-    }),
-
+    ...mapGetters('security',['getUser']),
+    ...mapGetters('routineCycle',['getRoutineCycle']),
     ...mapGetters('favouriteRoutine',{
       isFavouriteFunction:'isFavourite'
     }),
+
+    mine(){
+      console.log(this.routine)
+      console.log(this.getUser)
+      return this.routine.user.id === this.getUser.id
+    },
 
     favourite(){
       return  this.isFavouriteFunction.includes(this.routineID)

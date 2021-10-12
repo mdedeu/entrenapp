@@ -1,21 +1,19 @@
 <template>
   <v-container class="mb-7">
-    <BackAndButton :routineID="this.routine.id" :routine="this.routine" class="mt-6"></BackAndButton>
+    <ExerciseBackAndButton :exerciseId="this.exercise.id" class="mt-6"></ExerciseBackAndButton>
     <div  class="pt-10 accent--text">
       <v-row justify="center">
-        <h2>{{routine.name}}</h2>
+        <h2>{{exercise.name}}</h2>
       </v-row>
       <v-row justify="center">
-        <p>Nivel de dificultad: {{routine.difficulty}}</p>
+        <p>Musculos que trabaja: {{exercise.name}}</p>
       </v-row>
       <v-row justify="center">
         <p>
-          Duración: {{routine.name}}
+          Duración: {{exercise.name}}
         </p>
       </v-row>
     </div>
-
-
   </v-container>
 
 </template>
@@ -23,15 +21,15 @@
 
 
 <script>
-import BackAndButton from './BackAndButton'
+import ExerciseBackAndButton from './ExerciseBackAndButton'
 export default {
-  name: 'RoutineDescription',
+  name: 'ExerciseDescription',
   components: {
-    BackAndButton
+    ExerciseBackAndButton
   },
   props:{
-    routine: {
-      type: Object,/**name,dificultad,duracion*/
+    exercise: {
+      type: Object, //Nombre, musculo (o descanso), requirere herramientas, deportes
       required: true
     }
   },
