@@ -6,14 +6,14 @@
       </v-col>
     </v-row>
 
-  <v-carousel >
+  <v-carousel class="mt-11">
 
     <v-carousel-item order="1">
       <v-container fluid class="accent fill-height">
 
         <v-row justify="space-around">
           <v-col cols="3">
-            <p class="text-h3  primary--text"> {{ calentamiento.name }}:</p>
+            <p class="text-h4  primary--text"> {{ calentamiento.name }}:</p>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -113,15 +113,16 @@
 
     <v-carousel-item v-if="update">
       <v-container fluid class="accent fill-height">
-
-        <v-btn width="50%"
-               rounded
-               color="white"
-               class="primary--text justify-center text-h3 mt-n5"
-               height="20%"
-               @click="addExerciseCycle"
+      <v-row justify="center">
+        <v-btn
+          rounded
+          color="white"
+          class="primary--text"
+          @click="addExerciseCycle"
         >Agregar ciclo de ejercitacion
         </v-btn>
+      </v-row>
+
 
       </v-container>
     </v-carousel-item>

@@ -6,7 +6,7 @@
     <v-row style="height: 10vh">
       <v-col>
         <template>
-          <v-stepper alt-labels>
+          <v-stepper v-model="step">
             <v-stepper-header>
               <v-stepper-step
                   complete
@@ -19,7 +19,6 @@
 
 
               <v-stepper-step
-                  :rules="[() => false]"
                   step="2"
               >
                 Agregar ejercicios
@@ -54,6 +53,11 @@ export default {
   },
   computed:{
     ...mapGetters('routineCycle',['getRoutineCycle']),
+  },
+  data(){
+    return{
+      step:2
+    }
   },
   methods:{
 

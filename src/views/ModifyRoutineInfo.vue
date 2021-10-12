@@ -10,7 +10,6 @@
           <v-stepper alt-labels>
             <v-stepper-header>
               <v-stepper-step
-                  :rules="[() => false]"
                   step="1"
               >
                 Informacion de la rutina

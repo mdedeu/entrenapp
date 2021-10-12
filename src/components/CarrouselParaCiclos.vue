@@ -6,10 +6,10 @@
 
         <v-row justify="space-around">
           <v-col cols="3">
-            <p class="text-h3  primary--text"> {{this.calentamiento.name}}:</p>
+            <p class="text-h4 primary--text"> {{this.calentamiento.name}}:</p>
           </v-col>
           <v-col cols="3">
-            <p class="text-h3  primary--text"> Número de repeticiones: {{this.calentamiento.repetitions}}</p>
+            <p class="text-h5  primary--text"> Número de repeticiones: {{this.calentamiento.repetitions}}</p>
           </v-col>
         </v-row>
 
@@ -45,10 +45,10 @@
 
         <v-row justify="space-around">
           <v-col cols="3">
-            <p class="text-h3  primary--text"> {{ exercise.name }}:</p>
+            <p class="text-h4  primary--text"> {{ exercise.name }}:</p>
           </v-col>
           <v-col cols="3">
-            <p class="text-h3  primary--text"> Número de repeticiones: {{exercise.repetitions}}</p>
+            <p class="text-h5  primary--text"> Número de repeticiones: {{exercise.repetitions}}</p>
           </v-col>
         </v-row>
 
@@ -85,10 +85,10 @@
 
         <v-row justify="space-around">
           <v-col cols="3">
-            <p class="text-h3  primary--text"> {{ enfriamiento.name }}:</p>
+            <p class="text-h4  primary--text"> {{ enfriamiento.name }}:</p>
           </v-col>
           <v-col cols="3">
-            <p class="text-h3  primary--text"> Número de repeticiones: {{enfriamiento.repetitions}}</p>
+            <p class="text-h5  primary--text"> Número de repeticiones: {{enfriamiento.repetitions}}</p>
           </v-col>
         </v-row>
 

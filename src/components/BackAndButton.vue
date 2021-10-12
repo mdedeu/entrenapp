@@ -132,8 +132,7 @@
       <v-col></v-col>
       <v-col>
         <v-btn
-            color="lighten-2"
-            dark
+            color="red light white--text"
             @click="removeRoutine"
         >
           Eliminar rutina
@@ -141,8 +140,8 @@
       </v-col>
       <v-col>
         <v-btn
-            color="lighten-2"
-            dark
+            color="accent primary--text"
+
             @click="editRoutine"
         >
           Editar rutina

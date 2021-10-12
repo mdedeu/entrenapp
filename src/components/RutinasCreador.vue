@@ -10,7 +10,7 @@
 
 
     <v-row justify="center">
-      <h3 class="accent--text"> Dale un nombre creativo a tu rutina</h3>
+      <h3 class="accent--text"> Dale un nombre creativo a tu rutina*</h3>
     </v-row>
     <v-row justify="center">
       <v-col cols="4">
@@ -42,7 +42,7 @@
 
     <v-row>
       <v-col col="6">
-        <h3 class="accent--text">Selecciona el nivel de dificultad:</h3>
+        <h3 class="accent--text">Selecciona el nivel de dificultad:*</h3>
       </v-col>
     </v-row>
 
@@ -83,7 +83,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <h3 class="accent--text">¿Tiene algun deporte relacionado?</h3>
+        <h3 class="accent--text">¿Tiene algun deporte relacionado?*</h3>
       </v-col>
     </v-row>
     <v-row justify="center">

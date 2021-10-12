@@ -77,11 +77,12 @@
                 solo
                 background-color="white"
                 v-model="exercise.repetitions"
+                :rules="rulesNumber"
             ></v-text-field>
           </v-col>
         </v-row>
 
-        <v-row justify="center"   style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
+        <v-row justify="center" style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
           <v-col cols="6"  >
             <v-btn width="100%"
                    rounded
@@ -142,6 +143,7 @@
                 solo
                 v-model="enfriamiento.repetitions"
                 background-color="white"
+                :rules="rulesNumber"
             ></v-text-field>
           </v-col>
         </v-row>

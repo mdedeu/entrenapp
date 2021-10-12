@@ -35,18 +35,26 @@
     <v-row style="height: 80vh">
       <RutinasCreador @Info-received="createRoutine" class="pt-16"/>
     </v-row>
-    <v-dialog :value="exito" width="600px" height="600px">
-      <v-card class="fill-height">
+    <v-dialog :value="exito" width="500px">
+      <v-card class="ma-1">
         <v-card-title class="green lighten-1">
           Exito
         </v-card-title>
         <v-card-text>
-          Rutina creada con éxito. Proseguí para detallar las ciclos de la misma
+          <v-row class="mt-6" justify="center">
+            Rutina creada con éxito. Siga para marcar las ciclos de la misma
+          </v-row>
+          <v-row justify="center">
+            <v-icon class="green--text" size="80">
+              mdi-check
+            </v-icon>
+          </v-row>
+
         </v-card-text>
         <v-card-actions>
           <v-row>
             <v-col>
-              <v-btn @click="redirect">
+              <v-btn @click="redirect" class="green white--text">
                 Continuar
               </v-btn>
             </v-col>
@@ -75,34 +83,27 @@ export default {
   },
   methods:{
     async createRoutine(routine){
-
-      let createdroutine = await this.$store.dispatch("routine/create",routine);
-      let currentRoutine = {
+      this.createdRoutine = await this.$store.dispatch("routine/create",routine);
+      this.currentRoutine = {
         user: this.getUser,
-        name: createdroutine.name,
-        id: createdroutine.id,
-        detail: createdroutine.detail,
-        difficulty: createdroutine.difficulty,
-        isPublic: createdroutine.isPublic,
-        metadata : createdroutine.metadata
-      }
-      this.currentRoutine = currentRoutine
-      try{
-        this.createdRoutine_component = await this.$store.dispatch("routine/create",currentRoutine);
-      }catch (e) {
-        console.log(e)
+        name: this.createdRoutine.name,
+        id: this.createdRoutine.id,
+        detail: this.createdRoutine.detail,
+        difficulty: this.createdRoutine.difficulty,
+        isPublic: this.createdRoutine.isPublic,
+        metadata: this.createdRoutine.metadata
       }
       this.exito=true
     },
     redirect(){
-      this.$router.push({name:"RoutineCreatorExercise",params:{routineID:this.createdRoutine_component.id,routine:this.currentRoutine}})
+      this.$router.push({name:"RoutineCreatorExercise",params:{routineID:this.createdRoutine.id,routine:this.currentRoutine}})
     }
   },
   data() {
     return {
       step: 1,
       exito: false,
-      createdRoutine_component: null,
+      createdRoutine: null,
       currentRoutine: null
     }
   },
