@@ -20,7 +20,7 @@
                    color="white"
                    class="primary--text justify-center text-h5 mt-n5"
                    height="100%"
-                   @click="EjercicioDescripcion"
+                   @click="EjercicioDescripcion(calExec)"
             >
               {{ calExec.name }}
               <v-icon
@@ -59,7 +59,7 @@
                    color="white"
                    class="primary--text justify-center text-h5 mt-n5"
                    height="100%"
-                   @click="EjercicioDescripcion"
+                   @click="EjercicioDescripcion(exerciseDescrip)"
             >
               {{ exerciseDescrip.name }}
               <v-icon
@@ -99,7 +99,7 @@
                    color="white"
                    class="primary--text justify-center text-h5 mt-n5"
                    height="100%"
-                   @click="EjercicioDescripcion"
+                   @click="EjercicioDescripcion(calExec)"
             >
               {{ calExec.name }}
               <v-icon
@@ -137,8 +137,8 @@ export default {
         update:false
         }),
   methods:{
-    EjercicioDescripcion(){
-      this.$router.push({name:"EjercicioDescripcion"})
+    EjercicioDescripcion(exercise){
+      this.$router.push({name:"EjercicioDescripcion",params:{exercise: exercise}})
     }
   },
   props:{
