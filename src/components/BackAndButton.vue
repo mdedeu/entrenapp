@@ -215,6 +215,12 @@ export default {
     }
   },
   methods:{
+    async mine(){
+      console.log(this.routine)
+      console.log(this.getUser)
+      await this.$store.dispatch("security/getCurrentUser")
+      return this.routine.user.id === this.getUser.id
+    },
     async addTofavourite(){
       this.loadingButton=true
       await this.create(this.routineID)
@@ -261,18 +267,14 @@ export default {
       isFavouriteFunction:'isFavourite'
     }),
 
-    mine(){
-      console.log(this.routine)
-      console.log(this.getUser)
-      return this.routine.user.id === this.getUser.id
-    },
+
 
     favourite(){
       return  this.isFavouriteFunction.includes(this.routineID)
     }
 
   },
-  async created() {
+  async mounted() {
     this.loading = true;
     await this.$store.dispatch("security/getCurrentUser")
     await this.$store.dispatch("favouriteRoutine/getAll")

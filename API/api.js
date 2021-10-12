@@ -1,7 +1,7 @@
 export { Api }
 
 class Api {
-    static token
+    static token = localStorage.getItem('security-token') || null
 
     static get baseUrl() {
         return 'http://127.0.0.1:8080/api'

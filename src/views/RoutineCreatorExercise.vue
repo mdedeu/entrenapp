@@ -45,6 +45,7 @@ import HeaderApp from "../components/HeaderApp";
 import CarrouselParaCreacion from '../components/CarrouselParaCreacion'
 
 
+
 export default {
   name: "RoutineCreator",
   components:{
@@ -53,7 +54,9 @@ export default {
   },
   data(){
     return {
-      step:2
+      step:2,
+      routineIDdata: null,
+      routineData: null
     }
   },
   methods:{
@@ -64,21 +67,31 @@ export default {
      for ( i=0 ; i < cycles.length ; i++) {
        cycles[i].order = Number(cycles[i].order)
        cycles[i].repetitions = Number(cycles[i].repetitions)
-       let info = {id:this.routineID, routineCycle:cycles[i]}
+       let info = {id:this.routineIDdata, routineCycle:cycles[i]}
        await this.$store.dispatch('routineCycle/create', info)
      }
-     console.log(this.routine)
-    this.$router.push({name:"RoutineDescription",params:{routine:this.routine}})
+    this.$router.push({name:"RoutineDescription",params:{routine:this.routineData}})
+
    }
   },
   props:{
     routineID:{
-      type:Number,
-      required : true
+      type:Number
     },
     routine:{
-      type:Object,
-      required:true
+      type:Object
+    }
+  },
+  created() {
+    if(!this.routine){
+      this.routineData = (JSON).parse(localStorage.getItem('routine'))
+      this.routineIDdata = Number(localStorage.getItem('routineID'))
+    }
+    else{
+      this.routineData = this.routine
+      this.routineIDdata = this.routineID
+      localStorage.setItem('routine', JSON.stringify(this.routine))
+      localStorage.setItem('routineID', this.routineID.toString())
     }
   }
 }
