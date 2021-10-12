@@ -30,6 +30,7 @@ class ExerciseApi{
 }
 
 
+
 class Exercise{
     constructor(id, name, detail,type,metadata) {
         if (id) {
@@ -42,4 +43,3 @@ class Exercise{
     }
 
 }
-
