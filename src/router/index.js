@@ -25,6 +25,7 @@ import RoutineCreadorInfo from "../views/RoutineCreatorInfo"
 import RoutineCreatorExercise from "../views/RoutineCreatorExercise"
 import ModifyRoutineInfo from "../views/ModifyRoutineInfo"
 import ModifyRoutineExercise from "../views/ModifyRoutineExercise"
+import {mapGetters} from 'vuex'
 
 
 Vue.use(VueRouter)
@@ -128,7 +129,7 @@ const routes = [
     path: '/RoutineLanding',
     name: 'RoutineLanding',
     component: RoutineLanding,
-    props:true,
+    props:true
   },
   {
     path: '/login',
@@ -151,23 +152,12 @@ const routes = [
     name: 'SeleccCateg',
     component: SeleccCateg
   },
-  // {
-  //   path: '/RutinasFavoritas',
-  //   name: 'RutinasFavoritas',
-  //   component: RutinasFavoritas
-  // },
   {
     path: '/Rutinas/:slug',
     name: 'Rutinas',
     component: RutinasFavoritas,
     props: true
   },
-
-  // {
-  //   path: '/RutinasRecomendadas',
-  //   name: 'RutinasRecomendadas',
-  //   component: RutinasRecomendadas
-  // },
   {
     path: '*',
     name: "NotFound",
@@ -183,16 +173,20 @@ const router = new VueRouter({
       return { x: 0, y: 0 }
   }
 })
-//
-// router.beforeEach((to,from,next) =>{
-//     if (to.matched.some(route => route.meta.requiresAuth)) {
-//       if (!store.user) {
-//         next({ name: "Login", query: { redirect: to.fullPath } });
-//       } else {
-//         next();
-//       }
-//     } else {
-//       next();
-//     }
-// });
+
+// eslint-disable-next-line no-unused-vars
+router.beforeEach((to,from,next) =>{
+  let noAuthRoutes = ['Home','Login','Register','Verificacion','codeChecking']
+  if(!noAuthRoutes.includes(to.name)){
+    if(to.name)
+    if (mapGetters('security','isLoggedIn')) {
+      next({name: 'Login'})
+    } else {
+      next()
+    }
+  }
+  next()
+
+
+});
 export default router
