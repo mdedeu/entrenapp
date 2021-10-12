@@ -17,10 +17,10 @@
       </v-row>
       <v-row>
         <v-col/>
-        <v-col>  <v-text-field   label="Email"
+        <v-col>  <v-text-field   label="Nombre de usuario"
                                  required
                                  solo
-                                 prepend-inner-icon="mdi-email-outline"
+                                 prepend-inner-icon="mdi-account"
                                  outlined
                                  v-model="email"
         ></v-text-field> </v-col>

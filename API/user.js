@@ -16,8 +16,19 @@ class UserApi {
     }
 
     static async get(controller) {
-        return Api.get(UserApi.getUrl('current'), true, controller)
+        return await Api.get(UserApi.getUrl('current'), true, controller)
     }
+
+    static async add(data,controller){
+        return await Api.post(UserApi.getUrl(),false,data,controller)
+    }
+
+    static async verify(data,controller){
+        return await Api.post(`${UserApi.getUrl()}/verify_email`,false,data,controller)
+    }
+
+
+
 }
 
 class Credentials {

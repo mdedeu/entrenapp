@@ -1,5 +1,7 @@
 <template>
-  <v-container fluid  fill-height class="primary">
+  <p v-if="this.error">{{this.message}}</p>
+
+  <v-container v-else fluid  fill-height class="primary">
     <v-row class="mt-16">
       <v-col/>
       <v-col>
@@ -11,11 +13,11 @@
     </v-row>
     <v-row>
       <v-col/>
-      <v-col>  <v-text-field   label="Nombre y Apellido"
+      <v-col>  <v-text-field   label="Nombre de usuario"
                                required
                                solo
+                               v-model="username"
                                prepend-inner-icon="mdi-account"
-                               v-model="name"
                                outlined
       ></v-text-field> </v-col>
       <v-col/>
@@ -62,7 +64,7 @@
     <v-row>
       <v-col/>
       <v-col class="text-center">
-        <v-btn class="accent text--primary" width="250" height="50" rounded>Registrate</v-btn>
+        <v-btn class="accent text--primary" width="250" height="50"  @click="register" rounded>Registrate</v-btn>
       </v-col>
       <v-col/>
     </v-row>
@@ -82,16 +84,34 @@ export default {
   name: "Register",
   data() {
     return{
-      name : null,
-      email : null,
-      password : null,
-      confirm_password : null,
-      show: false
+        username : null,
+        email : null,
+        password : null,
+        confirm_password : null,
+      show: false,
+      error:false,
+      message:null
     }
   },
   methods :{
     changeShow(){
       this.show = !this.show ;
+    },
+
+    async register(){
+      if(!this.password||!this.confirm_password||this.password != this.confirm_password){
+        this.message='Las contraseña no coinciden'
+        this.error=true
+        return;
+      }else if(!this.email || !this.email.includes('@') || !this.email.includes('.com')){
+        this.message='El email ingresado no es valido'
+        this.error=true
+        return;
+      }
+      else{
+        await this.$store.dispatch('security/add',{username:this.username,email:this.email,password:this.password})
+        this.$router.push({name:'codeChecking',params:{ user:{username:this.username,password:this.password,email:this.email}}})
+      }
     }
   }
 }

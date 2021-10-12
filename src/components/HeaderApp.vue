@@ -37,7 +37,7 @@ export default {
   name: "HeaderApp",
   methods:{
     CreateRoutine() {
-      this.$router.push({name:"RoutineCreator"});
+      this.$router.push({name:"RoutineCreadorInfo"});
     },
     RoutineLanding(){
       this.$router.push({name:"RoutineLanding"});

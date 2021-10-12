@@ -1,18 +1,47 @@
-import {ExerciseApi} from "../../../API/exercise";
 
-export default {
-    namespaced: true,
-    state: {
+import {ExerciseApi} from "../../../API/exercise"
+
+export default{
+    namespaced:true,
+    state:{
         items: []
     },
-    getters: {
+    getters:{
         findIndex(state) {
             return (exercise) => {
                 return state.items.findIndex(item => item.id === exercise.id)
             }
         },
+        getMine(state){
+            return state.items
+        },
+        getOther(state){
+            return state.items
+        },
+        getMuscle(state){
+            return (muscle)=>{
+                return state.items.filter( (item) => item.metadata.musculos.includes(muscle))
+            }
+        },
+        getEquipacion(state){
+            return state.items.filter( (item) => item.metadata.equipacion )
+        },
+        getDeporte(state){
+            return (sport)=>{
+                return state.items.filter((item)=>item.metadata.deportes.includes(sport))
+
+            }
+        },
+        getFavourites(state){
+            return state.items.filter((item) => item.metadata.favorito)
+        },
+        isFavourite(){
+            return (exercise) => {
+                return exercise.metadata.favorito
+            }
+        }
     },
-    mutations: {
+    mutations:{
         push(state, exercise) {
             state.items.push(exercise)
         },
@@ -22,11 +51,11 @@ export default {
         splice(state, index) {
             state.items.splice(index, 1)
         },
-        replaceAll(state, exercises) {
-            state.items = exercises
+        replaceAll(state, exercise) {
+            state.items = exercise
         }
     },
-    actions: {
+    actions:{
         async create({getters, commit}, exercise) {
             const result = await ExerciseApi.add(exercise)
             if (!getters.findIndex(result))
@@ -57,8 +86,8 @@ export default {
         },
         async getAll({commit}, controller) {
             const result = await ExerciseApi.getAll(controller)
-            commit('replaceAll', result)
-            return result
-        }
+            commit('replaceAll', result.content)
+            return result.content
+        },
     },
 }

@@ -11,7 +11,7 @@
     </v-row>
     <v-row style="height: 90vh">
       <v-col>
-       <TusejerciciosComponent></TusejerciciosComponent>
+       <TusejerciciosComponent :slug="'no_favoritas'"></TusejerciciosComponent>
       </v-col>
     </v-row>
 

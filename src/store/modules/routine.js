@@ -12,13 +12,13 @@ export default{
             }
         },
         getMine(state){
-            return (username)=>{
-                return state.items.filter( (item) => item.user.username === (username))
+            return (userID)=>{
+                return state.items.filter( (item) => item.user.id === (userID))
             }
         },
         getOther(state){
-            return (username)=>{
-                return state.items.filter( (item) => item.user.username != (username))
+            return (userID)=>{
+                return state.items.filter( (item) => item.user.id != (userID))
             }
         },
 
@@ -46,11 +46,11 @@ export default{
             return result
         },
         async modify({getters, commit}, routine) {
-            const result = await RoutineApi.modify(routine)
-            const index = getters.findIndex(result)
+            await RoutineApi.modify(routine)
+            const index = getters.findIndex(routine)
             if (index >= 0)
-                commit('replace', index, result)
-            return result
+                commit('replace', index, routine)
+            return routine
         },
         async delete({getters, commit}, routine) {
             await RoutineApi.delete(routine.id)
@@ -71,7 +71,7 @@ export default{
             const result = await RoutineApi.getAll(controller)
             commit('replaceAll', result.content)
             return result.content
-        }
+        },
     },
 
 

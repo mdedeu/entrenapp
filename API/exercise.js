@@ -2,7 +2,8 @@ import { Api } from './api.js'
 
 export { ExerciseApi, Exercise }
 
-class ExerciseApi {
+class ExerciseApi{
+
     static getUrl(slug) {
         return `${Api.baseUrl}/exercises${ slug ? `/${slug}` : ''}`
     }
@@ -28,15 +29,17 @@ class ExerciseApi {
     }
 }
 
-class Exercise {
-    constructor(id, name, detail, type, date) {
+
+
+class Exercise{
+    constructor(id, name, detail,type,metadata) {
         if (id) {
             this.id = id;
         }
-        this.type=type
-        this.date=date
         this.name = name;
         this.detail = detail;
-
+        this.type = type;
+        this.metadata = metadata;
     }
+
 }

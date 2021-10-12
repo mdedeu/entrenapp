@@ -6,14 +6,14 @@
       </v-col>
     </v-row>
 
-  <v-carousel >
+  <v-carousel class="mt-11">
 
     <v-carousel-item order="1">
       <v-container fluid class="accent fill-height">
 
         <v-row justify="space-around">
           <v-col cols="3">
-            <h1 class=" text-h4 primary--text"> {{ calentamiento.name }}:</h1>
+            <p class="text-h4  primary--text"> {{ calentamiento.name }}:</p>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -21,19 +21,18 @@
                 v-model="calentamiento.repetitions"
                 solo
                 background-color="white"
-                :rules="rulesNumber"
             ></v-text-field>
           </v-col>
         </v-row>
 
-        <v-row justify="center" v-for="calExec in calentamiento.metadata.ejercicios" :key="calExec.name">
+        <v-row justify="center"  style="height: 10vh" v-for="calExec in calentamiento.metadata.ejercicios" :key="calExec.name">
           <v-col cols="6"  >
             <v-btn width="100%"
                    rounded
                    color="white"
                    class="primary--text justify-center text-h5 mt-n5"
                    height="100%"
-                   @click="EjercicioDescripcion()"
+                   @click="EjercicioDescripcion"
             >
               {{ calExec.name }}
               <v-icon
@@ -43,15 +42,14 @@
               >
                 mdi-timer
               </v-icon>
-              {{ calExec.time }}''||
-              {{calExec.reps}}
+              {{ calExec.time }}''
             </v-btn>
           </v-col>
         </v-row>
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio stage="Calentamiento" v-on:add-exercise="addExercise"></AgregarEjercicio>
+            <AgregarEjercicio :stage="Calentamiento" v-on:add-exercise="addExercise" ></AgregarEjercicio>
           </v-col>
         </v-row>
       </v-container>
@@ -77,12 +75,11 @@
                 solo
                 background-color="white"
                 v-model="exercise.repetitions"
-                :rules="rulesNumber"
             ></v-text-field>
           </v-col>
         </v-row>
 
-        <v-row justify="center" style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
+        <v-row justify="center"   style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
           <v-col cols="6"  >
             <v-btn width="100%"
                    rounded
@@ -99,15 +96,14 @@
               >
                 mdi-timer
               </v-icon>
-              {{ exerciseDescrip.time }}'' ||
-              {{exerciseDescrip.reps}}
+              {{ exerciseDescrip.time }}''
             </v-btn>
           </v-col>
         </v-row>
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio :stage="exercise.name" v-on:add-exercise="addExercise"></AgregarEjercicio>
+            <AgregarEjercicio :stage="exercise.name" v-on:add-exercise="addExercise" ></AgregarEjercicio>
           </v-col>
         </v-row>
       </v-container>
@@ -117,15 +113,17 @@
 
     <v-carousel-item v-if="update">
       <v-container fluid class="accent fill-height">
-        <v-row justify="center">
-          <v-btn width="50%"
-                 rounded
-                 color="white"
-                 class="primary--text justify-center mt-n5"
-                 @click="addExerciseCycle"
-          >Agregar ciclo de ejercitacion
-          </v-btn>
-        </v-row>
+      <v-row justify="center">
+        <v-btn
+          rounded
+          color="white"
+          class="primary--text"
+          @click="addExerciseCycle"
+        >Agregar ciclo de ejercitacion
+        </v-btn>
+      </v-row>
+
+
       </v-container>
     </v-carousel-item>
 
@@ -135,7 +133,7 @@
 
         <v-row justify="space-around">
           <v-col cols="3">
-            <h1 class="text-h4  primary--text"> {{ enfriamiento.name }}:</h1>
+            <p class="text-h3  primary--text"> {{ enfriamiento.name }}:</p>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -143,7 +141,6 @@
                 solo
                 v-model="enfriamiento.repetitions"
                 background-color="white"
-                :rules="rulesNumber"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -165,15 +162,14 @@
               >
                 mdi-timer
               </v-icon>
-              {{ calExec.time }}'' ||
-              {{calExec.reps}}
+              {{ calExec.time }}''
             </v-btn>
           </v-col>
         </v-row>
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio stage='Enfriamiento' v-on:add-exercise="addExercise" ></AgregarEjercicio>
+            <AgregarEjercicio :stage="Enfriamiento" v-on:add-exercise="addExercise" ></AgregarEjercicio>
           </v-col>
         </v-row>
 
@@ -194,19 +190,79 @@
 import AgregarEjercicio from "./AgregarEjercicio";
 
 export default {
-  name: "CarrouselParaCreacion",
+  name: "CarrouselParaModificacion",
   components : {AgregarEjercicio},
   data: () => (
       {
-        calentamiento:{name:'Calentamiento',detail:'Calentamiento',type:'warmup',order:1,repetitions:null,metadata:{ejercicios:[]} },
+        calentamiento:null,
         ejercitacion:[],
-        enfriamiento:{name:'Enfriamiento',detail:'Enfriamiento',type:'cooldown',order:null,repetitions:null,metadata:{ejercicios:[]} },
-        cicleNumber:2,
+        enfriamiento:null,
+        cicleNumber:null,
         update:true,
-        error:false,
-        rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 ']
+        error:false
+
+
       }),
+  created(){
+    this.calentamiento=this.routinesCycle[0]
+    let i;
+    for( i = 1 ; i < this.routinesCycle.length;i++ ){
+      if(this.routinesCycle[i].name==='Enfriamiento'){
+        this.enfriamiento=this.routinesCycle[i]
+      }
+      else
+        this.ejercitacion.push(this.routinesCycle[i])
+    }
+    this.cicleNumber=this.enfriamiento.order
+
+  },
+  props:{
+    routinesCycle:{
+      type:[],
+      required:true
+    }
+    },
+
   methods:{
+    SeleccCateg(){
+      this.$router.push({name:"SeleccCateg"})
+    },
+    EjercicioDescripcion(){
+      this.$router.push({name:"EjercicioDescripcion"})
+    },
+    tusRutinas(){
+      this.$router.push({name:"Tus rutinas"});
+    },
+    addExerciseCycle(){
+      this.update=false
+      this.cicleNumber++;
+      this.ejercitacion.push({name:'',detail:'Exercise',type:'exercise',order:this.cicleNumber,repetitions:null,metadata:{ejercicios:[]} })
+      setTimeout(()=>this.update=true,500)
+
+  },
+    SendInfo(){
+
+      if(this.ejercitacion.filter( (item) => ( item.name==null ) ).length > 0 ){
+        this.error=true //todos los ciclos deben tener un nombre asociado
+        return
+      }
+
+      if(this.calentamiento.repetitions == null || this.enfriamiento.repetitions == null || this.ejercitacion.filter((item)=>item.repetitions == null).length > 0 ){
+        this.error=true //se debe especificar la cantidad de vueltas en todos los ejercicios
+        return
+      }
+      // if(this.calentamiento.ejercicios.length == 0 || this.enfriamiento.ejercicios.length == 0 || this.ejercitacion.filter((item)=>item.metadata.ejercicios.length==0).length > 0){
+      //   this.error=true //no se puede agregar un ciclo sin ejercicios
+      //   return
+      // }
+
+      let cycles = []
+      cycles.push(this.calentamiento)
+      this.ejercitacion.forEach((item)=>cycles.push(item))
+      cycles.push(this.enfriamiento)
+      this.$emit('Info-Exercise',cycles)
+
+    },
     addExercise(event){
       if(event.stage==='Calentamiento'){
         this.calentamiento.metadata.ejercicios.push({
@@ -233,47 +289,8 @@ export default {
           }
         }
       }
+      console.log(event) //Aca nos llega { exercise: ObjectEjercicio, time: tiempo del ej, reps: reps}
     },
-    SeleccCateg(){
-      this.$router.push({name:"SeleccCateg"})
-    },
-    EjercicioDescripcion(){
-      this.$router.push({name:"EjercicioDescripcion"})
-    },
-    tusRutinas(){
-      this.$router.push({name:"Tus rutinas"});
-    },
-    addExerciseCycle(){
-      this.update=false
-      this.ejercitacion.push({name:'',detail:'Exercise',type:'exercise',order:this.cicleNumber,repetitions:null,metadata:{ejercicios:[]} })
-      this.cicleNumber++;
-      setTimeout(()=>this.update=true,500)
-
-  },
-    SendInfo(){
-      this.enfriamiento.order=this.cicleNumber
-
-      if(this.ejercitacion.filter( (item) => ( item.name==null ) ).length > 0 ){
-        this.error=true //todos los ciclos deben tener un nombre asociado
-        return
-      }
-
-      if(this.calentamiento.repetitions == null || this.enfriamiento.repetitions == null || this.ejercitacion.filter((item)=>item.repetitions == null).length > 0 ){
-        this.error=true //se debe especificar la cantidad de vueltas en todos los ejercicios
-        return
-      }
-      // if(this.calentamiento.ejercicios.length == 0 || this.enfriamiento.ejercicios.length == 0 || this.ejercitacion.filter((item)=>item.metadata.ejercicios.length==0).length > 0){
-      //   this.error=true //no se puede agregar un ciclo sin ejercicios
-      //   return
-      // }
-
-      let cycles = []
-      cycles.push(this.calentamiento)
-      this.ejercitacion.forEach((item)=>cycles.push(item))
-      cycles.push(this.enfriamiento)
-      this.$emit('Info-Exercise',cycles)
-
-    }
   }
 }
 </script>

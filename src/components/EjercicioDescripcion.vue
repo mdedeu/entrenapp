@@ -1,11 +1,11 @@
 <template>
   <v-container fluid class="primary fill-height" style="height: 100vh">
     <v-row>
-      <BackAndButton object="Ejericio agregado a favoritos">Agregar a favoritos</BackAndButton>
+        <ExerciseBackAndButton v-on:guardar-ejercicio="guardarEjercicio" :exercise="this.data_exercise" :exerciseId="this.data_exercise.id" class="mt-6"></ExerciseBackAndButton>
     </v-row>
     <v-row justify="center">
       <v-col cols="3" >
-        <p class="text-h4 accent--text">{{ejercicio.name}}</p>
+        <p class="text-h4 accent--text">{{this.data_exercise.name}}</p>
       </v-col>
     </v-row>
 
@@ -17,7 +17,7 @@
 
     <v-row justify="center">
       <v-col cols="6">
-        <p class="text-h5 accent--text">Músculos que trabaja: {{ejercicio.muscles}}</p>
+        <p class="text-h5 accent--text">Este ejercicio trabaja: {{this.data_exercise.metadata.musculos[0]}}</p>
       </v-col>
     </v-row>
   </v-container>
@@ -25,14 +25,29 @@
 </template>
 
 <script>
-import BackAndButton from "./BackAndButton";
+import ExerciseBackAndButton from "./ExerciseBackAndButton";
 export default {
   name: "EjercicioDescripcion",
-  components: {BackAndButton},
+  components: {ExerciseBackAndButton},
   data(){
     return {
-      ejercicio:{name:"Flexiones de brazo",muscles:"Pecho"}
+      data_exercise: null
     }
+  },
+  props:{
+    exercise: {
+      type: Object, //Nombre, musculo (o descanso), requirere herramientas, deportes
+      required: true
+    },
+  },
+  methods:{
+    async guardarEjercicio(){
+      await this.$store.dispatch('exercise/getAll')
+      this.data_exercise = await this.$store.dispatch('exercise/get', this.data_exercise)
+    }
+  },
+  created() {
+    this.data_exercise=this.exercise
   }
 }
 </script>
