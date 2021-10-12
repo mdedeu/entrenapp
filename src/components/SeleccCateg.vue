@@ -43,7 +43,7 @@
       props: ['stage'],
       data(){
         return {
-          categories:[{cat:"Ejercicios recomendados",showing:false},{cat:"Tus ejercicios",showing:false},{cat: 'Descanso',showing:false}],
+          categories:[{cat:"Ejercicios favoritos",showing:false},{cat:"Tus ejercicios",showing:false},{cat: 'Descanso',showing:false}],
           category_active: false
         }
       },
