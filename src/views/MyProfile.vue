@@ -1,13 +1,8 @@
 <template>
   <v-container fluid class="primary fill-height">
-    <v-row>
-      <v-col cols = 12><HeaderApp></HeaderApp></v-col>
-    </v-row>
-
-    <v-row>
-      <v-col>
+    <HeaderApp></HeaderApp>
+    <v-row justify="center">
         <ProfileCard></ProfileCard>
-      </v-col>
     </v-row>
   </v-container>
 </template>
