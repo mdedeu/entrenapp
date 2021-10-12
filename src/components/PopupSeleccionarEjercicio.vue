@@ -135,6 +135,30 @@
         </v-container>
       </v-col>
     </v-row>
+    <v-dialog :value="exito" width="500px">
+      <v-card>
+        <v-card-title class="text-h5 green lighten-2">
+          Éxito
+        </v-card-title>
+        <v-card-text>
+          Ejercicio agregado al ciclo de la rutina
+        </v-card-text>
+        <v-icon color="green" size="60">mdi-check</v-icon>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+              color="primary"
+              text
+              @click="closeAdd"
+          >
+            OK
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -157,7 +181,8 @@ export default {
       exercise_time: 0,
       exercise_reps: 0,
       currentExerciseToAdd : {},
-      rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 ']
+      rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 '],
+      exito:false
     }
   },
   methods:{
@@ -167,6 +192,10 @@ export default {
     closePopup() {
       this.$emit('close-popup')
     },
+    closeAdd(){
+      this.exito = false
+      this.agregar= false
+    },
     agregarPopup(exercise){
       this.agregar = true
       this.currentExerciseToAdd = exercise;
@@ -174,7 +203,7 @@ export default {
     addExercise(event){
       if(!isNaN(this.exercise_reps) && !isNaN(this.exercise_time)){
         this.$emit('add-exercise',event)
-        this.agregar = false
+        this.exito= true
       }
     },
     addColor(id){
