@@ -182,6 +182,31 @@
       <v-btn rounded class="accent text--primary mt-10 mb-16" @click="SendInfo">Siguiente</v-btn>
     </v-col>
   </v-row>
+
+    <v-dialog :value="popup" width="500px">
+      <v-card>
+        <v-card-title class="text-h5 green lighten-2">
+          Éxito
+        </v-card-title>
+        <v-card-text>
+          Rutina guardada con exito
+        </v-card-text>
+        <v-icon color="green" size="60">mdi-check</v-icon>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+              color="primary"
+              text
+              @click="closeAndSend"
+          >
+            OK
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 <script>
@@ -197,9 +222,9 @@ export default {
         enfriamiento:null,
         cicleNumber:null,
         update:true,
-        error:false
-
-
+        error:false,
+        popup:false,
+        cycles: false
       }),
   created(){
     this.calentamiento=this.routinesCycle[0]
@@ -238,8 +263,11 @@ export default {
       setTimeout(()=>this.update=true,500)
 
   },
+    closeAndSend(cycles){
+      this.popup= false
+      this.$emit('Info-Exercise',cycles)
+    },
     SendInfo(){
-
       if(this.ejercitacion.filter( (item) => ( item.name==null ) ).length > 0 ){
         this.error=true //todos los ciclos deben tener un nombre asociado
         return
@@ -258,7 +286,8 @@ export default {
       cycles.push(this.calentamiento)
       this.ejercitacion.forEach((item)=>cycles.push(item))
       cycles.push(this.enfriamiento)
-      this.$emit('Info-Exercise',cycles)
+      this.cycles = cycles
+      this.popup=true
 
     },
     addExercise(event){
