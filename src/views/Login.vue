@@ -2,7 +2,9 @@
   <v-container fluid  fill-height class="primary">
       <v-row>
         <v-col>
-          <p v-if="incorrect" class="text--h3">{{ this.error }}</p>
+          <v-alert v-if="incorrect" type="error" dismissible  @click="reset">
+           {{this.error}}
+          </v-alert>
         </v-col>
       </v-row>
 
@@ -17,18 +19,20 @@
       </v-row>
       <v-row>
         <v-col/>
-        <v-col>  <v-text-field   label="Nombre de usuario"
+        <v-col>  <v-text-field   label="Nombre de usuario*"
                                  required
-                                 solo
                                  prepend-inner-icon="mdi-account"
-                                 outlined
                                  v-model="email"
+                                 background-color="white"
+                                 color="accent"
+                                 solo
+                                 :rules="rules.name"
         ></v-text-field> </v-col>
         <v-col/>
       </v-row>
       <v-row>
         <v-col/>
-        <v-col>  <v-text-field label="Contraseña"
+        <v-col>  <v-text-field label="Contraseña*"
                                required
                                solo
                                prepend-inner-icon="mdi-lock-outline"
@@ -36,14 +40,16 @@
                                :append-icon="show ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
                                :type="show ? 'text' : 'password'"
                                @click:append="changeShow"
-                               outlined
+                               background-color="white"
+                               color="accent"
+                               :rules="rules.name"
         ></v-text-field> </v-col>
         <v-col/>
       </v-row>
       <v-row>
         <v-col/>
         <v-col class="text-center">
-          <v-btn class="accent text--primary" width="250" height="50" rounded @click="login">Ingresá</v-btn>
+          <v-btn  class="accent text--primary" width="250" height="50" rounded @click="login">Ingresá</v-btn>
         </v-col>
         <v-col/>
       </v-row>
@@ -67,23 +73,45 @@ export default {
       password : null,
       show: false,
       incorrect:false,
-      error:null
+      error:null,
+      dictionary : {
+        passUserError: 'Usuario o contraseña incorrecta',
+      },
+      rules:{
+        name: [
+            val => (val || '').length > 0 || 'Este campo es obligatorio',
+        ]
+      }
+
     }
   },
   methods :{
     async login(){
      try{
-       const credentials = new Credentials(this.email, this.password)
-       await this.$store.dispatch("security/login",{credentials, rememberMe: true });
-       this.$router.push({name:"RoutineLanding"})
+       if((this.password || '').length > 0 && (this.email || '').length>0){
+         const credentials = new Credentials(this.email, this.password)
+         await this.$store.dispatch("security/login",{credentials, rememberMe: true });
+         this.$router.push({name:"RoutineLanding"})
+       }
      }
       catch(e){
-        this.error=e.details
+        if(e.description.includes("username") || e.description.includes("password")){
+          this.error= this.dictionary.passUserError
+        }
+        else {
+          this.error = e.details
+        }
         this.incorrect=true
+        this.password = null;
+        this.email = null;
      }
     },
     changeShow(){
       this.show = !this.show ;
+    },
+    reset(){
+      this.incorrect = false;
+      this.error = null;
     }
   }
 }

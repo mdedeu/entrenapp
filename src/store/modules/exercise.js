@@ -1,3 +1,4 @@
+
 import {ExerciseApi} from "../../../API/exercise"
 
 export default{
@@ -89,6 +90,4 @@ export default{
             return result.content
         },
     },
-
-
 }
