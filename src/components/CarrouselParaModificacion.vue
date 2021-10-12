@@ -17,7 +17,8 @@
           </v-col>
           <v-col cols="3">
             <v-text-field
-                label="¿Cuántas vueltas de calentamiento?"
+                :rules="rulesNumber"
+                label="Nro. de vueltas*"
                 v-model="calentamiento.repetitions"
                 solo
                 background-color="white"
@@ -49,7 +50,7 @@
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio stage="Calentamiento" v-on:add-exercise="addExercise" ></AgregarEjercicio>
+            <AgregarEjercicio stage="Calentamiento" v-on:add-exercise="addExercise" v-on:add-descanso="addDescanso" ></AgregarEjercicio>
           </v-col>
         </v-row>
       </v-container>
@@ -71,7 +72,8 @@
           </v-col>
           <v-col cols="3">
             <v-text-field
-                label="¿Cuántas vueltas de estos ejercicios?"
+                :rules="rulesNumber"
+                label="Nro. de vueltas*"
                 solo
                 background-color="white"
                 v-model="exercise.repetitions"
@@ -103,7 +105,7 @@
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio :stage="exercise.name" v-on:add-exercise="addExercise" ></AgregarEjercicio>
+            <AgregarEjercicio :stage="exercise.name" v-on:add-exercise="addExercise" v-on:add-descanso="addDescanso"></AgregarEjercicio>
           </v-col>
         </v-row>
       </v-container>
@@ -135,7 +137,8 @@
           </v-col>
           <v-col cols="3">
             <v-text-field
-                label="¿Cuántas vueltas de enfriamiento?"
+                :rules="rulesNumber"
+                label="Nro. de vueltas*"
                 solo
                 v-model="enfriamiento.repetitions"
                 background-color="white"
@@ -167,7 +170,7 @@
 
         <v-row justify="center"  style="height: 11vh">
           <v-col cols="6" height="100%">
-            <AgregarEjercicio stage="Enfriamiento" v-on:add-exercise="addExercise" ></AgregarEjercicio>
+            <AgregarEjercicio stage="Enfriamiento" v-on:add-exercise="addExercise" v-on:add-descanso="addDescanso" ></AgregarEjercicio>
           </v-col>
         </v-row>
 
@@ -179,7 +182,7 @@
   </v-carousel>
   <v-row class="primary ">
     <v-col>
-      <v-btn rounded class="accent text--primary mt-10 mb-16" @click="SendInfo">Siguiente</v-btn>
+      <v-btn rounded class="accent text--primary mt-10 mb-16" @click="ModifyOrNot">Siguiente</v-btn>
     </v-col>
   </v-row>
 
@@ -200,9 +203,33 @@
           <v-btn
               color="primary"
               text
-              @click="closeAndSend"
+              @click="closeAndSend(cycles)"
           >
             OK
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog :value="confirmar" width="500px">
+      <v-card>
+        <v-card-title class="text-h5 warning lighten-2">
+          Advertencia
+        </v-card-title>
+        <v-card-text>
+          ¿Seguro que quiere continuar? No agregaste ningun ejercicio
+        </v-card-text>
+        <v-icon color="warning" size="60">mdi-help</v-icon>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+              color="primary"
+              text
+              @click="SendInfo"
+          >
+            Si
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -224,7 +251,11 @@ export default {
         update:true,
         error:false,
         popup:false,
-        cycles: false
+        cycles: false,
+        confirmar: false,
+        message: "",
+        amount: [{stage:'Calentamiento',count: 0}, {stage:'Enfriamiento', count:0}],
+        rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 '],
       }),
   created(){
     this.calentamiento=this.routinesCycle[0]
@@ -247,6 +278,39 @@ export default {
     },
 
   methods:{
+    addDescanso(event){
+      console.log("CarouselModificacioj")
+      if(event.stage==='Calentamiento'){
+        this.calentamiento.metadata.ejercicios.push({
+          time: event.segundos,
+          name : 'Descanso'
+        })
+      }else if(event.stage === 'Enfriamiento'){
+        this.enfriamiento.metadata.ejercicios.push({
+          time: event.segundos,
+          name : 'Descanso'
+        })
+      }else{
+        let i;
+        for(i=0;i<this.ejercitacion.length;i++){
+          if(this.ejercitacion[i].name === event.stage){
+            this.ejercitacion[i].metadata.ejercicios.push({
+              time: event.segundos,
+              name : 'Descanso'
+            })
+            break;
+          }
+        }
+      }
+
+    },
+    ModifyOrNot(){
+      if(this.amount[0].count === 0 || this.amount[1].count === 0){
+        this.confirmar=true;
+      }else{
+        this.SendInfo()
+      }
+    },
     SeleccCateg(){
       this.$router.push({name:"SeleccCateg"})
     },
@@ -297,12 +361,14 @@ export default {
           reps: event.reps,
           name : event.exercise.name
         })
+        this.amount[0].count +=1
       }else if(event.stage === 'Enfriamiento'){
         this.enfriamiento.metadata.ejercicios.push({
           time: event.time,
           reps: event.reps,
           name : event.exercise.name
         })
+        this.amount[1].count +=1
       }else{
         let i;
         for(i=0;i<this.ejercitacion.length;i++){

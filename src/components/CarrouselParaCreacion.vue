@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <p v-if="error" class="red--text text-h3">Error </p>
+        <v-alert v-if="error" type="error" dismissible @click="error=false">{{this.message}}</v-alert>
       </v-col>
     </v-row>
 
@@ -17,7 +17,7 @@
           </v-col>
           <v-col cols="3">
             <v-text-field
-                label="¿Cuántas vueltas de calentamiento?"
+                label="Nro de vueltas*"
                 v-model="calentamiento.repetitions"
                 solo
                 background-color="white"
@@ -73,7 +73,7 @@
           </v-col>
           <v-col cols="3">
             <v-text-field
-                label="¿Cuántas vueltas de estos ejercicios?"
+                label=""
                 solo
                 background-color="white"
                 v-model="exercise.repetitions"
@@ -139,7 +139,7 @@
           </v-col>
           <v-col cols="3">
             <v-text-field
-                label="¿Cuántas vueltas de enfriamiento?"
+                label="Nro.de Vueltas*"
                 solo
                 v-model="enfriamiento.repetitions"
                 background-color="white"
@@ -185,9 +185,33 @@
   </v-carousel>
   <v-row class="primary ">
     <v-col>
-      <v-btn rounded class="accent text--primary mt-10 mb-16" @click="SendInfo">Siguiente</v-btn>
+      <v-btn rounded class="accent text--primary mt-10 mb-16" @click="ConfirmarOno">Siguiente</v-btn>
     </v-col>
   </v-row>
+    <v-dialog :value="confirmar" width="500px">
+      <v-card>
+        <v-card-title class="text-h5 warning lighten-2">
+          Advertencia
+        </v-card-title>
+        <v-card-text>
+          ¿Seguro que quiere continuar? Alguno de los ciclos no tienen ejercicios
+        </v-card-text>
+        <v-icon color="warning" size="60">mdi-help</v-icon>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+              color="primary"
+              text
+              @click="SendInfo"
+          >
+            Si
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 <script>
@@ -204,9 +228,19 @@ export default {
         cicleNumber:2,
         update:true,
         error:false,
-        rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 ']
+        amount: [{stage:'Calentamiento',count: 0}, {stage:'Enfriamiento', count:0}],
+        rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 '],
+        confirmar: false,
+        message: ""
       }),
   methods:{
+    ConfirmarOno(){
+      if(this.amount[0].count === 0 || this.amount[1].count === 0){
+        this.confirmar=true;
+      }else{
+        this.SendInfo()
+      }
+    },
     addExercise(event){
       if(event.stage==='Calentamiento'){
         this.calentamiento.metadata.ejercicios.push({
@@ -214,12 +248,14 @@ export default {
           reps: event.reps,
           name : event.exercise.name
         })
+        this.amount[0].count +=1
       }else if(event.stage === 'Enfriamiento'){
         this.enfriamiento.metadata.ejercicios.push({
           time: event.time,
           reps: event.reps,
           name : event.exercise.name
         })
+        this.amount[1].count+=1
       }else{
         let i;
         for(i=0;i<this.ejercitacion.length;i++){
@@ -279,11 +315,15 @@ export default {
 
       if(this.ejercitacion.filter( (item) => ( item.name==null ) ).length > 0 ){
         this.error=true //todos los ciclos deben tener un nombre asociado
+        this.message = "Todos los ciclos deben tener un nombre asociado"
+        this.confirmar = false
         return
       }
 
       if(this.calentamiento.repetitions == null || this.enfriamiento.repetitions == null || this.ejercitacion.filter((item)=>item.repetitions == null).length > 0 ){
-        this.error=true //se debe especificar la cantidad de vueltas en todos los ejercicios
+        this.error=true
+        this.message = "Se debe especificar la cantidad de vueltas de cada ciclo"
+        this.confirmar = false
         return
       }
       // if(this.calentamiento.ejercicios.length == 0 || this.enfriamiento.ejercicios.length == 0 || this.ejercitacion.filter((item)=>item.metadata.ejercicios.length==0).length > 0){
@@ -296,7 +336,7 @@ export default {
       this.ejercitacion.forEach((item)=>cycles.push(item))
       cycles.push(this.enfriamiento)
       this.$emit('Info-Exercise',cycles)
-
+      this.confirmar = false
     }
   }
 }

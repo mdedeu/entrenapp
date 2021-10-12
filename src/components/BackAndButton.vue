@@ -155,11 +155,11 @@
     >
       <v-card>
         <v-card-title class="text-h5 red lighten-2">
-          Eliminar este ejercicio
+          Eliminar  rutina
         </v-card-title>
 
         <v-card-text>
-          Seguro que desea eliminar este ejercicio?
+          Seguro que desea eliminar esta rutina?
         </v-card-text>
         <v-icon color="red" size="60">mdi-delete</v-icon>
 
