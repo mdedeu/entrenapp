@@ -68,22 +68,26 @@ const routes = [
   {
     path: '/EjerciciosRecomendados',
     name: 'EjerciciosRecomendados',
-    component: EjerciciosRecomendados
+    component: EjerciciosRecomendados,
+    props: true
   },
   {
     path: '/EjerciciosFavoritos',
     name: 'EjerciciosFavoritos',
-    component: EjerciciosFavoritos
+    component: EjerciciosFavoritos,
+    props: true
   },
   {
     path: '/EjerciciosLanding',
     name: 'EjerciciosLanding',
-    component: EjerciciosLanding
+    component: EjerciciosLanding,
+    props: true
   },
   {
     path: '/TusEjercicios',
     name: 'Tus Ejercicios',
-    component: TusEjercicios
+    component: TusEjercicios,
+    props: true
   },
   {
     path: '/Verification',
@@ -117,7 +121,8 @@ const routes = [
   {
     path: '/EjercicioDescripcion',
     name: 'EjercicioDescripcion',
-    component: EjercicioDescripcion
+    component: EjercicioDescripcion,
+    props:true
   },
   {
     path: '/RoutineLanding',
@@ -157,6 +162,7 @@ const routes = [
     component: RutinasFavoritas,
     props: true
   },
+
   // {
   //   path: '/RutinasRecomendadas',
   //   name: 'RutinasRecomendadas',

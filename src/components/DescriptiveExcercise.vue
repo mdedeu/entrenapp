@@ -1,19 +1,19 @@
 <template>
     <v-card
-        class="mx-auto"
-        max-width="500"
+        class="mx-10"
+        max-width="600"
         outlined
         onclick="EjercicioDescripcion()"
     >
       <v-list-item three-line>
         <v-list-item-content>
           <div class="text-overline mb-4">
-            {{category}}
+            <p>category</p>
           </div>
           <v-list-item-title class="text-h5 mb-1">
-            {{name}}
+            {{exerciseDes.name}}
           </v-list-item-title>
-          <v-list-item-subtitle>Esta ejercicio tiene dificultad {{difficulty}}. </v-list-item-subtitle>
+          <v-list-item-subtitle>Este ejercicio esta orientado al {{exerciseDes.metadata.deportes}}. </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -25,7 +25,7 @@
             @click="EjercicioDescripcion()"
             class="accent"
         >
-          Ir al Ejercicio
+          Ir al ejercicio
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -33,13 +33,19 @@
 
   <script>
     export default {
-      name: "DescriptiveExcercise",
-      props: ['name','category','difficulty'],
+      name: "DescriptiveExercise",
+      //props: ['name','category','difficulty'],
+      props: {
+        exerciseDes: {
+          type: Object,
+          required: true
+        }
+      },
       methods:{
-        EjercicioDescripcion(){
-          this.$router.push({name:"EjercicioDescripcion"})
+        EjercicioDescripcion: function () {
+          this.$router.push({name: 'EjercicioDescripcion', params: {exercise: this.exerciseDes}})
         },
-      }
+      },
     }
 
 </script>
