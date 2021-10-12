@@ -114,7 +114,7 @@
                 Éxito
               </v-card-title>
               <v-card-text>
-                ¡Ejercicio editado correctamente!
+                ¡Ejercicio creado correctamente!
               </v-card-text>
               <v-icon color="green" size="60">mdi-check</v-icon>
 

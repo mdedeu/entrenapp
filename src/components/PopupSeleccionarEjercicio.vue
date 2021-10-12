@@ -74,7 +74,7 @@
                     outlined
                     rounded
                     text
-                    @click="EjercicioDescripcion"
+                    @click="EjercicioDescripcion(exercise)"
                     class="accent"
                 >
                   Ir al Ejercicio
@@ -166,14 +166,26 @@
 <script>
 
 import Close from "./Close";
+import {mapGetters} from "vuex";
 export default {
   name: 'PopupSeleccionarEjercicio',
   components: {Close},
-  props: ['stage'],
+  props: {
+    isFav:{
+      type: Boolean,
+      required: true
+    },
+    //['stage']
+    stage: {
+      type: String,
+      required: true
+    }
+  },
   data(){
     return {
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
-      exercises:[{name:"Flexiones de brazo", difficulty: 'Intermedio', category: 'Pecho'},{name:"Abdominales bolita", difficulty: 'Intermedio', category: 'Pecho'},{name:"Salto con soga", difficulty: 'Intermedio', category: 'Pecho'},{name:"Estirar piernas", difficulty: 'Intermedio', category: 'Pecho'},{name:"Espalda en colchoneta", difficulty: 'Intermedio', category: 'Pecho'}],
+      exercises: null,//[{name:"Flexiones de brazo", difficulty: 'Intermedio', category: 'Pecho'},{name:"Abdominales bolita", difficulty: 'Intermedio', category: 'Pecho'},{name:"Salto con soga", difficulty: 'Intermedio', category: 'Pecho'},{name:"Estirar piernas", difficulty: 'Intermedio', category: 'Pecho'},{name:"Espalda en colchoneta", difficulty: 'Intermedio', category: 'Pecho'}],
+      favouriteExercises: null,
       sports: ['Futbol','Hockey', 'Otros'],
       selected_muscle: null,
       selected_sport: null,
@@ -185,9 +197,23 @@ export default {
       exito:false
     }
   },
+  computed:{
+    ...mapGetters('exercise', {
+      $getFavouriteExercises : 'getFavourites',
+      $getExercises : 'getMine'
+    })
+  },
+  async created() {
+    console.log('Es favorito?')
+    console.log(this.isFav)
+    await this.$store.dispatch('exercise/getAll')
+    if(this.isFav){
+      this.exercises = this.$getFavouriteExercises
+    } else {this.exercises = this.$getExercises}
+  },
   methods:{
-    EjercicioDescripcion(){
-      this.$router.push({name:"EjercicioDescripcion"})
+    EjercicioDescripcion(exercise){
+      this.$router.push({name: 'EjercicioDescripcion', params: {exercise: exercise}})
     },
     closePopup() {
       this.$emit('close-popup')

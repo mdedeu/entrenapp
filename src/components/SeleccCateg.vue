@@ -25,7 +25,7 @@
                 </v-col>
                 </template>
                 <PopupDescanso :stage= "stage" v-if="category.cat==='Descanso'"  v-on:close-popup="updateShowing()" v-on:add-descanso="addDescanso"></PopupDescanso>
-                <PopupSeleccionarEjercicio :stage="stage" v-else v-on:close-popup="updateShowing()" v-on:add-exercise="addExercise"></PopupSeleccionarEjercicio>
+                <PopupSeleccionarEjercicio :isFav=category.isFav :stage="stage" v-else v-on:close-popup="updateShowing()" v-on:add-exercise="addExercise"></PopupSeleccionarEjercicio>
               </v-dialog>
 
 
@@ -43,7 +43,7 @@
       props: ['stage'],
       data(){
         return {
-          categories:[{cat:"Ejercicios favoritos",showing:false},{cat:"Tus ejercicios",showing:false},{cat: 'Descanso',showing:false}],
+          categories:[{cat:"Ejercicios favoritos",showing:false, isFav:true},{cat:"Tus ejercicios",showing:false, isFav:false},{cat: 'Descanso',showing:false, isFav:false}],
           category_active: false
         }
       },
