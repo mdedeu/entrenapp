@@ -55,6 +55,18 @@
           console.log("SeleccCateg")
           this.$emit('add-descanso',segundos)
         }
+      },
+      created() {
+        if(!this.routine){
+          this.routineData = (JSON).parse(localStorage.getItem('routine'))
+          this.routineIDdata = Number(localStorage.getItem('routineID'))
+        }
+        else{
+          this.routineData = this.routine
+          this.routineIDdata = this.routineID
+          localStorage.setItem('routine', JSON.stringify(this.routine))
+          localStorage.setItem('routineID', this.routineID.toString())
+        }
       }
     }
     </script>

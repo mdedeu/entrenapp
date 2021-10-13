@@ -4,7 +4,7 @@
   <v-container v-else-if="!mine">
   <v-row justify="space-between">
 
-    <Back></Back>
+    <Back v-if="this.$router"></Back>
 
 
     <v-col v-if="favourite" class="col-3" offset="6" >
