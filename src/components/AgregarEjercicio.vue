@@ -27,7 +27,7 @@
     </template>
     <v-card class="primary"
     rounded>
-      <SeleccCateg :stage="stage_data" v-on:close-popup="popup=false" v-on:add-exercise="addExercise" v-on:add-descanso="addDescanso"></SeleccCateg>
+      <SeleccCateg :stage="stage" v-on:close-popup="popup=false" v-on:add-exercise="addExercise" v-on:add-descanso="addDescanso"></SeleccCateg>
     </v-card>
 
   </v-dialog>
@@ -45,7 +45,6 @@
       data(){
         return {
           popup: false,
-          stage_data: null
         }
       },
       methods :{
@@ -55,15 +54,6 @@
         addDescanso(segundos){
           console.log("SeleccCateg")
           this.$emit('add-descanso',segundos)
-        }
-      },
-      created() {
-        if(!this.stage){
-          this.stage_data = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['stage']
-        }
-        else{
-          this.stage_data = this.stage
-          this.$store.dispatch('cache/setStage',this.stage)
         }
       }
     }

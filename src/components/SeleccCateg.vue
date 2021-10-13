@@ -24,8 +24,8 @@
                     </v-btn>
                 </v-col>
                 </template>
-                <PopupDescanso :stage= "stage_data" v-if="category.cat==='Descanso'"  v-on:close-popup="updateShowing()" v-on:add-descanso="addDescanso"></PopupDescanso>
-                <PopupSeleccionarEjercicio :stage="stage_data" v-else v-on:close-popup="updateShowing()" v-on:add-exercise="addExercise"></PopupSeleccionarEjercicio>
+                <PopupDescanso :stage= "stage" v-if="category.cat==='Descanso'"  v-on:close-popup="updateShowing()" v-on:add-descanso="addDescanso"></PopupDescanso>
+                <PopupSeleccionarEjercicio :stage="stage" v-else v-on:close-popup="updateShowing()" v-on:add-exercise="addExercise"></PopupSeleccionarEjercicio>
               </v-dialog>
 
 
@@ -45,7 +45,6 @@
         return {
           categories:[{cat:"Ejercicios favoritos",showing:false},{cat:"Tus ejercicios",showing:false},{cat: 'Descanso',showing:false}],
           category_active: false,
-          stage_data:null
         }
       },
       methods : {
@@ -65,14 +64,5 @@
           this.$emit('add-exercise',event)
         }
       },
-      created() {
-        if(!this.stage){
-          this.stage_data = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['stage']
-        }
-        else{
-          this.stage_data = this.stage
-          this.$store.dispatch('cache/setStage',this.stage)
-        }
-      }
 }
 </script>

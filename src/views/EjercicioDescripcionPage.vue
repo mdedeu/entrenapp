@@ -10,6 +10,7 @@
 
 <script>
 import EjercicioDescripcion from '../components/EjercicioDescripcion'
+import {mapGetters} from 'vuex'
 
 export default {
   name: "EjercicioDescripcionPage",
@@ -22,6 +23,10 @@ export default {
       required: true
     }
   },
+  computed:{
+    ...mapGetters('cache',['get']),
+
+  },
   data() {
     return {
       exerciseData: null,
@@ -29,11 +34,11 @@ export default {
   },
   created() {
     if(!this.exercise){
-      this.exerciseData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exercise']
+      this.exerciseData = this.$store.getters['cache/get']('exercise')
     }
     else{
-      this.exerciseData = this.exceptionDetails
-      this.$store.dispatch('cache/setExercise',this.exercise)
+      this.exerciseData = this.exercise
+      this.$store.dispatch('cache/set',{key:'exercise',value:this.exercise})
     }
   }
 }

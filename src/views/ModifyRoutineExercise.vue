@@ -53,6 +53,9 @@ export default {
   },
   computed:{
     ...mapGetters('routineCycle',['getRoutineCycle']),
+    ...mapGetters('cache',['get']),
+
+
   },
   data(){
     return{
@@ -93,18 +96,19 @@ export default {
     }
   }, created() {
     if(!this.routine){
-      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routine']
+      this.routineData = this.$store.getters['cache/get']('routine')
     }
     else{
       this.routineData = this.routine
-      this.$store.dispatch('cache/setRoutine',this.routine)
+      this.$store.dispatch('cache/set', {key:'routine',value:this.routine})
     }
 
     if(!this.routinesCycle){
-      this.routinesCycleData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routinesCycle']
+      this.routinesCycleData = this.routineCycleData = this.$store.getters['cache/get']('routineCycle')
+
     }else{
       this.routinesCycleData = this.routinesCycle
-      this.$store.dispatch('cache/setRoutinesCycle',this.routinesCycle)
+      this.$store.dispatch('cache/set',{key:'routineCycle',value:this.routineCycle})
     }
   }
 

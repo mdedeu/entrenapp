@@ -104,7 +104,6 @@ export default {
       selected_difficulty : null,
       selected_duration : null,
       selected_sport: null,
-      slugData: null
     }
   },
   methods : {
@@ -156,7 +155,7 @@ export default {
     ...mapGetters('favouriteRoutine',['getFavouritesId']),
 
     routines(){
-      if(this.slugData==='favoritas'){
+      if(this.slug==='favoritas'){
         return this.getFavouritesId
       }
       return this.getOther(this.user.username)
@@ -164,17 +163,8 @@ export default {
   },
   async created() {
     this.loading = true;
-
-    if(!this.slug){
-      this.slugData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['slug']
-    }
-    else{
-      this.slugData = this.slug
-      this.$store.dispatch('cache/setSlug',this.slug)
-    }
-
     await this.$store.dispatch("security/getCurrentUser")
-    if(this.slugData != 'favoritas')
+    if(this.slug != 'favoritas')
       await this.$store.dispatch("routine/getAll")
     else
       await this.$store.dispatch("favouriteRoutine/getAll")

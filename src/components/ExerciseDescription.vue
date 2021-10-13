@@ -1,16 +1,16 @@
 <template>
   <v-container class="mb-7">
-    <ExerciseBackAndButton :exerciseId="this.exerciseData.id" class="mt-6"></ExerciseBackAndButton>
+    <ExerciseBackAndButton :exerciseId="this.exercise.id" class="mt-6"></ExerciseBackAndButton>
     <div  class="pt-10 accent--text">
       <v-row justify="center">
-        <h2>{{exerciseData.name}}</h2>
+        <h2>{{exercise.name}}</h2>
       </v-row>
       <v-row justify="center">
-        <p>Musculos que trabaja: {{exerciseData.name}}</p>
+        <p>Musculos que trabaja: {{exercise.name}}</p>
       </v-row>
       <v-row justify="center">
         <p>
-          Duración: {{exerciseData.name}}
+          Duración: {{exercise.name}}
         </p>
       </v-row>
     </div>
@@ -33,21 +33,6 @@ export default {
       required: true
     }
   },
-  created() {
-    if(!this.exercise){
-      this.exerciseData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exercise']
-    }
-    else{
-      this.exerciseData = this.exercise
-      this.$store.dispatch('cache/setExercise',this.exercise)
-    }
-  },
-  data () {
-    return {
-      exerciseData: null
-    }
-  }
-
 }
 </script>
 <style scoped>

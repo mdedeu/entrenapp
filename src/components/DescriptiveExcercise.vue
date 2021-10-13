@@ -11,9 +11,9 @@
             <p>category</p>
           </div>
           <v-list-item-title class="text-h5 mb-1">
-            {{exerciseDesData.name}}
+            {{exerciseDes.name}}
           </v-list-item-title>
-          <v-list-item-subtitle>Este ejercicio esta orientado al {{exerciseDesData.metadata.deportes}}. </v-list-item-subtitle>
+          <v-list-item-subtitle>Este ejercicio esta orientado al {{exerciseDes.metadata.deportes}}. </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -43,23 +43,10 @@
       },
       methods:{
         EjercicioDescripcion: function () {
-          this.$router.push({name: 'EjercicioDescripcion', params: {exercise: this.exerciseDesData}})
+          this.$router.push({name: 'EjercicioDescripcion', params: {exercise: this.exerciseDes}})
         },
       },
-      created() {
-        if(!this.exerciseDes){
-          this.exerciseDesData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exerciseDes']
-        }
-        else{
-          this.exerciseDesData = this.exerciseDes
-          this.$store.dispatch('cache/setExerciseDes',this.exerciseDes)
-        }
-      },
-      data () {
-        return {
-          exerciseDesData: null
-        }
-      }
+
     }
 
 </script>

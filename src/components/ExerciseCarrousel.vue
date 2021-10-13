@@ -2,7 +2,7 @@
   <v-container fluid class="accent fill-height">
     <v-row justify="center" class="mb-5 mt-4">
       <v-col cols="5">
-        <router-link  :to="{path:`${SectionData.path}`}" class="text-h4">{{ SectionData.title }}</router-link>
+        <router-link  :to="{path:`${Section.path}`}" class="text-h4">{{ Section.title }}</router-link>
       </v-col>
     </v-row>
     <v-row class="mb-5 mt-4" justify="space-around">
@@ -32,31 +32,6 @@ export default {
       required:true
     }
   },
-  created() {
-    if(!this.Section){
-      this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['Section']
-    }
-    else{
-      this.SectionData = this.Section
-      this.$store.dispatch('cache/setSection',this.Section)
-    }
-    if(!this.exercises){
-      this.exercisesData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exercises']
-    }
-    else{
-      this.exercisesData = this.exercises
-      this.$store.dispatch('cache/setExercises',this.exercises)
-    }
-  },
-  data() {
-    return{
-      SectionData: null,
-      exercisesData: null
-    }
-  }
-
-
-
 }
 </script>
 

@@ -43,6 +43,7 @@
 <script>
 import HeaderApp from "../components/HeaderApp";
 import CarrouselParaCreacion from '../components/CarrouselParaCreacion'
+import {mapGetters} from 'vuex'
 
 
 
@@ -58,6 +59,10 @@ export default {
       routineIDdata: null,
       routineData: null
     }
+  },
+  computed:{
+    ...mapGetters('cache',['get']),
+
   },
   methods:{
    async saveCycles(cycles) {
@@ -84,14 +89,14 @@ export default {
   },
   created() {
     if(!this.routineID){
-      this.routineIDdata = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routineID']
-      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routine']
+      this.routineIDdata = this.$store.getters['cache/get']('routineID')
+      this.routineData = this.$store.getters['cache/get']('routine')
     }
     else{
       this.routineIDdata = this.routineID
       this.routineData = this.routine
-      this.$store.dispatch('cache/setRoutineID',this.routineID)
-      this.$store.dispatch('cache/setRoutine',this.routine)
+      this.$store.dispatch('cache/set',{key:'routineID',value:this.routineID})
+      this.$store.dispatch('cache/set',{key:'routine',value:this.routine})
     }
   }
 }

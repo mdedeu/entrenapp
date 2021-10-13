@@ -4,6 +4,9 @@
 
 <script>
 import PantallaDividida from "../components/PantallaDividida";
+import {mapGetters} from 'vuex'
+
+
 export default {
   name: "RutinasFavoritas",
   components: {PantallaDividida},
@@ -18,13 +21,18 @@ export default {
       slugData: null
     }
   },
+  computed:{
+    ...mapGetters('cache',['get']),
+
+  },
+
   created() {
     if(!this.slug){
-      this.slugData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['slug']
+      this.slugData = this.$store.getters['cache/get']('slug')
     }
     else{
       this.slugData = this.slug
-      this.$store.dispatch('cache/setSlug',this.slug)
+      this.$store.dispatch('cache/set',{key:'slug',value:this.slug})
     }
   }
 }

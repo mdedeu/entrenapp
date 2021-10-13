@@ -28,6 +28,7 @@ import HeaderApp from '../components/HeaderApp'
 import Back from '../components/Back'
 import TusEj from '../components/TusejerciciosComponent'
 import CrearEjercicioButton from "../components/CrearEjercicioButton";
+import {mapGetters} from 'vuex'
 
 export default {
   name: "TusEjercicios",
@@ -48,13 +49,18 @@ export default {
       titleData: null
     }
   },
+  computed:{
+    ...mapGetters('cache',['get']),
+
+  },
+
   created() {
     if(!this.title){
-      this.title = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['title']
+      this.title = this.$store.getters['cache/get']('title')
     }
     else{
       this.titleData = this.title
-      this.$store.dispatch('cache/setTitle',this.title)
+      this.$store.dispatch('cache/set',{key:'title',value:this.title})
     }
   }
 }

@@ -116,13 +116,11 @@ export default {
     return {
       sports: ['Futbol', 'Tenis', 'Hockey', 'Ninguno'],
       difficulty: null,
-      nombre: this.routineData.name,
-      sport_selected : this.routineData.metadata.sport,
+      nombre: this.routine.name,
+      sport_selected : this.routine.metadata.sport,
       error:false,
       publicRoutine:true,
-      descripcion:this.routineData.detail,
-      routineData: null,
-      routineCycleData: null
+      descripcion:this.routine.detail,
     }
   },
   methods : {
@@ -167,23 +165,8 @@ export default {
     }
   },
   created(){
-    if(!this.routine){
-      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routine']
-    }
-    else{
-      this.routineData = this.routine
-      this.$store.dispatch('cache/setRoutine',this.routine)
-    }
-
-    if(!this.routineCycle){
-      this.routineCycleData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routineCycle']
-    }else{
-      this.routineCycleData = this.routineCycle
-      this.$store.dispatch('cache/setRoutineCycle',this.routineCycle)
-    }
-
-    let element =document.getElementById(this.routineData.difficulty)
-    this.difficulty = this.routineData.difficulty;
+    let element =document.getElementById(this.routine.difficulty)
+    this.difficulty = this.routine.difficulty;
     element.classList.add('accent')
   }
 }

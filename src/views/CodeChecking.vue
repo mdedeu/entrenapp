@@ -38,8 +38,10 @@
 </template>
 
 <script>
+
 export default {
   name: "CodeChecking",
+
   data(){
     return{
       code:null,
@@ -54,6 +56,7 @@ export default {
       required:true
     }
   },
+
   methods:{
     async check(){
         try{
@@ -69,11 +72,11 @@ export default {
   },
   created() {
     if(!this.user){
-      this.userData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['user']
+      this.userData = this.$store.getters['cache/get']('user')
     }
     else{
       this.userData = this.user
-      this.$store.dispatch('cache/setUser',this.user)
+      this.$store.dispatch('cache/set', {key:'user',value:this.user})
     }
   }
 }

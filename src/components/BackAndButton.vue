@@ -212,8 +212,6 @@ export default {
       loading : true,
       loadingButton:false,
       eliminada: false,
-      routineIDdata: null,
-      routineData: null
     }
   },
   methods:{
@@ -221,11 +219,11 @@ export default {
       console.log(this.routine)
       console.log(this.getUser)
       await this.$store.dispatch("security/getCurrentUser")
-      return this.routineData.user.id === this.getUser.id
+      return this.routine.user.id === this.getUser.id
     },
     async addTofavourite(){
       this.loadingButton=true
-      await this.create(this.routineIDdata)
+      await this.create(this.routineID)
       await this.$store.dispatch("favouriteRoutine/getAll")
       this.loadingButton=false
     },
@@ -233,16 +231,16 @@ export default {
     ...mapActions( 'favouriteRoutine',['delete'] ),
 
     async removeRoutine(){
-       await this.$store.dispatch('routine/delete',this.routineData)
+       await this.$store.dispatch('routine/delete',this.routine)
        this.redirect()
     },
     redirect(){
       this.$router.push({name:'RoutineLanding'})
     },
     async editRoutine(){
-      await this.$store.dispatch('routineCycle/getAll',this.routineData)
+      await this.$store.dispatch('routineCycle/getAll',this.routine)
       let routineCycleL = this.getRoutineCycle;
-      this.$router.push({name:"modifyRoutineInfo",params:{routine:this.routineData,routineCycle:routineCycleL}})
+      this.$router.push({name:"modifyRoutineInfo",params:{routine:this.routine,routineCycle:routineCycleL}})
     },
 
 
@@ -272,28 +270,15 @@ export default {
 
 
     favourite(){
-      return  this.isFavouriteFunction.includes(this.routineIDdata)
+      return  this.isFavouriteFunction.includes(this.routineID)
     }
 
   },
   async created() {
     this.loading = true;
-
-    if(!this.routineID){
-      this.routineIDdata = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routineID']
-      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routine']
-    }
-    else{
-      this.routineIDdata = this.routineID
-      this.routineData = this.routine
-      this.$store.dispatch('cache/setRoutineID',this.routineID)
-      this.$store.dispatch('cache/setRoutine',this.routine)
-    }
     await this.$store.dispatch("security/getCurrentUser")
     await this.$store.dispatch("favouriteRoutine/getAll")
-
     this.loading = false;
-
   }
 
 }

@@ -121,7 +121,7 @@
 
 
       <v-col>
-        <ModificarEjercicio v-on:guardar-ejercicio="guardarAuxiliar" :slug="exerciseData"></ModificarEjercicio>
+        <ModificarEjercicio v-on:guardar-ejercicio="guardarAuxiliar" :slug="exercise"></ModificarEjercicio>
       </v-col>
 
       <v-col>
@@ -204,8 +204,6 @@ export default {
       dialog:false,
       loading : true,
       loadingButton:false,
-      exerciseIDdata: null,
-      exerciseData: null
     }
   },
   methods:{
@@ -214,14 +212,14 @@ export default {
       $deleteExercise: 'delete'
     }),
     async addTofavourite(){
-      const result = this.exerciseData
+      const result = this.exercise
       result.metadata.favorito=true
       await this.$store.dispatch('exercise/getAll')
       await this.$store.dispatch('exercise/modify', result)
     },
 
     async removeFromFavourite(){
-      const result = this.exerciseData
+      const result = this.exercise
       result.metadata.favorito=false
       await this.$store.dispatch('exercise/getAll')
       await this.$store.dispatch('exercise/modify', result)
@@ -229,7 +227,7 @@ export default {
     async deleteHandler(){
       this.dialog_delete = false
       await this.$store.dispatch('exercise/getAll')
-      await this.$store.dispatch('exercise/delete', this.exerciseData)
+      await this.$store.dispatch('exercise/delete', this.exercise)
       return this.$router.go(-1);
     },
     guardarAuxiliar(){
@@ -253,24 +251,12 @@ export default {
     }),
 
     favourite(){
-      return  this.exerciseData.metadata.favorito
+      return  this.exercise.metadata.favorito
     }
 
   },
   async created() {
     this.loading = true;
-
-    if(!this.exerciseId){
-      this.exerciseIDdata = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exerciseID']
-      this.exerciseData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exercise']
-    }
-    else{
-      this.exerciseIDdata = this.exerciseId
-      this.exerciseData = this.exercise
-      this.$store.dispatch('cache/setExerciseID',this.exerciseId)
-      this.$store.dispatch('cache/setExercise',this.exercise)
-    }
-
     await this.$store.dispatch("exercise/getAll")
     this.loading = false;
   }

@@ -17,6 +17,7 @@
     import RoutineDescription from '../components/RoutineDescription'
     import HeaderApp from '../components/HeaderApp'
     import CarrouselParaCiclos from '../components/CarrouselParaCiclos'
+    import {mapGetters} from 'vuex'
 
     export default {
     name: "RoutineDescriptionPage",
@@ -31,6 +32,9 @@
           required: true
         }
       },
+      computed:{
+      ...mapGetters('cache',['get']),
+      },
       data(){
         return{
           routineData: null
@@ -38,11 +42,12 @@
       },
       created() {
         if(!this.routine){
-          this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routine']
+          this.routineData = this.$store.getters['cache/get']('routine')
+          console.log(this.routineData)
         }
         else{
           this.routineData = this.routine
-          this.$store.dispatch('cache/setRoutine',this.routine)
+          this.$store.dispatch('cache/set', { key:'routine', value:this.routine } )
         }
       }
 

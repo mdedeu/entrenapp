@@ -2,7 +2,7 @@
   <v-container fluid class="accent fill-height">
     <v-row justify="center">
       <v-col cols="3">
-        <router-link  :to="{name:`${SectionData.nameComponent}`}" class="text-h4">{{ SectionData.title }}</router-link>
+        <router-link  :to="{name:`${Section.nameComponent}`}" class="text-h4">{{ Sectionf.title }}</router-link>
       </v-col>
     </v-row  >
     <v-row>
@@ -36,7 +36,6 @@ export default {
   data(){
     return {
       exercises : [ {id:0,name:"Salto con soga"} , {id:1,name:"Salto con soga"} , {id:2,name:"Salto con soga"}, {id:3,name:"Salto con soga"} ],
-      SectionData: null
     }
   },
   props:{
@@ -50,16 +49,6 @@ export default {
       this.$router.push({name:"EjercicioDescripcion"})
     }
   },
-  created() {
-    if(!this.Section){
-      this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['Section']
-    }
-    else{
-      this.SectionData = this.Section
-      this.$store.dispatch('cache/setSection',this.Section)
-    }
-  }
-
 }
 </script>
 

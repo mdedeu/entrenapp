@@ -42,6 +42,8 @@
 <script>
 import HeaderApp from "../components/HeaderApp";
 import RutinasModificador from '../components/RutinasModificador'
+import {mapGetters} from 'vuex'
+
 
 export default {
   name: "RoutineCreatorInfo",
@@ -61,6 +63,10 @@ export default {
       this.$router.push({name:"ModifyRoutineExercise",params:{routine:this.routineData,routinesCycle:this.routineCycleData}})
     }
   },
+  computed:{
+    ...mapGetters('cache',['get']),
+
+  },
   props:{
     routine:{
       type:Object,
@@ -73,18 +79,18 @@ export default {
   },
   created() {
     if(!this.routine){
-      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routine']
+      this.routineData = this.$store.getters['cache/get']('routine')
     }
     else{
       this.routineData = this.routine
-      this.$store.dispatch('cache/setRoutine',this.routine)
+      this.$store.dispatch('cache/set', {key:'routine',value:this.routine})
     }
 
     if(!this.routineCycle){
-      this.routineCycleData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routineCycle']
+      this.routineCycleData = this.$store.getters['cache/get']('routineCycle')
     }else{
       this.routineCycleData = this.routineCycle
-      this.$store.dispatch('cache/setRoutineCycle',this.routineCycle)
+      this.$store.dispatch('cache/set',{key:'routineCycle',value:this.routineCycle})
     }
   },
   data(){

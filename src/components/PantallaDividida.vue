@@ -9,12 +9,12 @@
     </v-row>
     <v-row justify="center">
       <v-col cols="3">
-        <h2 class="accent--text text-h3">Rutinas  {{this.slugData}}</h2>
+        <h2 class="accent--text text-h3">Rutinas  {{this.slug}}</h2>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <FiltroRutinas :slug="this.slugData"></FiltroRutinas>
+        <FiltroRutinas :slug="this.slug"></FiltroRutinas>
       </v-col>
     </v-row>
 
@@ -34,20 +34,6 @@ export default {
       required:true
     }
   },
-  data(){
-    return {
-      slugData: null
-    }
-  },
-  created() {
-    if(!this.slug){
-      this.slugData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['slug']
-    }
-    else{
-      this.slugData = this.slug
-      this.$store.dispatch('cache/setSlug',this.slug)
-    }
-  }
 
 }
 </script>

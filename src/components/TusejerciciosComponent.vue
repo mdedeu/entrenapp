@@ -90,7 +90,6 @@ export default {
       equipacion:false,
       exercises:null,
       filtered:null,
-      slugData: null
     }
   },
   props:{
@@ -143,16 +142,9 @@ export default {
     },
     async loadExercises(){
       this.loading = true;
-      if(!this.slug){
-        this.slugData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['slug']
-      }
-      else{
-        this.slugData = this.slug
-        this.$store.dispatch('cache/setSlug',this.slug)
-      }
       await this.$store.dispatch("exercise/getAll")
       this.loading = false;
-      if(this.slugData !== 'favoritas') {
+      if(this.slug !== 'favoritas') {
         this.exercises = this.getMine
       }
       else{

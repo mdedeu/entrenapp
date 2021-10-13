@@ -194,7 +194,6 @@ export default {
       equip: false,
       selected_muscle: null,
       nombre: null,
-      slugData: null
     }
   },
   props:{
@@ -205,9 +204,9 @@ export default {
   },
   methods : {
     async loadInfo(){
-      this.nombre=this.slugData.name
-      this.selected_sport=this.slugData.metadata.deportes
-      this.equip=this.slugData.metadata.equipacion
+      this.nombre=this.slug.name
+      this.selected_sport=this.slug.metadata.deportes
+      this.equip=this.slug.metadata.equipacion
     },
     addColor(name){
       let element =document.getElementById('crear-'+name)
@@ -242,11 +241,11 @@ export default {
         this.error="musculo"
         return
       }
-      const exercise = {id:this.slugData.id, name:this.nombre, detail:"", type:"exercise", metadata:{
+      const exercise = {id:this.slug.id, name:this.nombre, detail:"", type:"exercise", metadata:{
           musculos: [this.selected_muscle],
           equipacion: this.equip,
           deportes: this.selected_sport,
-          favorito: this.slugData.metadata.favorito
+          favorito: this.slug.metadata.favorito
         }}
       await this.$store.dispatch('exercise/modify', exercise)
       await this.$store.dispatch('exercise/getAll')
@@ -277,14 +276,7 @@ export default {
   },
 
   created() {
-    if(!this.slug){
-      this.slugData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['slug']
-    }
-    else{
-      this.slugData = this.slug
-      this.$store.dispatch('cache/setSlug',this.slug)
-    }
-    this.last_muscle=this.slugData.metadata.musculos[0]
+    this.last_muscle=this.slug.metadata.musculos[0]
   }
 
 }

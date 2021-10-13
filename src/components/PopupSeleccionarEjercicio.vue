@@ -121,7 +121,7 @@
                                        exercise: currentExerciseToAdd,
                              time: exercise_time,
                              reps: exercise_reps,
-                             stage: stage_data
+                             stage: stage
                       })">
                         Guardar
                       </v-btn>
@@ -183,18 +183,9 @@ export default {
       currentExerciseToAdd : {},
       rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 '],
       exito:false,
-      stage_data: null
     }
   },
-  created() {
-    if(!this.stage){
-      this.stage_data = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['stage']
-    }
-    else{
-      this.stage_data = this.stage
-      this.$store.dispatch('cache/setStage',this.stage)
-    }
-  },
+
   methods:{
     EjercicioDescripcion(){
       this.$router.push({name:"EjercicioDescripcion"})

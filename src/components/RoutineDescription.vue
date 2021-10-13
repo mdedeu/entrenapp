@@ -1,16 +1,16 @@
 <template>
   <v-container class="mb-7">
-    <BackAndButton :routineID="this.routineData.id" :routine="this.routineData" class="mt-6"></BackAndButton>
+    <BackAndButton :routineID="this.routine.id" :routine="this.routine" class="mt-6"></BackAndButton>
     <div  class="pt-10 accent--text">
       <v-row justify="center">
-        <h2>{{this.routineData.name}}</h2>
+        <h2>{{this.routine.name}}</h2>
       </v-row>
       <v-row justify="center">
-        <p>Nivel de dificultad: {{this.routineData.difficulty}}</p>
+        <p>Nivel de dificultad: {{this.routine.difficulty}}</p>
       </v-row>
       <v-row justify="center">
         <p>
-          Duración: {{this.routineData.name}}
+          Duración: {{this.routine.name}}
         </p>
       </v-row>
     </div>
@@ -35,20 +35,7 @@ export default {
       required: true
     }
   },
-  created() {
-    if(!this.routine){
-      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routine']
-    }
-    else{
-      this.routineData = this.routine
-      this.$store.dispatch('cache/setRoutine',this.routine)
-    }
-  },
-  data(){
-    return{
-      routineData: null
-    }
-  }
+
 }
 </script>
 <style scoped>
