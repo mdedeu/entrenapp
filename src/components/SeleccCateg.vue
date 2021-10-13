@@ -44,7 +44,8 @@
       data(){
         return {
           categories:[{cat:"Ejercicios favoritos",showing:false},{cat:"Tus ejercicios",showing:false},{cat: 'Descanso',showing:false}],
-          category_active: false
+          category_active: false,
+          stage_data:null
         }
       },
       methods : {
@@ -62,6 +63,15 @@
         },
         addExercise(event) {
           this.$emit('add-exercise',event)
+        }
+      },
+      created() {
+        if(!this.stage){
+          this.stage_data = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['stage']
+        }
+        else{
+          this.stage_data = this.stage
+          this.$store.dispatch('cache/setStage',this.stage)
         }
       }
 }

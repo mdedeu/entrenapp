@@ -120,7 +120,9 @@ export default {
       sport_selected : this.routine.metadata.sport,
       error:false,
       publicRoutine:true,
-      descripcion:this.routine.detail
+      descripcion:this.routine.detail,
+      routineData: null,
+      routineCycleData: null
     }
   },
   methods : {
@@ -164,7 +166,22 @@ export default {
       required:true
     }
   },
-  mounted(){
+  created(){
+    if(!this.routine){
+      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routine']
+    }
+    else{
+      this.routineData = this.routine
+      this.$store.dispatch('cache/setRoutine',this.routine)
+    }
+
+    if(!this.routineCycle){
+      this.routineCycleData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routineCycle']
+    }else{
+      this.routineCycleData = this.routineCycle
+      this.$store.dispatch('cache/setRoutineCycle',this.routineCycle)
+    }
+
     let element =document.getElementById(this.routine.difficulty)
     this.difficulty = this.routine.difficulty;
     element.classList.add('accent')

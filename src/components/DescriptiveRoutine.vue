@@ -44,7 +44,21 @@ export default {
   RoutineDescription(){
     this.$router.push({name:"RoutineDescription",params:{ routine:this.routineDes } })
   }
-},
+  },
+  created() {
+    if(!this.routineDes){
+      this.routineDesData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routineDes']
+    }
+    else{
+      this.routineDesData = this.routineDes
+      this.$store.dispatch('cache/setRoutineDes',this.routineDes)
+    }
+  },
+  data () {
+    return {
+      routineDesData: null
+    }
+  }
 }
 </script>
 

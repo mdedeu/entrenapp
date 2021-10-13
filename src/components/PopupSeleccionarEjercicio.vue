@@ -182,7 +182,17 @@ export default {
       exercise_reps: 0,
       currentExerciseToAdd : {},
       rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 '],
-      exito:false
+      exito:false,
+      stage_data: null
+    }
+  },
+  created() {
+    if(!this.stage){
+      this.stage_data = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['stage']
+    }
+    else{
+      this.stage_data = this.stage
+      this.$store.dispatch('cache/setStage',this.stage)
     }
   },
   methods:{

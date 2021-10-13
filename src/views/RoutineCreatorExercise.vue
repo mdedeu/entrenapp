@@ -83,15 +83,15 @@ export default {
     }
   },
   created() {
-    if(!this.routine){
-      this.routineData = (JSON).parse(localStorage.getItem('routine'))
-      this.routineIDdata = Number(localStorage.getItem('routineID'))
+    if(!this.routineID){
+      this.routineIDdata = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routineID']
+      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routine']
     }
     else{
-      this.routineData = this.routine
       this.routineIDdata = this.routineID
-      localStorage.setItem('routine', JSON.stringify(this.routine))
-      localStorage.setItem('routineID', this.routineID.toString())
+      this.routineData = this.routine
+      this.$store.dispatch('cache/setRoutineID',this.routineID)
+      this.$store.dispatch('cache/setRoutine',this.routine)
     }
   }
 }

@@ -22,6 +22,11 @@ import DescriptiveRoutine from './DescriptiveRoutine'
   export default {
     name: "carrousel",
     components:{DescriptiveRoutine},
+    data(){
+      return {
+        routinesData: null
+      }
+    },
     props:{
       Section: {
         type: Object,
@@ -32,6 +37,15 @@ import DescriptiveRoutine from './DescriptiveRoutine'
         required:true
       }
     },
+    created() {
+      if(!this.routines){
+        this.routinesData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routines']
+      }
+      else{
+        this.routinesData = this.routines
+        this.$store.dispatch('cache/setRoutines',this.routines)
+      }
+    }
 
 
   }

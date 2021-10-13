@@ -36,6 +36,7 @@ export default {
   data(){
     return {
       exercises : [ {id:0,name:"Salto con soga"} , {id:1,name:"Salto con soga"} , {id:2,name:"Salto con soga"}, {id:3,name:"Salto con soga"} ],
+      SectionData: null
     }
   },
   props:{
@@ -47,6 +48,15 @@ export default {
   methods:{
     EjercicioDescripcion(){
       this.$router.push({name:"EjercicioDescripcion"})
+    }
+  },
+  created() {
+    if(!this.Section){
+      this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['Section']
+    }
+    else{
+      this.SectionData = this.Section
+      this.$store.dispatch('cache/setSection',this.Section)
     }
   }
 

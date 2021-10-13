@@ -61,7 +61,8 @@ export default {
     return {
       rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 '],
       exito: false,
-      segundos : null
+      segundos : null,
+      stage_data:null
     }
 
   },
@@ -75,6 +76,15 @@ export default {
       )
       this.$emit('close-popup');
 
+    }
+  },
+  created() {
+    if(!this.stage){
+      this.stage_data = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['stage']
+    }
+    else{
+      this.stage_data = this.stage
+      this.$store.dispatch('cache/setStage',this.stage)
     }
   }
 }

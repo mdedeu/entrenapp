@@ -31,6 +31,20 @@
           required: true
         }
       },
+      data(){
+        return{
+          routineData: null
+        }
+      },
+      created() {
+        if(!this.routine){
+          this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routine']
+        }
+        else{
+          this.routineData = this.routine
+          this.$store.dispatch('cache/setRoutine',this.routine)
+        }
+      }
 
-}
+    }
 </script>

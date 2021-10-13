@@ -47,7 +47,13 @@ export default {
     }
   },
   created() {
-    this.data_exercise=this.exercise
+    if(!this.exercise){
+      this.data_exercise = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['exercise']
+    }
+    else{
+      this.data_exercise = this.exercise
+      this.$store.dispatch('cache/setExercise',this.exercise)
+    }
   }
 }
 </script>

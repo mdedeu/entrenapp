@@ -56,7 +56,9 @@ export default {
   },
   data(){
     return{
-      step:2
+      step:2,
+      routinesCycleData: null,
+      routineData: null
     }
   },
   methods:{
@@ -89,8 +91,22 @@ export default {
       type:Object,
       required:true
     }
-  },
+  }, created() {
+    if(!this.routine){
+      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routine']
+    }
+    else{
+      this.routineData = this.routine
+      this.$store.dispatch('cache/setRoutine',this.routine)
+    }
 
+    if(!this.routinesCycle){
+      this.routinesCycleData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routinesCycle']
+    }else{
+      this.routinesCycleData = this.routinesCycle
+      this.$store.dispatch('cache/setRoutinesCycle',this.routinesCycle)
+    }
+  }
 
 
 }

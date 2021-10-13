@@ -44,7 +44,8 @@ export default {
     return{
       code:null,
       error:false,
-      msg:null
+      msg:null,
+      userData: null
     }
   },
   props:{
@@ -65,6 +66,15 @@ export default {
       }
     }
 
+  },
+  created() {
+    if(!this.user){
+      this.userData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['user']
+    }
+    else{
+      this.userData = this.user
+      this.$store.dispatch('cache/setUser',this.user)
+    }
   }
 }
 </script>

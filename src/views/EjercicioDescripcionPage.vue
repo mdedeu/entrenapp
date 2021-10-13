@@ -22,8 +22,19 @@ export default {
       required: true
     }
   },
-  created(){
-    console.log(this.exercise)
+  data() {
+    return {
+      exerciseData: null,
+    }
+  },
+  created() {
+    if(!this.exercise){
+      this.exerciseData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['exercise']
+    }
+    else{
+      this.exerciseData = this.exceptionDetails
+      this.$store.dispatch('cache/setExercise',this.exercise)
+    }
   }
 }
 </script>

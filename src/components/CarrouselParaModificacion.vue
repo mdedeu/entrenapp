@@ -256,8 +256,19 @@ export default {
         message: "",
         amount: [{stage:'Calentamiento',count: 0}, {stage:'Enfriamiento', count:0}],
         rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 '],
+        rutinesCycleData: null
       }),
   created(){
+
+
+    if(!this.routinesCycle){
+      this.routinesCycleData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routinesCycle']
+    }
+    else{
+      this.routinesCycleData = this.routinesCycle
+      this.$store.dispatch('cache/setRoutinesCycle',this.routinesCycle)
+    }
+
     this.calentamiento=this.routinesCycle[0]
     let i;
     for( i = 1 ; i < this.routinesCycle.length;i++ ){
@@ -275,8 +286,7 @@ export default {
       type:[],
       required:true
     }
-    },
-
+  },
   methods:{
     addDescanso(event){
       console.log("CarouselModificacioj")

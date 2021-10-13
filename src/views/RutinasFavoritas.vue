@@ -12,6 +12,20 @@ export default {
       type:String,
       required:true
     }
+  },
+  data(){
+    return{
+      slugData: null
+    }
+  },
+  created() {
+    if(!this.slug){
+      this.slugData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['slug']
+    }
+    else{
+      this.slugData = this.slug
+      this.$store.dispatch('cache/setSlug',this.slug)
+    }
   }
 }
 </script>

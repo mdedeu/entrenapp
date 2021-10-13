@@ -203,7 +203,9 @@ export default {
       dialog_delete:false,
       dialog:false,
       loading : true,
-      loadingButton:false
+      loadingButton:false,
+      exerciseIDdata: null,
+      exerciseData: null
     }
   },
   methods:{
@@ -257,6 +259,18 @@ export default {
   },
   async created() {
     this.loading = true;
+
+    if(!this.exerciseId){
+      this.exerciseIDdata = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['exerciseID']
+      this.exerciseData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['exercise']
+    }
+    else{
+      this.exerciseIDdata = this.exerciseId
+      this.exerciseData = this.exercise
+      this.$store.dispatch('cache/setExerciseID',this.exerciseId)
+      this.$store.dispatch('cache/setExercise',this.exercise)
+    }
+
     await this.$store.dispatch("exercise/getAll")
     this.loading = false;
   }

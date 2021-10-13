@@ -42,6 +42,20 @@ export default {
     async loadExercise(){
       this.$refs.tusEj.loadExercises()
     }
+  },
+  data(){
+    return {
+      titleData: null
+    }
+  },
+  created() {
+    if(!this.title){
+      this.title = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['title']
+    }
+    else{
+      this.titleData = this.title
+      this.$store.dispatch('cache/setTitle',this.title)
+    }
   }
 }
 </script>

@@ -134,7 +134,8 @@ export default {
         ejercitacion:[],
         enfriamiento:{detail:null,id:null,metadata:{ejercicios:null},name:null,order:null,repetitions:null,type:null},
         loading:false,
-        update:false
+        update:false,
+        routineData: null
         }),
   methods:{
     EjercicioDescripcion(exercise){
@@ -147,17 +148,24 @@ export default {
       required:true
     }
   },
-
   computed:{
     ...mapGetters('routineCycle',['getRoutineCycle']),
   },
 
   async created(){
     this.loading=true
+
+    if(!this.routine){
+        this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routine']
+    }
+    else{
+      this.routineData = this.routine
+      this.$store.dispatch('cache/setRoutine',this.routine)
+    }
+
     await this.$store.dispatch('routineCycle/getAll',this.routine)
     this.loading=false
     let routinesCycle = this.getRoutineCycle
-    console.log(routinesCycle)
     this.calentamiento = routinesCycle[0]
     let i
     for( i = 1 ; i <  routinesCycle.length;i++ ){

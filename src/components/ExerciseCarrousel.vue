@@ -32,6 +32,29 @@ export default {
       required:true
     }
   },
+  created() {
+    if(!this.Section){
+      this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['Section']
+    }
+    else{
+      this.SectionData = this.Section
+      this.$store.dispatch('cache/setSection',this.Section)
+    }
+    if(!this.exercises){
+      this.exercisesData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['exercises']
+    }
+    else{
+      this.exercisesData = this.exercises
+      this.$store.dispatch('cache/setExercises',this.exercises)
+    }
+  },
+  data() {
+    return{
+      SectionData: null,
+      exercisesData: null
+    }
+  }
+
 
 
 }
