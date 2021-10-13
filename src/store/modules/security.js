@@ -51,8 +51,9 @@ export default {
             dispatch('updateToken', { token: result.token, rememberMe })
         },
 
-        async logout({dispatch}) {
+        async logout({dispatch, commit}) {
             await UserApi.logout()
+            commit('setUser', null)
             dispatch('removeToken')
         },
         async getCurrentUser({state, commit}) {

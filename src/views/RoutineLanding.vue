@@ -1,27 +1,27 @@
 <template>
-  <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
-
-  <v-container v-else fluid class="primary fill-height">
+  <v-container fluid class="primary fill-height">
+    <Loading v-if="loading"></Loading>
+    <v-container v-else fluid class="primary fill-height">
         <v-row>
-            <v-col cols = "12"><HeaderApp/></v-col>
+          <v-col cols = "12"><HeaderApp/></v-col>
         </v-row>
 
 
         <v-row class="pt-16" >
-            <carrousel :Section="{title:'Tus rutinas',path:'/TusRutinas'}" :routines="mine"></carrousel>
+          <carrousel :Section="{title:'Tus rutinas',path:'/TusRutinas'}" :routines="mine"></carrousel>
         </v-row>
 
 
         <v-row class="pt-16">
-            <carrousel :Section="{title:'Rutinas favoritas',path:'/Rutinas/favoritas'}" :routines="favourites"></carrousel>
+          <carrousel :Section="{title:'Rutinas favoritas',path:'/Rutinas/favoritas'}" :routines="favourites"></carrousel>
         </v-row>
 
-     <v-row class="pt-16">
-      <carrousel :Section="{title:'Rutinas recomendadas',path:'/Rutinas/recomendadas'}" :routines="other"></carrousel>
-    </v-row>
+        <v-row class="pt-16">
+          <carrousel :Section="{title:'Rutinas recomendadas',path:'/Rutinas/recomendadas'}" :routines="other"></carrousel>
+        </v-row>
 
-    </v-container>
-
+      </v-container>
+  </v-container>
 
 </template>
 
@@ -29,12 +29,14 @@
     import carrousel from '../components/carrousel'
     import HeaderApp from '../components/HeaderApp'
     import {mapGetters} from 'vuex'
+    import Loading from "../components/Loading";
 
 
 
     export default {
     name: "RoutineLanding",
     components:{
+      Loading,
         carrousel,
         HeaderApp
     },
@@ -53,10 +55,16 @@
       ...mapGetters('favouriteRoutine',['getFavouritesId']),
 
       mine(){
-        return this.getMine(this.user.id)
+        if(this.user){
+          return this.getMine(this.user.id)
+        }
+        return null
       },
       other(){
-        return this.getOther(this.user.id)
+        if(this.user){
+          return this.getOther(this.user.id)
+        }
+        return null
       },
       favourites(){
         return this.getFavouritesId

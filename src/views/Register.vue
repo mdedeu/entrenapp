@@ -165,8 +165,8 @@ export default {
         this.confirm_password = null
         return;
       }else{
-        this.loading=true
-           this.$store.dispatch('security/add',{username:this.username,email:this.email,password:this.password}).then(()=>{
+          this.loading=true
+          this.$store.dispatch('security/add',{username:this.username,email:this.email,password:this.password}).then(()=>{
              this.$router.push({name:'codeChecking',params:{ user:{username:this.username,password:this.password,email:this.email}}})},
                (response)=>{
                  this.error = true

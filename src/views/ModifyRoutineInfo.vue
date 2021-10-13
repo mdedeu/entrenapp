@@ -12,7 +12,7 @@
               <v-stepper-step
                   step="1"
               >
-                Informacion de la rutina
+                Modifica la información de tu rutina
               </v-stepper-step>
 
               <v-divider></v-divider>
@@ -21,7 +21,7 @@
               <v-stepper-step
                   step="2"
               >
-                Agregar ejercicios
+                Agrega o elimina ejercicios
               </v-stepper-step>
 
             </v-stepper-header>

@@ -29,7 +29,7 @@
   <v-row>
     <v-col/>
     <v-col class="text-center">
-      <v-btn class="accent text--primary" width="250" height="50"  @click="check" rounded>Confirmar</v-btn>
+      <v-btn class="accent text--primary" width="250" height="50"  @click="check"  :loading="loading" rounded>Confirmar</v-btn>
     </v-col>
     <v-col/>
   </v-row>
@@ -47,7 +47,8 @@ export default {
       code:null,
       error:false,
       msg:null,
-      userData: null
+      userData: null,
+      loading: false
     }
   },
   props:{
@@ -56,10 +57,10 @@ export default {
       required:true
     }
   },
-
   methods:{
     async check(){
         try{
+          this.loading = true
           await this.$store.dispatch("security/verify",{email:this.userData.email,code:this.code})
           await this.$store.dispatch("security/login",{ credentials:{username:this.userData.username,password:this.userData.password}, rememberMe: true });
           this.$router.push({name:"RoutineLanding"})

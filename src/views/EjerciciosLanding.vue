@@ -1,18 +1,21 @@
 <template>
-  <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
-<v-container v-else fluid class="primary fill-height">
-  <v-row>
-    <v-col cols = 12><HeaderApp></HeaderApp></v-col>
-  </v-row>
+  <v-container fluid class="primary fill-height">
+   <Loading v-if="loading"></Loading>
+    <v-container v-else fluid class="primary fill-height" >
+      <v-row>
+        <v-col cols = 12><HeaderApp></HeaderApp></v-col>
+      </v-row>
 
-  <v-row class="pt-16">
-    <ExerciseCarrousel :Section="{title:'Tus ejercicios',path:'/TusEjercicios'}" :exercises="mine"></ExerciseCarrousel>
-  </v-row>
+      <v-row class="pt-16">
+        <ExerciseCarrousel :Section="{title:'Tus ejercicios',path:'/TusEjercicios'}" :exercises="mine"></ExerciseCarrousel>
+      </v-row>
 
-  <v-row class="pt-16" >
-    <ExerciseCarrousel :Section="{title:'Ejercicios favoritos',path:'/EjerciciosFavoritos'}" :exercises="favourites"></ExerciseCarrousel>
-  </v-row>
-</v-container>
+      <v-row class="pt-16" >
+        <ExerciseCarrousel :Section="{title:'Ejercicios favoritos',path:'/EjerciciosFavoritos'}" :exercises="favourites"></ExerciseCarrousel>
+      </v-row>
+    </v-container>
+  </v-container>
+
 
 
 </template>
@@ -21,11 +24,13 @@
 import HeaderApp from '../components/HeaderApp'
 import {mapGetters} from "vuex";
 import ExerciseCarrousel from "../components/ExerciseCarrousel";
+import Loading from "../components/Loading";
 
 
 export default {
   name: "EjerciciosLanding",
   components:{
+    Loading,
     ExerciseCarrousel,
     HeaderApp
   },

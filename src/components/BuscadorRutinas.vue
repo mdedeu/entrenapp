@@ -1,32 +1,32 @@
 <template>
-  <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
-
-  <v-container style="height: 90vh" v-else>
+  <v-container style="height: 90vh">
+    <Loading v-if="loading"></Loading>
+    <v-container  v-else>
       <v-row>
         <v-col>
           <Back/>
         </v-col>
       </v-row>
-        <v-row>
-            <v-col align="center">
-                <p class="text-h3 accent--text">Tus rutinas</p>
-            </v-col>
-        </v-row>
-        <v-row justify="center">
-            <v-col cols="4" >
-                <v-text-field
-                    label="Nombre"
-                    filled
-                    dense
-                    rounded
-                    background-color="white"
-                    width="50%"
-                    append-icon="mdi-magnify"
-                    v-model="name"
-                ></v-text-field>
+      <v-row>
+        <v-col align="center">
+          <p class="text-h3 accent--text">Tus rutinas</p>
+        </v-col>
+      </v-row>
+      <v-row justify="center">
+        <v-col cols="4" >
+          <v-text-field
+              label="Nombre"
+              filled
+              dense
+              rounded
+              background-color="white"
+              width="50%"
+              append-icon="mdi-magnify"
+              v-model="name"
+          ></v-text-field>
 
-            </v-col>
-        </v-row>
+        </v-col>
+      </v-row>
       <v-container class="routines">
         <v-row v-for="routine in routines" :key="routine.id">
           <v-col cols="12" align="center">
@@ -35,15 +35,18 @@
         </v-row>
       </v-container>
     </v-container>
+  </v-container>
+
 </template>
 
 <script>
     import Back from './Back'
     import DescriptiveRoutine from "./DescriptiveRoutine";
     import {mapGetters} from 'vuex'
+    import Loading from "./Loading";
     export default {
       name: "BuscadorRutinas",
-      components: {DescriptiveRoutine,Back},
+      components: {Loading, DescriptiveRoutine,Back},
       data(){
         return {
           loading : false,

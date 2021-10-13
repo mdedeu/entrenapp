@@ -8,14 +8,16 @@
   </v-container>
 
   <v-container v-else>
-    <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
+    <Loading v-if="loading"></Loading>
   </v-container>
 
 </template>
 
 <script>
+import Loading from "../components/Loading";
 export default {
   name: "Verification",
+  components: {Loading},
   data(){
     return{
       error:true

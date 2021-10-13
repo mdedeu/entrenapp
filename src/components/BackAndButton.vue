@@ -1,71 +1,72 @@
 <template>
-  <img v-if="loading" :src="require('@/assets/ajax-loader.gif')">
+  <v-container>
+    <Loading v-if="loading"></Loading>
 
-  <v-container v-else-if="!mine">
-  <v-row justify="space-between">
+    <v-container v-else-if="!mine">
+      <v-row justify="space-between">
 
-    <Back v-if="this.$router"></Back>
+        <Back v-if="this.$router"></Back>
 
 
-    <v-col v-if="favourite" class="col-3" offset="6" >
-      <template>
-        <div class="text-center">
-          <v-dialog
-              v-model="dialog"
-              width="500"
-              transition="dialog-bottom-transition"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                  color="lighten-2"
-                  dark
-                  v-bind="attrs"
-                  v-on="on"
-                  @click="removeFromFavourite"
-                  :loading="loadingButton"
-                  :disabled="loadingButton"
-
+        <v-col v-if="favourite" class="col-3" offset="6" >
+          <template>
+            <div class="text-center">
+              <v-dialog
+                  v-model="dialog"
+                  width="500"
+                  transition="dialog-bottom-transition"
               >
-                <v-icon left>
-                  mdi-bookmark-outline
-                </v-icon>
-                Eliminar de favoritas
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                      color="lighten-2"
+                      dark
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="removeFromFavourite"
+                      :loading="loadingButton"
+                      :disabled="loadingButton"
 
-              </v-btn>
-            </template>
+                  >
+                    <v-icon left>
+                      mdi-bookmark-outline
+                    </v-icon>
+                    Eliminar de favoritas
 
-            <v-card>
-              <v-card-title class="text-h5 green lighten-2">
-                Éxito
-              </v-card-title>
+                  </v-btn>
+                </template>
 
-              <v-card-text>
-                Rutina agregada a tus favoritas
-              </v-card-text>
-              <v-icon color="green" size="60">mdi-check</v-icon>
+                <v-card>
+                  <v-card-title class="text-h5 green lighten-2">
+                    Éxito
+                  </v-card-title>
 
-              <v-divider></v-divider>
+                  <v-card-text>
+                    Rutina agregada a tus favoritas
+                  </v-card-text>
+                  <v-icon color="green" size="60">mdi-check</v-icon>
 
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                    color="primary"
-                    text
-                    @click="dialog = false"
-                    :loading="loadingButton"
-                    :disabled="loadingButton"
-                >
-                  OK
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </div>
-      </template>
-    </v-col>
+                  <v-divider></v-divider>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="primary"
+                        text
+                        @click="dialog = false"
+                        :loading="loadingButton"
+                        :disabled="loadingButton"
+                    >
+                      OK
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </div>
+          </template>
+        </v-col>
 
 
-    <v-col v-else class="col-3" offset="6" >
+        <v-col v-else class="col-3" offset="6" >
           <template>
             <div class="text-center">
               <v-dialog
@@ -123,74 +124,76 @@
 
 
 
-  </v-row>
-  </v-container>
+      </v-row>
+    </v-container>
 
-  <v-container v-else>
-    <v-row>
-      <Back></Back>
-      <v-col></v-col>
-      <v-col>
-        <v-btn
-            color="red light white--text"
-            @click="eliminada=true"
-        >
-          <v-icon left>
-            mdi-delete-outline
-          </v-icon>
-          Eliminar rutina
-        </v-btn>
-      </v-col>
-      <v-col>
-        <v-btn
-            color="accent primary--text"
-
-            @click="editRoutine"
-        >
-          <v-icon left>
-            mdi-pencil-outline
-          </v-icon>
-          Editar rutina
-
-        </v-btn>
-      </v-col>
-    </v-row>
-    <v-dialog
-        v-model="eliminada"
-        width="500"
-        transition="dialog-bottom-transition"
-    >
-      <v-card>
-        <v-card-title class="text-h5 red lighten-2">
-          Eliminar  rutina
-        </v-card-title>
-
-        <v-card-text>
-          Seguro que desea eliminar esta rutina?
-        </v-card-text>
-        <v-icon color="red" size="60">mdi-delete</v-icon>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
+    <v-container v-else>
+      <v-row>
+        <Back></Back>
+        <v-col></v-col>
+        <v-col>
           <v-btn
-              color="primary"
-              text
-              @click="removeRoutine"
+              color="red light white--text"
+              @click="eliminada=true"
           >
-            Eliminar
+            <v-icon left>
+              mdi-delete-outline
+            </v-icon>
+            Eliminar rutina
           </v-btn>
+        </v-col>
+        <v-col>
           <v-btn
-              color="primary"
-              text
-              @click="eliminada = false"
+              color="accent primary--text"
+
+              @click="editRoutine"
           >
-            Cancelar
+            <v-icon left>
+              mdi-pencil-outline
+            </v-icon>
+            Editar rutina
+
           </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+        </v-col>
+      </v-row>
+      <v-dialog
+          v-model="eliminada"
+          width="500"
+          transition="dialog-bottom-transition"
+      >
+        <v-card>
+          <v-card-title class="text-h5 red lighten-2">
+            Eliminar  rutina
+          </v-card-title>
+
+          <v-card-text>
+            Seguro que desea eliminar esta rutina?
+          </v-card-text>
+          <v-icon color="red" size="60">mdi-delete</v-icon>
+
+          <v-divider></v-divider>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+                color="primary"
+                text
+                @click="removeRoutine"
+            >
+              Eliminar
+            </v-btn>
+            <v-btn
+                color="primary"
+                text
+                @click="eliminada = false"
+            >
+              Cancelar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+    </v-container>
 
   </v-container>
 
@@ -200,10 +203,12 @@
 <script>
 import Back from './Back'
 import {mapGetters,mapActions} from 'vuex'
+import Loading from "./Loading";
 
 export default {
   name: 'BackAndButton',
   components:{
+    Loading,
     Back
   },
   data(){
