@@ -17,7 +17,6 @@
     import RoutineDescription from '../components/RoutineDescription'
     import HeaderApp from '../components/HeaderApp'
     import CarrouselParaCiclos from '../components/CarrouselParaCiclos'
-    import {mapGetters} from 'vuex'
 
     export default {
     name: "RoutineDescriptionPage",
@@ -29,11 +28,8 @@
       props:{
         routine: {
           type: Object,
-          required: true
+          required: false
         }
-      },
-      computed:{
-      ...mapGetters('cache',['get']),
       },
       data(){
         return{
@@ -43,7 +39,6 @@
       created() {
         if(!this.routine){
           this.routineData = this.$store.getters['cache/get']('routine')
-          console.log(this.routineData)
         }
         else{
           this.routineData = this.routine

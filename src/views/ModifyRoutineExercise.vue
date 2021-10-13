@@ -76,8 +76,9 @@ export default {
      for ( i=0 ; i < cycles.length ; i++) {
        cycles[i].order = Number(cycles[i].order)
        cycles[i].repetitions = Number(cycles[i].repetitions)
-       let info = {id:this.routineData.id, routineCycleData:cycles[i]}
-       if(Apicycle.filter((item)=>item.order===info.routineCycleData.order).length > 0)
+       let info = {id:this.routineData.id, routinesCycleData:cycles[i]}
+       console.log(info)
+       if(Apicycle.filter((item)=>item.order===info.routinesCycleData.order).length > 0)
          await this.$store.dispatch('routineCycle/modify', info)
        else
          await this.$store.dispatch('routineCycle/create', info)
@@ -88,11 +89,11 @@ export default {
   props:{
     routinesCycle:{
       type:[],
-      required : true
+      required : false
     },
     routine:{
       type:Object,
-      required:true
+      required:false
     }
   }, created() {
     if(!this.routine){
@@ -104,11 +105,11 @@ export default {
     }
 
     if(!this.routinesCycle){
-      this.routinesCycleData = this.routineCycleData = this.$store.getters['cache/get']('routineCycle')
+      this.routinesCycleData = this.$store.getters['cache/get']('routineCycle')
 
     }else{
       this.routinesCycleData = this.routinesCycle
-      this.$store.dispatch('cache/set',{key:'routineCycle',value:this.routineCycle})
+      this.$store.dispatch('cache/set',{key:'routineCycle',value:this.routinesCycle})
     }
   }
 

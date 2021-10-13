@@ -164,7 +164,7 @@ export default {
       required:true
     }
   },
-  created(){
+  mounted(){
     let element =document.getElementById(this.routine.difficulty)
     this.difficulty = this.routine.difficulty;
     element.classList.add('accent')

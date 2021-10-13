@@ -70,11 +70,11 @@ export default {
   props:{
     routine:{
       type:Object,
-      required:true
+      required:false
     },
     routineCycle:{
       type:[],
-      required:true,
+      required:false,
     }
   },
   created() {

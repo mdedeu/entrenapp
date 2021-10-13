@@ -56,7 +56,7 @@ export default {
 
   created() {
     if(!this.title){
-      this.title = this.$store.getters['cache/get']('title')
+      this.titleData = this.$store.getters['cache/get']('title')
     }
     else{
       this.titleData = this.title
