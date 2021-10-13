@@ -69,9 +69,6 @@ export default {
       return 'Avanzado'
     }
   },
-  created(){
-    console.log(this.routineDes)
-  }
 }
 </script>
 
