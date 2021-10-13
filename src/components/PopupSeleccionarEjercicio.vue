@@ -46,6 +46,29 @@
           color="accent"
       ></v-divider>
 
+      <v-dialog
+          v-model="viewExercise"
+          persistent
+          max-width="600px"
+          class="primary"
+      >
+        <h1 class="yellow" style="color: #2C2E43">{{ this.currentExercise.name }}</h1>
+        <h2 class="yellow" style="color: #2C2E43">Este ejercicio esta orientado al {{this.currentExercise.metadata.deportes}} y trabaja : {{this.currentExercise.metadata.musculos[0]}}</h2>
+        <h2 class="yellow" style="color: #2C2E43">Este ejercicio {{this.currentExercise.metadata.equipacion ? "requiere" : "no require"}} equipacion</h2>
+        <v-card color="yellow">
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+              color="primary"
+              text
+              @click="viewExercise=false"
+          >
+            Close
+          </v-btn>
+        </v-card-actions>
+        </v-card>
+      </v-dialog>
+
       <v-col cols="6" >
         <v-row justify="center" class="mb-4"><h4>Todos los resultados</h4></v-row>
         <v-container class="exercises">
@@ -65,7 +88,7 @@
                   <v-list-item-title class="text-h5 mb-1">
                     {{exercise.name}}
                   </v-list-item-title>
-                  <v-list-item-subtitle>Esta ejercicio tiene dificultad {{exercise.difficulty}}. </v-list-item-subtitle>
+                  <v-list-item-subtitle>Este ejercicio trabaja: {{exercise.metadata.musculos[0]}}. </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
@@ -74,7 +97,7 @@
                     outlined
                     rounded
                     text
-                    @click="EjercicioDescripcion"
+                    @click="viewExerciseHandler(exercise)"
                     class="accent"
                 >
                   Ir al Ejercicio
@@ -89,6 +112,8 @@
                 </v-btn>
               </v-card-actions>
             </v-card>
+
+
             <v-dialog width="600px"  :value="agregar" :retain-focus="false">
               <v-container fluid  class="fill-height">
                 <v-card  width="100%" class="primary mx-16" rounded>
@@ -166,14 +191,33 @@
 <script>
 
 import Close from "./Close";
+import {mapGetters} from "vuex";
 export default {
   name: 'PopupSeleccionarEjercicio',
   components: {Close},
-  props: ['stage'],
+  props: {
+    isFav:{
+      type: Boolean,
+      required: true
+    },
+    //['stage']
+    stage: {
+      type: String,
+      required: true
+    }
+  },
   data(){
     return {
+      currentExercise: {name: null, detail: null, type: null, metadata: {
+          musculos:[],
+          equipacion: null,
+          deportes: null,
+          favorito: null
+        }},
+      viewExercise: false,
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
-      exercises:[{name:"Flexiones de brazo", difficulty: 'Intermedio', category: 'Pecho'},{name:"Abdominales bolita", difficulty: 'Intermedio', category: 'Pecho'},{name:"Salto con soga", difficulty: 'Intermedio', category: 'Pecho'},{name:"Estirar piernas", difficulty: 'Intermedio', category: 'Pecho'},{name:"Espalda en colchoneta", difficulty: 'Intermedio', category: 'Pecho'}],
+      exercises: null,//[{name:"Flexiones de brazo", difficulty: 'Intermedio', category: 'Pecho'},{name:"Abdominales bolita", difficulty: 'Intermedio', category: 'Pecho'},{name:"Salto con soga", difficulty: 'Intermedio', category: 'Pecho'},{name:"Estirar piernas", difficulty: 'Intermedio', category: 'Pecho'},{name:"Espalda en colchoneta", difficulty: 'Intermedio', category: 'Pecho'}],
+      favouriteExercises: null,
       sports: ['Futbol','Hockey', 'Otros'],
       selected_muscle: null,
       selected_sport: null,
@@ -185,10 +229,25 @@ export default {
       exito:false,
     }
   },
-
+  computed:{
+    ...mapGetters('exercise', {
+      $getFavouriteExercises : 'getFavourites',
+      $getExercises : 'getMine'
+    })
+  },
+  async created() {
+    await this.$store.dispatch('exercise/getAll')
+    if(this.isFav){
+      this.exercises = this.$getFavouriteExercises
+    } else {this.exercises = this.$getExercises}
+  },
   methods:{
-    EjercicioDescripcion(){
-      this.$router.push({name:"EjercicioDescripcion"})
+    viewExerciseHandler(exercise){
+      this.viewExercise=true
+      this.currentExercise=exercise
+    },
+    EjercicioDescripcion(exercise){
+      this.$router.push({name: 'EjercicioDescripcion', params: {exercise: exercise}})
     },
     closePopup() {
       this.$emit('close-popup')

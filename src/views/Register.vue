@@ -78,6 +78,26 @@
       <v-col/>
     </v-row>
     <v-row style="height: 150px"></v-row>
+    <v-dialog
+        v-model="loading"
+        hide-overlay
+        persistent
+        width="300"
+    >
+      <v-card
+          color="primary"
+          dark
+      >
+        <v-card-text>
+          Creando cuenta
+          <v-progress-linear
+              indeterminate
+              color="yellow"
+              class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -87,6 +107,7 @@ export default {
   name: "Register",
   data() {
     return{
+        loading: false,
         username : null,
         email : null,
         password : null,
@@ -101,6 +122,9 @@ export default {
     }
   },
   methods :{
+    startLoading(){
+      this.loading=true
+    },
     resetErrors(){
       this.error = false
       this.message = null
@@ -141,21 +165,25 @@ export default {
         this.confirm_password = null
         return;
       }else{
+        this.loading=true
            this.$store.dispatch('security/add',{username:this.username,email:this.email,password:this.password}).then(()=>{
              this.$router.push({name:'codeChecking',params:{ user:{username:this.username,password:this.password,email:this.email}}})},
                (response)=>{
                  this.error = true
                   if(response.code === 2){
                     if(response.details[0].includes('username')){
+                      this.loading = false
                       this.message = 'No puede utilizar ese nombre de usuario.'
                       this.username = null
                     }
                     else{
+                      this.loading = false
                       this.message = 'No puede utilizar ese email.'
                       this.email = null
                     }
                   }
                   else{
+                    this.loading = false
                     this.message = "Revise su conexion y vuelva a intentar. Si persiste, contacte a soporte."
                   }
                }
