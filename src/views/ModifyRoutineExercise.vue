@@ -83,17 +83,20 @@ export default {
          await this.$store.dispatch('routineCycle/create', info)
      }
 
-     //si hay algun elemento en ApiCycle , que no esta en cycle , Entonces se elimino de los ciclos de ejercitacion
+     //si hay algun elemento en ApiCycle , que no esta en cycles , Entonces se elimino de los ciclos de ejercitacion
+     for(let j = 0; j < Apicycle.length; j++){
+       let encontrado = false;
 
-     let aux = Apicycle.filter( (item ) => {return !cycles.includes(item)})
-       for(let j=0 ; j < aux.length;j++){
-         let info = {id:this.routineData.id, routineCycle:aux[j]}
+       for(let i=0 ; i< cycles.length ; i++) {
+         if (cycles[i].id == Apicycle[j].id) {
+           encontrado = true;
+         }
+       }
+       if(!encontrado){
+         let info = {id: this.routineData.id, routineCycle: Apicycle[j]}
          await this.$store.dispatch('routineCycle/delete', info)
        }
-
-
-     console.log(Apicycle)
-
+     }
 
     this.$router.push({name:"RoutineDescription",params:{routine:this.routineData}})
    }

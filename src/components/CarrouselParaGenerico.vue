@@ -2,10 +2,9 @@
   <v-container>
     <v-row>
       <v-col>
-        <p v-if="error" class="red--text text-h3">Error </p>
+        <v-alert v-if="error" type="error" dismissible @click="error=false">{{this.message}}</v-alert>
       </v-col>
     </v-row>
-
     <v-carousel class="mt-11">
 
       <v-carousel-item order="1">
@@ -80,7 +79,7 @@
 
           <v-row justify="center"  style="height: 11vh">
             <v-col cols="6" height="100%">
-              <AgregarEjercicio stage="Calentamiento" v-on:add-exercise="addExercise" ></AgregarEjercicio>
+              <AgregarEjercicio stage="Calentamiento" v-on:add-exercise="addExercise" v-on:add-descanso="addDescanso"></AgregarEjercicio>
             </v-col>
           </v-row>
         </v-container>
@@ -348,9 +347,8 @@ export default {
           this.ejercitacion=[],
           this.enfriamiento={name:'Enfriamiento',detail:'Enfriamiento',type:'cooldown',order:2,repetitions:null,metadata:{ejercicios:[]} },
           this.cicleNumber=3
-
-
     }else{
+
       this.calentamiento=this.routinesCycle[0]
       let i;
       for( i = 1 ; i < this.routinesCycle.length;i++ ){
@@ -380,15 +378,9 @@ export default {
         error:false,
         popup:false,
         cycles: false,
+        message: "Error inesperado",
         rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 ']
       }),
-
-
-
-
-
-
-
   methods:{
     removeCycle(name){
       this.update=false
@@ -420,31 +412,35 @@ export default {
     SendInfo(){
       if(this.ejercitacion.filter( (item) => ( item.name==null ) ).length > 0 ){
         this.error=true //todos los ciclos deben tener un nombre asociado
+        this.message = "Todos los ciclos deben tener un nombre asociado"
         return
       }
 
       if(this.calentamiento.repetitions == null || this.enfriamiento.repetitions == null || this.ejercitacion.filter((item)=>item.repetitions == null).length > 0 ){
-        this.error=true //se debe especificar la cantidad de vueltas en todos los ejercicios
+        this.error=true
+        this.message = "Se debe especificar la cantidad de vueltas de cada ciclo"
         return
       }
-      // if(this.calentamiento.ejercicios.length == 0 || this.enfriamiento.ejercicios.length == 0 || this.ejercitacion.filter((item)=>item.metadata.ejercicios.length==0).length > 0){
-      //   this.error=true //no se puede agregar un ciclo sin ejercicios
-      //   return
-      // }
+      if(this.calentamiento.metadata.ejercicios.length === 0 || this.enfriamiento.metadata.ejercicios.length === 0 || this.ejercitacion.filter((item)=>item.metadata.ejercicios.length===0).length > 0){
+        this.error=true
+        this.message = "No puede crear un ciclo sin ejercicios"//no se puede agregar un ciclo sin ejercicios
+        return
+      }
 
       let cycles = []
       cycles.push(this.calentamiento)
       this.ejercitacion.forEach((item)=>cycles.push(item))
       cycles.push(this.enfriamiento)
       this.cycles = cycles
+      console.log('aca')
       this.popup=true
 
     },
     eliminarEjercicio(nombre,ejercicio){
-      if(nombre=='Calentamiento'){
+      if(nombre==='Calentamiento'){
         this.calentamiento.metadata.ejercicios=this.calentamiento.metadata.ejercicios.filter((item) => item.name!=ejercicio)
       }
-      else if(nombre=='Enfriamiento')
+      else if(nombre==='Enfriamiento')
         this.enfriamiento.metadata.ejercicios=this.enfriamiento.metadata.ejercicios.filter((item) => item.name!=ejercicio)
       else
         for(let i = 0 ; i < this.ejercitacion.length ; i++)
