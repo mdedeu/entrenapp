@@ -360,7 +360,11 @@ export default {
         else
           this.ejercitacion.push(this.routinesCycle[i])
       }
-      this.cicleNumber=Math.max.apply(null,this.ejercitacion.map( (item) => item.id))
+      let aux = this.ejercitacion.map( (item) => item.id)
+      if(aux.length == 0 )
+        this.cicleNumber=3
+      else
+        this.cicleNumber=Math.max.apply(null,)
     }
   },
 

@@ -82,6 +82,19 @@ export default {
        else
          await this.$store.dispatch('routineCycle/create', info)
      }
+
+     //si hay algun elemento en ApiCycle , que no esta en cycle , Entonces se elimino de los ciclos de ejercitacion
+
+     let aux = Apicycle.filter( (item ) => {return !cycles.includes(item)})
+       for(let j=0 ; j < aux.length;j++){
+         let info = {id:this.routineData.id, routineCycle:aux[j]}
+         await this.$store.dispatch('routineCycle/delete', info)
+       }
+
+
+     console.log(Apicycle)
+
+
     this.$router.push({name:"RoutineDescription",params:{routine:this.routineData}})
    }
   },
