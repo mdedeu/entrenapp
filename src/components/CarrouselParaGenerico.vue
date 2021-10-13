@@ -16,7 +16,7 @@
               <p class="text-h4  primary--text"> {{ calentamiento.name }}:</p>
             </v-col>
 
-            <v-col cols="3" v-if="calentamiento.metadata.ejercicios.length > 0">
+            <v-col cols="3" v-if="calentamiento.metadata.ejercicios.length > 0 && !eliminando">
               <v-btn
                   color="red"
                   dark
@@ -27,6 +27,19 @@
                 </v-icon>
                 Eliminar Ejercicio
 
+              </v-btn>
+            </v-col>
+
+            <v-col cols="3" v-if="eliminando">
+              <v-btn
+                  color="green"
+                  dark
+                  @click="eliminando=false"
+              >
+                <v-icon left>
+                  mdi-check
+                </v-icon>
+                Continuar
               </v-btn>
             </v-col>
 
@@ -78,6 +91,29 @@
       <v-carousel-item order="2" :v-if="ejercitacion.length > 0" v-for="exercise in ejercitacion" :key="exercise.id">
         <v-container fluid class="accent fill-height">
 
+          <v-row>
+            <v-col>
+
+            </v-col>
+            <v-col>
+
+            </v-col>
+            <v-col>
+              <v-btn
+                  color="transparent"
+                  @click="removeCycle(exercise.name)"
+
+              >
+                <v-icon
+                    x-large
+                    color="primary"
+                >
+                  mdi-alpha-x
+                </v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+
           <v-row justify="space-around">
             <v-col cols="3">
               <v-text-field
@@ -88,7 +124,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="3" v-if="exercise.metadata.ejercicios.length > 0">
+            <v-col cols="3" v-if="exercise.metadata.ejercicios.length > 0 && !eliminando">
               <v-btn
                   color="red"
                   dark
@@ -100,6 +136,18 @@
                 </v-icon>
                 Eliminar Ejercicio
 
+              </v-btn>
+            </v-col>
+            <v-col cols="3" v-if="eliminando">
+              <v-btn
+                  color="green"
+                  dark
+                  @click="eliminando=false"
+              >
+                <v-icon left>
+                  mdi-check
+                </v-icon>
+                Continuar
               </v-btn>
             </v-col>
 
@@ -173,7 +221,7 @@
               <p class="text-h3  primary--text"> {{ enfriamiento.name }}:</p>
             </v-col>
 
-            <v-col cols="3" v-if="enfriamiento.metadata.ejercicios.length > 0">
+            <v-col cols="3" v-if="enfriamiento.metadata.ejercicios.length > 0 && !eliminando">
               <v-btn
                   color="red"
                   dark
@@ -184,6 +232,18 @@
                 </v-icon>
                 Eliminar Ejercicio
 
+              </v-btn>
+            </v-col>
+            <v-col cols="3" v-if="eliminando">
+              <v-btn
+                  color="green"
+                  dark
+                  @click="eliminando=false"
+              >
+                <v-icon left>
+                  mdi-check
+                </v-icon>
+                Continuar
               </v-btn>
             </v-col>
 
@@ -326,6 +386,13 @@ export default {
 
 
   methods:{
+    removeCycle(name){
+      this.update=false
+      this.ejercitacion=this.ejercitacion.filter( (item) => (item.name!=name))
+      setTimeout(()=>this.update=true,500)
+    },
+
+
     SeleccCateg(){
       this.$router.push({name:"SeleccCateg"})
     },
