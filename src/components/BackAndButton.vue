@@ -274,11 +274,12 @@ export default {
     }
 
   },
-  async mounted() {
+  async created() {
     this.loading = true;
     await this.$store.dispatch("security/getCurrentUser")
     await this.$store.dispatch("favouriteRoutine/getAll")
     this.loading = false;
+
   }
 
 }
