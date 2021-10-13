@@ -144,7 +144,7 @@ export default {
     async loadExercises(){
       this.loading = true;
       if(!this.slug){
-        this.slugData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['slug']
+        this.slugData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['slug']
       }
       else{
         this.slugData = this.slug

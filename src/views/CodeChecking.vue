@@ -69,7 +69,7 @@ export default {
   },
   created() {
     if(!this.user){
-      this.userData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['user']
+      this.userData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['user']
     }
     else{
       this.userData = this.user

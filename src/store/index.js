@@ -6,6 +6,8 @@ import routine from '@/store/modules/routine'
 import favouriteRoutine from '@/store/modules/favouriteRoutine'
 import routineCycle from '@/store/modules/routineCycle'
 import exercise from "./modules/exercise";
+import createPersistedState from 'vuex-persistedstate'
+import cache from "./modules/cache";
 
 Vue.use(Vuex)
 
@@ -22,6 +24,8 @@ export default new Vuex.Store({
     routine:routine,
     favouriteRoutine:favouriteRoutine,
     routineCycle : routineCycle,
-    exercise:exercise
-  }
+    exercise:exercise,
+    cache: cache
+  },
+  plugins: [createPersistedState()],
 })

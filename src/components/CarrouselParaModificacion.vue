@@ -260,7 +260,7 @@ export default {
       }),
   created(){
     if(!this.routinesCycle){
-      this.routinesCycleData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routinesCycle']
+      this.routinesCycleData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routinesCycle']
     }
     else{
       this.routinesCycleData = this.routinesCycle

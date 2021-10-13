@@ -47,7 +47,7 @@ export default {
   },
   created() {
     if(!this.routineDes){
-      this.routineDesData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routineDes']
+      this.routineDesData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routineDes']
     }
     else{
       this.routineDesData = this.routineDes

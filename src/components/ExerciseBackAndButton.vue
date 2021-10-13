@@ -261,8 +261,8 @@ export default {
     this.loading = true;
 
     if(!this.exerciseId){
-      this.exerciseIDdata = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['exerciseID']
-      this.exerciseData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['exercise']
+      this.exerciseIDdata = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exerciseID']
+      this.exerciseData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exercise']
     }
     else{
       this.exerciseIDdata = this.exerciseId

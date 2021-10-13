@@ -168,7 +168,7 @@ export default {
   },
   created(){
     if(!this.routine){
-      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routine']
+      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routine']
     }
     else{
       this.routineData = this.routine
@@ -176,7 +176,7 @@ export default {
     }
 
     if(!this.routineCycle){
-      this.routineCycleData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routineCycle']
+      this.routineCycleData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routineCycle']
     }else{
       this.routineCycleData = this.routineCycle
       this.$store.dispatch('cache/setRoutineCycle',this.routineCycle)

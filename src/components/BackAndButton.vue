@@ -280,8 +280,8 @@ export default {
     this.loading = true;
 
     if(!this.routineID){
-      this.routineIDdata = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routineID']
-      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routine']
+      this.routineIDdata = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routineID']
+      this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routine']
     }
     else{
       this.routineIDdata = this.routineID

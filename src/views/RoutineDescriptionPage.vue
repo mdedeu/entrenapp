@@ -38,7 +38,7 @@
       },
       created() {
         if(!this.routine){
-          this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routine']
+          this.routineData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routine']
         }
         else{
           this.routineData = this.routine

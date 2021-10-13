@@ -80,7 +80,7 @@ export default {
   },
   created() {
     if(!this.stage){
-      this.stage_data = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['stage']
+      this.stage_data = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['stage']
     }
     else{
       this.stage_data = this.stage

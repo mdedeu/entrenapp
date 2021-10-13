@@ -52,7 +52,7 @@ export default {
   },
   created() {
     if(!this.Section){
-      this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['Section']
+      this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['Section']
     }
     else{
       this.SectionData = this.Section

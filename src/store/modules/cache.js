@@ -93,6 +93,9 @@ export default {
         setExercise({commit}, exercise) {
             commit('replace', 'exercise', exercise)
         },
+        setExercises({commit}, exercises) {
+            commit('replace', 'exercises', exercises)
+        },
         setExerciseID({commit}, exerciseID) {
             commit('replace', 'exerciseID', exerciseID)
         },

@@ -48,7 +48,7 @@
       },
       created() {
         if(!this.exerciseDes){
-          this.exerciseDesData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['exerciseDes']
+          this.exerciseDesData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exerciseDes']
         }
         else{
           this.exerciseDesData = this.exerciseDes

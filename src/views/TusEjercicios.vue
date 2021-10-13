@@ -50,7 +50,7 @@ export default {
   },
   created() {
     if(!this.title){
-      this.title = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['title']
+      this.title = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['title']
     }
     else{
       this.titleData = this.title

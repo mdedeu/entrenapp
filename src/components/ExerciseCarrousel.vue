@@ -34,14 +34,14 @@ export default {
   },
   created() {
     if(!this.Section){
-      this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['Section']
+      this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['Section']
     }
     else{
       this.SectionData = this.Section
       this.$store.dispatch('cache/setSection',this.Section)
     }
     if(!this.exercises){
-      this.exercisesData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['exercises']
+      this.exercisesData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exercises']
     }
     else{
       this.exercisesData = this.exercises

@@ -40,7 +40,7 @@ import DescriptiveRoutine from './DescriptiveRoutine'
     },
     created() {
       if(!this.routines){
-        this.routinesData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routines']
+        this.routinesData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['routines']
       }
       else{
         this.routinesData = this.routines
@@ -48,7 +48,7 @@ import DescriptiveRoutine from './DescriptiveRoutine'
       }
 
       if(!this.Section){
-        this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['Section']
+        this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['Section']
       }
       else{
         this.SectionData = this.Section

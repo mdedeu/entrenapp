@@ -35,7 +35,7 @@ export default {
   },
   created() {
     if(!this.exercise){
-      this.exerciseData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['exercise']
+      this.exerciseData = ((JSON).parse(localStorage.getItem('vuex')))['cache']['propsData']['exercise']
     }
     else{
       this.exerciseData = this.exercise
