@@ -24,7 +24,7 @@ import RoutineCreadorInfo from "../views/RoutineCreatorInfo"
 import RoutineCreatorExercise from "../views/RoutineCreatorExercise"
 import ModifyRoutineInfo from "../views/ModifyRoutineInfo"
 import ModifyRoutineExercise from "../views/ModifyRoutineExercise"
-import {mapGetters} from 'vuex'
+import {Api} from "../../API/api";
 
 
 Vue.use(VueRouter)
@@ -172,12 +172,12 @@ const router = new VueRouter({
 // eslint-disable-next-line no-unused-vars
 router.beforeEach((to,from,next) =>{
   let noAuthRoutes = ['Home','Login','Register','Verificacion','codeChecking']
-  if(!noAuthRoutes.includes(to.name)){
-    if (!mapGetters('security',['isLoggedIn'])) {
-      next({name: 'Login'})
-      return;
-    } else {
-      next()
+  if(noAuthRoutes.includes(to.name)){
+    next()
+    return;
+  } else {
+      if (Api.token === null) {
+        next({name: 'Login'})
       return;
     }
   }
