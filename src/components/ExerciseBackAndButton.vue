@@ -30,7 +30,7 @@
                   <v-icon left>
                     mdi-bookmark-outline
                   </v-icon>
-                  Eliminar de favoritas
+                  Eliminar de favoritos
 
                 </v-btn>
               </template>
