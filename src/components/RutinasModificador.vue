@@ -32,12 +32,13 @@
     </v-row>
     <v-row justify="center" v-if="publicRoutine">
       <v-col cols="4">
-        <v-text-field
+        <v-textarea
             v-model="descripcion"
             label="Descripcion"
             solo
             background-color="white"
-        ></v-text-field>
+        ></v-textarea>
+
       </v-col>
     </v-row>
 

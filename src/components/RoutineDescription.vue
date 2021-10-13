@@ -46,7 +46,6 @@ export default {
     ...mapGetters('routineCycle',['getRoutineCycle']),
 
     duracion(){
-      console.log(this.routinesCycle)
 
       let sumaTotal = 0 ;
       for(let i = 0 ; i < this.routinesCycle.length ; i++){
@@ -61,7 +60,7 @@ export default {
     difficulty(){
       if(this.routine.difficulty == 'rookie')
         return 'Principiante'
-      if(this.routine.difficulty == 'Intermediate')
+      if(this.routine.difficulty == 'intermediate')
         return 'Intermedio'
       return 'Avanzado'
     }
