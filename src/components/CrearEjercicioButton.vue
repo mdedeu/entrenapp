@@ -181,7 +181,7 @@ export default {
       error:null,
       popup:false,
       dialog:false,
-      sports: ['Fútbol', 'Voley', 'Tenis', 'Paddle'],
+      sports: ['Fútbol', 'Hockey', 'Tenis', 'Paddle'],
       exercises: [{name: 'Abdominales' }, {name: 'Espalda'}, {name: 'Brazos'}, {name: 'Pecho'}],
       selected_sport: null,
       equip: false,

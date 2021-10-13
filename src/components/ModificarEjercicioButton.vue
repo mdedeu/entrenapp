@@ -188,7 +188,7 @@ export default {
       },
       dialog_message:false,
       dialog:false,
-      sports: ['Fútbol', 'Voley', 'Tenis', 'Paddle'],
+      sports: ['Fútbol', 'Hockey', 'Tenis', 'Paddle'],
       exercises: [{name: 'Piernas'}, {name: 'Abdominales' }, {name: 'Espalda'}, {name: 'Brazos'}, {name: 'Pecho'}],
       selected_sport: null,
       equip: false,
