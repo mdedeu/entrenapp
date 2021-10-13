@@ -152,7 +152,7 @@ export default {
       }
       await this.$store.dispatch("exercise/getAll")
       this.loading = false;
-      if(this.slug !== 'favoritas') {
+      if(this.slugData !== 'favoritas') {
         this.exercises = this.getMine
       }
       else{

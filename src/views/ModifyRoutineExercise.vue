@@ -31,7 +31,7 @@
     </v-row>
 
     <v-row>
-      <CarrouselParaModificacion :routinesCycle="this.routinesCycle" @Info-Exercise="saveCycles"></CarrouselParaModificacion>
+      <CarrouselParaModificacion :routinesCycle="this.routinesCycleData" @Info-Exercise="saveCycles"></CarrouselParaModificacion>
     </v-row>
 
 
@@ -64,7 +64,7 @@ export default {
   methods:{
 
    async saveCycles(cycles) {
-      await this.$store.dispatch('routineCycle/getAll',this.routine)
+      await this.$store.dispatch('routineCycle/getAll',this.routineData)
       await this.$store.dispatch('routine/getAll')
 
       let Apicycle =  this.getRoutineCycle
@@ -73,13 +73,13 @@ export default {
      for ( i=0 ; i < cycles.length ; i++) {
        cycles[i].order = Number(cycles[i].order)
        cycles[i].repetitions = Number(cycles[i].repetitions)
-       let info = {id:this.routine.id, routineCycle:cycles[i]}
-       if(Apicycle.filter((item)=>item.order===info.routineCycle.order).length > 0)
+       let info = {id:this.routineData.id, routineCycleData:cycles[i]}
+       if(Apicycle.filter((item)=>item.order===info.routineCycleData.order).length > 0)
          await this.$store.dispatch('routineCycle/modify', info)
        else
          await this.$store.dispatch('routineCycle/create', info)
      }
-    this.$router.push({name:"RoutineDescription",params:{routine:this.routine}})
+    this.$router.push({name:"RoutineDescription",params:{routine:this.routineData}})
    }
   },
   props:{

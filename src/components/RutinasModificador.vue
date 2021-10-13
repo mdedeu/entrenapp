@@ -116,11 +116,11 @@ export default {
     return {
       sports: ['Futbol', 'Tenis', 'Hockey', 'Ninguno'],
       difficulty: null,
-      nombre: this.routine.name,
-      sport_selected : this.routine.metadata.sport,
+      nombre: this.routineData.name,
+      sport_selected : this.routineData.metadata.sport,
       error:false,
       publicRoutine:true,
-      descripcion:this.routine.detail,
+      descripcion:this.routineData.detail,
       routineData: null,
       routineCycleData: null
     }
@@ -182,8 +182,8 @@ export default {
       this.$store.dispatch('cache/setRoutineCycle',this.routineCycle)
     }
 
-    let element =document.getElementById(this.routine.difficulty)
-    this.difficulty = this.routine.difficulty;
+    let element =document.getElementById(this.routineData.difficulty)
+    this.difficulty = this.routineData.difficulty;
     element.classList.add('accent')
   }
 }

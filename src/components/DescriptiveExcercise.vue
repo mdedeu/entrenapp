@@ -11,9 +11,9 @@
             <p>category</p>
           </div>
           <v-list-item-title class="text-h5 mb-1">
-            {{exerciseDes.name}}
+            {{exerciseDesData.name}}
           </v-list-item-title>
-          <v-list-item-subtitle>Este ejercicio esta orientado al {{exerciseDes.metadata.deportes}}. </v-list-item-subtitle>
+          <v-list-item-subtitle>Este ejercicio esta orientado al {{exerciseDesData.metadata.deportes}}. </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -43,7 +43,7 @@
       },
       methods:{
         EjercicioDescripcion: function () {
-          this.$router.push({name: 'EjercicioDescripcion', params: {exercise: this.exerciseDes}})
+          this.$router.push({name: 'EjercicioDescripcion', params: {exercise: this.exerciseDesData}})
         },
       },
       created() {

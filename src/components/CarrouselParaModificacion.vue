@@ -259,8 +259,6 @@ export default {
         rutinesCycleData: null
       }),
   created(){
-
-
     if(!this.routinesCycle){
       this.routinesCycleData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['routinesCycle']
     }
@@ -269,14 +267,14 @@ export default {
       this.$store.dispatch('cache/setRoutinesCycle',this.routinesCycle)
     }
 
-    this.calentamiento=this.routinesCycle[0]
+    this.calentamiento=this.routinesCycleData[0]
     let i;
-    for( i = 1 ; i < this.routinesCycle.length;i++ ){
-      if(this.routinesCycle[i].name==='Enfriamiento'){
-        this.enfriamiento=this.routinesCycle[i]
+    for( i = 1 ; i < this.routinesCycleData.length;i++ ){
+      if(this.routinesCycleData[i].name==='Enfriamiento'){
+        this.enfriamiento=this.routinesCycleData[i]
       }
       else
-        this.ejercitacion.push(this.routinesCycle[i])
+        this.ejercitacion.push(this.routinesCycleData[i])
     }
     this.cicleNumber=this.enfriamiento.order
 

@@ -57,8 +57,8 @@ export default {
   methods:{
     async check(){
         try{
-          await this.$store.dispatch("security/verify",{email:this.user.email,code:this.code})
-          await this.$store.dispatch("security/login",{ credentials:{username:this.user.username,password:this.user.password}, rememberMe: true });
+          await this.$store.dispatch("security/verify",{email:this.userData.email,code:this.code})
+          await this.$store.dispatch("security/login",{ credentials:{username:this.userData.username,password:this.userData.password}, rememberMe: true });
           this.$router.push({name:"RoutineLanding"})
       }catch (e){
         this.error=true

@@ -1,16 +1,16 @@
 <template>
   <v-container class="mb-7">
-    <BackAndButton :routineID="this.routine.id" :routine="this.routine" class="mt-6"></BackAndButton>
+    <BackAndButton :routineID="this.routineData.id" :routine="this.routineData" class="mt-6"></BackAndButton>
     <div  class="pt-10 accent--text">
       <v-row justify="center">
-        <h2>{{routine.name}}</h2>
+        <h2>{{this.routineData.name}}</h2>
       </v-row>
       <v-row justify="center">
-        <p>Nivel de dificultad: {{routine.difficulty}}</p>
+        <p>Nivel de dificultad: {{this.routineData.difficulty}}</p>
       </v-row>
       <v-row justify="center">
         <p>
-          Duración: {{routine.name}}
+          Duración: {{this.routineData.name}}
         </p>
       </v-row>
     </div>
@@ -42,6 +42,11 @@ export default {
     else{
       this.routineData = this.routine
       this.$store.dispatch('cache/setRoutine',this.routine)
+    }
+  },
+  data(){
+    return{
+      routineData: null
     }
   }
 }

@@ -24,8 +24,8 @@
                     </v-btn>
                 </v-col>
                 </template>
-                <PopupDescanso :stage= "stage" v-if="category.cat==='Descanso'"  v-on:close-popup="updateShowing()" v-on:add-descanso="addDescanso"></PopupDescanso>
-                <PopupSeleccionarEjercicio :stage="stage" v-else v-on:close-popup="updateShowing()" v-on:add-exercise="addExercise"></PopupSeleccionarEjercicio>
+                <PopupDescanso :stage= "stage_data" v-if="category.cat==='Descanso'"  v-on:close-popup="updateShowing()" v-on:add-descanso="addDescanso"></PopupDescanso>
+                <PopupSeleccionarEjercicio :stage="stage_data" v-else v-on:close-popup="updateShowing()" v-on:add-exercise="addExercise"></PopupSeleccionarEjercicio>
               </v-dialog>
 
 

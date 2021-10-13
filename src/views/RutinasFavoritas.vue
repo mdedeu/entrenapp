@@ -1,5 +1,5 @@
 <template>
-  <PantallaDividida :slug="this.slug"></PantallaDividida>
+  <PantallaDividida :slug="this.slugData"></PantallaDividida>
 </template>
 
 <script>

@@ -31,7 +31,7 @@
     </v-row>
 
     <v-row style="height: 80vh">
-      <RutinasModificador :routine="this.routine" :routineCycle="this.routineCycle" @Info-received="modificateRoutine" class="pt-16"/>
+      <RutinasModificador :routine="this.routineData" :routineCycle="this.routineCycleData" @Info-received="modificateRoutine" class="pt-16"/>
     </v-row>
 
 
@@ -52,13 +52,13 @@ export default {
   methods:{
     async modificateRoutine(routine){
       await this.$store.dispatch('routine/getAll')
-      this.routine.name=routine.name
-      this.routine.detail=routine.detail
-      this.routine.isPublic=routine.isPublic
-      this.routine.difficulty = routine.difficulty
-      this.routine.metadata=routine.metadata
-      await this.$store.dispatch("routine/modify",this.routine);
-      this.$router.push({name:"ModifyRoutineExercise",params:{routine:this.routine,routinesCycle:this.routineCycle}})
+      this.routineData.name=routine.name
+      this.routineData.detail=routine.detail
+      this.routineData.isPublic=routine.isPublic
+      this.routineData.difficulty = routine.difficulty
+      this.routineData.metadata=routine.metadata
+      await this.$store.dispatch("routine/modify",this.routineData);
+      this.$router.push({name:"ModifyRoutineExercise",params:{routine:this.routineData,routinesCycle:this.routineCycleData}})
     }
   },
   props:{

@@ -72,7 +72,7 @@ export default {
       this.$emit('add-descanso',
           {
             segundos:this.segundos,
-            stage:  this.stage}
+            stage:  this.stage_data}
       )
       this.$emit('close-popup');
 

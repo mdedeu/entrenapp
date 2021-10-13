@@ -2,7 +2,7 @@
   <v-container fluid class="accent fill-height">
     <v-row justify="center">
       <v-col cols="3">
-        <router-link  :to="{name:`${Section.nameComponent}`}" class="text-h4">{{ Section.title }}</router-link>
+        <router-link  :to="{name:`${SectionData.nameComponent}`}" class="text-h4">{{ SectionData.title }}</router-link>
       </v-col>
     </v-row  >
     <v-row>

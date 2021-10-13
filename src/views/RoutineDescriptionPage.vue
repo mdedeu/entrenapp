@@ -5,10 +5,10 @@
         </v-row>
 
         <v-row>
-            <RoutineDescription :routine="routine"></RoutineDescription>
+            <RoutineDescription :routine="routineData"></RoutineDescription>
         </v-row>
 
-        <CarrouselParaCiclos :routine="routine"></CarrouselParaCiclos>
+        <CarrouselParaCiclos :routine="routineData"></CarrouselParaCiclos>
 
     </v-container>
 </template>

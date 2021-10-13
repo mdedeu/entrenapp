@@ -121,7 +121,7 @@
 
 
       <v-col>
-        <ModificarEjercicio v-on:guardar-ejercicio="guardarAuxiliar" :slug="exercise"></ModificarEjercicio>
+        <ModificarEjercicio v-on:guardar-ejercicio="guardarAuxiliar" :slug="exerciseData"></ModificarEjercicio>
       </v-col>
 
       <v-col>
@@ -214,14 +214,14 @@ export default {
       $deleteExercise: 'delete'
     }),
     async addTofavourite(){
-      const result = this.exercise
+      const result = this.exerciseData
       result.metadata.favorito=true
       await this.$store.dispatch('exercise/getAll')
       await this.$store.dispatch('exercise/modify', result)
     },
 
     async removeFromFavourite(){
-      const result = this.exercise
+      const result = this.exerciseData
       result.metadata.favorito=false
       await this.$store.dispatch('exercise/getAll')
       await this.$store.dispatch('exercise/modify', result)
@@ -229,7 +229,7 @@ export default {
     async deleteHandler(){
       this.dialog_delete = false
       await this.$store.dispatch('exercise/getAll')
-      await this.$store.dispatch('exercise/delete', this.exercise)
+      await this.$store.dispatch('exercise/delete', this.exerciseData)
       return this.$router.go(-1);
     },
     guardarAuxiliar(){
@@ -253,7 +253,7 @@ export default {
     }),
 
     favourite(){
-      return  this.exercise.metadata.favorito
+      return  this.exerciseData.metadata.favorito
     }
 
   },

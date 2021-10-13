@@ -11,9 +11,9 @@
             <p>category</p>
         </div>
         <v-list-item-title class="text-h5 mb-1">
-          {{routineDes.name}}
+          {{routineDesData.name}}
         </v-list-item-title>
-        <v-list-item-subtitle>Esta rutina tiene dificultad {{routineDes.difficulty}}. Incluye ejercicios como ... </v-list-item-subtitle>
+        <v-list-item-subtitle>Esta rutina tiene dificultad {{routineDesData.difficulty}}. Incluye ejercicios como ... </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 
@@ -42,7 +42,7 @@ export default {
   },
   methods:{
   RoutineDescription(){
-    this.$router.push({name:"RoutineDescription",params:{ routine:this.routineDes } })
+    this.$router.push({name:"RoutineDescription",params:{ routine:this.routineDesData } })
   }
   },
   created() {

@@ -2,7 +2,7 @@
   <v-container fluid class="accent fill-height">
     <v-row justify="center" class="mb-5 mt-4">
       <v-col cols="5">
-        <router-link  :to="{path:`${Section.path}`}" class="text-h4">{{ Section.title }}</router-link>
+        <router-link  :to="{path:`${SectionData.path}`}" class="text-h4">{{ SectionData.title }}</router-link>
       </v-col>
     </v-row>
     <v-row class="mb-5 mt-4" justify="space-around">

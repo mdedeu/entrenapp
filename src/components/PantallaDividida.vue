@@ -9,12 +9,12 @@
     </v-row>
     <v-row justify="center">
       <v-col cols="3">
-        <h2 class="accent--text text-h3">Rutinas  {{this.slug}}</h2>
+        <h2 class="accent--text text-h3">Rutinas  {{this.slugData}}</h2>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <FiltroRutinas :slug="this.slug"></FiltroRutinas>
+        <FiltroRutinas :slug="this.slugData"></FiltroRutinas>
       </v-col>
     </v-row>
 

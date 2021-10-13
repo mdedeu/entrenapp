@@ -2,13 +2,13 @@
     <v-container fluid class="accent fill-height">
       <v-row justify="center" class="mb-5 mt-4">
         <v-col cols="5">
-          <router-link  :to="{path:`${Section.path}`}" class="text-h4">{{ Section.title }}</router-link>
+          <router-link  :to="{path:`${SectionData.path}`}" class="text-h4">{{ SectionData.title }}</router-link>
         </v-col>
         </v-row  >
         <v-row class="mb-5 mt-4" justify="space-around">
           <v-slide-group show-arrows >
             <v-slide-item
-                v-for="routine in routines"
+                v-for="routine in routinesData"
                 :key="routine.id">
               <DescriptiveRoutine :routineDes="routine" ></DescriptiveRoutine>
             </v-slide-item>
@@ -24,7 +24,8 @@ import DescriptiveRoutine from './DescriptiveRoutine'
     components:{DescriptiveRoutine},
     data(){
       return {
-        routinesData: null
+        routinesData: null,
+        SectionData: null
       }
     },
     props:{
@@ -44,6 +45,14 @@ import DescriptiveRoutine from './DescriptiveRoutine'
       else{
         this.routinesData = this.routines
         this.$store.dispatch('cache/setRoutines',this.routines)
+      }
+
+      if(!this.Section){
+        this.SectionData = ((JSON).parse(localStorage.getItem('vuex')))['propsData']['Section']
+      }
+      else{
+        this.SectionData = this.Section
+        this.$store.dispatch('cache/setSection',this.Section)
       }
     }
 

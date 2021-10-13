@@ -2,7 +2,7 @@
   <v-container fluid class="primary fill-height">
     <v-row>
       <v-col>
-        <EjercicioDescripcion :exercise="this.exercise"></EjercicioDescripcion>
+        <EjercicioDescripcion :exercise="this.exerciseData"></EjercicioDescripcion>
       </v-col>
     </v-row>
   </v-container>
