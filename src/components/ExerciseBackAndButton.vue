@@ -10,7 +10,7 @@
 
       <v-col v-if="favourite" offset="5">
         <template>
-          <div class="text-center">
+          <div class="text-right">
             <v-dialog
                 v-model="dialog"
                 width="500"
@@ -68,7 +68,7 @@
 
       <v-col v-else offset="5">
         <template>
-          <div class="text-center">
+          <div class="text-right">
             <v-dialog
                 v-model="dialog"
                 width="500"
@@ -126,7 +126,7 @@
 
       <v-col>
         <template>
-          <div class="text-center">
+          <div class="text-right">
             <v-dialog
                 v-model="dialog_delete"
                 width="500"
