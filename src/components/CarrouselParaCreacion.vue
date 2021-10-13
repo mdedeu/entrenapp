@@ -209,6 +209,13 @@
           >
             Si
           </v-btn>
+          <v-btn
+              color="primary"
+              text
+              @click="cancelConfirmation"
+          >
+            Cancelar
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -308,8 +315,10 @@ export default {
       this.ejercitacion.push({name:'',detail:'Exercise',type:'exercise',order:this.cicleNumber,repetitions:null,metadata:{ejercicios:[]} })
       this.cicleNumber++;
       setTimeout(()=>this.update=true,500)
-
-  },
+    },
+    cancelConfirmation(){
+      this.confirmar=false
+    },
     SendInfo(){
       this.enfriamiento.order=this.cicleNumber
 
