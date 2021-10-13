@@ -432,7 +432,6 @@ export default {
       this.ejercitacion.forEach((item)=>cycles.push(item))
       cycles.push(this.enfriamiento)
       this.cycles = cycles
-      console.log('aca')
       this.popup=true
 
     },
