@@ -98,7 +98,21 @@ export default {
        }
      }
 
-    this.$router.push({name:"RoutineDescription",params:{routine:this.routineData}})
+     //guardar la duracion de la rutina en metadata de la misma
+     let sumaTotal = 0
+     for(let i = 0 ; i < cycles.length ; i++){
+       let sumaParcial = 0 ;
+       for(let j = 0 ; j < cycles[i].metadata.ejercicios.length;j++){
+         sumaParcial+=cycles[i].metadata.ejercicios[j].time
+       }
+       sumaTotal += (cycles[i].repetitions)*sumaParcial
+     }
+     sumaTotal = Math.round(sumaTotal/60)
+     this.routine.metadata={sport:this.routine.metadata.sport ,duracion:sumaTotal}
+
+     await this.$store.dispatch('routine/modify',this.routine)
+
+     this.$router.push({name:"RoutineDescription",params:{routine:this.routineData}})
    }
   },
   props:{

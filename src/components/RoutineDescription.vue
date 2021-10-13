@@ -46,16 +46,7 @@ export default {
     ...mapGetters('routineCycle',['getRoutineCycle']),
 
     duracion(){
-
-      let sumaTotal = 0 ;
-      for(let i = 0 ; i < this.routinesCycle.length ; i++){
-        let sumaParcial = 0 ;
-        for(let j = 0 ; j < this.routinesCycle[i].metadata.ejercicios.length;j++){
-          sumaParcial+=this.routinesCycle[i].metadata.ejercicios[j].time
-        }
-        sumaTotal += (this.routinesCycle[i].repetitions)*sumaParcial
-      }
-      return Math.round(sumaTotal/60)
+      return this.routine.metadata.duracion
     },
     difficulty(){
       if(this.routine.difficulty == 'rookie')
