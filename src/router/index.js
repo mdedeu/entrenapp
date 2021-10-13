@@ -8,7 +8,6 @@ import RoutineLanding from '../views/RoutineLanding.vue'
 import Login from "../views/Login";
 // import store from "../store/index"
 import Register from "../views/Register";
-import RoutineCreator from "../views/RoutineCreator"
 import TusRutinas from "../views/TusRutinas"
 //import RutinasRecomendadas from "../views/RutinasRecomendadas"
 import EjercicioDescripcion from "../views/EjercicioDescripcionPage"
@@ -136,11 +135,7 @@ const routes = [
     name: 'Login',
     component: Login
   },
-  {
-    path: '/RoutineCreator',
-    name: 'RoutineCreator',
-    component: RoutineCreator
-  },
+
   {
     path: '/TusRutinas',
     name: 'Tus rutinas',

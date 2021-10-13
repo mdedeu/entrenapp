@@ -13,7 +13,6 @@ class RoutineCycleApi{
     }
 
     static async modify(info, controller) {
-        console.log(info)
         return await Api.put(RoutineCycleApi.getUrl(info.id,info.routineCycle.id), true, info.routineCycle, controller)
     }
 

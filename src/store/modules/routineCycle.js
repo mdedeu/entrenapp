@@ -39,7 +39,6 @@ export default{
             return result
         },
         async modify({getters,commit}, info) {
-            console.log(info)
             const result = await RoutineCycleApi.modify(info)
             const index = getters.findIndex(info)
             if (index >= 0)

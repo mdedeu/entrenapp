@@ -31,7 +31,7 @@
     </v-row>
 
     <v-row>
-      <CarrouselParaCreacion @Info-Exercise="saveCycles"></CarrouselParaCreacion>
+      <CarrouselParaGenerico @Info-Exercise="saveCycles"></CarrouselParaGenerico>
     </v-row>
 
 
@@ -42,7 +42,7 @@
 
 <script>
 import HeaderApp from "../components/HeaderApp";
-import CarrouselParaCreacion from '../components/CarrouselParaCreacion'
+import CarrouselParaGenerico from '../components/CarrouselParaGenerico'
 import {mapGetters} from 'vuex'
 
 
@@ -51,7 +51,7 @@ export default {
   name: "RoutineCreator",
   components:{
     HeaderApp,
-    CarrouselParaCreacion
+    CarrouselParaGenerico
   },
   data(){
     return {
