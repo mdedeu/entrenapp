@@ -1,5 +1,7 @@
 <template>
-  <v-container fluid class="primary fill-height">
+  <Loading v-if="loading"></Loading>
+
+  <v-container v-else fluid class="primary fill-height">
     <v-row style="height: 10vh">
       <HeaderApp/>
     </v-row>
@@ -44,12 +46,14 @@
 import HeaderApp from "../components/HeaderApp";
 import CarrouselParaGenerico from '../components/CarrouselParaGenerico'
 import {mapGetters} from 'vuex'
+import Loading from "../components/Loading"
 
 export default {
   name: "RoutineCreator",
   components:{
     HeaderApp,
     CarrouselParaGenerico
+    ,Loading
   },
   computed:{
     ...mapGetters('routineCycle',['getRoutineCycle']),
@@ -61,12 +65,14 @@ export default {
     return{
       step:2,
       routinesCycleData: null,
-      routineData: null
+      routineData: null,
+      loading : false
     }
   },
   methods:{
 
    async saveCycles(cycles) {
+     this.loading = true
       await this.$store.dispatch('routineCycle/getAll',this.routineData)
       await this.$store.dispatch('routine/getAll')
 
@@ -116,6 +122,7 @@ export default {
 
      await this.$store.dispatch('routine/modify',this.routine)
 
+     this.loading = false
      this.$router.push({name:"RoutineDescription",params:{routine:this.routineData}})
    }
   },

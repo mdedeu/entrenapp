@@ -219,20 +219,26 @@ export default {
     async addTofavourite(){
       const result = this.exercise
       result.metadata.favorito=true
+      this.loading=true
       await this.$store.dispatch('exercise/getAll')
       await this.$store.dispatch('exercise/modify', result)
+      this.loading = false
     },
 
     async removeFromFavourite(){
       const result = this.exercise
       result.metadata.favorito=false
+      this.loading = true
       await this.$store.dispatch('exercise/getAll')
       await this.$store.dispatch('exercise/modify', result)
+      this.loading = false
     },
     async deleteHandler(){
       this.dialog_delete = false
+      this.loading = true
       await this.$store.dispatch('exercise/getAll')
       await this.$store.dispatch('exercise/delete', this.exercise)
+      this.loading = false
       return this.$router.go(-1);
     },
     guardarAuxiliar(){

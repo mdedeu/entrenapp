@@ -246,7 +246,9 @@ export default {
           deportes:this.selected_sport,
           favorito:false
         }}
+      this.loading=true
       await this.$createExercise(exercise)
+      this.loading=false
       this.$emit('load-exercise')
       this.popup=true
     },

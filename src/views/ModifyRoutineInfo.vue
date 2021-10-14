@@ -1,5 +1,6 @@
 <template>
-  <v-container fluid class="primary fill-height">
+  <Loading v-if="loading"></Loading>
+  <v-container v-else fluid class="primary fill-height">
     <v-row style="height: 10vh">
       <HeaderApp/>
     </v-row>
@@ -43,16 +44,18 @@
 import HeaderApp from "../components/HeaderApp";
 import RutinasModificador from '../components/RutinasModificador'
 import {mapGetters} from 'vuex'
-
+import Loading from "../components/Loading"
 
 export default {
   name: "RoutineCreatorInfo",
   components: {
     HeaderApp,
     RutinasModificador,
+    Loading
   },
   methods:{
     async modificateRoutine(routine){
+      this.loading = true
       await this.$store.dispatch('routine/getAll')
       this.routineData.name=routine.name
       this.routineData.detail=routine.detail
@@ -60,6 +63,7 @@ export default {
       this.routineData.difficulty = routine.difficulty
       this.routineData.metadata=routine.metadata
       await this.$store.dispatch("routine/modify",this.routineData);
+      this.loading = false
       this.$router.push({name:"ModifyRoutineExercise",params:{routine:this.routineData,routinesCycle:this.routineCycleData}})
     }
   },
@@ -96,7 +100,8 @@ export default {
   data(){
     return{
       routineData: null,
-      routineCycleData: null
+      routineCycleData: null,
+      loading : false
     }
   }
 }
