@@ -7,6 +7,12 @@
     </v-row>
     <v-row class="mb-5 mt-4" justify="space-around">
       <v-slide-group show-arrows >
+        <v-slide-item v-if="this.exercises.length === 0" >
+          <v-container class="primary--text" >
+            <h4 class="primary--text">No hubo resultados</h4>
+            <v-icon  size="60" color="primary"> mdi-emoticon-sad-outline</v-icon>
+          </v-container>
+        </v-slide-item>
         <v-slide-item
             v-for="exercise in exercises"
             :key="exercise.id">
