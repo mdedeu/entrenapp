@@ -5,8 +5,8 @@
       app
       color = "primary"
    >
-    <v-row>
-      <v-col cols="3">
+    <v-row justify="space-between">
+      <v-col cols="2">
         <router-link :to="{name:'RoutineLanding'}"><v-img :src="require('../assets/logo.png')"
                      alt="Vuetify Logo"
                      class="shrink mr-2 col-6"
@@ -16,33 +16,33 @@
         </v-img>
         </router-link>
       </v-col>
-     <v-col>
-       <div class="d-inline-flex justify-space-around text-center  align-content-center mt-4">
-         <router-link :to="{name: 'RoutineCreadorInfo'}" class="white--text mr-16 ml-16">
+     <v-col justify="space-between">
+       <v-container class="d-inline-flex justify-space-around text-center  align-content-center mt-4">
+         <router-link :to="{name: 'RoutineCreadorInfo'}" class="white--text ">
            <v-btn  class="white--text" plain>
              Creá tu rutina
            </v-btn>
 
          </router-link>
-         <router-link :to="{name: 'RoutineLanding'}" class=" white--text  mr-16 ml-16">
+         <router-link :to="{name: 'RoutineLanding'}" class=" white--text">
            <v-btn  class="white--text" plain>
              Rutinas
            </v-btn>
          </router-link>
-         <router-link :to="{name: 'EjerciciosLanding'}" class=" white--text   mr-16 ml-16">
+         <router-link :to="{name: 'EjerciciosLanding'}" class=" white--text">
            <v-btn  class="white--text" plain>
              Ejercicios
            </v-btn>
          </router-link>
-         <router-link :to="{name: 'My Profile'}" class=" white--text   mr-16 ml-16">
+         <router-link :to="{name: 'My Profile'}" class=" white--text">
            <v-btn  class="white--text" plain>
              Mi perfil
            </v-btn>
          </router-link>
-         <v-btn class="white--text ml-16 text-decoration-underline"  @click="confirmSalir" plain>
+         <v-btn class="white--text text-decoration-underline"  @click="confirmSalir" plain>
            <u>Salir</u>
          </v-btn>
-       </div>
+       </v-container>
      </v-col>
     </v-row>
 
