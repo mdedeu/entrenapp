@@ -8,7 +8,7 @@
        <Back></Back>
        <v-spacer></v-spacer>
 
-       <v-col v-if="favourite" offset="5">
+       <v-col v-if="favourite" offset="3">
          <template>
            <div class="text-right">
              <v-dialog
@@ -66,7 +66,7 @@
        </v-col>
 
 
-       <v-col v-else offset="5">
+       <v-col v-else offset="3">
          <template>
            <div class="text-right">
              <v-dialog
