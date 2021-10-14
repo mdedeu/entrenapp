@@ -97,7 +97,7 @@
                  </v-card-title>
 
                  <v-card-text>
-                   ¡Ejercicio eliminado de favoritos!
+                   Ejercicio eliminado de favoritos
                  </v-card-text>
                  <v-icon color="green" size="60">mdi-check</v-icon>
 
@@ -142,18 +142,18 @@
                    <v-icon left>
                      mdi-delete-outline
                    </v-icon>
-                   Eliminar Ejercicio
+                   Eliminar ejercicio
 
                  </v-btn>
                </template>
 
                <v-card>
                  <v-card-title class="text-h5 red lighten-2">
-                   Eliminar este ejercicio
+                   Eliminar ejercicio
                  </v-card-title>
 
                  <v-card-text>
-                   Seguro que desea eliminar este ejercicio?
+                   ¿Seguro de que desea eliminar este ejercicio?
                  </v-card-text>
                  <v-icon color="red" size="60">mdi-delete</v-icon>
 

@@ -14,7 +14,7 @@
                   complete
                   step="1"
               >
-                Informacion de la rutina
+                Información de la rutina
               </v-stepper-step>
 
               <v-divider></v-divider>

@@ -22,12 +22,12 @@
 
 
         <v-row justify="space-around" class="mt-10 mb-n9">
-          ¿Vas a necesitar alguna máquina o equipación extra?
+          ¿Vas a necesitar alguna máquina o equipamiento extra?
         </v-row>
         <v-row justify="space-around" class="pt-6">
           <v-checkbox
               color="accent"
-              label="Equipación Extra"
+              label="Equipamiento Extra"
               hide-details
               v-model="equipacion"
               dark
@@ -80,7 +80,7 @@
                 Deporte
               </v-list-item-title>
               <v-list-item-subtitle class="white--text">
-                Este ejercicio esta orientado al {{this.currentExercise.metadata.deportes}}
+                Este ejercicio está orientado al {{this.currentExercise.metadata.deportes}}
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -95,10 +95,10 @@
           <v-list-item three-line>
             <v-list-item-content  class=" text-deco ma-3 font-weight-thin accent--text ">
               <v-list-item-title>
-                Equipación
+                Equipamiento
               </v-list-item-title>
               <v-list-item-subtitle class="white--text">
-                Este ejercicio {{this.currentExercise.metadata.equipacion ? "requiere" : "no require"}} equipacion
+                Este ejercicio {{this.currentExercise.metadata.equipacion ? "requiere" : "no require"}} equipamiento
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -164,10 +164,10 @@
             <v-dialog width="600px"  :value="agregar" :retain-focus="false">
               <v-container fluid  class="fill-height">
                 <v-card  width="100%" class="primary mx-16" rounded>
-                  <h1 class="font-weight-medium">Elegi la duración</h1>
+                  <h1 class="font-weight-medium">Elije la duración</h1>
                   <v-row>
                     <v-col>
-                      <h4 class=" font-weight-medium accent--text">Ingresá el número de repeticiones si corresponde</h4>
+                      <h4 class=" font-weight-medium accent--text">Ingresa el número de repeticiones, si corresponde</h4>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -177,7 +177,7 @@
                   </v-row>
                   <v-row>
                     <v-col>
-                      <h4 class=" font-weight-medium accent--text" :rules="rulesNumber">Ingresá el tiempo del ejercicio en segundos si corresponde</h4>
+                      <h4 class=" font-weight-medium accent--text" :rules="rulesNumber">Ingresa el tiempo del ejercicio en segundos, si corresponde</h4>
                     </v-col>
                   </v-row>
                   <v-row>

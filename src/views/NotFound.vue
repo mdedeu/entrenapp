@@ -7,7 +7,7 @@
     </v-row>
     <v-row class="mt-16 mb-10">
       <v-col align="center" cols="12">
-      <h1 class="accent--text">Por favor vuelva a intentar con una URL valida</h1>
+      <h1 class="accent--text">Por favor vuelve a intentar con una URL valida</h1>
         <Back></Back>
       </v-col>
     </v-row>

@@ -18,7 +18,7 @@
       </v-col>
      <v-col cols="3" >
        <div class="d-inline-flex justify-space-around text-center align-content-center mt-3">
-         <v-btn class="white--text  mr-16 ml-16" plain  @click="CreateRoutine" >Creá tu rutina</v-btn>
+         <v-btn class="white--text  mr-16 ml-16" plain  @click="CreateRoutine" >Crea tu rutina</v-btn>
          <v-btn class="white--text mr-16 ml-16" plain @click="RoutineLanding">Rutinas</v-btn>
          <v-btn class="white--text mr-16 ml-16" plain @click="EjerciciosLanding">Ejercicios</v-btn>
          <v-btn class="white--text mr-16 ml-16" plain @click="MyProfile">Mi perfil</v-btn>
@@ -35,7 +35,7 @@
           Advertencia
         </v-card-title>
         <v-card-text>
-          ¿Seguro que quiere cerrar sesion?
+          ¿Seguro de que quieres cerrar sesión?
         </v-card-text>
         <v-icon color="warning" size="60">mdi-help</v-icon>
 
@@ -48,7 +48,7 @@
               text
               @click="Salir"
           >
-            Si
+            Sí
           </v-btn>
           <v-btn
               color="primary"

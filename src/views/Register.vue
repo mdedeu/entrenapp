@@ -67,14 +67,14 @@
     <v-row>
       <v-col/>
       <v-col class="text-center">
-        <v-btn class="accent text--primary" width="250" height="50"  @click="register" rounded>Registrate</v-btn>
+        <v-btn class="accent text--primary" width="250" height="50"  @click="register" rounded>Regístrate</v-btn>
       </v-col>
       <v-col/>
     </v-row>
     <v-row>
       <v-col/>
       <v-col class="text-center mt-n3"><u><router-link :to="{name: 'Login'}">
-        <a class="grey--text"> Ya tenes una cuenta?</a></router-link></u></v-col>
+        <a class="grey--text"> ¿Ya tienes una cuenta?</a></router-link></u></v-col>
       <v-col/>
     </v-row>
     <v-row style="height: 150px"></v-row>

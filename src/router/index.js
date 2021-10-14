@@ -25,6 +25,7 @@ import RoutineCreatorExercise from "../views/RoutineCreatorExercise"
 import ModifyRoutineInfo from "../views/ModifyRoutineInfo"
 import ModifyRoutineExercise from "../views/ModifyRoutineExercise"
 import {Api} from "../../API/api";
+import ApiFill from "../views/sampleview"
 
 
 Vue.use(VueRouter)
@@ -110,7 +111,11 @@ const routes = [
     component: codeChecking,
     props: true
   },
-
+  {
+    path: '/apifill',
+    name: 'ApiFill',
+    component: ApiFill,
+  },
 
   {
     path: '/RoutineDescription',

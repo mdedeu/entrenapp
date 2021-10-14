@@ -1,7 +1,7 @@
 <template>
   <v-container  class="primary" width="200px">
     <v-row>
-      <h3 class="accent--text  ma-3">Duración del Descanso en segundos</h3>
+      <h3 class="accent--text  ma-3">Duración del descanso en segundos</h3>
     </v-row>
     <v-row>
       <v-text-field

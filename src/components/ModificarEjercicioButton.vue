@@ -21,12 +21,12 @@
             <v-icon left>
               mdi-pencil-outline
             </v-icon>
-            Editar Ejercicio
+            Editar ejercicio
           </v-btn>
         </template>
         <v-card class="accent">
           <v-card-title>
-            <span class="text-h4">Editá el ejercicio</span>
+            <span class="text-h4">Edita el ejercicio</span>
           </v-card-title>
           <v-card-text>
             <v-row justify="center">
@@ -44,7 +44,7 @@
             </v-row>
             <v-row>
               <v-col>
-                <h4 class="primary--text mt-n6">Grupo múscular</h4>
+                <h4 class="primary--text mt-n6">Grupo muscular</h4>
               </v-col>
             </v-row>
             <v-row justify="center" v-for="exercise in exercises" :key="exercise.name">
@@ -121,7 +121,7 @@
                   Éxito
                 </v-card-title>
                 <v-card-text>
-                  ¡Ejercicio editado correctamente!
+                  Ejercicio editado correctamente
                 </v-card-text>
                 <v-icon color="green" size="60">mdi-check</v-icon>
 
@@ -149,7 +149,7 @@
                   Error
                 </v-card-title>
                 <v-card-text>
-                  Falta informacion sobre el {{this.error}}
+                  Falta información sobre el {{this.error}}
                 </v-card-text>
                 <v-icon color="red" size="60">mdi-close</v-icon>
 

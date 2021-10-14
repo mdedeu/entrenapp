@@ -22,12 +22,12 @@
         </v-row>
 
         <v-row justify="space-around" class="mt-10 mb-n9">
-          ¿Vas a necesitar alguna máquina o equipación extra?
+          ¿Vas a necesitar alguna máquina o equipamiento extra?
         </v-row>
         <v-row justify="space-around" class="pt-6">
           <v-checkbox
               color="accent"
-              label="Equipación Extra"
+              label="Equipamiento extra"
               hide-details
               v-model="equipacion"
               dark

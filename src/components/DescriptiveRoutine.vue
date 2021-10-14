@@ -3,7 +3,7 @@
       class="mx-10"
       width="600"
       outlined
-      onclick="RoutineDescription"
+      :onclick="this.RoutineDescription"
   >
     <v-list-item three-line>
       <v-list-item-content>

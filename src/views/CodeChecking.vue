@@ -2,7 +2,7 @@
 <v-container  fluid class="primary fill-height">
 
 <v-row justify="center">
-  <h1>Revisa tu casilla de email!</h1>
+  <h1>Revisa tu casilla de email</h1>
 </v-row>
   <v-row justify="center">
     <p class="accent--text"> Te enviamos un código para verificar tu cuenta</p>

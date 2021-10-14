@@ -97,7 +97,7 @@
                   </v-card-title>
 
                   <v-card-text>
-                    ¡Rutina eliminada de favoritas!
+                    Rutina eliminada de favoritas
                   </v-card-text>
                   <v-icon color="green" size="60">mdi-check</v-icon>
 
@@ -167,7 +167,7 @@
           </v-card-title>
 
           <v-card-text>
-            Seguro que desea eliminar esta rutina?
+            ¿Seguro de que desea eliminar esta rutina?
           </v-card-text>
           <v-icon color="red" size="60">mdi-delete</v-icon>
 

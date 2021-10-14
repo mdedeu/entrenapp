@@ -2,7 +2,7 @@
         <v-container fluid class="primary fill-height">
             <v-row justify="space-around">
                 <v-col>
-                    <p class="text-center accent--text">Seleccionar la categoria</p>
+                    <p class="text-center accent--text">Seleccionar la categoría</p>
                 </v-col>
               <v-col>
                 <Close v-on:close-popup="closePopup()"></Close>

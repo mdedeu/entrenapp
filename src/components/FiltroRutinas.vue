@@ -36,11 +36,11 @@
             </template>
           </v-row>
           <v-row justify="space-around" class="mt-6 mb-n5">
-            ¿Vas a necesitar alguna máquina o equipación extra?
+            ¿Vas a necesitar alguna máquina o equipamiento extra?
           </v-row>
           <v-row justify="space-around" class="pt-6">
             <v-checkbox
-                label="Equipación extra"
+                label="Equipamiento extra"
                 color="accent"
                 hide-details
                 dark
@@ -53,7 +53,7 @@
               <v-select
                   v-model="selected_sport"
                   :items="sports"
-                  label="Deporte Relacionado"
+                  label="Deporte relacionado"
                   solo
                   full-width
               ></v-select>

@@ -2,7 +2,7 @@
   <v-container class="mb-7">
     <BackAndButton :routineID="this.routine.id" :routine="this.routine" class="mt-6"></BackAndButton>
     <div  class="pt-10 accent--text">
-      <v-row justify="center ">
+      <v-row justify="center">
         <h2>{{this.routine.name}}</h2>
       </v-row>
       <v-row justify="center">

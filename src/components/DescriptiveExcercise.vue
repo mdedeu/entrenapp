@@ -10,7 +10,7 @@
           <v-list-item-title class="text-h5 mb-1">
             {{exerciseDes.name}}
           </v-list-item-title>
-          <v-list-item-subtitle>Este ejercicio esta orientado al {{exerciseDes.metadata.deportes}}. </v-list-item-subtitle>
+          <v-list-item-subtitle>Este ejercicio está orientado al {{exerciseDes.metadata.deportes}}. </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 

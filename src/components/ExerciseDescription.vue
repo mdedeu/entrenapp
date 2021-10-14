@@ -6,7 +6,7 @@
         <h2>{{exercise.name}}</h2>
       </v-row>
       <v-row justify="center">
-        <p>Musculos que trabaja: {{exercise.name}}</p>
+        <p>Músculos que trabaja: {{exercise.name}}</p>
       </v-row>
       <v-row justify="center">
         <p>

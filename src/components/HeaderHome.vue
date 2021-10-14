@@ -14,10 +14,10 @@
     </v-spacer>
     <router-link :to = "{name: 'Login'}" class="text-decoration-none">
     <v-btn outlined rounded class="mr-3 font-weight-bold" @click="Login">
-      Inicia Sesión
+      Inicia sesión
     </v-btn>
     </router-link>
-    <v-btn outlined rounded class="primary accent--text font-weight-bold" @click="Register">Registrate</v-btn>
+    <v-btn outlined rounded class="primary accent--text font-weight-bold" @click="Register">Regístrate</v-btn>
   </v-app-bar>
 
 </template>

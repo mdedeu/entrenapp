@@ -51,13 +51,13 @@
       <v-row>
         <v-col/>
         <v-col class="text-center">
-          <v-btn  class="accent text--primary" width="250" height="50" rounded @click="login">Ingresá</v-btn>
+          <v-btn  class="accent text--primary" width="250" height="50" rounded @click="login">Ingresa</v-btn>
         </v-col>
         <v-col/>
       </v-row>
     <v-row>
       <v-col/>
-      <v-col class="text-center mt-n3"><u><a class="grey--text">Olvidaste tu contraseña?</a></u></v-col>
+      <v-col class="text-center mt-n3"><u><a class="grey--text">¿Olvidaste tu contraseña?</a></u></v-col>
       <v-col/>
     </v-row>
   </v-container>
