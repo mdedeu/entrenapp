@@ -100,18 +100,20 @@ export default {
 
      //guardar la duracion de la rutina en metadata de la misma
      let sumaTotal = 0
+     let equipacion = false
      for(let i = 0 ; i < cycles.length ; i++){
        let sumaParcial = 0 ;
        for(let j = 0 ; j < cycles[i].metadata.ejercicios.length;j++){
+         if(cycles[i].metadata.ejercicios[j].metadata.equipacion)
+           equipacion=true
          sumaParcial+=cycles[i].metadata.ejercicios[j].time
        }
        sumaTotal += (cycles[i].repetitions)*sumaParcial
      }
      sumaTotal = Math.round(sumaTotal/60)
 
-     this.routine.metadata={sport:this.routine.metadata.sport ,duracion:sumaTotal}
+     this.routine.metadata={sport:this.routine.metadata.sport ,duracion:sumaTotal,equipacion:equipacion}
 
-     console.log(this.routine)
      await this.$store.dispatch('routine/modify',this.routine)
 
      this.$router.push({name:"RoutineDescription",params:{routine:this.routineData}})

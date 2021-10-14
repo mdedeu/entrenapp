@@ -79,9 +79,13 @@ export default {
      //guardar la informacion de la rutina en metadata de la misma
 
     let sumaTotal = 0
+     let equipacion = false
      for(let i = 0 ; i < cycles.length ; i++){
        let sumaParcial = 0 ;
        for(let j = 0 ; j < cycles[i].metadata.ejercicios.length;j++){
+         console.log(cycles[i].metadata.ejercicios[j])
+         if(cycles[i].metadata.ejercicios[j].metadata.equipacion)
+           equipacion=true
          sumaParcial+=cycles[i].metadata.ejercicios[j].time
        }
        sumaTotal += (cycles[i].repetitions)*sumaParcial
@@ -90,7 +94,7 @@ export default {
 
      let routineAPI = await this.$store.dispatch('routine/get',this.routine)
 
-     routineAPI.metadata={sport:this.routine.metadata.sport ,duracion:sumaTotal}
+     routineAPI.metadata={sport:this.routine.metadata.sport ,duracion:sumaTotal,equipacion:equipacion}
 
      await this.$store.dispatch('routine/modify',routineAPI)
 

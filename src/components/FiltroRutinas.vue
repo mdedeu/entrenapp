@@ -44,6 +44,7 @@
                 color="accent"
                 hide-details
                 dark
+                v-model="equipacion"
             ></v-checkbox>
           </v-row>
 
@@ -108,7 +109,8 @@ export default {
       selected_difficulty : null,
       selected_duration : null,
       selected_sport: null,
-      routinesF:null
+      routinesF:null,
+      equipacion:false
     }
   },
   methods : {
@@ -131,9 +133,11 @@ export default {
           let b1 = (item.metadata.duracion >= this.selected_duration.from)
           let b2 =(item.metadata.duracion < this.selected_duration.to)
           return b1 && b2
-
-
         })
+
+      if(this.equipacion)
+        this.routinesF = this.routinesF.filter( (item)  => item.metadata.equipacion )
+
       return this.routinesF
 
     },
