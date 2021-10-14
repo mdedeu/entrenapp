@@ -152,7 +152,7 @@
                   </v-row>
                   <v-row>
                     <v-col>
-                      <v-text-field v-model="exercise_reps" solo label="Repeticiones" class=" mx-3 mt-6" :rules="rulesNumber"></v-text-field>
+                      <v-text-field v-model="exercise_reps" solo label="Repeticiones" class=" mx-3 mt-6" :rules="rulesNumber" clearable></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -162,7 +162,7 @@
                   </v-row>
                   <v-row>
                     <v-col>
-                      <v-text-field v-model="exercise_time" solo label="Tiempo" class=" mx-3 mt-6"></v-text-field>
+                      <v-text-field v-model="exercise_time" solo label="Tiempo" class=" mx-3 mt-6" clearable></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -249,8 +249,8 @@ export default {
       selected_muscle: null,
       selected_sport: null,
       agregar : false,
-      exercise_time: 0,
-      exercise_reps: 0,
+      exercise_time: null,
+      exercise_reps: null,
       currentExerciseToAdd : {},
       rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 '],
       exito:false,
@@ -288,7 +288,7 @@ export default {
       this.currentExerciseToAdd = exercise;
     },
     addExercise(event){
-      if(!isNaN(this.exercise_reps) && !isNaN(this.exercise_time)){
+      if(!isNaN(this.exercise_reps) || !isNaN(this.exercise_time)){
         this.$emit('add-exercise',event)
         this.exito= true
       }

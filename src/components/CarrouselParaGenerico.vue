@@ -70,11 +70,11 @@
                   </v-container>
                   <v-divider></v-divider>
 
-                  <v-container v-if="calExec.time > 0">
+                  <v-container v-if="!isNaN(calExec.time) && calExec.time > 0">
                     Duración:
                     {{ calExec.time }}''
                   </v-container>
-                  <v-container v-if="calExec.reps >0">
+                  <v-container v-if="!isNaN(calExec.reps) &&calExec.reps >0">
                     Reps: {{calExec.reps}}
                   </v-container>
 
@@ -183,11 +183,11 @@
                   {{ exerciseDescrip.name }}
                 </v-container>
                 <v-divider></v-divider>
-                <v-container v-if="exerciseDescrip.time > 0">
+                <v-container v-if="!isNaN(exerciseDescrip.time) && exerciseDescrip.time > 0">
                   Duración:
                   {{ exerciseDescrip.time }}''
                 </v-container>
-                <v-container v-if="exerciseDescrip.reps >0">
+                <v-container v-if=" !isNaN(exerciseDescrip.reps) && exerciseDescrip.reps >0">
                   Reps: {{exerciseDescrip.reps}}
                 </v-container>
               </v-card>
@@ -278,11 +278,11 @@
                     {{ calExec.name }}
                   </v-container>
                   <v-divider></v-divider>
-                  <v-container v-if="calExec.time > 0">
+                  <v-container v-if="!isNaN(calExec.time) && calExec.time > 0">
                     Duración:
                     {{ calExec.time }}''
                   </v-container>
-                  <v-container v-if="calExec.reps >0">
+                  <v-container v-if="!isNaN(calExec.reps) && calExec.reps >0">
                     Reps: {{calExec.reps}}
                   </v-container>
                 </v-card>
