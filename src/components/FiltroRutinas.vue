@@ -68,14 +68,24 @@
             vertical class="accent"
         ></v-divider>
 
+        <v-col v-if="routinesF.length==0">
+          <v-row justify="space-around">
+            <v-col>
 
-        <v-col cols="6">
-          <v-card-text justify="space-around" class="waiting-api" v-if="!routinesF" > Filtra tus rutinas!</v-card-text>
+            </v-col>
+            <v-col cols="9" >
+              <v-card-text  class="accent-text text-h3" > No tienes rutinas aún</v-card-text>
+            </v-col>
+          </v-row>
+        </v-col>
+
+        <v-col v-else cols="6">
+          <v-card-text justify="space-around" class="waiting-api" v-if="sinResultados" > No se obtuvieron resultados</v-card-text>
           <v-row class="pt-6 pl-6" justify="space-around" v-for="routine in routinesF" :key="routine.name">
             <DescriptiveRoutine :routineDes="routine" ></DescriptiveRoutine>
           </v-row>
-
         </v-col>
+
       </v-row>
     </v-container>
   </v-container>
@@ -110,7 +120,8 @@ export default {
       selected_duration : null,
       selected_sport: null,
       routinesF:null,
-      equipacion:false
+      equipacion:false,
+      sinResultados:false
     }
   },
   methods : {
@@ -124,9 +135,6 @@ export default {
           this.routinesF=this.routinesF.filter( (item) => item.difficulty === 'intermediate')
         else if(this.selected_difficulty=='Avanzado')
           this.routinesF=this.routinesF.filter( (item) => item.difficulty === 'expert')
-        else{
-          console.log('here')
-        }
       }
       if(this.selected_sport!=null)
         this.routinesF=this.routinesF.filter( (item) => item.metadata.sport == this.selected_sport)
@@ -140,6 +148,12 @@ export default {
 
       if(this.equipacion)
         this.routinesF = this.routinesF.filter( (item)  => item.metadata.equipacion )
+
+      if(this.routinesF.length == 0 ){
+       this.sinResultados=true
+       this.routinesF = this.routines
+      }else
+        this.sinResultados=false
 
       return this.routinesF
 
@@ -217,7 +231,7 @@ export default {
 <style scoped>
 .waiting-api{
   font-size: 1.5em;
-  margin-top: 25%;
+  color:red;
 }
 .routine{
   max-height: 45em;
