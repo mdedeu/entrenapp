@@ -135,6 +135,8 @@ export default {
           return b1 && b2
         })
 
+      console.log(this.equipacion)
+      console.log(this.routinesF)
       if(this.equipacion)
         this.routinesF = this.routinesF.filter( (item)  => item.metadata.equipacion )
 
@@ -192,7 +194,7 @@ export default {
       if(this.slug==='favoritas'){
         return this.getFavouritesId
       }
-      return this.getOther(this.user.username)
+      return this.getOther(this.user.id)
     },
   },
   async created() {

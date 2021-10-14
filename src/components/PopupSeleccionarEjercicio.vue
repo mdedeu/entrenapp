@@ -146,7 +146,7 @@
                                        exercise: currentExerciseToAdd,
                              time: exercise_time,
                              reps: exercise_reps,
-                             stage: stage
+                             stage: stage,
                       })">
                         Guardar
                       </v-btn>

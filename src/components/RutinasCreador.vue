@@ -129,7 +129,7 @@ export default {
       error:false,
       publicRoutine:true,
       descripcion:"",
-      message: "Ocurrio un error inesperado"
+      message: "Ocurrió un error inesperado"
     }
   },
   methods : {
@@ -153,7 +153,7 @@ export default {
     },
     SendInfo(){
       if(this.publicRoutine && this.descripcion==null){
-        this.message = 'La rutina debe tener el campo descripcion'
+        this.message = 'La rutina debe tener el campo descripción'
         return this.error=true
       }
 

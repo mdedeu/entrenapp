@@ -453,13 +453,18 @@ export default {
         this.calentamiento.metadata.ejercicios.push({
           time: event.time,
           reps: event.reps,
-          name : event.exercise.name
+          name : event.exercise.name,
+          equipacion : event.exercise.metadata.equipacion
+
+
         })
       }else if(event.stage === 'Enfriamiento'){
         this.enfriamiento.metadata.ejercicios.push({
           time: event.time,
           reps: event.reps,
-          name : event.exercise.name
+          name : event.exercise.name,
+          equipacion : event.exercise.metadata.equipacion
+
         })
       }else{
         let i;
@@ -468,7 +473,8 @@ export default {
             this.ejercitacion[i].metadata.ejercicios.push({
               time: event.time,
               reps: event.reps,
-              name : event.exercise.name
+              name : event.exercise.name,
+              equipacion : event.exercise.metadata.equipacion
             })
             break;
           }

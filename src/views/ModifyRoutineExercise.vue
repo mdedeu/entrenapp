@@ -104,7 +104,7 @@ export default {
      for(let i = 0 ; i < cycles.length ; i++){
        let sumaParcial = 0 ;
        for(let j = 0 ; j < cycles[i].metadata.ejercicios.length;j++){
-         if(cycles[i].metadata.ejercicios[j].metadata.equipacion)
+         if(cycles[i].metadata.ejercicios[j].equipacion)
            equipacion=true
          sumaParcial+=cycles[i].metadata.ejercicios[j].time
        }
