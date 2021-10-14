@@ -7,7 +7,7 @@
         </v-row  >
         <v-row class="mb-5 mt-4" justify="space-around">
           <v-slide-group show-arrows >
-            <v-slide-item v-if="this.routines.length === 0" >
+            <v-slide-item v-if="routines.length === 0" >
               <v-container class="primary--text" >
                 <h4 class="primary--text">No hubo resultados</h4>
                 <v-icon  size="60" color="primary"> mdi-emoticon-sad-outline</v-icon>

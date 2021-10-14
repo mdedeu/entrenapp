@@ -6,8 +6,8 @@
         <v-col cols = 12><HeaderApp></HeaderApp></v-col>
       </v-row>
 
-      <v-row class="pt-16">
-        <ExerciseCarrousel :Section="{title:'Tus ejercicios',path:'/TusEjercicios'}" :exercises="mine"></ExerciseCarrousel>
+      <v-row>
+        <ExerciseCarrousel class="mt-n6" :Section="{title:'Tus ejercicios',path:'/TusEjercicios'}" :exercises="mine"></ExerciseCarrousel>
       </v-row>
 
       <v-row class="pt-16" >

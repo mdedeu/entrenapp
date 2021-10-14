@@ -1,8 +1,9 @@
 <template>
-  <Loading v-if="loading"></Loading>
 
-  <v-container v-else>
-  <v-row justify="center">
+
+  <v-container  >
+
+    <v-row justify="center">
     <v-dialog
         v-model="dialog"
         persistent
@@ -171,12 +172,10 @@
 </template>
 
 <script>
-import Loading from './Loading'
 import {mapActions} from 'vuex'
 
 export default {
   name: "CrearEjercicio",
- components:{Loading},
   data() {
     return {
       loading : false,
@@ -246,9 +245,7 @@ export default {
           deportes:this.selected_sport,
           favorito:false
         }}
-      this.loading=true
       await this.$createExercise(exercise)
-      this.loading=false
       this.$emit('load-exercise')
       this.popup=true
     },

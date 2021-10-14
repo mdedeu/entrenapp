@@ -1,5 +1,5 @@
 <template>
-  <v-container class="primary">
+  <v-container fluid class="primary fill-height">
     <v-row justify="center">
       <h1 class="accent--text">Cargando...</h1>
     </v-row>
