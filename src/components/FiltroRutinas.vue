@@ -115,7 +115,7 @@ export default {
       difficulty: [{level:"Principiante"},{level:"Intermedio"},{level:"Avanzado"}],
       duration: [{from:0,to:15,range:"0-15"},{from:15,to:30,range:"15-30"},{from:30,to:45,range:"30-45"},{from:45,to:60,range:"45-60"}],
       loading: false,
-      sports: ['Futbol','Hockey','Tenis','Otro'],
+      sports: null,
       selected_difficulty : null,
       selected_duration : null,
       selected_sport: null,
@@ -219,6 +219,8 @@ export default {
       await this.$store.dispatch("routine/getAll")
     else
       await this.$store.dispatch("favouriteRoutine/getAll")
+    await this.$store.dispatch('sport/getAll')
+    this.sports = this.$store.getters['sport/getSports'].map((item) => item.name)
     this.loading = false;
     this.routinesF = this.routines
   }
