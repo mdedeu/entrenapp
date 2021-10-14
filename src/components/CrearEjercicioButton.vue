@@ -187,7 +187,7 @@ export default {
       popup:false,
       dialog:false,
       sports: null,
-      exercises: [{name: 'Abdominales' }, {name: 'Espalda'}, {name: 'Brazos'}, {name: 'Pecho'}],
+      exercises: [{name: 'Piernas' }, {name: 'Pecho'}, {name: 'Brazos'}, {name: 'Abdominales'},{name:'Espalda'}],
       selected_sport: null,
       equip: false,
       selected_muscle: null,
