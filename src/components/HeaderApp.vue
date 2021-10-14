@@ -16,14 +16,31 @@
         </v-img>
         </router-link>
       </v-col>
-     <v-col cols="3" >
-       <div class="d-inline-flex justify-space-around text-center align-content-center mt-3">
-         <v-btn class="white--text  mr-16 ml-16" plain  @click="CreateRoutine" >Crea tu rutina</v-btn>
-         <v-btn class="white--text mr-16 ml-16" plain @click="RoutineLanding">Rutinas</v-btn>
-         <v-btn class="white--text mr-16 ml-16" plain @click="EjerciciosLanding">Ejercicios</v-btn>
-         <v-btn class="white--text mr-16 ml-16" plain @click="MyProfile">Mi perfil</v-btn>
-         <v-btn class="white--text ml-16"  @click="confirmSalir" plain>
-           Salir
+     <v-col>
+       <div class="d-inline-flex justify-space-around text-center  align-content-center mt-4">
+         <router-link :to="{name: 'RoutineCreadorInfo'}" class="white--text mr-16 ml-16">
+           <v-btn  class="white--text" plain>
+             Creá tu rutina
+           </v-btn>
+
+         </router-link>
+         <router-link :to="{name: 'RoutineLanding'}" class=" white--text  mr-16 ml-16">
+           <v-btn  class="white--text" plain>
+             Rutinas
+           </v-btn>
+         </router-link>
+         <router-link :to="{name: 'EjerciciosLanding'}" class=" white--text   mr-16 ml-16">
+           <v-btn  class="white--text" plain>
+             Ejercicios
+           </v-btn>
+         </router-link>
+         <router-link :to="{name: 'My Profile'}" class=" white--text   mr-16 ml-16">
+           <v-btn  class="white--text" plain>
+             Mi perfil
+           </v-btn>
+         </router-link>
+         <v-btn class="white--text ml-16 text-decoration-underline"  @click="confirmSalir" plain>
+           <u>Salir</u>
          </v-btn>
        </div>
      </v-col>
@@ -74,16 +91,10 @@ export default {
       loading : false
     }
   },
+  mounted() {
+
+  },
   methods:{
-    CreateRoutine() {
-      this.$router.push({name:"RoutineCreadorInfo"});
-    },
-    RoutineLanding(){
-      this.$router.push({name:"RoutineLanding"});
-    },
-    MyProfile(){
-      this.$router.push({name:"My Profile"});
-    },
     confirmSalir(){
       this.confirmation=true
     },
@@ -95,9 +106,13 @@ export default {
       await this.$store.dispatch("security/logout");
       this.$router.push({name:"Home"})
     },
-    EjerciciosLanding(){
-      this.$router.push({name:"EjerciciosLanding"});
-    }
   }
 }
 </script>
+<style scoped >
+.router-link-active{
+  text-decoration-color: #FFD523;
+  text-decoration-style: solid ;
+  text-decoration-thickness: 3px;
+}
+</style>

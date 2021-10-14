@@ -361,8 +361,7 @@ export default {
 
     },
     eliminarEjercicio(nombre,ejercicioID){
-      console.log(this.calentamiento.metadata.ejercicios)
-      console.log(this.enfriamiento.metadata.ejercicios)
+
       if(nombre==='Calentamiento'){
         this.calentamiento.metadata.ejercicios=this.calentamiento.metadata.ejercicios.filter((item) => item.id!= ejercicioID)
       }

@@ -138,7 +138,6 @@ export default {
 
   methods : {
     addOutline(id){
-      console.log(this.sports)
       let element =document.getElementById(id)
 
       if(!this.difficulty){

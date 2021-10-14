@@ -37,8 +37,8 @@
     <v-row style="height: 80vh">
       <RutinasCreador @Info-received="createRoutine" class="pt-16"/>
     </v-row>
-    <v-dialog :value="exito" width="500px">
-      <v-card class="ma-1">
+    <v-dialog :value="exito" width="600px" height="500px">
+      <v-card class="pa-1">
         <v-card-title class="green lighten-1">
           Exito
         </v-card-title>

@@ -1,25 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import MyProfile from '../views/MyProfile.vue'
 import RoutineSearcher from '../views/RoutineSearcher.vue'
 import RoutineDescription from '../views/RoutineDescriptionPage.vue'
 import RoutineLanding from '../views/RoutineLanding.vue'
 import Login from "../views/Login";
 // import store from "../store/index"
-import Register from "../views/Register";
 import TusRutinas from "../views/TusRutinas"
 //import RutinasRecomendadas from "../views/RutinasRecomendadas"
-import EjercicioDescripcion from "../views/EjercicioDescripcionPage"
 import SeleccCateg from "../views/SeleccCategPage"
-import NotFound from "../views/NotFound";
-import TusEjercicios from "../views/TusEjercicios"
 import EjerciciosLanding from  "../views/EjerciciosLanding"
-import RutinasFavoritas from "../views/RutinasFavoritas";
-import EjerciciosRecomendados from "../views/EjerciciosRecomendados";
 import EjerciciosFavoritos from "../views/EjerciciosFavoritos";
-import codeChecking from "../views/CodeChecking"
-import Verification from "../views/Verification"
 import RoutineCreadorInfo from "../views/RoutineCreatorInfo"
 import RoutineCreatorExercise from "../views/RoutineCreatorExercise"
 import ModifyRoutineInfo from "../views/ModifyRoutineInfo"
@@ -64,13 +55,10 @@ const routes = [
   {
     path: '/myprofile',
     name: 'My Profile',
-    component: MyProfile
-  },
-  {
-    path: '/EjerciciosRecomendados',
-    name: 'EjerciciosRecomendados',
-    component: EjerciciosRecomendados,
-    props: true
+    component: () =>
+        import(
+            /* webpackChunkName: "my-profile" */ "../views/MyProfile.vue"
+            ),
   },
   {
     path: '/EjerciciosFavoritos',
@@ -87,13 +75,19 @@ const routes = [
   {
     path: '/TusEjercicios',
     name: 'Tus Ejercicios',
-    component: TusEjercicios,
+    component: () =>
+        import(
+            /* webpackChunkName: "tus-ejercicios" */ "../views/TusEjercicios.vue"
+            ),
     props: true
   },
   {
     path: '/Verification',
     name: 'Verification',
-    component: Verification
+    component: () =>
+        import(
+            /* webpackChunkName: "verification" */ "../views/Verification.vue"
+            ),
   },
   {
     path: '/Routines',
@@ -103,12 +97,18 @@ const routes = [
   {
     path: '/Register',
     name: 'Register',
-    component: Register
+    component: () =>
+        import(
+            /* webpackChunkName: "register" */ "../views/Register.vue"
+            ),
   },
   {
     path: '/codeChecking',
     name: 'codeChecking',
-    component: codeChecking,
+    component: () =>
+        import(
+            /* webpackChunkName: "code-checking" */ "../views/CodeChecking.vue"
+            ),
     props: true
   },
   {
@@ -126,7 +126,10 @@ const routes = [
   {
     path: '/EjercicioDescripcion',
     name: 'EjercicioDescripcion',
-    component: EjercicioDescripcion,
+    component: () =>
+        import(
+            /* webpackChunkName: "ejercicio-descripcion-page" */ "../views/EjercicioDescripcionPage.vue"
+            ),
     props:true
   },
   {
@@ -155,13 +158,19 @@ const routes = [
   {
     path: '/Rutinas/:slug',
     name: 'Rutinas',
-    component: RutinasFavoritas,
+    component: () =>
+        import(
+            /* webpackChunkName: "rutinas-favoritas" */ "../views/RutinasFavoritas.vue"
+            ),
     props: true
   },
   {
     path: '*',
     name: "NotFound",
-    component: NotFound
+    component: () =>
+        import(
+            /* webpackChunkName: "not-found" */ "../views/NotFound.vue"
+            ),
   }
 ]
 
