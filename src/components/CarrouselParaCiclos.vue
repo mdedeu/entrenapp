@@ -12,10 +12,12 @@
             <p class="text-h5  primary--text"> Número de repeticiones: {{this.calentamiento.repetitions}}</p>
           </v-col>
         </v-row>
+
         <v-container class="shrink">
           <v-row justify="center"  style="height: 10vh" v-for="calExec in this.calentamiento.metadata.ejercicios" :key="calExec.name">
             <v-col>
-              <v-card width="100%"
+              <v-card
+                  min-width="700px"
                             rounded
                             :color="descansoOrExercise(calExec)"
                             class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
@@ -56,31 +58,31 @@
             <p class="text-h5  primary--text"> Número de repeticiones: {{exercise.repetitions}}</p>
           </v-col>
         </v-row>
-
-        <v-row justify="center"   style="height: 10vh; margin-bottom: 4px" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
-          <v-col cols="6"  >
-            <v-card width="100%"
-                    rounded
-                    :color="descansoOrExercise(exerciseDescrip)"
-                    class="primary--text justify-center text-h5 d-inline-flex px-3  "
-                    height="100%"
-                    @click="EjercicioDescripcion(exerciseDescrip)"
-            >
-              <v-container>
-                {{ exerciseDescrip.name }}
-              </v-container>
-              <v-divider></v-divider>
-              <v-container v-if="!isNaN(exerciseDescrip.time) && exerciseDescrip.time > 0">
-                Duración:
-                {{ exerciseDescrip.time }}''
-              </v-container>
-              <v-container v-if=" !isNaN(exerciseDescrip.reps) && exerciseDescrip.reps >0">
-                Reps: {{exerciseDescrip.reps}}
-              </v-container>
-            </v-card>
-          </v-col>
-        </v-row>
-
+        <v-container class="shrink">
+          <v-row justify="center"   style="height: 10vh; margin-bottom: 4px" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
+            <v-col cols="6"  >
+              <v-card
+                  min-width="700px"
+                  rounded
+                  :color="descansoOrExercise(exerciseDescrip)"
+                  class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
+                  @click="EjercicioDescripcion(exerciseDescrip)"
+              >
+                <v-container>
+                  {{ exerciseDescrip.name }}
+                </v-container>
+                <v-divider></v-divider>
+                <v-container v-if="!isNaN(exerciseDescrip.time) && exerciseDescrip.time > 0">
+                  Duración:
+                  {{ exerciseDescrip.time }}''
+                </v-container>
+                <v-container v-if=" !isNaN(exerciseDescrip.reps) && exerciseDescrip.reps >0">
+                  Reps: {{exerciseDescrip.reps}}
+                </v-container>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-container>
     </v-carousel-item>
 
@@ -99,29 +101,30 @@
           </v-col>
         </v-row>
 
-        <v-row justify="center"  style="height: 10vh" v-for="calExec in enfriamiento.metadata.ejercicios" :key="calExec.name">
-          <v-col cols="6"  >
-            <v-card width="100%"
-                    rounded
-                    :color="descansoOrExercise(calExec)"
-                    class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
-                    @click="EjercicioDescripcion(calExec)"
-            >
-              <v-container>
-                {{ calExec.name }}
-              </v-container>
-              <v-divider></v-divider>
-              <v-container v-if="!isNaN(calExec.time) && calExec.time > 0">
-                Duración:
-                {{ calExec.time }}''
-              </v-container>
-              <v-container v-if="!isNaN(calExec.reps) && calExec.reps >0">
-                Reps: {{calExec.reps}}
-              </v-container>
-            </v-card>
-          </v-col>
-        </v-row>
-
+        <v-container class="shrink">
+          <v-row justify="center"  style="height: 10vh" v-for="calExec in enfriamiento.metadata.ejercicios" :key="calExec.name">
+            <v-col cols="6"  >
+              <v-card min-width="700px"
+                      rounded
+                      :color="descansoOrExercise(calExec)"
+                      class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
+                      @click="EjercicioDescripcion(calExec)"
+              >
+                <v-container>
+                  {{ calExec.name }}
+                </v-container>
+                <v-divider></v-divider>
+                <v-container v-if="!isNaN(calExec.time) && calExec.time > 0">
+                  Duración:
+                  {{ calExec.time }}''
+                </v-container>
+                <v-container v-if="!isNaN(calExec.reps) && calExec.reps >0">
+                  Reps: {{calExec.reps}}
+                </v-container>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-container>
     </v-carousel-item>
 

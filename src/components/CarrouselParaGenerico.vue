@@ -18,34 +18,6 @@
               <p class="text-h4  primary--text"> {{ calentamiento.name }}:</p>
             </v-col>
 
-            <v-col cols="3" v-if="calentamiento.metadata.ejercicios.length > 0 && !eliminando">
-              <v-btn
-                  color="red"
-                  dark
-                  @click="eliminando=true"
-              >
-                <v-icon left>
-                  mdi-delete-outline
-                </v-icon>
-                Eliminar Ejercicio
-
-              </v-btn>
-            </v-col>
-
-            <v-col cols="3" v-if="eliminando">
-              <v-btn
-                  color="green"
-                  dark
-                  @click="eliminando=false"
-              >
-                <v-icon left>
-                  mdi-check
-                </v-icon>
-                Continuar
-              </v-btn>
-            </v-col>
-
-
             <v-col cols="3">
               <v-text-field
                   label="¿Cuántas vueltas de calentamiento?"
@@ -59,11 +31,11 @@
           <v-container class="shrink">
             <v-row justify="center" v-for="calExec in calentamiento.metadata.ejercicios" :key="calExec.name">
               <v-col cols="6">
-                <v-card width="100%"
+                <v-card min-width="500px"
                         rounded
+                        v-if="calentamiento.metadata.ejercicios.includes(calExec)"
                         :color="descansoOrExercise(calExec)"
-                        class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
-                        @click="eliminando?eliminarEjercicio('Calentamiento',calExec.name):null"
+                        class="primary--text justify-center px-3  d-inline-flex lighten-1"
                 >
                   <v-container>
                     {{ calExec.name }}
@@ -77,6 +49,11 @@
                   <v-container v-if="!isNaN(calExec.reps) &&calExec.reps >0">
                     Reps: {{calExec.reps}}
                   </v-container>
+                  <v-icon
+                      class="mr-3"
+                    @click="eliminarEjercicio('Calentamiento',calExec.name)">
+                    mdi-close
+                  </v-icon>
 
                 </v-card>
               </v-col>
@@ -126,42 +103,14 @@
             </v-col>
           </v-row>
 
-          <v-row justify="space-around">
-            <v-col cols="3" v-if="exercise.metadata.ejercicios.length > 0 && !eliminando">
-              <v-btn
-                  color="red"
-                  dark
-                  @click="eliminando=true"
-
-              >
-                <v-icon left>
-                  mdi-delete-outline
-                </v-icon>
-                Eliminar Ejercicio
-
-              </v-btn>
-            </v-col>
-            <v-col cols="3" v-if="eliminando">
-              <v-btn
-                  color="green"
-                  dark
-                  @click="eliminando=false"
-              >
-                <v-icon left>
-                  mdi-check
-                </v-icon>
-                Continuar
-              </v-btn>
-            </v-col>
-          </v-row>
           <v-container class="shrink"> <v-row justify="center"   style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
             <v-col cols="6"  >
-              <v-card width="100%"
+              <v-card
+                      min-width="500px"
                       rounded
+                      v-if="exercise.metadata.ejercicios.includes(exerciseDescrip)"
                       :color="descansoOrExercise(exerciseDescrip)"
-                      class="primary--text justify-center text-h5 mt-n5 d-inline-flex"
-                      height="100%"
-                      @click="eliminando?eliminarEjercicio(exercise.name,exerciseDescrip.name):null"
+                      class="primary--text justify-center mt-n5 d-inline-flex lighten-1"
               >
                 <v-container>
                   {{ exerciseDescrip.name }}
@@ -173,6 +122,11 @@
                 <v-container v-if=" !isNaN(exerciseDescrip.reps) && exerciseDescrip.reps >0">
                   Reps: {{exerciseDescrip.reps}}
                 </v-container>
+                <v-icon
+                    class="mr-3"
+                    @click="eliminarEjercicio(exercise.name,exerciseDescrip.name)">
+                  mdi-close
+                </v-icon>
               </v-card>
             </v-col>
           </v-row>
@@ -211,33 +165,6 @@
               <p class="text-h3  primary--text"> {{ enfriamiento.name }}:</p>
             </v-col>
 
-            <v-col cols="3" v-if="enfriamiento.metadata.ejercicios.length > 0 && !eliminando">
-              <v-btn
-                  color="red"
-                  dark
-                  @click="eliminando=true"
-              >
-                <v-icon left>
-                  mdi-delete-outline
-                </v-icon>
-                Eliminar Ejercicio
-
-              </v-btn>
-            </v-col>
-            <v-col cols="3" v-if="eliminando">
-              <v-btn
-                  color="green"
-                  dark
-                  @click="eliminando=false"
-              >
-                <v-icon left>
-                  mdi-check
-                </v-icon>
-                Continuar
-              </v-btn>
-            </v-col>
-
-
             <v-col cols="3">
               <v-text-field
                   label="¿Cuántas vueltas de enfriamiento?"
@@ -251,11 +178,11 @@
           <v-container class="shrink">
             <v-row justify="center"  style="height: 10vh" v-for="calExec in enfriamiento.metadata.ejercicios" :key="calExec.name">
               <v-col cols="6"  >
-                <v-card width="100%"
+                <v-card min-width="500px"
+                        v-if="enfriamiento.metadata.ejercicios.includes(calExec)"
                         rounded
                         :color="descansoOrExercise(calExec)"
-                        class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
-                        @click="eliminando?eliminarEjercicio('Enfriamiento',calExec.name):null"
+                        class="primary--text justify-center px-3  d-inline-flex lighten-1"
                 >
                   <v-container>
                     {{ calExec.name }}
@@ -268,6 +195,11 @@
                   <v-container v-if="!isNaN(calExec.reps) && calExec.reps >0">
                     Reps: {{calExec.reps}}
                   </v-container>
+                  <v-icon
+                      class="mr-3"
+                      @click="eliminarEjercicio('Enfriamiento',calExec.name)">
+                    mdi-close
+                  </v-icon>
                 </v-card>
               </v-col>
             </v-row>
