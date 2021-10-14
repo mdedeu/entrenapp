@@ -52,7 +52,6 @@
           this.$emit('add-exercise',event)
         },
         addDescanso(segundos){
-          console.log("SeleccCateg")
           this.$emit('add-descanso',segundos)
         }
       }

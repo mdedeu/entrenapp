@@ -2,7 +2,7 @@
 
   <v-container fluid class="primary fill-height">
 
-    <v-row>
+    <v-row justify="center" class="accent--text">
       <v-col>
         <h1>Creá tu rutina</h1>
       </v-col>

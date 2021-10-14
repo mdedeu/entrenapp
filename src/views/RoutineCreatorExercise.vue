@@ -87,12 +87,15 @@ export default {
        sumaTotal += (cycles[i].repetitions)*sumaParcial
      }
       sumaTotal = Math.round(sumaTotal/60)
-     this.routine.metadata={sport:this.routine.metadata.sport ,duracion:sumaTotal}
 
-     await this.$store.dispatch('routine/modify',this.routine)
+     let routineAPI = await this.$store.dispatch('routine/get',this.routine)
+
+     routineAPI.metadata={sport:this.routine.metadata.sport ,duracion:sumaTotal}
+
+     await this.$store.dispatch('routine/modify',routineAPI)
 
 
-    this.$router.push({name:"RoutineDescription",params:{routine:this.routineData}})
+    this.$router.push({name:"RoutineDescription",params:{routine:routineAPI}})
 
    }
   },
@@ -104,7 +107,7 @@ export default {
       type:Object
     }
   },
-  created() {
+  async created() {
     if(!this.routineID){
       this.routineIDdata = this.$store.getters['cache/get']('routineID')
       this.routineData = this.$store.getters['cache/get']('routine')
@@ -115,6 +118,7 @@ export default {
       this.$store.dispatch('cache/set',{key:'routineID',value:this.routineID})
       this.$store.dispatch('cache/set',{key:'routine',value:this.routine})
     }
+      await this.$store.dispatch('routine/getAll')
   }
 }
 </script>

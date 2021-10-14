@@ -108,8 +108,10 @@ export default {
        sumaTotal += (cycles[i].repetitions)*sumaParcial
      }
      sumaTotal = Math.round(sumaTotal/60)
+
      this.routine.metadata={sport:this.routine.metadata.sport ,duracion:sumaTotal}
 
+     console.log(this.routine)
      await this.$store.dispatch('routine/modify',this.routine)
 
      this.$router.push({name:"RoutineDescription",params:{routine:this.routineData}})
