@@ -66,6 +66,7 @@ export default {
           this.loading = false
           this.$router.push({name:"RoutineLanding"})
       }catch (e){
+          this.loading=false
         this.error=true
         this.msg='El código ingresado es incorrecto'
       }
