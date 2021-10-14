@@ -1,5 +1,7 @@
 <template>
-  <v-container fluid>
+  <Loading v-if="loading"></Loading>
+
+  <v-container v-else fluid>
     <v-row class="accent--text" justify="space-around" >
       <v-col cols="6" >
         <v-row justify="center">
@@ -73,18 +75,18 @@
 
 <script>
 
-
+import Loading from './Loading'
 import DescriptiveExcercise from "./DescriptiveExcercise";
 import {mapGetters} from "vuex";
 export default {
   name: 'PopupSeleccionarEjercicio',
-  components: {DescriptiveExcercise},
+  components: {DescriptiveExcercise,Loading},
   data(){
     return {
       loading : false,
       name : null,
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
-      sports: ['Fútbol', 'Hockey','Tenis','Paddle'],
+      sports: null,
       selected_sport: null,
       selected_muscle: null,
       equipacion:false,
@@ -108,9 +110,6 @@ export default {
     ...mapGetters('exercise',['getDeporte']),
     ...mapGetters('exercise', ['getFavourites'])
 
-  },
-  async created() {
-    await this.loadExercises()
   },
   methods:{
     addColor(id){
@@ -152,6 +151,13 @@ export default {
       }
       this.filtered = this.exercises
     }
+  },
+  async created(){
+    this.loading = true
+    await this.loadExercises()
+    await this.$store.dispatch('sport/getAll')
+    this.sports = this.$store.getters['sport/getSports'].map((item) => item.name)
+    this.loading = false
   }
 
 }

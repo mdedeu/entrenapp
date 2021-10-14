@@ -1,6 +1,7 @@
 <template>
+  <Loading v-if="loading"></Loading>
 
-  <v-container fluid class="primary fill-height">
+  <v-container v-else fluid class="primary fill-height">
     <v-row v-if="error"><v-col>
       <p class="text-h3 red--text" >Todos los campos son obligatorios</p>
     </v-col></v-row>
@@ -32,12 +33,13 @@
     </v-row>
     <v-row justify="center" v-if="publicRoutine">
       <v-col cols="4">
-        <v-text-field
+        <v-textarea
             v-model="descripcion"
             label="Descripcion"
             solo
             background-color="white"
-        ></v-text-field>
+        ></v-textarea>
+
       </v-col>
     </v-row>
 
@@ -109,12 +111,13 @@
 </template>
 
 <script>
-
+import Loading from './Loading'
 export default {
   name: 'RutinasModificador',
+  components:{Loading},
   data() {
     return {
-      sports: ['Futbol', 'Tenis', 'Hockey', 'Ninguno'],
+      sports:null,
       difficulty: null,
       nombre: this.routine.name,
       sport_selected : this.routine.metadata.sport,
@@ -164,7 +167,11 @@ export default {
       required:true
     }
   },
-  mounted(){
+  async mounted(){
+    this.loading = true
+    await this.$store.dispatch('sport/getAll')
+    this.sports = this.$store.getters['sport/getSports'].map((item) => item.name)
+    this.loading = false
     let element =document.getElementById(this.routine.difficulty)
     this.difficulty = this.routine.difficulty;
     element.classList.add('accent')

@@ -30,7 +30,7 @@
                   width="60%"
                   class="primary--text"
                   :id="durationE.range"
-                  @click="addColorDuration(durationE.range)"
+                  @click="addColorDuration(durationE.range,durationE)"
               >{{ durationE.range }}
               </v-btn>
             </template>
@@ -44,6 +44,7 @@
                 color="accent"
                 hide-details
                 dark
+                v-model="equipacion"
             ></v-checkbox>
           </v-row>
 
@@ -59,7 +60,7 @@
             </v-col>
           </v-row>
           <v-row justify="space-around">
-            <v-btn class="accent text--primary" rounded width="200px"> Filtrar
+            <v-btn class="accent text--primary" rounded width="200px" @click="filter"> Filtrar
             </v-btn>
           </v-row>
         </v-col>
@@ -67,14 +68,24 @@
             vertical class="accent"
         ></v-divider>
 
+        <v-col v-if="routinesF.length==0">
+          <v-row justify="space-around">
+            <v-col>
 
-        <v-col cols="6">
-          <v-card-text justify="space-around" class="waiting-api" v-if="!routines" > Filtra tus rutinas!</v-card-text>
-          <v-row class="pt-6 pl-6" justify="space-around" v-for="routine in routines" :key="routine.name">
+            </v-col>
+            <v-col cols="9" >
+              <v-card-text  class="accent-text text-h3" > No tienes rutinas aún</v-card-text>
+            </v-col>
+          </v-row>
+        </v-col>
+
+        <v-col v-else cols="6">
+          <v-card-text justify="space-around" class="waiting-api" v-if="sinResultados" > No se obtuvieron resultados</v-card-text>
+          <v-row class="pt-6 pl-6" justify="space-around" v-for="routine in routinesF" :key="routine.name">
             <DescriptiveRoutine :routineDes="routine" ></DescriptiveRoutine>
           </v-row>
-
         </v-col>
+
       </v-row>
     </v-container>
   </v-container>
@@ -102,15 +113,52 @@ export default {
     return {
 
       difficulty: [{level:"Principiante"},{level:"Intermedio"},{level:"Avanzado"}],
-      duration: [{range:"15-30"},{range:"30-45"},{range:"45-60"}],
+      duration: [{from:0,to:15,range:"0-15"},{from:15,to:30,range:"15-30"},{from:30,to:45,range:"30-45"},{from:45,to:60,range:"45-60"}],
       loading: false,
-      sports: ['Futbol','Hockey','Tenis','Otro'],
+      sports: null,
       selected_difficulty : null,
       selected_duration : null,
       selected_sport: null,
+      routinesF:null,
+      equipacion:false,
+      sinResultados:false
     }
   },
   methods : {
+    filter(){
+      this.routinesF = this.routines
+
+      if(this.selected_difficulty!=null){
+        if(this.selected_difficulty=='Principiante')
+          this.routinesF=this.routinesF.filter( (item) => item.difficulty === 'rookie')
+        else if(this.selected_difficulty=='Intermedio')
+          this.routinesF=this.routinesF.filter( (item) => item.difficulty === 'intermediate')
+        else if(this.selected_difficulty=='Avanzado')
+          this.routinesF=this.routinesF.filter( (item) => item.difficulty === 'expert')
+      }
+      if(this.selected_sport!=null)
+        this.routinesF=this.routinesF.filter( (item) => item.metadata.sport == this.selected_sport)
+
+      if(this.selected_duration!=null)
+        this.routinesF=this.routinesF.filter( (item) => {
+          let b1 = (item.metadata.duracion >= this.selected_duration.from)
+          let b2 =(item.metadata.duracion < this.selected_duration.to)
+          return b1 && b2
+        })
+
+      if(this.equipacion)
+        this.routinesF = this.routinesF.filter( (item)  => item.metadata.equipacion )
+
+      if(this.routinesF.length == 0 ){
+       this.sinResultados=true
+       this.routinesF = this.routines
+      }else
+        this.sinResultados=false
+
+      return this.routinesF
+
+    },
+
     addColorDifficulty(id){
         let element =document.getElementById(id)
 
@@ -129,21 +177,20 @@ export default {
           }
         }
     },
-    addColorDuration(id){
+    addColorDuration(id,duration){
       let element =document.getElementById(id)
 
       if(!this.selected_duration){
-        this.selected_duration = id;
+        this.selected_duration = duration;
         element.classList.add('accent')
       }else{
-        if(this.selected_duration === id){
+        if(this.selected_duration.range === id){
           element.classList.remove('accent')
           this.selected_duration = null;
         }
         else{
-          document.getElementById(this.selected_duration).classList.remove('accent')
-          this.selected_duration = id;
-          console.log(this.selected_duration)
+          document.getElementById(this.selected_duration.range).classList.remove('accent')
+          this.selected_duration = duration;
           element.classList.add('accent')
         }
       }
@@ -162,7 +209,7 @@ export default {
       if(this.slug==='favoritas'){
         return this.getFavouritesId
       }
-      return this.getOther(this.user.username)
+      return this.getOther(this.user.id)
     },
   },
   async created() {
@@ -172,7 +219,10 @@ export default {
       await this.$store.dispatch("routine/getAll")
     else
       await this.$store.dispatch("favouriteRoutine/getAll")
+    await this.$store.dispatch('sport/getAll')
+    this.sports = this.$store.getters['sport/getSports'].map((item) => item.name)
     this.loading = false;
+    this.routinesF = this.routines
   }
 
 
@@ -183,7 +233,7 @@ export default {
 <style scoped>
 .waiting-api{
   font-size: 1.5em;
-  margin-top: 25%;
+  color:red;
 }
 .routine{
   max-height: 45em;

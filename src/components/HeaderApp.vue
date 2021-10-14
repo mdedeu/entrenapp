@@ -1,5 +1,6 @@
 <template>
-  <v-app-bar
+  <Loading v-if="loading"></Loading>
+  <v-app-bar v-else
       outlined
       app
       color = "primary"
@@ -70,6 +71,7 @@ export default {
   data(){
     return {
       confirmation: false,
+      loading : false
     }
   },
   methods:{
@@ -89,6 +91,7 @@ export default {
       this.confirmation=false
     },
     async Salir(){
+      this.loading = true
       await this.$store.dispatch("security/logout");
       this.$router.push({name:"Home"})
     },

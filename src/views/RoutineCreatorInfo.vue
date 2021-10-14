@@ -1,5 +1,7 @@
 <template>
-  <v-container fluid class="primary fill-height">
+  <Loading v-if="loading "></Loading>
+
+  <v-container  v-else fluid class="primary fill-height">
     <v-row style="height: 10vh">
       <HeaderApp/>
     </v-row>
@@ -74,15 +76,18 @@
 import HeaderApp from "../components/HeaderApp";
 import RutinasCreador from '../components/RutinasCreador'
 import {mapGetters} from 'vuex';
+import Loading from "../components/Loading"
 
 export default {
   name: "RoutineCreatorInfo",
   components: {
     HeaderApp,
     RutinasCreador,
+    Loading
   },
   methods:{
     async createRoutine(routine){
+      this.loading=true
       this.createdRoutine = await this.$store.dispatch("routine/create",routine);
       this.currentRoutine = {
         user: this.getUser,
@@ -94,6 +99,7 @@ export default {
         metadata: this.createdRoutine.metadata
       }
       this.exito=true
+      this.loading=false
     },
     redirect(){
       this.$router.push({name:"RoutineCreatorExercise",params:{routineID:this.createdRoutine.id,routine:this.currentRoutine}})
@@ -104,11 +110,14 @@ export default {
       step: 1,
       exito: false,
       createdRoutine: null,
-      currentRoutine: null
+      currentRoutine: null,
+      loading : false
     }
   },
   async created() {
+    this.loading=true
     await this.$store.dispatch('security/getCurrentUser')
+    this.loading=false
   },
   computed : {
     ...mapGetters(

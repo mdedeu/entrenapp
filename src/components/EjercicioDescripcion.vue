@@ -1,5 +1,6 @@
 <template>
-  <v-container fluid class="primary fill-height" style="height: 100vh">
+  <Loading v-if="loading"></Loading>
+  <v-container v-else fluid class="primary fill-height" style="height: 100vh">
     <v-row>
         <ExerciseBackAndButton v-on:guardar-ejercicio="guardarEjercicio" :exercise="this.exercise" :exerciseId="this.exercise.id" class="mt-6"></ExerciseBackAndButton>
     </v-row>
@@ -26,10 +27,15 @@
 
 <script>
 import ExerciseBackAndButton from "./ExerciseBackAndButton";
+import Loading from './Loading'
 export default {
   name: "EjercicioDescripcion",
-  components: {ExerciseBackAndButton},
-
+  components: {ExerciseBackAndButton,Loading},
+  data(){
+    return{
+      loading:false
+    }
+  },
   props:{
     exercise: {
       type: Object, //Nombre, musculo (o descanso), requirere herramientas, deportes
@@ -38,8 +44,10 @@ export default {
   },
   methods:{
     async guardarEjercicio(){
+      this.loading = true
       await this.$store.dispatch('exercise/getAll')
       this.exercise = await this.$store.dispatch('exercise/get', this.exercise)
+      this.loading = false
     }
   },
 }

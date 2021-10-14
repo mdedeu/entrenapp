@@ -63,6 +63,7 @@ export default {
           this.loading = true
           await this.$store.dispatch("security/verify",{email:this.userData.email,code:this.code})
           await this.$store.dispatch("security/login",{ credentials:{username:this.userData.username,password:this.userData.password}, rememberMe: true });
+          this.loading = false
           this.$router.push({name:"RoutineLanding"})
       }catch (e){
         this.error=true

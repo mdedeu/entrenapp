@@ -1,8 +1,9 @@
 <template>
+  <Loading v-if="loading"></Loading>
 
-  <v-container fluid class="primary fill-height">
+  <v-container v-else fluid class="primary fill-height">
 
-    <v-row>
+    <v-row justify="center" class="accent--text">
       <v-col>
         <h1>Creá tu rutina</h1>
       </v-col>
@@ -117,23 +118,28 @@
 </template>
 
 <script>
+import Loading from './Loading'
 
 export default {
   name: 'RutinasCreador',
+  components:{Loading},
   data() {
     return {
-      sports: ['Futbol', 'Tenis', 'Hockey', 'Ninguno'],
+      loading:false,
+      sports:null,
       difficulty: null,
       nombre: null,
       sport_selected : null,
       error:false,
       publicRoutine:true,
       descripcion:"",
-      message: "Ocurrio un error inesperado"
+      message: "Ocurrió un error inesperado"
     }
   },
+
   methods : {
     addOutline(id){
+      console.log(this.sports)
       let element =document.getElementById(id)
 
       if(!this.difficulty){
@@ -153,7 +159,7 @@ export default {
     },
     SendInfo(){
       if(this.publicRoutine && this.descripcion==null){
-        this.message = 'La rutina debe tener el campo descripcion'
+        this.message = 'La rutina debe tener el campo descripción'
         return this.error=true
       }
 
@@ -164,6 +170,12 @@ export default {
         this.error=true
       }
     }
+  },
+  async created(){
+    this.loading=true
+    await this.$store.dispatch('sport/getAll')
+    this.sports = this.$store.getters['sport/getSports'].map((item) => item.name)
+    this.loading=false
   }
 }
 </script>

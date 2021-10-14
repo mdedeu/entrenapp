@@ -357,7 +357,6 @@ export default {
       this.ejercitacion.forEach((item)=>cycles.push(item))
       cycles.push(this.enfriamiento)
       this.cycles = cycles
-      console.log('aca')
       this.popup=true
 
     },
@@ -382,14 +381,16 @@ export default {
           time: event.time,
           reps: event.reps,
           name : event.exercise.name,
-          id : this.calentamiento.metadata.ejercicios.length
+          id : this.calentamiento.metadata.ejercicios.length,
+          equipacion : event.exercise.metadata.equipacion
         })
       }else if(event.stage === 'Enfriamiento'){
         this.enfriamiento.metadata.ejercicios.push({
           time: event.time,
           reps: event.reps,
           name : event.exercise.name,
-          id : this.enfriamiento.metadata.ejercicios.length
+          id : this.enfriamiento.metadata.ejercicios.length,
+          equipacion : event.exercise.metadata.equipacion
         })
       }else{
         let i;
@@ -399,7 +400,8 @@ export default {
               time: event.time,
               reps: event.reps,
               name : event.exercise.name,
-              id : this.ejercitacion[i].metadata.ejercicios.length
+              id : this.ejercitacion[i].metadata.ejercicios.length,
+              equipacion : event.exercise.metadata.equipacion
             })
             break;
           }

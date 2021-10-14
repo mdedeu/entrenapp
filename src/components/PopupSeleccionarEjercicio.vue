@@ -1,5 +1,7 @@
 <template>
-  <v-container class="primary">
+  <Loading v-if="loading"></Loading>
+
+  <v-container v-else class="primary">
     <v-row > <Close v-on:close-popup="closePopup()"></Close></v-row>
     <v-row class="accent--text mt-6" justify="space-around" >
       <v-col cols="6" >
@@ -173,7 +175,7 @@
                                        exercise: currentExerciseToAdd,
                              time: exercise_time,
                              reps: exercise_reps,
-                             stage: stage
+                             stage: stage,
                       })">
                         Guardar
                       </v-btn>
@@ -219,9 +221,10 @@
 
 import Close from "./Close";
 import {mapGetters} from "vuex";
+import Loading from './Loading'
 export default {
   name: 'PopupSeleccionarEjercicio',
-  components: {Close},
+  components: {Close,Loading},
   props: {
     isFav:{
       type: Boolean,
@@ -235,6 +238,7 @@ export default {
   },
   data(){
     return {
+      loading : false,
       currentExercise: {name: null, detail: null, type: null, metadata: {
           musculos:[],
           equipacion: null,
@@ -245,7 +249,7 @@ export default {
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
       exercises: null,//[{name:"Flexiones de brazo", difficulty: 'Intermedio', category: 'Pecho'},{name:"Abdominales bolita", difficulty: 'Intermedio', category: 'Pecho'},{name:"Salto con soga", difficulty: 'Intermedio', category: 'Pecho'},{name:"Estirar piernas", difficulty: 'Intermedio', category: 'Pecho'},{name:"Espalda en colchoneta", difficulty: 'Intermedio', category: 'Pecho'}],
       favouriteExercises: null,
-      sports: ['Futbol','Hockey', 'Otros'],
+      sports: null,
       selected_muscle: null,
       selected_sport: null,
       agregar : false,
@@ -263,7 +267,11 @@ export default {
     })
   },
   async created() {
+    this.loading = true
+    await this.$store.dispatch('sport/getAll')
+    this.sports = this.$store.getters['sport/getSports'].map((item) => item.name)
     await this.$store.dispatch('exercise/getAll')
+    this.loading  = false
     if(this.isFav){
       this.exercises = this.$getFavouriteExercises
     } else {this.exercises = this.$getExercises}

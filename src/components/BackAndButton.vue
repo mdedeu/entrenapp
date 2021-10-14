@@ -5,7 +5,7 @@
     <v-container v-else-if="!mine">
       <v-row justify="space-between">
 
-        <Back v-if="this.$router"></Back>
+        <Back></Back>
 
 
         <v-col v-if="favourite" class="col-3" offset="6" >
@@ -28,7 +28,7 @@
 
                   >
                     <v-icon left>
-                      mdi-bookmark-outline
+                      mdi-bookmark
                     </v-icon>
                     Eliminar de favoritas
 
@@ -220,12 +220,7 @@ export default {
     }
   },
   methods:{
-    async mine(){
-      console.log(this.routine)
-      console.log(this.getUser)
-      await this.$store.dispatch("security/getCurrentUser")
-      return this.routine.user.id === this.getUser.id
-    },
+
     async addTofavourite(){
       this.loadingButton=true
       await this.create(this.routineID)
@@ -236,6 +231,7 @@ export default {
     ...mapActions( 'favouriteRoutine',['delete'] ),
 
     async removeRoutine(){
+      this.loading=true
        await this.$store.dispatch('routine/delete',this.routine)
        this.redirect()
     },
@@ -243,6 +239,7 @@ export default {
       this.$router.push({name:'RoutineLanding'})
     },
     async editRoutine(){
+      this.loading=true
       await this.$store.dispatch('routineCycle/getAll',this.routine)
       let routineCycleL = this.getRoutineCycle;
       this.$router.push({name:"modifyRoutineInfo",params:{routine:this.routine,routineCycle:routineCycleL}})
@@ -251,7 +248,7 @@ export default {
 
     async removeFromFavourite(){
       this.loadingButton=true
-      await this.delete(this.routineIDdata)
+      await this.delete(this.routineID)
       await this.$store.dispatch("favouriteRoutine/getAll")
       this.loadingButton=false
     }
@@ -268,14 +265,14 @@ export default {
   computed:{
     ...mapGetters('security',['getUser']),
     ...mapGetters('routineCycle',['getRoutineCycle']),
-    ...mapGetters('favouriteRoutine',{
-      isFavouriteFunction:'isFavourite'
-    }),
+    ...mapGetters('favouriteRoutine',['isFavourite']),
 
-
+    mine(){
+      return this.routine.user.id === this.getUser.id
+    },
 
     favourite(){
-      return  this.isFavouriteFunction.includes(this.routineID)
+      return  this.isFavourite.includes(this.routineID)
     }
 
   },

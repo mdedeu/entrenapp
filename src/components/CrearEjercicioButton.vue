@@ -1,5 +1,7 @@
 <template>
-  <v-container>
+  <Loading v-if="loading"></Loading>
+
+  <v-container v-else>
   <v-row justify="center">
     <v-dialog
         v-model="dialog"
@@ -169,11 +171,15 @@
 </template>
 
 <script>
+import Loading from './Loading'
 import {mapActions} from 'vuex'
+
 export default {
   name: "CrearEjercicio",
+ components:{Loading},
   data() {
     return {
+      loading : false,
       rules: {
         length:[ val => (val || '').length > 0 || 'Este campo es obligatorio' ]
       },
@@ -181,7 +187,7 @@ export default {
       error:null,
       popup:false,
       dialog:false,
-      sports: ['Fútbol', 'Hockey', 'Tenis', 'Paddle'],
+      sports: null,
       exercises: [{name: 'Abdominales' }, {name: 'Espalda'}, {name: 'Brazos'}, {name: 'Pecho'}],
       selected_sport: null,
       equip: false,
@@ -240,7 +246,9 @@ export default {
           deportes:this.selected_sport,
           favorito:false
         }}
+      this.loading=true
       await this.$createExercise(exercise)
+      this.loading=false
       this.$emit('load-exercise')
       this.popup=true
     },
@@ -256,6 +264,12 @@ export default {
       })
     }
   },
+  async created(){
+    this.loading = true
+    await this.$store.dispatch('sport/getAll')
+    this.sports = this.$store.getters['sport/getSports'].map((item) => item.name)
+    this.loading=false
+  }
 }
 </script>
 

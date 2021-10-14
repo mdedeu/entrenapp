@@ -1,5 +1,7 @@
 <template>
-  <v-container>
+  <Loading v-if="loading"></Loading>
+
+  <v-container v-else>
     <v-row justify="center">
       <template>
       <v-dialog
@@ -175,11 +177,14 @@
 </template>
 
 <script>
+import Loading from './Loading'
 
 export default {
   name: "ModificarEjercicio",
+  components:{Loading},
   data() {
     return {
+      loading:false,
       error_popup: false,
       error: null,
       popup: false,
@@ -247,9 +252,11 @@ export default {
           deportes: this.selected_sport,
           favorito: this.slug.metadata.favorito
         }}
+      this.loading = true
       await this.$store.dispatch('exercise/modify', exercise)
       await this.$store.dispatch('exercise/getAll')
       await this.$store.dispatch('exercise/get', exercise)
+      this.loading = false
       this.$emit('guardar-ejercicio')
       this.openPopup()
     },

@@ -138,15 +138,18 @@ export default {
   },
   methods: {
    async updatePhoto(){
+        this.loading = true
         await this.$store.dispatch('security/updateUser',{ avatarUrl : this.url})
+        this.loading = false
         this.url = ''
         this.editar= false
-    },
+   },
     async deleteUser(){
+     this.loading = true
      await this.$store.dispatch('security/removeUser')
      this.borrar= false
      await this.$router.push({name: 'Home'})
-
+    this.loading = false
     }
   },
   async beforeCreate() {

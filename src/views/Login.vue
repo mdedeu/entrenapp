@@ -1,5 +1,7 @@
 <template>
-  <v-container fluid  fill-height class="primary">
+  <Loading v-if="loading"></Loading>
+
+  <v-container v-else fluid  fill-height class="primary">
       <v-row>
         <v-col>
           <v-alert v-if="incorrect" type="error" dismissible  @click="reset">
@@ -63,12 +65,15 @@
 
 <script>
 import {Credentials} from "../../API/user";
+import Loading from "../components/Loading"
 
 export default {
 
   name: "Login.vue",
+  components:{Loading},
   data() {
     return{
+      loading : false,
       email : null,
       password : null,
       show: false,
@@ -90,11 +95,13 @@ export default {
      try{
        if((this.password || '').length > 0 && (this.email || '').length>0){
          const credentials = new Credentials(this.email, this.password)
+         this.loading = true
          await this.$store.dispatch("security/login",{credentials, rememberMe: true });
          this.$router.push({name:"RoutineLanding"})
        }
      }
       catch(e){
+        this.loading = false
         if(e.description.includes("username") || e.description.includes("password")){
           this.error= this.dictionary.passUserError
         }

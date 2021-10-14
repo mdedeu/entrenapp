@@ -20,15 +20,17 @@ export default {
   components: {Loading},
   data(){
     return{
-      error:true
+      error:true,
+      loading : false
     }
   },
   async created(){
-
+    this.loading = true
     try{
       await this.$store.dispatch("security/verify",{email:this.$route.query.email.replace('%40','@'),code:this.$route.query.code})
       this.$router.push({name:"Login"})
     }catch (e){
+      this.loading = false
       this.error=false
     }
 
