@@ -154,8 +154,6 @@ export default {
       }
     },
     SendInfo(){
-      console.log(this.nombre)
-      console.log(this.descripcion)
 
       if(this.publicRoutine && this.descripcion==null){
         this.message = 'La rutina debe tener el campo descripción'
