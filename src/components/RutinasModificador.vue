@@ -1,10 +1,9 @@
 <template>
-  <Loading v-if="loading"></Loading>
 
-  <v-container v-else fluid class="primary fill-height">
-    <v-row v-if="error"><v-col>
-      <p class="text-h3 red--text" >Todos los campos son obligatorios</p>
-    </v-col></v-row>
+  <v-container  fluid class="primary fill-height">
+    <Loading v-if="loading"></Loading>
+
+
 
     <v-row>
       <v-col class="mt-10">
@@ -104,6 +103,14 @@
     </v-row>
     <v-row class="primary ">
       <v-col>
+        <v-alert v-if="error"
+                 color="red"
+                 type="error"
+                 transition="scale-transition"
+                 dismissible
+                 @click="error=false"
+                 id="error"
+        >{{ this.message }}</v-alert>
         <v-btn rounded class="accent text--primary mt-10 mb-16" @click="SendInfo">Siguiente</v-btn>
       </v-col>
     </v-row>
@@ -117,7 +124,8 @@ export default {
   components:{Loading},
   data() {
     return {
-      sports:null,
+      loading:false,
+      sports:[{name:null}],
       difficulty: null,
       nombre: this.routine.name,
       sport_selected : this.routine.metadata.sport,
@@ -146,15 +154,24 @@ export default {
       }
     },
     SendInfo(){
+      console.log(this.nombre)
+      console.log(this.descripcion)
+
       if(this.publicRoutine && this.descripcion==null){
+        this.message = 'La rutina debe tener el campo descripción'
         return this.error=true
       }
 
+      if(this.descripcion.length > 200 ){
+        this.error=true
+        this.message="La descripcion de la rutina no puede tener mas de 200 caracteres"
+        return
+      }
 
-
-      if(this.nombre != null  && this.sport_selected!=null && this.difficulty !=null)
+      if(this.nombre !=null && this.nombre.length > 0   && this.sport_selected!=null && this.difficulty !=null)
         this.$emit('Info-received',{name:this.nombre,detail:this.descripcion,isPublic:true,difficulty:this.difficulty,metadata:{sport:this.sport_selected}})
       else {
+        this.message = 'La rutina tiene que tener nombre, deporte asociado y dificultad'
         this.error=true
       }
     }
@@ -169,15 +186,17 @@ export default {
       required:true
     }
   },
+
   async mounted(){
     this.loading = true
     await this.$store.dispatch('sport/getAll')
     this.sports = this.$store.getters['sport/getSports'].map((item) => item.name)
-    this.loading = false
+    this.loading=false
     let element =document.getElementById(this.routine.difficulty)
     this.difficulty = this.routine.difficulty;
     element.classList.add('accent')
-  }
+
+  },
 }
 </script>
 <style scoped>

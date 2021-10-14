@@ -105,7 +105,6 @@
             type="error"
             transition="scale-transition"
             dismissible
-            outlined
             @click="error=false"
             id="error"
         >{{ this.message }}</v-alert>
