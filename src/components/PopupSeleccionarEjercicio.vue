@@ -52,18 +52,45 @@
           max-width="600px"
           class="primary"
       >
-        <h1 class="yellow" style="color: #2C2E43">{{ this.currentExercise.name }}</h1>
-        <h2 class="yellow" style="color: #2C2E43">Este ejercicio esta orientado al {{this.currentExercise.metadata.deportes}} y trabaja : {{this.currentExercise.metadata.musculos[0]}}</h2>
-        <h2 class="yellow" style="color: #2C2E43">Este ejercicio {{this.currentExercise.metadata.equipacion ? "requiere" : "no require"}} equipacion</h2>
-        <v-card color="yellow">
-        <v-card-actions>
+        <v-card color="primary"  class="pa-4" rounded>
+          <h1 class="accent--text">Ejercicio: {{ this.currentExercise.name }}</h1>
+          <v-list-item>
+            <v-list-item-content class=" text-deco ma-3 font-weight-thin accent--text ">
+              <v-list-item-title>
+                Deporte
+              </v-list-item-title>
+              <v-list-item-subtitle class="white--text">
+                Este ejercicio esta orientado al {{this.currentExercise.metadata.deportes}}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item two-line>
+            <v-list-item-content  class=" text-deco ma-3 font-weight-thin accent--text ">
+              <v-list-item-title>Grupo muscular</v-list-item-title>
+              <v-list-item-subtitle class=" white--text ">
+                 {{this.currentExercise.metadata.musculos[0]}}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content  class=" text-deco ma-3 font-weight-thin accent--text ">
+              <v-list-item-title>
+                Equipación
+              </v-list-item-title>
+              <v-list-item-subtitle class="white--text">
+                Este ejercicio {{this.currentExercise.metadata.equipacion ? "requiere" : "no require"}} equipacion
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-              color="primary"
+              color="accent"
               text
               @click="viewExercise=false"
           >
-            Close
+            Cerrar
           </v-btn>
         </v-card-actions>
         </v-card>
