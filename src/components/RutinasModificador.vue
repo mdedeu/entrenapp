@@ -150,6 +150,8 @@ export default {
         return this.error=true
       }
 
+
+
       if(this.nombre != null  && this.sport_selected!=null && this.difficulty !=null)
         this.$emit('Info-received',{name:this.nombre,detail:this.descripcion,isPublic:true,difficulty:this.difficulty,metadata:{sport:this.sport_selected}})
       else {

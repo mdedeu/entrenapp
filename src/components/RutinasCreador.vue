@@ -163,6 +163,12 @@ export default {
         return this.error=true
       }
 
+      if(this.descripcion.length > 200 ){
+        this.error=true
+        this.message="La descripcion de la rutina no puede tener mas de 200 caracteres"
+        return
+      }
+
       if(this.nombre != null  && this.sport_selected!=null && this.difficulty !=null)
         this.$emit('Info-received',{name:this.nombre,detail:this.descripcion,isPublic:true,difficulty:this.difficulty,metadata:{sport:this.sport_selected}})
       else {
