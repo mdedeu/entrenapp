@@ -119,11 +119,14 @@ export default {
 
       if(this.selected_difficulty!=null){
         if(this.selected_difficulty=='Principiante')
-          this.routinesF=this.routinesF.filter( (item) => item.difficulty == 'rookie')
-        else  if(this.selected_difficulty=='Intermedio')
-          this.routinesF=this.routinesF.filter( (item) => item.difficulty == 'intermediate')
-        else(this.selected_difficulty=='Avanzado')
-          this.routinesF=this.routinesF.filter( (item) => item.difficulty == 'expert')
+          this.routinesF=this.routinesF.filter( (item) => item.difficulty === 'rookie')
+        else if(this.selected_difficulty=='Intermedio')
+          this.routinesF=this.routinesF.filter( (item) => item.difficulty === 'intermediate')
+        else if(this.selected_difficulty=='Avanzado')
+          this.routinesF=this.routinesF.filter( (item) => item.difficulty === 'expert')
+        else{
+          console.log('here')
+        }
       }
       if(this.selected_sport!=null)
         this.routinesF=this.routinesF.filter( (item) => item.metadata.sport == this.selected_sport)
@@ -135,8 +138,6 @@ export default {
           return b1 && b2
         })
 
-      console.log(this.equipacion)
-      console.log(this.routinesF)
       if(this.equipacion)
         this.routinesF = this.routinesF.filter( (item)  => item.metadata.equipacion )
 
