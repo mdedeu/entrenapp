@@ -52,7 +52,7 @@
           <v-col>
             <v-btn
             rounded
-            class="accent primary--text"
+            class="accent primary--text mt-n10"
             @click="filterHandler">
               Filtrar
             </v-btn>
@@ -163,7 +163,7 @@
 
             <v-dialog width="600px"  :value="agregar" :retain-focus="false">
               <v-container fluid  class="fill-height">
-                <v-card  width="100%" class="primary mx-16" rounded>
+                <v-card  width="100%" class="primary" rounded>
                   <h1 class="font-weight-medium">Elegi la duración</h1>
                   <v-row>
                     <v-col>
@@ -182,7 +182,7 @@
                   </v-row>
                   <v-row>
                     <v-col>
-                      <v-text-field v-model="exercise_time" solo label="Tiempo" class=" mx-3 mt-6" clearable></v-text-field>
+                      <v-text-field v-model="exercise_time" solo label="Tiempo" class=" mx-3 mt-6"  :rules="rulesNumber" clearable></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -360,6 +360,10 @@ export default {
       this.currentExerciseToAdd = exercise;
     },
     addExercise(event){
+      if((this.exercise_time === null && this.exercise_reps === null) || (this.exercise_reps == 0 && this.exercise_time == 0))
+      {
+        return;
+      }
       if(!isNaN(this.exercise_reps) || !isNaN(this.exercise_time)){
         this.$emit('add-exercise',event)
         this.exito= true
