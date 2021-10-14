@@ -40,7 +40,7 @@
            </v-btn>
          </router-link>
          <v-btn class="white--text ml-16 text-decoration-underline"  @click="confirmSalir" plain>
-           Salir
+           <u>Salir</u>
          </v-btn>
        </div>
      </v-col>
