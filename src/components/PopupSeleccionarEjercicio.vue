@@ -5,14 +5,14 @@
       <v-col cols="6" >
         <v-row justify="center"><h4>Filtra</h4></v-row>
         <v-row justify="space-around">Por Grupo Muscular:</v-row>
-        <v-row class="pt-6" justify="space-around" v-for="muscle in auxMuscles" :key="muscle.name">
+        <v-row class="pt-6" justify="space-around" v-for="muscle in muscles" :key="muscle.name">
           <template>
             <v-btn
                 rounded
                 width="60%"
                 class="primary--text"
                 :id="muscle.auxName"
-                @click="addColor(muscle.auxName)"
+                @click="addColor(muscle)"
             >{{ muscle.name }}
             </v-btn>
           </template>
@@ -101,7 +101,7 @@
                     @click="viewExerciseHandler(exercise)"
                     class="accent"
                 >
-                  Ir al Ejercicio
+                  Ver ejercicio
                 </v-btn>
                 <v-btn
                     outlined
@@ -210,7 +210,6 @@ export default {
   data(){
     return {
       isFavText: null,
-      auxMuscles: [],
       currentExercise: {name: null, detail: null, type: null, metadata: {
           musculos:[],
           equipacion: null,
@@ -218,11 +217,14 @@ export default {
           favorito: null
         }},
       viewExercise: false,
-      muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
+      muscles:[{name:"Piernas", auxName: null},{name:"Pecho", auxName: null},{name:"Brazos", auxName: null},{name:"Abdominales", auxName: null},{name:"Espalda", auxName: null}],
       exercises: null,//[{name:"Flexiones de brazo", difficulty: 'Intermedio', category: 'Pecho'},{name:"Abdominales bolita", difficulty: 'Intermedio', category: 'Pecho'},{name:"Salto con soga", difficulty: 'Intermedio', category: 'Pecho'},{name:"Estirar piernas", difficulty: 'Intermedio', category: 'Pecho'},{name:"Espalda en colchoneta", difficulty: 'Intermedio', category: 'Pecho'}],
       favouriteExercises: null,
       sports: ['Fútbol', 'Hockey','Tenis','Paddle'],
-      selected_muscle: null,
+      selected_muscle:{
+        name: null,
+        auxName: null
+      },
       selected_sport: null,
       agregar : false,
       exercise_time: 0,
@@ -248,9 +250,8 @@ export default {
     this.isFavText = this.isFav ? "f" : "nf"
     await this.$store.dispatch('exercise/getAll')
     this.muscles.forEach((muscle) => {
-      this.auxMuscles.push({name: muscle.name, auxName: muscle.name + this.isFavText})
+      muscle.auxName = muscle.name + this.isFavText + this.stage
     })
-    console.log(this.auxMuscles)
     this.setMyExercises()
   },
   methods:{
@@ -261,8 +262,8 @@ export default {
       this.setMyExercises()
       if(this.equipacion)
         this.exercises = this.exercises.filter( (item)=> this.getEquipacion.includes(item) )
-      if(this.selected_muscle)
-        this.exercises = this.exercises.filter( (item) => this.getMuscle(this.selected_muscle).includes(item) )
+      if(this.selected_muscle.name)
+        this.exercises = this.exercises.filter( (item) => this.getMuscle(this.selected_muscle.name).includes(item) )
       if(this.selected_sport)
         this.exercises = this.exercises.filter( (item) => this.getDeporte(this.selected_sport).includes(item) )
     },
@@ -272,7 +273,7 @@ export default {
       } else {this.exercises = this.$getExercises}
     },
     makeCleanup(){
-      this.selected_muscle=null
+      this.selected_muscle={name:null, auxName:null}
       this.selected_sport=null
       this.setMyExercises()
     },
@@ -285,7 +286,7 @@ export default {
     },
     closePopup() {
       this.makeCleanup()
-      this.auxMuscles.forEach((musc)=> {
+      this.muscles.forEach((musc)=> {
         document.getElementById(musc.auxName).classList.remove('accent')
       })
       this.$emit('close-popup')
@@ -304,20 +305,19 @@ export default {
         this.exito= true
       }
     },
-    addColor(id){
-      let element =document.getElementById(id)
-
-      if(!this.selected_muscle){
-        this.selected_muscle = id;
+    addColor(muscle){
+      let element =document.getElementById(muscle.auxName)
+      if(!this.selected_muscle.name){
+        this.selected_muscle = muscle;
         element.classList.add('accent')
       }else{
-        if(this.selected_muscle === id){
+        if(this.selected_muscle.auxName === muscle.auxName){
           element.classList.remove('accent')
-          this.selected_muscle = null;
+          this.selected_muscle = {name: null, auxName: null}
         }
         else{
-          document.getElementById(this.selected_muscle).classList.remove('accent')
-          this.selected_muscle = id;
+          document.getElementById(this.selected_muscle.auxName).classList.remove('accent')
+          this.selected_muscle = muscle;
           element.classList.add('accent')
         }
       }
