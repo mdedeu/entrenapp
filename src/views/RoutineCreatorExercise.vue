@@ -87,13 +87,23 @@ export default {
      for(let i = 0 ; i < cycles.length ; i++){
        let sumaParcial = 0 ;
        for(let j = 0 ; j < cycles[i].metadata.ejercicios.length;j++){
-         if( cycles[i].metadata.ejercicios[j].equipacion)
+         if( cycles[i].metadata.ejercicios[j].equipacion){
            equipacion=true
-         sumaParcial+=cycles[i].metadata.ejercicios[j].time
+         }
+
+
+         if(cycles[i].metadata.ejercicios[j].time > 0 ){
+           sumaParcial+=Number(cycles[i].metadata.ejercicios[j].time)
+         }else{
+           sumaParcial+=Number(cycles[i].metadata.ejercicios[j].reps)
+         }
+
+
        }
        sumaTotal += (cycles[i].repetitions)*sumaParcial
      }
-      sumaTotal = Math.round(sumaTotal/60)
+
+     sumaTotal = Math.round((sumaTotal/60))
 
      let routineAPI = await this.$store.dispatch('routine/get',this.routine)
 

@@ -1,8 +1,9 @@
 <template>
-  <v-container>
-    <Loading v-if="loading"></Loading>
 
-    <v-container v-else-if="!mine">
+  <Loading v-if="loading"></Loading>
+
+  <v-container v-else>
+    <v-container v-if="!mine">
       <v-row justify="space-between">
 
         <Back></Back>
@@ -214,7 +215,7 @@ export default {
   data(){
     return {
       dialog:false,
-      loading : true,
+      loading : false,
       loadingButton:false,
       eliminada: false,
     }
