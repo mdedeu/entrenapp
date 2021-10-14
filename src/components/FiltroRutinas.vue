@@ -68,15 +68,33 @@
             vertical class="accent"
         ></v-divider>
 
-        <v-col v-if="routinesF.length==0">
-          <v-row justify="space-around">
-            <v-col>
-
-            </v-col>
-            <v-col cols="9" >
-              <v-card-text  class="accent-text text-h3" > No tienes rutinas aún</v-card-text>
+        <v-col v-if="routinesF.length==0 && !sinResultados">
+          <v-row justify="space-around" class="mt-n10">
+            <v-col  >
+              <v-card-text  class="accent-text text-h5" > No tienes rutinas aún</v-card-text>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col>
+              <v-icon
+              size="100"
+              color="accent"
+              >
+                mdi-emoticon-sad-outline
+              </v-icon>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <router-link  :to="{name:'RoutineCreadorInfo'}" class="text-h5 accent--text">Crea tus rutinas</router-link>
+            </v-col>
+          </v-row>
+          <v-row>
+              <v-col>
+                <router-link  :to="{path:'/Rutinas/recomendadas'}" class="text-h5 accent--text">Explora nuestras rutinas recomendadas</router-link>
+              </v-col>
+          </v-row>
+
         </v-col>
 
         <v-col v-else cols="6">
@@ -151,7 +169,6 @@ export default {
 
       if(this.routinesF.length == 0 ){
        this.sinResultados=true
-       this.routinesF = this.routines
       }else
         this.sinResultados=false
 

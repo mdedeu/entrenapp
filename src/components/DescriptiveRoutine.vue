@@ -1,7 +1,7 @@
 <template>
   <v-card
       class="mx-10"
-      max-width="600"
+      width="600"
       outlined
       onclick="RoutineDescription"
   >
