@@ -291,6 +291,8 @@ export default {
       if(!isNaN(this.exercise_reps) || !isNaN(this.exercise_time)){
         this.$emit('add-exercise',event)
         this.exito= true
+        this.exercise_time = null
+        this.exercise_reps = null
       }
     },
     addColor(id){

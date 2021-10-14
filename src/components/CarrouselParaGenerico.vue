@@ -8,7 +8,7 @@
     <v-row class="accent--text" justify="center">
       <h1 class="accent--text">Agrega información sobre los ciclos</h1>
     </v-row>
-    <v-carousel height="650px">
+    <v-carousel height="650px" class="mt-2">
 
       <v-carousel-item order="1">
         <v-container fluid class="accent fill-height mt-6">
@@ -95,33 +95,10 @@
 
 
       <v-carousel-item order="2" :v-if="ejercitacion.length > 0" v-for="exercise in ejercitacion" :key="exercise.id">
-        <v-container fluid class="accent fill-height">
+        <v-container fluid class="accent fill-height mt-6">
 
           <v-row>
             <v-col>
-
-            </v-col>
-            <v-col>
-
-            </v-col>
-            <v-col>
-              <v-btn
-                  color="transparent"
-                  @click="removeCycle(exercise.name)"
-
-              >
-                <v-icon
-                    x-large
-                    color="primary"
-                >
-                  mdi-alpha-x
-                </v-icon>
-              </v-btn>
-            </v-col>
-          </v-row>
-
-          <v-row justify="space-around">
-            <v-col cols="3">
               <v-text-field
                   label="Nombre"
                   v-model="exercise.name"
@@ -129,7 +106,27 @@
                   background-color="white"
               ></v-text-field>
             </v-col>
+            <v-col>
+              <v-text-field
+                  label="¿Cuántas vueltas de estos ejercicios?"
+                  solo
+                  background-color="white"
+                  v-model="exercise.repetitions"
+                  :rules="rulesNumber"
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-btn
+                  color="transparent"
+                  @click="removeCycle(exercise.name)"
 
+              >
+                Borrar Ciclo
+              </v-btn>
+            </v-col>
+          </v-row>
+
+          <v-row justify="space-around">
             <v-col cols="3" v-if="exercise.metadata.ejercicios.length > 0 && !eliminando">
               <v-btn
                   color="red"
@@ -156,33 +153,19 @@
                 Continuar
               </v-btn>
             </v-col>
-
-
-
-
-            <v-col cols="3">
-              <v-text-field
-                  label="¿Cuántas vueltas de estos ejercicios?"
-                  solo
-                  background-color="white"
-                  v-model="exercise.repetitions"
-                  :rules="rulesNumber"
-              ></v-text-field>
-            </v-col>
           </v-row>
           <v-container class="shrink"> <v-row justify="center"   style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
             <v-col cols="6"  >
               <v-card width="100%"
                       rounded
                       :color="descansoOrExercise(exerciseDescrip)"
-                      class="primary--text justify-center text-h5 mt-n5"
+                      class="primary--text justify-center text-h5 mt-n5 d-inline-flex"
                       height="100%"
                       @click="eliminando?eliminarEjercicio(exercise.name,exerciseDescrip.name):null"
               >
                 <v-container>
                   {{ exerciseDescrip.name }}
                 </v-container>
-                <v-divider></v-divider>
                 <v-container v-if="!isNaN(exerciseDescrip.time) && exerciseDescrip.time > 0">
                   Duración:
                   {{ exerciseDescrip.time }}''
@@ -206,7 +189,7 @@
 
 
       <v-carousel-item v-if="update">
-        <v-container fluid class="accent fill-height">
+        <v-container fluid class="accent fill-height mt-6">
           <v-row justify="center">
             <v-btn width="50%"
                    rounded
@@ -221,7 +204,7 @@
 
 
       <v-carousel-item v-if="update">
-        <v-container fluid class="accent fill-height">
+        <v-container fluid class="accent fill-height mt-6">
 
           <v-row justify="space-around">
             <v-col cols="3">

@@ -73,6 +73,7 @@ export default {
             segundos:this.segundos,
             stage:  this.stage}
       )
+      this.segundos = null
       this.$emit('close-popup');
 
     }

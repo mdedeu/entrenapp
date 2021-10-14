@@ -1,8 +1,8 @@
 <template>
-  <v-carousel >
+  <v-carousel height="650px">
 
     <v-carousel-item order="1">
-      <v-container fluid class="accent fill-height">
+      <v-container fluid class="accent fill-height mt-6">
 
         <v-row justify="space-around">
           <v-col cols="3">
@@ -12,28 +12,33 @@
             <p class="text-h5  primary--text"> Número de repeticiones: {{this.calentamiento.repetitions}}</p>
           </v-col>
         </v-row>
-
-        <v-row justify="center"  style="height: 10vh" v-for="calExec in this.calentamiento.metadata.ejercicios" :key="calExec.name">
-          <v-col cols="6"  >
-            <v-btn width="100%"
-                   rounded
-                   color="white"
-                   class="primary--text justify-center text-h5 mt-n5"
-                   height="100%"
-                   @click="EjercicioDescripcion(calExec)"
-            >
+        <v-container class="shrink">
+          <v-row justify="center"  style="height: 10vh" v-for="calExec in this.calentamiento.metadata.ejercicios" :key="calExec.name">
+            <v-col>
+              <v-card width="100%"
+                            rounded
+                            :color="descansoOrExercise(calExec)"
+                            class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
+                            @click="EjercicioDescripcion(calExec.name)"
+          >
+            <v-container>
               {{ calExec.name }}
-              <v-icon
-                  x-large
-                  color="primary"
-                  class="pl-10 pr-5"
-              >
-                mdi-timer
-              </v-icon>
+            </v-container>
+            <v-divider></v-divider>
+
+            <v-container v-if="!isNaN(calExec.time) && calExec.time > 0">
+              Duración:
               {{ calExec.time }}''
-            </v-btn>
+            </v-container>
+            <v-container v-if="!isNaN(calExec.reps) &&calExec.reps >0">
+              Reps: {{calExec.reps}}
+            </v-container>
+
+          </v-card>
           </v-col>
-        </v-row>
+          </v-row>
+        </v-container>
+
 
       </v-container>
     </v-carousel-item>
@@ -41,7 +46,7 @@
 
 
     <v-carousel-item order="2" :v-if="ejercitacion.length > 0" v-for="exercise in ejercitacion" :key="exercise.id">
-      <v-container fluid class="accent fill-height">
+      <v-container fluid class="accent fill-height mt-6">
 
         <v-row justify="space-around">
           <v-col cols="3">
@@ -52,25 +57,27 @@
           </v-col>
         </v-row>
 
-        <v-row justify="center"   style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
+        <v-row justify="center"   style="height: 10vh; margin-bottom: 4px" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
           <v-col cols="6"  >
-            <v-btn width="100%"
-                   rounded
-                   color="white"
-                   class="primary--text justify-center text-h5 mt-n5"
-                   height="100%"
-                   @click="EjercicioDescripcion(exerciseDescrip)"
+            <v-card width="100%"
+                    rounded
+                    :color="descansoOrExercise(exerciseDescrip)"
+                    class="primary--text justify-center text-h5 d-inline-flex px-3  "
+                    height="100%"
+                    @click="EjercicioDescripcion(exerciseDescrip)"
             >
-              {{ exerciseDescrip.name }}
-              <v-icon
-                  x-large
-                  color="primary"
-                  class="pl-10 pr-5"
-              >
-                mdi-timer
-              </v-icon>
-              {{ exerciseDescrip.time }}''
-            </v-btn>
+              <v-container>
+                {{ exerciseDescrip.name }}
+              </v-container>
+              <v-divider></v-divider>
+              <v-container v-if="!isNaN(exerciseDescrip.time) && exerciseDescrip.time > 0">
+                Duración:
+                {{ exerciseDescrip.time }}''
+              </v-container>
+              <v-container v-if=" !isNaN(exerciseDescrip.reps) && exerciseDescrip.reps >0">
+                Reps: {{exerciseDescrip.reps}}
+              </v-container>
+            </v-card>
           </v-col>
         </v-row>
 
@@ -81,7 +88,7 @@
 
 
     <v-carousel-item v-if="update">
-      <v-container fluid class="accent fill-height">
+      <v-container fluid class="accent fill-height mt-6">
 
         <v-row justify="space-around">
           <v-col cols="3">
@@ -94,23 +101,24 @@
 
         <v-row justify="center"  style="height: 10vh" v-for="calExec in enfriamiento.metadata.ejercicios" :key="calExec.name">
           <v-col cols="6"  >
-            <v-btn width="100%"
-                   rounded
-                   color="white"
-                   class="primary--text justify-center text-h5 mt-n5"
-                   height="100%"
-                   @click="EjercicioDescripcion(calExec)"
+            <v-card width="100%"
+                    rounded
+                    :color="descansoOrExercise(calExec)"
+                    class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
+                    @click="EjercicioDescripcion(calExec)"
             >
-              {{ calExec.name }}
-              <v-icon
-                  x-large
-                  color="primary"
-                  class="pl-10 pr-5"
-              >
-                mdi-timer
-              </v-icon>
-              {{ calExec.time }}''
-            </v-btn>
+              <v-container>
+                {{ calExec.name }}
+              </v-container>
+              <v-divider></v-divider>
+              <v-container v-if="!isNaN(calExec.time) && calExec.time > 0">
+                Duración:
+                {{ calExec.time }}''
+              </v-container>
+              <v-container v-if="!isNaN(calExec.reps) && calExec.reps >0">
+                Reps: {{calExec.reps}}
+              </v-container>
+            </v-card>
           </v-col>
         </v-row>
 
@@ -139,6 +147,9 @@ export default {
   methods:{
     EjercicioDescripcion(exercise){
       this.$router.push({name:"EjercicioDescripcion",params:{exercise: exercise}})
+    },
+    descansoOrExercise(calExec) {
+      return calExec.name === 'Descanso' ? 'grey': 'white';
     }
   },
   props:{
