@@ -16,19 +16,22 @@
       </v-col>
     </v-row>
 
-    <v-row class="ml-10">
-      <h2 class="mb-10 accent--text">Creá rutinas , compartilas y ejecutalas</h2>
-        <v-carousel class="mb-10">
+    <v-row>
+      <v-col>
+        <h2 class="mb-10 accent--text ml-10">Creá rutinas , compartilas y ejecutalas</h2>
+        <v-carousel class="mb-10 mr-16 " hide-delimiter-background show-arrows-on-hover>
           <v-carousel-item>
-            <v-img  contain src="@/assets/ej2.jpg"></v-img>
+            <v-img width="100%"  height="100%" contain src="@/assets/ej2.jpg"></v-img>
           </v-carousel-item>
           <v-carousel-item>
-            <v-img  contain src="@/assets/ej.jpg"></v-img>
+            <v-img  width="100%" height="100%" contain src="@/assets/ej.jpg"></v-img>
           </v-carousel-item>
           <v-carousel-item>
-            <v-img  contain src="@/assets/ej3.jpg"></v-img>
+            <v-img width="100%"  height="100%" contain src="@/assets/ej3.jpg"></v-img>
           </v-carousel-item>
         </v-carousel>
+      </v-col>
+
     </v-row>
   </v-container>
 </template>
