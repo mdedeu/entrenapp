@@ -5,10 +5,13 @@
         <v-alert v-if="error" type="error" dismissible @click="error=false">{{this.message}}</v-alert>
       </v-col>
     </v-row>
-    <v-carousel class="mt-11">
+    <v-row class="accent--text" justify="center">
+      <h1 class="accent--text">Agrega información sobre los ciclos</h1>
+    </v-row>
+    <v-carousel height="650px">
 
       <v-carousel-item order="1">
-        <v-container fluid class="accent fill-height">
+        <v-container fluid class="accent fill-height mt-6">
 
           <v-row justify="space-around">
             <v-col cols="3">
@@ -53,31 +56,35 @@
               ></v-text-field>
             </v-col>
           </v-row>
-
-          <v-row justify="center"  style="height: 10vh" v-for="calExec in calentamiento.metadata.ejercicios" :key="calExec.name">
-            <v-col cols="6"  >
-              <v-btn width="100%"
-                     rounded
-                     color="white"
-                     class="primary--text justify-center text-h5 mt-n5"
-                     height="100%"
-                     @click="eliminando?eliminarEjercicio('Calentamiento',calExec.name):EjercicioDescripcion"
-              >
-                {{ calExec.name }}
-                <v-icon
-                    x-large
-                    color="primary"
-                    class="pl-10 pr-5"
+          <v-container class="shrink">
+            <v-row justify="center" v-for="calExec in calentamiento.metadata.ejercicios" :key="calExec.name">
+              <v-col cols="6">
+                <v-card width="100%"
+                        rounded
+                        :color="descansoOrExercise(calExec)"
+                        class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
+                        @click="eliminando?eliminarEjercicio('Calentamiento',calExec.name):null"
                 >
-                  mdi-timer
-                </v-icon>
-                {{ calExec.time }}''||
-                {{calExec.reps}}
-              </v-btn>
-            </v-col>
-          </v-row>
+                  <v-container>
+                    {{ calExec.name }}
+                  </v-container>
+                  <v-divider></v-divider>
 
-          <v-row justify="center"  style="height: 11vh">
+                  <v-container v-if="calExec.time > 0">
+                    Duración:
+                    {{ calExec.time }}''
+                  </v-container>
+                  <v-container v-if="calExec.reps >0">
+                    Reps: {{calExec.reps}}
+                  </v-container>
+
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+
+
+          <v-row justify="center"  style="height: 11vh" class="grow" >
             <v-col cols="6" height="100%">
               <AgregarEjercicio stage="Calentamiento" v-on:add-exercise="addExercise" v-on:add-descanso="addDescanso"></AgregarEjercicio>
             </v-col>
@@ -163,31 +170,32 @@
               ></v-text-field>
             </v-col>
           </v-row>
-
-          <v-row justify="center"   style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
+          <v-container class="shrink"> <v-row justify="center"   style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
             <v-col cols="6"  >
-              <v-btn width="100%"
-                     rounded
-                     color="white"
-                     class="primary--text justify-center text-h5 mt-n5"
-                     height="100%"
-                     @click="eliminando?eliminarEjercicio(exercise.name,exerciseDescrip.name):EjercicioDescripcion"
+              <v-card width="100%"
+                      rounded
+                      :color="descansoOrExercise(exerciseDescrip)"
+                      class="primary--text justify-center text-h5 mt-n5"
+                      height="100%"
+                      @click="eliminando?eliminarEjercicio(exercise.name,exerciseDescrip.name):null"
               >
-                {{ exerciseDescrip.name }}
-                <v-icon
-                    x-large
-                    color="primary"
-                    class="pl-10 pr-5"
-                >
-                  mdi-timer
-                </v-icon>
-                {{ exerciseDescrip.time }}'' ||
-                {{exerciseDescrip.reps}}
-              </v-btn>
+                <v-container>
+                  {{ exerciseDescrip.name }}
+                </v-container>
+                <v-divider></v-divider>
+                <v-container v-if="exerciseDescrip.time > 0">
+                  Duración:
+                  {{ exerciseDescrip.time }}''
+                </v-container>
+                <v-container v-if="exerciseDescrip.reps >0">
+                  Reps: {{exerciseDescrip.reps}}
+                </v-container>
+              </v-card>
             </v-col>
           </v-row>
+          </v-container>
 
-          <v-row justify="center"  style="height: 11vh">
+          <v-row justify="center"  style="height: 11vh" class="mt-3 mb-10">
             <v-col cols="6" height="100%">
               <AgregarEjercicio :stage="exercise.name" v-on:add-exercise="addExercise" v-on:add-descanso="addDescanso"></AgregarEjercicio>
             </v-col>
@@ -257,29 +265,31 @@
               ></v-text-field>
             </v-col>
           </v-row>
-
-          <v-row justify="center"  style="height: 10vh" v-for="calExec in enfriamiento.metadata.ejercicios" :key="calExec.name">
-            <v-col cols="6"  >
-              <v-btn width="100%"
-                     rounded
-                     color="white"
-                     class="primary--text justify-center text-h5 mt-n5"
-                     height="100%"
-                     @click="eliminando?eliminarEjercicio('Enfriamiento',calExec.name):EjercicioDescripcion"
-              >
-                {{ calExec.name }}
-                <v-icon
-                    x-large
-                    color="primary"
-                    class="pl-10 pr-5"
+          <v-container class="shrink">
+            <v-row justify="center"  style="height: 10vh" v-for="calExec in enfriamiento.metadata.ejercicios" :key="calExec.name">
+              <v-col cols="6"  >
+                <v-card width="100%"
+                        rounded
+                        :color="descansoOrExercise(calExec)"
+                        class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
+                        @click="eliminando?eliminarEjercicio('Enfriamiento',calExec.name):null"
                 >
-                  mdi-timer
-                </v-icon>
-                {{ calExec.time }}'' ||
-                {{calExec.reps}}
-              </v-btn>
-            </v-col>
-          </v-row>
+                  <v-container>
+                    {{ calExec.name }}
+                  </v-container>
+                  <v-divider></v-divider>
+                  <v-container v-if="calExec.time > 0">
+                    Duración:
+                    {{ calExec.time }}''
+                  </v-container>
+                  <v-container v-if="calExec.reps >0">
+                    Reps: {{calExec.reps}}
+                  </v-container>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+
 
           <v-row justify="center"  style="height: 11vh">
             <v-col cols="6" height="100%">
@@ -287,15 +297,13 @@
             </v-col>
           </v-row>
 
-
-
         </v-container>
       </v-carousel-item>
 
     </v-carousel>
     <v-row class="primary ">
       <v-col>
-        <v-btn rounded class="accent text--primary mt-10 mb-16" @click="SendInfo">Siguiente</v-btn>
+        <v-btn rounded class="accent text--primary mt-3 mb-16" @click="SendInfo">Siguiente</v-btn>
       </v-col>
     </v-row>
 
@@ -382,6 +390,11 @@ export default {
         rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 ']
       }),
   methods:{
+    descansoOrExercise(calExec){
+      if(calExec.name === 'Descanso')
+        return 'grey'
+
+    },
     removeCycle(name){
       this.update=false
       this.ejercitacion=this.ejercitacion.filter( (item) => (item.name!=name))
