@@ -17,6 +17,23 @@
             </v-btn>
           </template>
         </v-row>
+
+
+        <v-row justify="space-around" class="mt-10 mb-n9">
+          ¿Vas a necesitar alguna máquina o equipación extra?
+        </v-row>
+        <v-row justify="space-around" class="pt-6">
+          <v-checkbox
+              color="accent"
+              label="Equipación Extra"
+              hide-details
+              v-model="equipacion"
+              dark
+          >
+          </v-checkbox>
+        </v-row>
+
+
         <v-row justify="center"><h4 class="accent--text mt-6 mb-n3">Por deporte</h4></v-row>
         <v-row justify="space-around" class="pt-6" >
           <v-col cols="4">
@@ -275,6 +292,7 @@ export default {
     makeCleanup(){
       this.selected_muscle={name:null, auxName:null}
       this.selected_sport=null
+      this.equipacion=false
       this.setMyExercises()
     },
     viewExerciseHandler(exercise){
