@@ -234,6 +234,7 @@ export default {
     async removeRoutine(){
       this.loading=true
        await this.$store.dispatch('routine/delete',this.routine)
+      this.loading=false
        this.redirect()
     },
     redirect(){
