@@ -29,7 +29,7 @@
             </v-col>
           </v-row>
           <v-container class="shrink">
-            <v-row justify="center" v-for="calExec in calentamiento.metadata.ejercicios" :key="calExec.name">
+            <v-row justify="center" v-for="calExec in calentamiento.metadata.ejercicios" :key="calExec.id">
               <v-col cols="6">
                 <v-card min-width="500px"
                         rounded
@@ -51,7 +51,7 @@
                   </v-container>
                   <v-icon
                       class="mr-3"
-                    @click="eliminarEjercicio('Calentamiento',calExec.name)">
+                    @click="eliminarEjercicio('Calentamiento',calExec.id)">
                     mdi-close
                   </v-icon>
 
@@ -94,16 +94,15 @@
             </v-col>
             <v-col>
               <v-btn
-                  color="transparent"
+                  color="red white--text"
                   @click="removeCycle(exercise.name)"
-
               >
                 Borrar Ciclo
               </v-btn>
             </v-col>
           </v-row>
 
-          <v-container class="shrink"> <v-row justify="center"   style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.name">
+          <v-container class="shrink"> <v-row justify="center"   style="height: 10vh" v-for="exerciseDescrip in exercise.metadata.ejercicios" :key="exerciseDescrip.id">
             <v-col cols="6"  >
               <v-card
                       min-width="500px"
@@ -124,7 +123,7 @@
                 </v-container>
                 <v-icon
                     class="mr-3"
-                    @click="eliminarEjercicio(exercise.name,exerciseDescrip.name)">
+                    @click="eliminarEjercicio(exercise.name,exerciseDescrip.id)">
                   mdi-close
                 </v-icon>
               </v-card>
@@ -176,7 +175,7 @@
             </v-col>
           </v-row>
           <v-container class="shrink">
-            <v-row justify="center"  style="height: 10vh" v-for="calExec in enfriamiento.metadata.ejercicios" :key="calExec.name">
+            <v-row justify="center"  style="height: 10vh" v-for="calExec in enfriamiento.metadata.ejercicios" :key="calExec.id">
               <v-col cols="6"  >
                 <v-card min-width="500px"
                         v-if="enfriamiento.metadata.ejercicios.includes(calExec)"
@@ -197,7 +196,7 @@
                   </v-container>
                   <v-icon
                       class="mr-3"
-                      @click="eliminarEjercicio('Enfriamiento',calExec.name)">
+                      @click="eliminarEjercicio('Enfriamiento',calExec.id)">
                     mdi-close
                   </v-icon>
                 </v-card>
@@ -315,7 +314,6 @@ export default {
       setTimeout(()=>this.update=true,500)
     },
 
-
     SeleccCateg(){
       this.$router.push({name:"SeleccCateg"})
     },
@@ -363,16 +361,18 @@ export default {
       this.popup=true
 
     },
-    eliminarEjercicio(nombre,ejercicio){
+    eliminarEjercicio(nombre,ejercicioID){
+      console.log(this.calentamiento.metadata.ejercicios)
+      console.log(this.enfriamiento.metadata.ejercicios)
       if(nombre==='Calentamiento'){
-        this.calentamiento.metadata.ejercicios=this.calentamiento.metadata.ejercicios.filter((item) => item.name!=ejercicio)
+        this.calentamiento.metadata.ejercicios=this.calentamiento.metadata.ejercicios.filter((item) => item.id!= ejercicioID)
       }
       else if(nombre==='Enfriamiento')
-        this.enfriamiento.metadata.ejercicios=this.enfriamiento.metadata.ejercicios.filter((item) => item.name!=ejercicio)
+        this.enfriamiento.metadata.ejercicios=this.enfriamiento.metadata.ejercicios.filter((item) => item.id!= ejercicioID)
       else
         for(let i = 0 ; i < this.ejercitacion.length ; i++)
           if(this.ejercitacion[i].name===nombre) {
-            this.ejercitacion[i].metadata.ejercicios = this.ejercitacion[i].metadata.ejercicios.filter((item) => item.name != ejercicio)
+            this.ejercitacion[i].metadata.ejercicios = this.ejercitacion[i].metadata.ejercicios.filter((item) => item.id != ejercicioID)
             break
           }
     },
@@ -381,13 +381,15 @@ export default {
         this.calentamiento.metadata.ejercicios.push({
           time: event.time,
           reps: event.reps,
-          name : event.exercise.name
+          name : event.exercise.name,
+          id : this.calentamiento.metadata.ejercicios.length
         })
       }else if(event.stage === 'Enfriamiento'){
         this.enfriamiento.metadata.ejercicios.push({
           time: event.time,
           reps: event.reps,
-          name : event.exercise.name
+          name : event.exercise.name,
+          id : this.enfriamiento.metadata.ejercicios.length
         })
       }else{
         let i;
@@ -396,7 +398,8 @@ export default {
             this.ejercitacion[i].metadata.ejercicios.push({
               time: event.time,
               reps: event.reps,
-              name : event.exercise.name
+              name : event.exercise.name,
+              id : this.ejercitacion[i].metadata.ejercicios.length
             })
             break;
           }
@@ -407,12 +410,14 @@ export default {
       if(event.stage==='Calentamiento'){
         this.calentamiento.metadata.ejercicios.push({
           time: event.segundos,
-          name : 'Descanso'
+          name : 'Descanso',
+          id: this.calentamiento.metadata.ejercicios.length
         })
       }else if(event.stage === 'Enfriamiento'){
         this.enfriamiento.metadata.ejercicios.push({
           time: event.segundos,
-          name : 'Descanso'
+          name : 'Descanso',
+          id: this.enfriamiento.metadata.ejercicios.length
         })
       }else{
         let i;
@@ -420,7 +425,8 @@ export default {
           if(this.ejercitacion[i].name === event.stage){
             this.ejercitacion[i].metadata.ejercicios.push({
               time: event.segundos,
-              name : 'Descanso'
+              name : 'Descanso',
+              id: this.ejercitacion[i].metadata.ejercicios.length
             })
             break;
           }
