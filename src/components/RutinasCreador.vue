@@ -1,6 +1,7 @@
 <template>
+  <Loading v-if="loading"></Loading>
 
-  <v-container fluid class="primary fill-height">
+  <v-container v-else fluid class="primary fill-height">
 
     <v-row justify="center" class="accent--text">
       <v-col>
@@ -117,12 +118,15 @@
 </template>
 
 <script>
+import Loading from './Loading'
 
 export default {
   name: 'RutinasCreador',
+  components:{Loading},
   data() {
     return {
-      sports: ['Futbol', 'Tenis', 'Hockey', 'Ninguno'],
+      loading:false,
+      sports:null,
       difficulty: null,
       nombre: null,
       sport_selected : null,
@@ -132,8 +136,10 @@ export default {
       message: "Ocurrió un error inesperado"
     }
   },
+
   methods : {
     addOutline(id){
+      console.log(this.sports)
       let element =document.getElementById(id)
 
       if(!this.difficulty){
@@ -164,6 +170,12 @@ export default {
         this.error=true
       }
     }
+  },
+  async created(){
+    this.loading=true
+    await this.$store.dispatch('sport/getAll')
+    this.sports = this.$store.getters['sport/getSports'].map((item) => item.name)
+    this.loading=false
   }
 }
 </script>

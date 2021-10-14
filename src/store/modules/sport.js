@@ -11,6 +11,9 @@ export default {
                 return state.items.findIndex(item => item.id === sport.id)
             }
         },
+        getSports(state){
+            return state.items
+        }
     },
     mutations: {
         push(state, sport) {
@@ -57,8 +60,8 @@ export default {
         },
         async getAll({commit}, controller) {
             const result = await SportApi.getAll(controller)
-            commit('replaceAll', result)
-            return result
+            commit('replaceAll', result.content)
+            return result.content
         }
     },
 }
