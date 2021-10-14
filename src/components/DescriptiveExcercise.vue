@@ -7,9 +7,6 @@
     >
       <v-list-item three-line>
         <v-list-item-content>
-          <div class="text-overline mb-4">
-            <p>category</p>
-          </div>
           <v-list-item-title class="text-h5 mb-1">
             {{exerciseDes.name}}
           </v-list-item-title>

@@ -5,14 +5,14 @@
       <v-col cols="6" >
         <v-row justify="center"><h4>Filtra</h4></v-row>
         <v-row justify="space-around">Por Grupo Muscular:</v-row>
-        <v-row class="pt-6" justify="space-around" v-for="muscle in muscles" :key="muscle.name">
+        <v-row class="pt-6" justify="space-around" v-for="muscle in auxMuscles" :key="muscle.name">
           <template>
             <v-btn
                 rounded
                 width="60%"
                 class="primary--text"
-                :id="muscle.name"
-                @click="addColor(muscle.name)"
+                :id="muscle.auxName"
+                @click="addColor(muscle.auxName)"
             >{{ muscle.name }}
             </v-btn>
           </template>
@@ -33,7 +33,8 @@
           <v-col>
             <v-btn
             rounded
-            class="accent primary--text">
+            class="accent primary--text"
+            @click="filterHandler">
               Filtrar
             </v-btn>
           </v-col>
@@ -208,6 +209,8 @@ export default {
   },
   data(){
     return {
+      isFavText: null,
+      auxMuscles: [],
       currentExercise: {name: null, detail: null, type: null, metadata: {
           musculos:[],
           equipacion: null,
@@ -218,7 +221,7 @@ export default {
       muscles:[{name:"Piernas"},{name:"Pecho"},{name:"Brazos"},{name:"Abdominales"},{name:"Espalda"}],
       exercises: null,//[{name:"Flexiones de brazo", difficulty: 'Intermedio', category: 'Pecho'},{name:"Abdominales bolita", difficulty: 'Intermedio', category: 'Pecho'},{name:"Salto con soga", difficulty: 'Intermedio', category: 'Pecho'},{name:"Estirar piernas", difficulty: 'Intermedio', category: 'Pecho'},{name:"Espalda en colchoneta", difficulty: 'Intermedio', category: 'Pecho'}],
       favouriteExercises: null,
-      sports: ['Futbol','Hockey', 'Otros'],
+      sports: ['Fútbol', 'Hockey','Tenis','Paddle'],
       selected_muscle: null,
       selected_sport: null,
       agregar : false,
@@ -227,21 +230,52 @@ export default {
       currentExerciseToAdd : {},
       rulesNumber: [v => (!isNaN(parseFloat(v)) && v >= 0 && v <= 999) || 'Tiene que ser un numero entre 0 y 999 '],
       exito:false,
+      equipacion:false
     }
   },
   computed:{
     ...mapGetters('exercise', {
       $getFavouriteExercises : 'getFavourites',
-      $getExercises : 'getMine'
-    })
+      $getExercises : 'getMine',
+    }),
+    ...mapGetters('exercise',['getMine']),
+    ...mapGetters('exercise',['getMuscle']),
+    ...mapGetters('exercise',['getEquipacion']),
+    ...mapGetters('exercise',['getDeporte']),
+    ...mapGetters('exercise', ['getFavourites'])
   },
   async created() {
+    this.isFavText = this.isFav ? "f" : "nf"
     await this.$store.dispatch('exercise/getAll')
-    if(this.isFav){
-      this.exercises = this.$getFavouriteExercises
-    } else {this.exercises = this.$getExercises}
+    this.muscles.forEach((muscle) => {
+      this.auxMuscles.push({name: muscle.name, auxName: muscle.name + this.isFavText})
+    })
+    console.log(this.auxMuscles)
+    this.setMyExercises()
   },
   methods:{
+    filterHandler(){
+      this.reassign()
+    },
+    reassign(){
+      this.setMyExercises()
+      if(this.equipacion)
+        this.exercises = this.exercises.filter( (item)=> this.getEquipacion.includes(item) )
+      if(this.selected_muscle)
+        this.exercises = this.exercises.filter( (item) => this.getMuscle(this.selected_muscle).includes(item) )
+      if(this.selected_sport)
+        this.exercises = this.exercises.filter( (item) => this.getDeporte(this.selected_sport).includes(item) )
+    },
+    setMyExercises(){
+      if(this.isFav){
+        this.exercises = this.$getFavouriteExercises
+      } else {this.exercises = this.$getExercises}
+    },
+    makeCleanup(){
+      this.selected_muscle=null
+      this.selected_sport=null
+      this.setMyExercises()
+    },
     viewExerciseHandler(exercise){
       this.viewExercise=true
       this.currentExercise=exercise
@@ -250,6 +284,10 @@ export default {
       this.$router.push({name: 'EjercicioDescripcion', params: {exercise: exercise}})
     },
     closePopup() {
+      this.makeCleanup()
+      this.auxMuscles.forEach((musc)=> {
+        document.getElementById(musc.auxName).classList.remove('accent')
+      })
       this.$emit('close-popup')
     },
     closeAdd(){
@@ -280,7 +318,6 @@ export default {
         else{
           document.getElementById(this.selected_muscle).classList.remove('accent')
           this.selected_muscle = id;
-          console.log(this.selected_muscle)
           element.classList.add('accent')
         }
       }
