@@ -205,7 +205,6 @@
             </v-row>
           </v-container>
 
-
           <v-row justify="center"  style="height: 11vh">
             <v-col cols="6" height="100%">
               <AgregarEjercicio stage="Enfriamiento" v-on:add-exercise="addExercise" v-on:add-descanso="addDescanso"></AgregarEjercicio>

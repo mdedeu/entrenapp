@@ -66,7 +66,6 @@
                   rounded
                   :color="descansoOrExercise(exerciseDescrip)"
                   class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
-                  @click="EjercicioDescripcion(exerciseDescrip)"
               >
                 <v-container>
                   {{ exerciseDescrip.name }}
@@ -108,7 +107,6 @@
                       rounded
                       :color="descansoOrExercise(calExec)"
                       class="primary--text justify-center text-h5 px-3  d-inline-flex lighten-1"
-                      @click="EjercicioDescripcion(calExec)"
               >
                 <v-container>
                   {{ calExec.name }}
@@ -148,9 +146,6 @@ export default {
         update:false,
         }),
   methods:{
-    EjercicioDescripcion(exercise){
-      this.$router.push({name:"EjercicioDescripcion",params:{exercise: exercise}})
-    },
     descansoOrExercise(calExec) {
       return calExec.name === 'Descanso' ? 'grey': 'white';
     }
